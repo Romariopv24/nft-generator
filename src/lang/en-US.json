@@ -126,7 +126,7 @@
   "legalwarning.aceptTitle": "Acceptance of Terms and Conditions",
   "legalwarning.aceptText": "By accessing and using the NFT Collection Generator service (hereinafter referred to as 'the Service'), you agree to and are bound by the following terms and conditions. If you do not agree to these terms, we recommend that you do not use the Service.",
 
-  "legawarning.firstTitle": "1. Use of the Service",
+  "legalwarning.firstTitle": "1. Use of the Service",
   "legalwarning.1.1": "1.1 Registration and Authentication: To use the Service, users must authenticate using a compatible cryptocurrency wallet, such as Metamask. The user is solely responsible for maintaining the security of their wallet and access credentials.",
   "legalwarning.1.2": "1.2 Collection Generation: Users can generate collections of NFTs through the Service. Up to 99 images per collection are free, but if a user generates more than 99 images in a single collection, fees will apply as set forth in section 2.",
   "legalwarnig.1.3": "1.3 Collection Storage: The generated collections will be stored in the Service for a period of 15 days. After this period, the user must download and back up their collections as the Service does not guarantee long-term storage.",
@@ -149,7 +149,7 @@
   "legalwarning.6": "The Service is not liable for any direct, indirect, incidental, consequential, or special damages, including loss of profits, revenue, or data, that may arise from the use or inability to use the Service.",
 
   "legalwarning.sevenTitle": "7. Contact",
-"legalwarning.7": "For questions or clarifications regarding these terms and conditions, you can contact us through the contact form provided for this purpose.",
+  "legalwarning.7": "For questions or clarifications regarding these terms and conditions, you can contact us through the contact form provided for this purpose.",
 
   "legalwarning.button": "Accept",
 

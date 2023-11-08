@@ -1,21 +1,20 @@
 import { useEffect, useLayoutEffect, useState } from "react";
-import Generator from "./pages/generator";
-import Login from "./pages/Login";
-import { Route, Routes, useNavigate } from "react-router-dom";
-import ColeccionNFT from "./pages/coleccionNFT";
-import FAQs from "./pages/FAQs";
-import Terms from "./pages/terms";
-import Menu from "./components/Menu";
-import { URL } from "./constantes";
-import RegisterUser from "./components/RegisterUser";
-import "./styles/scss/_pedir-correro.scss";
-import Pay from "./pages/Pay";
-import Joyride, { STATUS } from "react-joyride";
 import { FormattedMessage, useIntl } from "react-intl";
-import { Link } from "react-router-dom";
+import Joyride, { STATUS } from "react-joyride";
+import { Route, Routes, useNavigate } from "react-router-dom";
+import { Contact } from "./components/Contact";
 import GenericModal from "./components/GenericModal";
 import { LegalWarning } from "./components/LegalWarning";
-import { Contact } from "./components/Contact";
+import Menu from "./components/Menu";
+import RegisterUser from "./components/RegisterUser";
+import { URL } from "./constantes";
+import FAQs from "./pages/FAQs";
+import Login from "./pages/Login";
+import Pay from "./pages/Pay";
+import ColeccionNFT from "./pages/coleccionNFT";
+import Generator from "./pages/generator";
+import Terms from "./pages/terms";
+import "./styles/scss/_pedir-correro.scss";
 
 function App() {
   const intl = useIntl();
@@ -368,53 +367,67 @@ function App() {
         }}
       />
 
-          <GenericModal show={showVideo}>
-              <div className="p-4">
-              <iframe
-                width="1280"
-                height="720"
-                src="https://www.youtube.com/embed/LikCPHJDVrY?autoplay=1&rel=0&wmode=transparent"
-                frameborder="0"
-                allowfullscreen
-              />
-              </div>
-              <div className="my-3">
-              <button className="__boton-mediano enphasis-button" onClick={() => {setShowVideo(false)}}>
-                <FormattedMessage
-                  id="capas.close-modal-preview"
-                  defaultMessage="Close"
-                />
-              </button>
-              </div>
-          </GenericModal>
-
-          <LegalWarning 
-          showLegalWarning={showLegalWarning}
-          setShowLegalWarning={setShowLegalWarning}
+      <GenericModal show={showVideo}>
+        <div className="p-4">
+          <iframe
+            width="1280"
+            height="720"
+            src="https://www.youtube.com/embed/LikCPHJDVrY?autoplay=1&rel=0&wmode=transparent"
+            frameborder="0"
+            allowfullscreen
           />
+        </div>
+        <div className="my-3">
+          <button
+            className="__boton-mediano enphasis-button"
+            onClick={() => {
+              setShowVideo(false);
+            }}
+          >
+            <FormattedMessage
+              id="capas.close-modal-preview"
+              defaultMessage="Close"
+            />
+          </button>
+        </div>
+      </GenericModal>
 
+      <LegalWarning
+        showLegalWarning={showLegalWarning}
+        setShowLegalWarning={setShowLegalWarning}
+      />
 
-          <Contact 
-          showContact={showContact}
-          setShowContact={setShowContact}
-          />
+      <Contact showContact={showContact} setShowContact={setShowContact} />
 
-
-            <footer class="text-center text-lg-start  text-muted">
+      <footer class="text-center text-lg-start  text-muted">
         {/* Copyright */}
-        <div class="text-center p-4 d-flex justify-content-center align-items-center">
+        <div class="text-center p-1 d-flex justify-content-center align-items-center">
           <p>
-            <span className="p-2">Copyright © 2023 - Fanaticoins LLC</span>
-            /
-            <a target="_blank" style={{color: "white", cursor: "pointer"}} className="text-reset fw-bold p-2 links" 
-              onClick={ () => setShowLegalWarning(true)}>
-            {""}
-              <FormattedMessage id="footer.legalwarning" defaultMessage="Legal warning"/>
+            <span className="p-2">Copyright © 2023 - Fanaticoins LLC</span>/
+            <a
+              target="_blank"
+              style={{ color: "white", cursor: "pointer" }}
+              className="text-reset fw-bold p-2 links"
+              onClick={() => setShowLegalWarning(true)}
+            >
+              {""}
+              <FormattedMessage
+                id="footer.legalwarning"
+                defaultMessage="Legal warning"
+              />
             </a>
             /
-            <span className="p-2" style={{cursor: "pointer"}} onClick={() => {setShowContact(true)}}><FormattedMessage id="footer.contact" defaultMessage="Contact"/></span>
+            <span
+              className="p-2"
+              style={{ cursor: "pointer" }}
+              onClick={() => {
+                setShowContact(true);
+              }}
+            >
+              <FormattedMessage id="footer.contact" defaultMessage="Contact" />
+            </span>
           </p>
-          
+
           {/* <a class="text-reset fw-bold" href="https://mdbootstrap.com/">MDBootstrap.com</a> */}
         </div>
       </footer>

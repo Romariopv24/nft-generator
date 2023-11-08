@@ -5,7 +5,7 @@ import "../styles/scss/_terms.scss";
 const Terms = () => {
   return (
     <div style={{ paddingTop: "6vh" }}>
-      <div className="justify-content-center d-flex">
+      <div class="justify-content-center d-flex">
         <h1>
           <FormattedMessage
             id="legalwarning.termsncondition"
@@ -13,7 +13,7 @@ const Terms = () => {
           />
         </h1>
       </div>
-      <div className="principal_container text_justify p-3">
+      <div class="principal_container text_justify p-3">
         <p>
           <FormattedMessage
             id="legalwarning.date"
