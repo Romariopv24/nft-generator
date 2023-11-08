@@ -1,13 +1,19 @@
-import React, { useEffect, useState } from "react";
 import { ethers } from "ethers";
-import "../styles/scss/_login.scss";
-import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import React, { useContext, useEffect, useState } from "react";
+import { FormattedMessage } from "react-intl";
 import { useNavigate } from "react-router-dom";
-import { ReactComponent as Metamask } from "../assets/svg/metamask.svg";
+import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import logo from "../assets/img/logo.png";
+import es from "../assets/img/spain.png";
+import en from "../assets/img/united-kingdom.png";
+import { ReactComponent as Metamask } from "../assets/svg/metamask.svg";
+import { langContext } from "../context/langContext";
+import "../styles/scss/_login.scss";
 
 const Login = ({ setIsAuth, isAuth }) => {
   const [nombreBotonMT, setNombreBotonMT] = useState("Login with Metamasks");
+  const idioma = useContext(langContext);
+
   let navigate = useNavigate();
 
   async function connectWalletHandler() {
@@ -50,8 +56,26 @@ const Login = ({ setIsAuth, isAuth }) => {
 
   return (
     <>
+      <div class="d-flex flex-row-reverse bd-highlight">
+        <div className="banderas">
+          <button
+            onClick={() => {
+              idioma.cambiarIdioma("es-ES");
+            }}
+          >
+            <img src={es} alt="" />
+          </button>
+          <button
+            onClick={() => {
+              idioma.cambiarIdioma("en-US");
+            }}
+          >
+            <img src={en} alt="" />
+          </button>
+        </div>
+      </div>
       <div className="align-items-center justify-content-center d-flex">
-        <img className="logo" src={logo}/>
+        <img className="logo" src={logo} />
       </div>
       <div className="formularioLogin ">
         <div className="formFields">
@@ -61,11 +85,33 @@ const Login = ({ setIsAuth, isAuth }) => {
               <div className="icon">
                 <Metamask width={30} height={30} fill="white" />
               </div>
-              <a className="text">{nombreBotonMT}</a>
+              <a className="text">
+                {nombreBotonMT === "Login with Metamasks" ? (
+                  <FormattedMessage
+                    id="login.metamask"
+                    defaultMessage="Login with Metamasks"
+                  />
+                ) : nombreBotonMT === "Login with MetaMask" ? (
+                  <FormattedMessage
+                    id="login.metamask"
+                    defaultMessage="Login with Metamasks"
+                  />
+                ) : (
+                  <FormattedMessage
+                    id="login.metamasknotinstalled"
+                    defaultMessage="MetaMask is not installed!"
+                  />
+                )}
+              </a>
             </div>
           </div>
           <div className="mt-5 text-center fw-bold">
-            <p class="fs-4">Unlimited NFT Generator</p>
+            <p class="fs-4">
+              <FormattedMessage
+                id="login.title"
+                defaultMessage="Unlimited NFT Generator"
+              />
+            </p>
           </div>
         </div>
       </div>
