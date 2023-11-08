@@ -1,0 +1,76 @@
+.FatherboxRegisterBefore {
+    position: absolute;
+    position: fixed !important;
+    top: 0;
+    z-index: 100;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.5);
+
+    .form-control{
+        color: white !important;
+    }
+    
+    .form-control:focus{
+        color: rgb(0, 0, 0) !important;
+    }
+
+    .regiterCloser {
+        background-color: #0d6dfd64;
+        color: white !important;
+        position: absolute;
+        top: 14px;
+        right: 17px;
+        padding: 5px 10px;
+        cursor: pointer;
+        fill: white;
+    }
+
+    .boxRegister {
+        background: variables.$background-color;
+        border: 1px solid rgba(255, 255, 255, 0.72);
+        border-radius: 5px;
+        padding: 20px 35px;
+        width: 90%;
+        max-width: 520px;
+        margin: auto;
+        // margin-top: 18vh;
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%) !important;
+    }
+
+    .inputRegister{
+        margin: 20px 0px;
+    }
+    @media (max-width: 1320px) {
+        .boxRegister {
+            background: variables.$background-color;
+            border: 1px solid rgba(255, 255, 255, 0.72);
+            border-radius: 5px;
+            padding: 20px 35px;
+            width: 90%;
+            margin: auto;
+        }
+    
+        .inputRegister{
+            margin: 20px 0px;
+        }
+    }
+
+    @media (max-width: 580px) {
+
+        .boxRegister {
+            background: variables.$background-color;
+            border: 1px solid rgba(255, 255, 255, 0.72);
+            border-radius: 5px;
+            padding: 10px 25px;
+            max-width: 90%;
+            margin: auto;
+        }
+    
+        .inputRegister{
+            margin: 20px 0px;
+        }
+    }
+}

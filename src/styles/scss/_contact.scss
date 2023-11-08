@@ -1,0 +1,63 @@
+@use "variables";
+
+.container-contact{
+    position: absolute;
+    border-radius:15px ;
+    background-color: variables.$secondary-color;
+    // height: 200px;
+    //max-width: 50%;
+    width: 40%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 4;
+    text-align: center;
+    overflow: hidden;
+    @media (max-width: 768px) {  
+        width: 95%;
+        h2{
+          font-size: 28px;
+        }
+    }
+  
+  }
+
+  .cont-wrapper{
+    position: absolute;
+    background-color: #030304c0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    border-radius: 0;
+    position: fixed;
+    
+}
+
+.btn-close-contact {
+    filter: invert(1);
+    position: absolute;
+    top: 2vh;
+    left: 36vw;
+    width: 30px;
+    cursor: pointer;
+}
+
+
+
+  
+//   @media (max-width: 400px) and (max-height: 700px){
+
+//     .container-contact{
+//         width: 30%;
+//     }
+
+//     .btn-close-contact {
+//         filter: invert(1);
+//         position: absolute;
+//         top: 2vh;
+//         left: 36vw;
+//         width: 30px;
+//     }
+//   }

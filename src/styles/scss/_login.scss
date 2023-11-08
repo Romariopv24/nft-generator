@@ -1,0 +1,171 @@
+@use "variables";
+
+$facebookColor: #3c5898;
+$googleColor:#eb4335;
+$metamaskColor :#6b78b8;
+
+*{
+  font-family: 'Nunito', sans-serif;
+  font-size: 16px;
+  color: variables.$text-color;
+  box-sizing: border-box;
+}
+
+.formularioLogin{
+  display: flex;
+  height:90vh;
+}
+.formFields{
+ padding: 2.2em;
+ background-color: variables.$secondary-color;
+ margin: auto;
+ display: block;
+}
+.loginBlock{
+  width:420px;
+  height:80px;
+  margin:15px auto;
+  background: variables.$main-color;
+  display:flex;
+  transition: 250ms ease-out;
+
+}
+.facebook:hover{
+  background:lighten($facebookColor, 5);
+  cursor:pointer;
+}
+.google:hover{
+  background:lighten($googleColor, 5);
+  cursor:pointer;
+}
+.MetaMask:hover{
+  background:lighten($metamaskColor, 5);
+  cursor:pointer;
+}
+.loginBlockContent{
+  margin: 22px auto;
+  display: flex;
+  flex-direction: row;
+}
+
+.icon{
+  display: flex;
+  flex: 3.3;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 1em;
+}
+
+.text{
+  display: flex;
+  flex: 6.7;
+  justify-content: flex-start;
+  align-items: center;
+  text-decoration: none;
+  color: whitesmoke !important;
+}
+
+text:hover a:hover{
+  text-decoration: none;
+  color: whitesmoke !important;
+}
+
+.itemContainer{
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+}
+
+@media (max-width: 580px) {
+  .formFields{
+    padding: 0;
+    width: 350px;
+    background-color: variables.$secondary-color;
+    margin: auto;
+    display: block;
+   }
+   .loginBlock{
+     width:330px;
+     height:80px;
+     margin:15px auto;
+     background: variables.$main-color;
+     display:flex;
+   }
+   .loginBlockContent{
+    margin: 10px auto;
+  }
+  .loginBlockContent{
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+  }
+  .icon{
+    display: flex;
+    flex: 2.3 1;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 1em;
+  }
+  .txt{
+    font-size:22px;
+    padding-left: 0;
+    text-decoration: none;
+    color: white;
+  }
+  .txt:hover{
+    font-size:22px;
+    padding-left: 0;
+    text-decoration: none;
+    color: white;
+  }
+
+}
+
+.logo {
+  max-width: 30%;
+  margin-bottom: -45vh;
+}
+
+@media (max-width: 1400px){
+  .logo {
+    max-width: 40%;
+    margin-bottom: -22vw;
+  }
+}
+
+@media (max-width: 1200px){
+  .logo {
+    max-width: 45%;
+    margin-bottom: -30vw;
+  }
+}
+
+@media (max-width: 1100px){
+  .logo {
+    max-width: 50%;
+    margin-bottom: -15vw;
+  }
+}
+
+@media (max-width: 800px) and (max-height: 600px){
+  .logo {
+    max-width: 60%;
+    margin-bottom: -10vw;
+  }
+}
+
+@media (max-width: 450px) and (max-height: 920px){
+  .logo {
+    max-width: 85%;
+    margin-bottom: -55vh;
+  }
+}
+
+@media (max-width: 400px) and (max-height: 700px){
+  .logo {
+    max-width: 90%;
+    margin-bottom: -44vh;
+  }
+}

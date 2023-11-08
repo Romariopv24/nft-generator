@@ -1,0 +1,37 @@
+.container-rarity {
+
+  .container-rarity-bottom {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+
+    .image-rarity-settings-container{
+      width: 130px;
+      height: auto;
+      border: 1px solid #f5f52fe3;
+      border: 1px solid #00b8ff;
+      border-radius: 10px;
+      overflow: hidden;
+      flex-grow: 0;
+      flex-shrink: 0;
+      img{
+        width: 100%;
+      }
+    }
+    .container-rarity-info {
+      margin: 0 10px 0 10px;
+      width: 60%;
+      flex-grow: 0;
+      flex-shrink: 0;
+      h5 {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+    .container-rarity-inputRange {
+      flex-grow: 1;
+      flex-shrink: 1;
+    }
+  }
+}

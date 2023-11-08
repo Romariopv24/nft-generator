@@ -1,0 +1,43 @@
+@use "variables";
+
+.capa {
+  padding: 0.7em;
+  background-color: variables.$main-color;
+  color: variables.$text-color;
+  margin: 5px;
+  width: 100%;
+  
+  &:focus {
+    outline: none;
+    border: 2px solid #4a9af5;
+  }
+
+  .plus-button {
+    align-items: center;
+    background-color: transparent;
+    border-radius: 100%;
+    color: white;
+    height: 20px;
+    justify-content: center;
+    width: 20px;
+    display: inline-flex;
+    cursor: pointer;
+
+    &:disabled, &[disabled] {
+      border: 1px solid gray;
+      color: gray;
+      cursor: default;
+    }
+  }
+
+  ._image-count{
+    background-color: variables.$enphasis-color;
+    border-radius: 15px;
+    color: variables.$text-color !important;
+    max-height: 30px;
+    padding: .25em .60em;
+
+  }
+  
+}
+

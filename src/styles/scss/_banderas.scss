@@ -1,0 +1,15 @@
+.banderas button {
+	border: none;
+	cursor: pointer;
+	background: none;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	display: inline-block;
+	width: 45px;
+	margin-left: 5px;
+}
+
+.banderas button img {
+	width: 100%;
+}

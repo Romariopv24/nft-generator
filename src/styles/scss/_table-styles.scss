@@ -1,0 +1,18 @@
+@use "variables";
+
+.table-pc{
+    background-color: variables.$table-color;
+    border-radius: 15px;
+
+    thead{
+        height: 50px;
+        box-shadow: 2px 2px 5px #0000001c;
+    }
+}
+
+.table-mobile{
+    background-color: variables.$table-color;
+    border-radius: 15px;
+
+
+}

@@ -1,0 +1,66 @@
+@use "variables";
+  
+  .faqs_container{
+    max-width: 1140px;
+    margin: auto;
+    position: relative;
+    top: 40px;
+    margin-bottom: 5vh;
+  }
+  
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+      monospace;
+  }
+  
+  /* accordion styles */
+  
+  .h1_title {
+    font-size: 42px;
+    color: var(variables.$text-color);
+    margin: 0px;
+    margin-bottom: 30px;
+  }
+  
+  .accordion-simple > .active {
+    display: block;
+  }
+  
+  .accordion__faq .inactive{
+    display: none;
+  }
+  
+  .accordion__faq > div{
+    background-color: variables.$enphasis-color;
+    margin-bottom: 20px;
+    padding: 0px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .accordion__title{
+    color: red;
+    padding-bottom: 20px;
+    font-weight: 500;
+  }
+  
+  .accordion__faq-heading{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .accordion__faq-heading .active{
+    color: variables.$secondary-color;
+  }
+  
+  .accordion__faq-heading h3{
+    color: variables.$text-color;
+    font-weight: 600;
+  }
+  
+  .accordion__faq p {
+    margin: 0px;
+    padding-bottom: 30px;
+    color: variables.$text-color;
+    line-height: 1.4;
+  }

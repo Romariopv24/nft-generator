@@ -1,0 +1,186 @@
+.container-preview{
+  width: 500px;
+  height: 500px;
+  position: absolute;
+  z-index: 2;
+  margin-bottom: 10px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  position: fixed;
+
+  .container-img{
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+  .eliminar-imagen{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    position: absolute;
+    top: 2%;
+    left: 86%;
+    z-index: 1;
+    // transform: scaleX(1.2);
+    cursor: pointer;
+    // font-size: 10px;
+    background: #00020f88;
+    width: 60px;
+    height: 25px;
+    border-radius: -4%;
+    p{
+      margin: 0;
+      padding: 0;
+    }
+  }
+  .preview-img{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+  }
+  @media (max-width: 580px) {
+    width: 320px;
+    height: 320px;
+  }
+}
+
+.pointerEvent {
+  pointer-events: none;
+}
+
+
+.container-preview-success{
+  width: 150px;
+  height: 150px;
+  z-index: 2;
+  margin-bottom: 10px;
+
+  .container-img{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+  }
+  .eliminar-imagen{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    position: absolute;
+    top: 2%;
+    left:   86%;
+    z-index: 1;
+    // transform: scaleX(1.2);
+    cursor: pointer;
+    // font-size: 10px;
+    background: #00020f88;
+    width: 60px;
+    height: 25px;
+    border-radius: -4%;
+    p{
+      margin: 0;
+      padding: 0;
+    }
+  }
+  .preview-img{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+  }
+  @media (max-width: 580px) {
+    width: 320px;
+    height: 320px;
+  }
+}
+
+.contenedor-envolvente {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,400;0,600;0,700;1,300&display=swap');
+$font:  'Titillium Web', sans-serif;
+
+.my-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 2;
+  background: linear-gradient(157deg, #53f4f7 47.9%, #f244e7 63.45%);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font: {
+    size: 1.25rem;
+    family: sans-serif;
+  }
+ -webkit-animation: MY_GRADIENT_ANIMATION 3s infinite;
+  -moz-animation: MY_GRADIENT_ANIMATION 3s infinite;
+  -o-animation: MY_GRADIENT_ANIMATION 3s infinite;
+  animation: MY_GRADIENT_ANIMATION 3s infinite;
+  
+  span:nth-child(2) {
+    margin-left: 200px
+  }
+}
+
+@-webkit-keyframes MY_GRADIENT_ANIMATION {
+  0%{
+    background-position: 0% 50%;
+  }
+  50%{
+    background-position: 100% 50%
+  }
+  100%{
+    background-position: 0% 50%;
+  }
+}
+
+@-moz-keyframes MY_GRADIENT_ANIMATION {
+  0%{
+    background-position: 0% 50%;
+  }
+  50%{
+    background-position: 100% 50%
+  }
+  100%{
+    background-position: 0% 50%;
+  }
+}
+
+@-o-keyframes MY_GRADIENT_ANIMATION {
+  0%{
+    background-position: 0% 50%;
+  }
+  50%{
+    background-position: 100% 50%
+  }
+  100%{
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes MY_GRADIENT_ANIMATION {
+  0%{
+    background-position: 0% 50%;
+  }
+  50%{
+    background-position: 100% 50%
+  }
+  100%{
+    background-position: 0% 50%;
+  }
+}
+
+.my-text2 {  
+  background: -webkit-linear-gradient(left top, #53f4f7, #f244e7);
+  background: linear-gradient(to bottom right, #53f4f7, #f244e7);
+  -webkit-background-clip: text;  
+  -webkit-text-fill-color: transparent;  
+}  

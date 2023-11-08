@@ -1,0 +1,165 @@
+@use "variables";
+
+body {
+  font-family: sans-serif;
+  margin: 0;
+  background-color: variables.$background-color;
+}
+
+div,
+li {
+  border-radius: 15px;
+  font-weight: 700;
+}
+
+button {
+  color: variables.$text-color;
+  background-color: variables.$secondary-color;
+  border-radius: 20px;
+  border: none;
+  font-weight: 700;
+  transition: 250ms ease-in-out;
+}
+
+button:hover {
+  background-color: variables.$text-color;
+  color: variables.$secondary-color;
+}
+
+button:disabled,
+button[disabled] {
+  background-color: variables.$background-color;
+  color: #666666;
+  cursor: not-allowed;
+  transform: scale(1);
+  box-shadow: none;
+}
+
+button[disabled]:hover {
+  transform: scale(1);
+  box-shadow: none;
+  cursor: not-allowed;
+  fill: white !important;
+}
+
+.form-control,
+.form-control-sm {
+  background-color: variables.$secondary-color;
+  border: none;
+  border-radius: 20px;
+  // transition: 400ms ease-in;
+  transition: 400ms cubic-bezier(0.43, -0.38, 0.14, 1.58);
+
+  height: 40px;
+}
+
+.form-control,
+.form-control-sm:focus {
+  outline: none !important;
+  border-radius: 5px;
+  font-weight: 700;
+  box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.165);
+}
+
+.__boton-mediano {
+  padding: .5em 1em;
+  margin: 5px 15px 5px;
+}
+
+.__boton-signOut {
+  padding: .5em 1em;
+  margin: 5px 15px 5px;
+  width: 140px;
+}
+.__boton-mediano-borrar {
+  background-color: #00000023;
+  border: 1px solid #ec2d01;
+  color: #ec2d01;
+  padding: .5em 1em;
+  margin: 5px 15px 5px;
+}
+
+.__boton-grande {
+  font-size: 30px
+}
+
+.__boton-mediano-borrar:hover {
+  background-color: #ec2d01;
+  color: variables.$text-color;
+}
+
+.--envair {
+  color: green;
+  border: 1px solid green;
+}
+
+.--envair:hover {
+  background-color: green;
+  color: variables.$text-color;
+}
+.user-button {
+  padding: .6em;
+  border-radius: 5px;
+  transition: border-radius 400ms cubic-bezier(0.43, -0.38, 0.14, 1.58);
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: center;
+  fill: variables.$text-color;
+  background-color: transparent;
+}
+
+.user-icon {
+  // width: 0px;
+  // height: 0px;
+  width: 30px;
+  height: 30px;
+  transition: 400ms cubic-bezier(0.43, -0.38, 0.14, 1.58);
+}
+
+.edit-icon {
+  height: 0px;
+  width: 0px;
+  transition: 400ms cubic-bezier(0.43, -0.38, 0.14, 1.58);
+}
+
+.divider{
+  height:20px;
+  width: 2px;
+  background-color: variables.$text-color;
+  margin-left: .5em;
+  border-radius: 10px;
+  transform: scale(0);
+}
+
+.user-button:hover {
+  background-color: variables.$main-color;
+  border-radius: 15px;
+
+  .user-icon {
+    width: 30px;
+    height: 30px;
+  }
+  .divider{
+  transform: scale(1);
+  }
+  .edit-icon{
+    width: 18px;
+    height: 18px;
+    margin-left: .9em;
+    margin-right: .4em;
+    cursor: pointer;
+  }
+}
+
+.--modificadorForm {
+  background-color: #b1b3e7 !important;
+}
+
+.table>:not(caption)>*>* {
+  max-width: 105px !important;
+}
+@import './capas-container';
+@import './capa';
+@import './registerUser'
+// @import './login'´

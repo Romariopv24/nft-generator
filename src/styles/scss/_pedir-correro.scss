@@ -1,0 +1,36 @@
+@use "variables";
+
+.container-pedir-correo{
+  position: absolute;
+  border-radius:15px ;
+  background-color: variables.$secondary-color;
+  // height: 200px;
+  max-width: 560px;
+  min-width: 420px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 4;
+  text-align: center;
+  overflow: hidden;
+  @media (max-width: 768px) {  
+      width: 95%;
+      h2{
+        font-size: 28px;
+      }
+  }
+
+}
+
+.cont-wrapper{
+  position: absolute;
+  background-color: #030304c0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  border-radius: 0;
+  position: fixed;
+  
+}

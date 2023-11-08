@@ -1,0 +1,62 @@
+@use "variables";
+#modalPortal {
+  .container-modal {
+    background-color: rgba(0, 0, 0, 0.733);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    color: white;
+  }
+  .card-modal{
+    max-height: 100%;
+    position: relative;
+    width: 600px;
+    background: variables.$secondary-color;
+    border-radius: 0.3rem;
+  }
+  .display-none {
+    display: none;
+  }
+
+  .content-modal {
+    position: relative;
+    max-height: 80vh;
+    border-radius: 5px;
+    padding: 1rem;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    overflow-y: auto;
+  }
+
+  .cerrar-modal {
+    cursor: pointer;
+  }
+
+  .header-modal{
+    // min-height: 40px;
+    border-bottom: 1px solid #0c0d15;
+    padding: 0.3rem 1rem;
+    font-size: 1.9rem;
+    display: flex;
+    align-content: center;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  
+  .--header-modal{
+    // min-height: 40px;
+    border-bottom: none;
+    padding: 0.0rem 1rem;
+    font-size: 1.9rem;
+    display: flex;
+    align-content: center;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
