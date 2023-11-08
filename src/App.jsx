@@ -401,7 +401,7 @@ function App() {
 
       <footer class="text-center text-lg-start  text-muted">
         {/* Copyright */}
-        <div class="text-center p-1 d-flex justify-content-center align-items-center">
+        <div class="text-center p-2 d-flex justify-content-center align-items-center">
           <p>
             <span className="p-2">Copyright © 2023 - Fanaticoins LLC</span>/
             <a
