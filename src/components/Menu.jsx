@@ -168,6 +168,7 @@ const Menu = ({
                 setName(null);
                 desLoguearse();
                 ReiniciarTodo();
+                navigate("/");
               }}
               className="__boton-signOut enphasis-button d-none d-sm-block "
             >
