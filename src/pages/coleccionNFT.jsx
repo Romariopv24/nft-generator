@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { ReactComponent as Descargar } from "../assets/svg/descargar.svg";
 import { ReactComponent as Export } from "../assets/svg/export.svg";
 import { ReactComponent as Delete } from "../assets/svg/trash.svg";
@@ -21,6 +21,7 @@ const listWalletPremiun = [
   "0x7b739a2c9e21e2Ad07eC8898EE89945a93627358",
   "0x63828d59737Aa3744960d6827Ccf457931B84245",
   "0x1A3Bd3C1f6f4c9e73AF91C21dbcB143bf2B2E5Da",
+  "0xFE18e91d90c5aB7ba6c0758Fa2122Eea6f5F1Db8",
 ];
 
 const ColeccionNFT = () => {
@@ -60,30 +61,39 @@ const ColeccionNFT = () => {
   const [isIntervalActive, setIsIntervalActive] = useState(false);
   const [isRequestSent, setIsRequestSent] = useState(false);
 
-  // useEffect(async() => {
-  //   if (collectall.length === 0 && !isPromiseReady) {
-  //     getColletionsRef.current();
-  //     const accounts = await window.ethereum.request({ method:'eth_accounts' })
-  //     /* let findWallet = listWalletPremiun.find(wallet => wallet.toLowerCase() === accounts[0].toLowerCase())
-  //     if(findWallet) {
-  //       setIsWalletPremiun(true)
-  //     } */
-  //   }
+  useEffect(async () => {
+    localStorage.setItem("noLoop", false);
 
-  //   if (!isIntervalActive) {
-  //     setIsIntervalActive(true);
-  //     const interval = setInterval(() => {
-  //       if (!isRequestSent) {
-  //         setIsRequestSent(true);
-  //         getColletionsRef.current();
-  //         setTimeout(() => setIsRequestSent(false), 30000);
-  //       }
-  //     }, 30000);
-  //     return () => clearInterval(interval);
-  //   }
-  // }, [collectall, isIntervalActive, isRequestSent]);
+    const noLoop = localStorage.getItem("noLoop");
+    if (!noLoop) {
+      console.log("lopp?");
+      if (collectall.length === 0 && !isPromiseReady) {
+        getColletionsRef.current();
+        const accounts = await window.ethereum.request({
+          method: "eth_accounts",
+        });
+        /* let findWallet = listWalletPremiun.find(wallet => wallet.toLowerCase() === accounts[0].toLowerCase())
+      if(findWallet) {
+        setIsWalletPremiun(true)
+      } */
+      }
+
+      if (!isIntervalActive) {
+        setIsIntervalActive(true);
+        const interval = setInterval(() => {
+          if (!isRequestSent) {
+            setIsRequestSent(true);
+            getColletionsRef.current();
+            setTimeout(() => setIsRequestSent(false), 5000);
+          }
+        }, 30000);
+        return () => clearInterval(interval);
+      }
+    }
+  }, []);
 
   async function getColletions() {
+    localStorage.setItem("noLoop", true);
     let url = `${URL}/collectall`;
     const facebook = JSON.parse(localStorage.getItem("facebook"));
     const google = JSON.parse(localStorage.getItem("google"));

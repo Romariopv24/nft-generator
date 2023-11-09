@@ -165,7 +165,9 @@ function App() {
   }, []);
 
   const location = useLocation().pathname;
-  console.log(location);
+
+  
+
 
   const fetchData = async () => {
     if (

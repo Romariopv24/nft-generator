@@ -132,11 +132,14 @@ function resetAllBars() {
                 variant="primary"
                 titleModal=""
                 sizeText="fs-5"
-                func={loadImageFromDB}>
+                func={loadImageFromDB}
+                resetAllBars={resetAllBars}
+                >
+              
                 <div className='container-rarity' >
-                  <button onClick={resetAllBars}>
+                  {/* <button onClick={resetAllBars}>
                     <FormattedMessage id="capas.reset" defaultMessage="Reset Values"/> 
-                  </button>
+                  </button> */}
                   {/* <div className='d-flex me-5 container-rarity-top'>
                     <div className="form-check form-switch">
                       <input className="form-check-input" type="checkbox" onClick={() => requiredRarity(!selectedCapa.required)} defaultChecked={selectedCapa.required} />

@@ -35,7 +35,7 @@
   "registerUser.btn-send": "Guardar",
 
   "form.projectname": "Nombre de la Coleccion",
-  "form.projectdescription": "Descripcion de la Colleccion",
+  "form.projectdescription": "Descripcion de la Coleccion",
   "form.combinations": "Combinaciones totales: ",
   "form.dimsension": "Dimensiones",
   "form.layername": "Nombre de capa",
@@ -191,7 +191,6 @@
 
   "contact.alertSuccess": "Mensaje enviado",
   "contact.captchaError": "Por favor complete el captcha",
-  "contact.validationMail":"Por favor introduzca un correo valido",
+  "contact.validationMail": "Por favor introduzca un correo valido",
   "contact.incompleteFields": "Por favor complete todos los campos"
-
 }
