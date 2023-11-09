@@ -154,6 +154,35 @@
 
   "legalwarning.button": "Aceptar",
 
+  "faq.title": "FAQs - Generación de Colecciones de NFTs",
+
+  "faq.1.ask": "¿Qué es la generación de Colecciones de NFTs con capas?",
+  "faq.1.res": "La generación de Colecciones de NFTs con capas es un proceso que le permite crear colecciones únicas de NFTs combinando diferentes capas de imágenes o elementos visuales. Esto permite la creación de una variedad de NFTs personalizados con características únicas.",
+
+  "faq.2.ask": "¿Cómo funciona la generación de Colecciones de NFTs con capas en este servicio?",
+  "faq.2.res": "Para utilizar nuestro servicio, los usuarios deben cargar las capas de imágenes que compondrán sus Colecciones de NFTs. Luego, podrán configurar las rarezas de estas capas y generar Colecciones de NFTs personalizados a partir de ellas.",
+
+  "faq.3.ask": "¿Qué son las “rarezas“ de las capas y cómo se configuran?",
+  "faq.3.res": "Las “rarezas“ se refieren a la probabilidad de que una capa específica se utilice al generar un NFT dentro de una Colección. Los usuarios pueden configurar las rarezas de sus capas para determinar con qué frecuencia aparecerán en los NFTs generados en la Colección. Esto permite crear NFTs con elementos únicos y escasos.",
+
+  "faq.4.ask": "¿Qué tipo de imágenes o capas se pueden cargar?",
+  "faq.4.res": "Puede cargar imágenes o capas en formatos de imagen comunes, como PNG o JPEG. Las capas pueden ser elementos visuales, ilustraciones, fotografías, o cualquier tipo de contenido gráfico que desee combinar en sus NFTs dentro de la Colección. Las capas deberán de ser todas de las mismas medidas y siguiendo los guidelines establecidos por la plataforma.",
+
+  "faq.5.ask": "¿Cómo se generan los NFTs dentro de una Colección a partir de las capas?",
+  "faq.5.res": "Una vez que haya cargado las capas y configurado las rarezas, nuestro sistema generará NFTs únicos dentro de la Colección combinando estas capas de acuerdo con las configuraciones de rareza que haya establecido. Los NFTs generados estarán listos para su descarga y uso en cualquier marketplace y red.",
+
+  "faq.6.ask": "¿Puedo vender los NFTs generados en las Colecciones en mercados de NFT?",
+  "faq.6.res": "Sí, los NFTs generados en las Colecciones son suyos y puede venderlos en los mercados de NFT de su elección. Puede utilizar los metadatos generados y la información proporcionada para listar sus NFTs en dichos mercados.",
+
+  "faq.7.ask": "¿Cuánto tiempo se almacenan los NFTs generados en las Colecciones en el servicio?",
+  "faq.7.res": "Los NFTs generados en las Colecciones se almacenan en el servicio durante un período determinado (puede variar). Después de ese tiempo, es responsabilidad del usuario descargar y respaldar sus NFTs, ya que el servicio no garantiza un almacenamiento a largo plazo.",
+
+  "faq.8.ask": "¿Qué sucede si cambio de opinión o cometí un error en la generación de NFTs dentro de una Colección?",
+  "faq.8.res": "Las generaciones de NFTs dentro de una Colección son finales y no se pueden deshacer. Asegúrese de revisar y confirmar cuidadosamente sus configuraciones antes de generar los NFTs",
+
+  "faq.9.ask": "¿Puedo modificar las capas o las rarezas después de generar los NFTs dentro de una Colección?",
+  "faq.9.res": "Una vez que se generan los NFTs dentro de una Colección, no es posible modificar las capas o las rarezas asociadas. Si desea realizar cambios, deberá crear una nueva generación de NFTs dentro de la Colección con las configuraciones deseadas",
+
   "contact.title": "Contacto",
   "contact.name": "Nombre",
   "contact.email": "Correo",

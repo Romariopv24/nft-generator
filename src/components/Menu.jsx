@@ -89,26 +89,25 @@ const Menu = ({
               <User className="user-icon" width={30} height={30} />
             </span>
           )}
-
-          <div class="links">
-            <FormattedMessage
-              id="menu.tutorial"
-              defaultMessage="Don't know where to start?  "
-            />
-            <a
-              class="links"
-              style={{ cursor: "pointer" }}
-              onClick={() => {
-                setShowVideo(true);
-                console.log("abriendo el video");
-              }}
-            >
+          {nameUser && (
+            <div class="links">
               <FormattedMessage
-                id="menu.video-tutorial"
-                defaultMessage=" Watch tutorial video!"
+                id="menu.tutorial"
+                defaultMessage="Don't know where to start?  "
               />
-            </a>
-          </div>
+              <Link
+                className="links"
+                style={{ cursor: "pointer" }}
+                target="_blank"
+                to={"/faqs"}
+              >
+                <FormattedMessage
+                  id="menu.video-tutorial"
+                  defaultMessage=" Watch tutorial video!"
+                />
+              </Link>
+            </div>
+          )}
 
           {location.pathname === "/" && (
             <div>

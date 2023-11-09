@@ -154,6 +154,35 @@
 
   "legalwarning.button": "Accept",
 
+  "faq.title": "FAQs - NFT Collection Generation with Layers",
+
+  "faq.1.ask": "What is NFT Collection generation with layers?",
+  "faq.1.res": "The generation of NFT collections with layers is a process that allows you to create unique NFT collections by combining different layers of images or visual elements. This enables the creation of a variety of custom NFTs with unique features.",
+
+  "faq.2.ask": "How does NFT Collection generation with layers work in this service?",
+  "faq.2.res": "To use our service, users must upload the layers of images that will make up their NFT collections. They can then configure the rarities of these layers and generate custom NFT collections from them.",
+
+  "faq.3.ask": "What are the “rarities“ of the layers, and how are they configured?",
+  "faq.3.res": "“Rarities“ refer to the probability of a specific layer being used when generating an NFT within a collection. Users can configure the rarities of their layers to determine how often they will appear in the NFTs generated in the collection. This allows for the creation of NFTs with unique and scarce elements.",
+
+  "faq.4.ask": "What types of images or layers can be uploaded?",
+  "faq.4.res": "You can upload images or layers in common image formats, such as PNG or JPEG. Layers can be visual elements, illustrations, photographs, or any type of graphic content you want to combine in your NFTs within the collection. The layers should all be of the same dimensions and follow the guidelines established by the platform.",
+
+  "faq.5.ask": "How are NFTs generated within a collection from the layers?",
+  "faq.5.res": "Once you have uploaded the layers and configured the rarities, our system will generate unique NFTs within the collection by combining these layers according to the rarity settings you have established. The generated NFTs will be ready for download and use on any marketplace and network.",
+
+  "faq.6.ask": "Can I sell the NFTs generated in collections on NFT markets?",
+  "faq.6.res": "Yes, the NFTs generated in collections belong to you, and you can sell them on the NFT markets of your choice. You can use the generated metadata and provided information to list your NFTs on these markets.",
+
+  "faq.7.ask": "How long are the NFTs generated in collections stored in the service?",
+  "faq.7.res": "The NFTs generated in collections are stored on the service for a specified period (which may vary). After this time, it is the user's responsibility to download and back up their NFTs, as the service does not guarantee long-term storage.",
+
+  "faq.8.ask": "What if I change my mind or make an error in the generation of NFTs within a collection?",
+  "faq.8.res": "NFT generations within a collection are final and cannot be undone. Be sure to carefully review and confirm your settings before generating the NFTs.",
+
+  "faq.9.ask": "Can I modify the layers or rarities after generating the NFTs within a collection?",
+  "faq.9.res": "Once the NFTs within a collection are generated, it is not possible to modify the layers or associated rarities. If you want to make changes, you will need to create a new generation of NFTs within the collection with the desired settings.",
+
   "contact.title": "Contact",
   "contact.name": "Name",
   "contact.email": "Email",
