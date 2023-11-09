@@ -1,12 +1,13 @@
 import { useSnackbar } from "notistack";
 import React, { useRef, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
-import { FormattedMessage } from "react-intl";
+import { FormattedMessage, useIntl } from "react-intl";
 import close from "../assets/svg/cerrar.svg";
 import "../styles/scss/_contact.scss";
 
 export const Contact = ({ showContact, setShowContact }) => {
   const { enqueueSnackbar } = useSnackbar();
+  const intl = useIntl();
 
   const captcha = useRef(null);
 
@@ -30,48 +31,72 @@ export const Contact = ({ showContact, setShowContact }) => {
   const handleSubmit = (event) => {
     if (nombre === "" || correo === "" || mensaje === "") {
       setError(true);
-      enqueueSnackbar("Por favor complete todos los campos", {
-        variant: "error",
-        anchorOrigin: {
-          vertical: "top",
-          horizontal: "right",
-        },
-      });
+      enqueueSnackbar(
+        intl.formatMessage({
+          id: "contact.incompleteFields",
+          defaultMessage: "Please complete all the fields",
+        }),
+        {
+          variant: "error",
+          anchorOrigin: {
+            vertical: "top",
+            horizontal: "right",
+          },
+        }
+      );
       return;
     }
     if (!validateEmail(correo)) {
       setError(true);
-      enqueueSnackbar("Por favor introduzca un correo valido", {
-        variant: "error",
-        anchorOrigin: {
-          vertical: "top",
-          horizontal: "right",
-        },
-      });
+      enqueueSnackbar(
+        intl.formatMessage({
+          id: "contact.validationMail",
+          defaultMessage: "Please introduce a valid email",
+        }),
+        {
+          variant: "error",
+          anchorOrigin: {
+            vertical: "top",
+            horizontal: "right",
+          },
+        }
+      );
       return;
     }
     if (captcha.current === null) {
       setError(true);
-      enqueueSnackbar("Por favor complete el captcha", {
-        variant: "error",
-        anchorOrigin: {
-          vertical: "top",
-          horizontal: "right",
-        },
-      });
+      enqueueSnackbar(
+        intl.formatMessage({
+          id: "contact.captchaError",
+          defaultMessage: "Please complete Captcha",
+        }),
+        {
+          variant: "error",
+          anchorOrigin: {
+            vertical: "top",
+            horizontal: "right",
+          },
+        }
+      );
       return;
     }
 
     setError(false);
 
-    enqueueSnackbar("mensaje enviado", {
-      variant: "success",
-      action: () => setShowContact(false),
-      anchorOrigin: {
-        vertical: "top",
-        horizontal: "right",
-      },
-    });
+    enqueueSnackbar(
+      intl.formatMessage({
+        id: "contact.alertSuccess",
+        defaultMessage: "Message sent",
+      }),
+      {
+        variant: "success",
+        action: () => setShowContact(false),
+        anchorOrigin: {
+          vertical: "top",
+          horizontal: "right",
+        },
+      }
+    );
     return {
       nombre: nombre,
       correo: correo,

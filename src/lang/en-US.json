@@ -187,5 +187,11 @@
   "contact.name": "Name",
   "contact.email": "Email",
   "contact.message": "Message",
-  "contact.send": "Send"
+  "contact.send": "Send",
+
+  "contact.alertSuccess": "Message sent",
+  "contact.captchaError": "Please complete Captcha",
+  "contact.validationMail":"Please introduce a valid email",
+  "contact.incompleteFields": "Please complete all the fields"
+
 }
