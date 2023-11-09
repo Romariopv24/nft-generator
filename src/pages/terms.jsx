@@ -5,7 +5,7 @@ import "../styles/scss/_terms.scss";
 const Terms = () => {
   return (
     <div style={{ paddingTop: "6vh" }}>
-      <div class="justify-content-center d-flex">
+      <div className="justify-content-center d-flex">
         <h1>
           <FormattedMessage
             id="legalwarning.termsncondition"
@@ -13,7 +13,7 @@ const Terms = () => {
           />
         </h1>
       </div>
-      <div class="principal_container text_justify p-3">
+      <div className="principal_container text_justify p-3">
         <p>
           <FormattedMessage
             id="legalwarning.date"
@@ -21,7 +21,7 @@ const Terms = () => {
           />
         </p>
 
-        <p class="fw-bold fs-4">
+        <p className="fw-bold fs-4">
           {" "}
           <ins>
             <FormattedMessage
@@ -36,7 +36,7 @@ const Terms = () => {
             defaultMessage="By accessing and using the NFT Collection Generator service (hereinafter referred to as 'the Service'), you agree to and are bound by the following terms and conditions. If you do not agree to these terms, we recommend that you do not use the Service."
           />
         </p>
-        <p class="fw-bold fs-4">
+        <p className="fw-bold fs-4">
           {" "}
           <ins>
             <FormattedMessage
@@ -63,7 +63,7 @@ const Terms = () => {
             defaultMessage=" 1.3 Almacenamiento de Colecciones: Las colecciones generadas se almacenarán en el Servicio durante un período de 15 días. Después de este período, el usuario deberá descargar y respaldar sus colecciones, ya que el Servicio no garantiza el almacenamiento a largo plazo."
           />
         </p>
-        <p class="fw-bold fs-4">
+        <p className="fw-bold fs-4">
           <ins>
             <FormattedMessage
               id="legalwarning.secondTitle"
@@ -83,7 +83,7 @@ const Terms = () => {
             defaultMessage="2.2 Métodos de Pago: Las tarifas se pagarán en la criptomoneda especificada en el Servicio o mediante Tarjeta de Crédito, y el usuario deberá completar el pago utilizando su billetera de criptomonedas compatible o tarjeta de crédito vigente."
           />
         </p>
-        <p class="fw-bold fs-4">
+        <p className="fw-bold fs-4">
           <ins>
             <FormattedMessage
               id="legalwarning.thirdTitle"
@@ -97,7 +97,7 @@ const Terms = () => {
             defaultMessage="3.1 Generated Collections: The collections generated through the Service are the exclusive property of the users. The user retains all intellectual property rights over the images and the generated JSON files."
           />
         </p>
-        <p class="fw-bold fs-4">
+        <p className="fw-bold fs-4">
           <ins>
             <FormattedMessage
               id="legalwarning.fourthTitle"
@@ -117,7 +117,7 @@ const Terms = () => {
             defaultMessage="4.2 Wallet Security: The user must take necessary measures to keep their cryptocurrency wallet and access credentials secure. The Service is not responsible for any loss or unauthorized access to the wallet."
           />
         </p>
-        <p class="fw-bold fs-4">
+        <p className="fw-bold fs-4">
           <ins>
             <FormattedMessage
               id="legalwarning.fiveTitle"
@@ -131,7 +131,7 @@ const Terms = () => {
             defaultMessage="The Service reserves the right to update or modify these terms and conditions at any time. Users will be notified of any changes, and continued use of the Service will constitute acceptance of the updated terms."
           />
         </p>
-        <p class="fw-bold fs-4">
+        <p className="fw-bold fs-4">
           <ins>
             <FormattedMessage
               id="legalwarning.sixTitle"
@@ -146,7 +146,7 @@ const Terms = () => {
           />
         </p>
 
-        <p class="fw-bold fs-4">
+        <p className="fw-bold fs-4">
           <ins>
             <FormattedMessage
               id="legalwarning.sevenTitle"

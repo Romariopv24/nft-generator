@@ -1,7 +1,13 @@
 import { useEffect, useLayoutEffect, useState } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
 import Joyride, { STATUS } from "react-joyride";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import {
+  Link,
+  Route,
+  Routes,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import { Contact } from "./components/Contact";
 import GenericModal from "./components/GenericModal";
 import { LegalWarning } from "./components/LegalWarning";
@@ -158,8 +164,16 @@ function App() {
     }
   }, []);
 
+  const location = useLocation().pathname;
+  console.log(location);
+
   const fetchData = async () => {
-    if (facebook?.tokenUser || google?.tokenUser || metamask?.tokenUser) {
+    if (
+      facebook?.tokenUser ||
+      google?.tokenUser ||
+      metamask?.tokenUser ||
+      location === "/terms&conditions"
+    ) {
       try {
         let res = await createFolderUserServer();
         setIsAuth(true);
@@ -181,26 +195,28 @@ function App() {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
-    let url = `${URL}/user`;
+    let url = `${URL}user`;
     let myInit = {
       method: "POST",
       body: JSON.stringify(ObjetoUser),
       headers: myHeaders,
     };
 
-    let resPost = await fetch(url, myInit);
-    if (!resPost.ok) {
-      // console.log({ resPost })
-      throw Error("HTTP status " + resPost.status);
-    }
+    if (location !== "/terms&conditions") {
+      let resPost = await fetch(url, myInit);
+      if (!resPost.ok) {
+        // console.log({ resPost })
+        throw Error("HTTP status " + resPost.status);
+      }
 
-    let post = await resPost.json();
-    if (post.usuario != "creado") {
-      localStorage.setItem("name", post[0].nombre);
-      setName(post[0].nombre);
+      let post = await resPost.json();
+      if (post.usuario !== "creado") {
+        localStorage.setItem("name", post[0].nombre);
+        setName(post[0].nombre);
+      }
+      validarDatosUserDesdeServidor(post);
+      return post;
     }
-    validarDatosUserDesdeServidor(post);
-    return post;
   }
 
   function validarDatosUserDesdeServidor(res) {
@@ -406,7 +422,7 @@ function App() {
             <span className="p-2">Copyright © 2023 - Fanaticoins LLC</span>/
             <a
               target="_blank"
-              style={{ color: "white", cursor: "pointer" }}
+              style={{ color: "", cursor: "pointer" }}
               className="text-reset fw-bold p-2 links"
               onClick={() => setShowLegalWarning(true)}
             >
@@ -426,6 +442,18 @@ function App() {
             >
               <FormattedMessage id="footer.contact" defaultMessage="Contact" />
             </span>
+            /
+            <Link
+              target="_blank"
+              style={{ textDecoration: "none", color: "white" }}
+              to={"/terms&conditions"}
+            >
+              {" "}
+              <FormattedMessage
+                id="footer.terms&conditions"
+                defaultMessage={"Terms & Conditions"}
+              />
+            </Link>
           </p>
 
           {/* <a class="text-reset fw-bold" href="https://mdbootstrap.com/">MDBootstrap.com</a> */}
