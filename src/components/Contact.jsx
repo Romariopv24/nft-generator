@@ -66,12 +66,12 @@ export const Contact = ({ showContact, setShowContact }) => {
 
     enqueueSnackbar("mensaje enviado", {
       variant: "success",
+      action: () => setShowContact(false),
       anchorOrigin: {
         vertical: "top",
         horizontal: "right",
       },
     });
-    setShowContact(false);
     return {
       nombre: nombre,
       correo: correo,
