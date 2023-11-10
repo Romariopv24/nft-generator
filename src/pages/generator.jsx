@@ -1,18 +1,17 @@
-import React, { useEffect, useRef } from "react";
-import { URL } from "../constantes";
-import { useState } from "react";
-import setCapa from "../utils/setCapa";
-import getCapas from "../utils/getCapas";
-import getUniqueId from "../utils/getUniqueId";
-import getSelectedCapaId from "../utils/getSelectedCapaId";
-import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
-import "../styles/scss/app.scss";
-import Capas from "../components/Capas";
-import { crearRarityWeights } from "../utils/crearRarityWeights";
-import Form from "../components/Form";
-import BodyImage from "../components/BodyImage";
-import { ConexionDB, agregar, obtenerTodo } from "../db/CrudDB";
+import React, { useEffect, useRef, useState } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
+import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import BodyImage from "../components/BodyImage";
+import Capas from "../components/Capas";
+import Form from "../components/Form";
+import { URL } from "../constantes";
+import { ConexionDB, agregar, obtenerTodo } from "../db/CrudDB";
+import "../styles/scss/app.scss";
+import { crearRarityWeights } from "../utils/crearRarityWeights";
+import getCapas from "../utils/getCapas";
+import getSelectedCapaId from "../utils/getSelectedCapaId";
+import getUniqueId from "../utils/getUniqueId";
+import setCapa from "../utils/setCapa";
 
 const Generator = ({ setLoadingImages }) => {
   const [capas, setCapas] = useState(getCapas());
@@ -217,7 +216,7 @@ const Generator = ({ setLoadingImages }) => {
     myHeaders.append("Authorization", "Basic dXN1YXJpbzpwd2Q=");
     myHeaders.append("Content-Type", "application/json");
 
-    let url = `${URL}/images`;
+    let url = `${URL}images`;
     let myInit = {
       method: "POST",
       body: JSON.stringify(objConfig2),
@@ -471,10 +470,14 @@ const Generator = ({ setLoadingImages }) => {
               setUrlNft={setUrlNft}
               isExisteNombreProject={isExisteNombreProject}
               setIsExisteNombreProject={setIsExisteNombreProject}
-              ValidarSiExisteNombreProjectServidor={ValidarSiExisteNombreProjectServidor}
+              ValidarSiExisteNombreProjectServidor={
+                ValidarSiExisteNombreProjectServidor
+              }
               handleSubmit={handleSubmit}
               generarObjIMGParaElServidor={generarObjIMGParaElServidor}
-              generarObjetoConfigParaElServidor={generarObjetoConfigParaElServidor}
+              generarObjetoConfigParaElServidor={
+                generarObjetoConfigParaElServidor
+              }
               validarSiExisteCapasConImagenes={validarSiExisteCapasConImagenes}
             />
           </div>

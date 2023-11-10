@@ -45,6 +45,10 @@ function Capas({
     setSelectedCapaId(capa.id);
     // console.log(capa)
   };
+//LYEA PERDONEN KAMEHAMEHAQ
+
+
+
 
   function eliminarCapasHandle() {
     resetLocalStorage();

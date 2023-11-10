@@ -21,7 +21,7 @@ const listWalletPremiun = [
   "0x7b739a2c9e21e2Ad07eC8898EE89945a93627358",
   "0x63828d59737Aa3744960d6827Ccf457931B84245",
   "0x1A3Bd3C1f6f4c9e73AF91C21dbcB143bf2B2E5Da",
-  "0xFE18e91d90c5aB7ba6c0758Fa2122Eea6f5F1Db8",
+  "0xE6225d9f75CA398F060A2A9B7a3b345e681700dC",
 ];
 
 const ColeccionNFT = () => {
@@ -72,10 +72,13 @@ const ColeccionNFT = () => {
         const accounts = await window.ethereum.request({
           method: "eth_accounts",
         });
-        /* let findWallet = listWalletPremiun.find(wallet => wallet.toLowerCase() === accounts[0].toLowerCase())
-      if(findWallet) {
-        setIsWalletPremiun(true)
-      } */
+        console.log(accounts);
+        let findWallet = listWalletPremiun.find(
+          (wallet) => wallet.toLowerCase() === accounts[0].toLowerCase()
+        );
+        if (findWallet) {
+          setIsWalletPremiun(true);
+        }
       }
 
       if (!isIntervalActive) {
@@ -134,6 +137,8 @@ const ColeccionNFT = () => {
         defaultMessage: "No Deadline",
       });
     }
+
+    console.log("kuek");
     return dayjs(date)
       .add(15, "day")
       .fromNow()
@@ -231,6 +236,7 @@ const ColeccionNFT = () => {
     return post;
   }
 
+  console.log(collectall);
   return (
     <>
       {/* tabla pc */}

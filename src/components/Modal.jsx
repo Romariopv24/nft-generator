@@ -66,8 +66,8 @@ const Modal = (props) => {
                 </div>
               </div>
               <div className="content-modal">
-                {/* {props.children} */}
-                {React.Children.map(props.children, (child) => {
+                {props.children}
+                {/* {React.Children.map(props.children, (child) => {
                   if (
                     React.isValidElement(child) &&
                     typeof child.type === "function"
@@ -81,7 +81,7 @@ const Modal = (props) => {
                     });
                   }
                   return child;
-                })}
+                })} */}
               </div>
             </div>
           </div>,

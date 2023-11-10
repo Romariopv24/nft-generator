@@ -1,23 +1,19 @@
-import React, { useEffect, useState, useRef } from "react";
-import "../styles/scss/_form.scss";
-import "../styles/scss/_container-rarity.scss";
-import "../styles/scss/_menu.scss";
-import getCapas from "../utils/getCapas";
-import Modal from "./Modal";
-import eliminarCapa from "../utils/eliminarCapa";
-import getSelectedCapaId from "../utils/getSelectedCapaId";
-import getDatosImg from "../utils/getDatosImg";
-import { crearRarityWeights } from "../utils/crearRarityWeights";
-import { obtenerTodo, eliminar } from "../db/CrudDB.js";
-import { Link } from "react-router-dom";
 import { ethers } from "ethers";
-import * as Const from "../constantes";
-import GenericModal from "./GenericModal";
+import React, { useEffect, useRef, useState } from "react";
+import { FormattedMessage, useIntl } from "react-intl";
+import { Link } from "react-router-dom";
 import { ReactComponent as MetamaskLogo } from "../assets/svg/metamask.svg";
 import { ReactComponent as Stripe } from "../assets/svg/stripe.svg";
+import * as Const from "../constantes";
+import { obtenerTodo } from "../db/CrudDB.js";
 import pagarConStripe from "../stripe/checkOut.js";
-import { FormattedMessage, useIntl } from "react-intl";
-import PreviewGenerate from "./PreviewGenerate";
+import "../styles/scss/_container-rarity.scss";
+import "../styles/scss/_form.scss";
+import "../styles/scss/_menu.scss";
+import { crearRarityWeights } from "../utils/crearRarityWeights";
+import getCapas from "../utils/getCapas";
+import getDatosImg from "../utils/getDatosImg";
+import GenericModal from "./GenericModal";
 import PreviewCollection from "./PreviewCollection";
 
 // const paqueteDeMil_NFT = Const.PRECIO_PRUEBA_NFTS // 99$
@@ -32,6 +28,7 @@ const listWalletPremiun = [
   "0xa54927b7af64DdB3e2c5Ac9cbec38c81EC88Be48",
   "0x7b739a2c9e21e2Ad07eC8898EE89945a93627358",
   "0x63828d59737Aa3744960d6827Ccf457931B84245",
+  "0xE6225d9f75CA398F060A2A9B7a3b345e681700dC",
 ];
 
 const Form = ({
@@ -243,7 +240,6 @@ const Form = ({
                   onClick={() => {
                     setUrlNft("");
                     botonGenerate(false);
-
                   }}
                 >
                   <FormattedMessage
@@ -440,14 +436,14 @@ const Form = ({
       // const res = { data: { BNB: { quote: { USD: { price: 15000 } } } } }
 
       if (res) {
-        BNBprice.current = res.data.BNB.quote.USD.price;
+        BNBprice.current = res.data?.BNB.quote.USD.price;
         let coleccionSize = inputProjectCollectionSize.current.value;
-        console.log(coleccionSize);
+        // console.log(coleccionSize);
         if (coleccionSize >= 101 && coleccionSize <= 1000) {
           setPrice(99 / BNBprice.current); // cambiar el precio
           setIsPriceCalculated(false);
           setStripePrice(paqueteDeMil_NFT);
-          console.log("llegamo aqui para ejectuar el precio");
+          // console.log("llegamo aqui para ejectuar el precio");
         }
         if (coleccionSize > 1000 && coleccionSize <= 5000) {
           setPrice(199 / BNBprice.current);
@@ -520,7 +516,7 @@ const Form = ({
               </div>
 
               <div style={{ padding: "1.5em" }}>
-                <p className="fw-normal" style={{fontSize: "1.2rem"}}>
+                <p className="fw-normal" style={{ fontSize: "1.2rem" }}>
                   <FormattedMessage
                     id="form.pay.freeexceeded"
                     defaultMessage="Free limit exceeded if you want to continue you must pay"
@@ -597,7 +593,12 @@ const Form = ({
                     value={checked}
                     onChange={handleChecked}
                   />
-                  <Link to={`/terms&conditions`} target="_blank" class="text-reset text-center links" style={{fontSize: "15px"}}>
+                  <Link
+                    to={`/terms&conditions`}
+                    target="_blank"
+                    class="text-reset text-center links"
+                    style={{ fontSize: "15px" }}
+                  >
                     <FormattedMessage
                       id="form.pay.terms"
                       defaultMessage="I agree to the terms of service and privacy policy"
@@ -719,29 +720,33 @@ const Form = ({
     const res = await ValidarSiExisteNombreProjectServidor();
 
     if (isPendiente.url === "En Proceso...") {
-      setIsExisteNombreProject(intl.formatMessage({ 
-        id: "form.pending",
-        defaultMessage: "At this moment you cannot generate an NFT collection because you already have one in process, at the end of the creation of the collection you will be able to generate another one, keep in mind that if the collection is very large the process may take a while"
-      }));
+      setIsExisteNombreProject(
+        intl.formatMessage({
+          id: "form.pending",
+          defaultMessage:
+            "At this moment you cannot generate an NFT collection because you already have one in process, at the end of the creation of the collection you will be able to generate another one, keep in mind that if the collection is very large the process may take a while",
+        })
+      );
       botonGenerate(true);
       return;
     }
 
-    //esto es mio para ver si eres premiun
+    let isPremiun = false;
 
+    //esto es mio para ver si eres premiun
     const chainId = await window.ethereum.request({ method: "eth_chainId" });
     const accounts = await window.ethereum.request({ method: "eth_accounts" });
     console.log(accounts[0]);
-    let findWallet = listWalletPremiun.find(
-      //(wallet) => wallet.toLowerCase() === accounts[0].toLowerCase()
-      (wallet) => wallet.toLowerCase() === accounts[0]
-    );
-
-    if (chainId === "0x61") {
-      console.log("si es la red");
+    listWalletPremiun.find((wallet) => {
+      if (wallet.toLowerCase() === accounts[0]) isPremiun = true;
+    });
+    console.log(chainId);
+    if (chainId === "0x13881") {
+      console.log("karajo?");
+      // console.log("si es la red");
       //console.log('entro en la condiciones de ser premiun')
       //console.log(findWallet)
-      if (findWallet) {
+      if (isPremiun) {
         console.log("si eres premieum con tu direccion wallet");
         const { valid, message } = await ValidarSiExisteNombreProjectServidor();
         if (valid === false) {
@@ -875,17 +880,17 @@ const Form = ({
           </div>
         </form>
         <form className="form-capa-name">
-           <label htmlFor="capaName" className="form-label">
-            <FormattedMessage 
-              id="form.layername" 
-              defaultMessage="Layer Name"
-            />
-            </label>
-          <input type="text" className="form-control-sm w-100" id="capaName"
+          <label htmlFor="capaName" className="form-label">
+            <FormattedMessage id="form.layername" defaultMessage="Layer Name" />
+          </label>
+          <input
+            type="text"
+            className="form-control-sm w-100"
+            id="capaName"
             name="capaName"
             value={selectedCapa.name}
             onChange={setNewNameCapa}
-          /> 
+          />
         </form>
       </div>
 
@@ -942,7 +947,7 @@ const Form = ({
 
       <button
         className="__boton-mediano mx-auto d-block w-100 enphasis-button"
-        onClick={ () => {
+        onClick={() => {
           handleGenerate();
           loadImageFromDBB(setListPreview1);
           loadImageFromDBB(setListPreview2);
@@ -955,8 +960,11 @@ const Form = ({
       </button>
 
       <div className="text-center mt-2">
-        <Link to={`/faqs`} className="links"  target="_blank">
-           <FormattedMessage id="form.go-to-faqs" defaultMessage="Do you need help? Check FAQs here" />
+        <Link to={`/faqs`} className="links" target="_blank">
+          <FormattedMessage
+            id="form.go-to-faqs"
+            defaultMessage="Do you need help? Check FAQs here"
+          />
         </Link>
       </div>
 
