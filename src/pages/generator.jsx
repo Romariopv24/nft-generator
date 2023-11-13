@@ -285,7 +285,7 @@ const Generator = ({ setLoadingImages }) => {
     myHeaders.append("Authorization", "Basic dXN1YXJpbzpwd2Q=");
     myHeaders.append("Content-Type", "application/json");
 
-    let url = `${URL}/collect`;
+    let url = `${URL}collect`;
     let myInit = {
       method: "POST",
       body: JSON.stringify(obj),

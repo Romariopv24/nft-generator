@@ -662,7 +662,7 @@ const Form = ({
   };
 
   async function estadoDePeticionDeGenerarNFT() {
-    let url = `${Const.URL}/collectall`;
+    let url = `${Const.URL}collectall`;
 
     let usuario = {
       id: correo,
@@ -680,6 +680,7 @@ const Form = ({
     try {
       let resPost = await fetch(url, myInit);
       let post = await resPost.json();
+      console.log(post);
       return post;
     } catch (error) {
       console.log(error);

@@ -97,7 +97,7 @@ const ColeccionNFT = () => {
 
   async function getColletions() {
     localStorage.setItem("noLoop", true);
-    let url = `${URL}/collectall`;
+    let url = `${URL}collectall`;
     const facebook = JSON.parse(localStorage.getItem("facebook"));
     const google = JSON.parse(localStorage.getItem("google"));
     const metamask = JSON.parse(localStorage.getItem("metamask"));
