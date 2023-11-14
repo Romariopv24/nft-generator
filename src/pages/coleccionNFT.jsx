@@ -61,18 +61,17 @@ const ColeccionNFT = () => {
   const [isIntervalActive, setIsIntervalActive] = useState(false);
   const [isRequestSent, setIsRequestSent] = useState(false);
 
-  useEffect(async () => {
-    localStorage.setItem("noLoop", false);
+  useEffect(() => {
+    async function what() {
+      localStorage.setItem("noLoop", false);
+      const noLoop = localStorage.getItem("noLoop");
 
-    const noLoop = localStorage.getItem("noLoop");
-    if (!noLoop) {
-      console.log("lopp?");
       if (collectall.length === 0 && !isPromiseReady) {
+        console.log("ah");
         getColletionsRef.current();
         const accounts = await window.ethereum.request({
           method: "eth_accounts",
         });
-        console.log(accounts);
         let findWallet = listWalletPremiun.find(
           (wallet) => wallet.toLowerCase() === accounts[0].toLowerCase()
         );
@@ -93,7 +92,9 @@ const ColeccionNFT = () => {
         return () => clearInterval(interval);
       }
     }
-  }, []);
+
+    what();
+  }, [isIntervalActive, isPromiseReady, isRequestSent, collectall.length]);
 
   async function getColletions() {
     localStorage.setItem("noLoop", true);
@@ -120,6 +121,7 @@ const ColeccionNFT = () => {
     try {
       let resPost = await fetch(url, myInit);
       let post = await resPost.json();
+      console.log(post);
       setCollectall(post);
       setIsPromiseReady(true);
       console.log(post);
@@ -236,7 +238,6 @@ const ColeccionNFT = () => {
     return post;
   }
 
-  console.log(collectall);
   return (
     <>
       {/* tabla pc */}

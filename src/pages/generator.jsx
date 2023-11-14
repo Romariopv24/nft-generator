@@ -189,7 +189,7 @@ const Generator = ({ setLoadingImages }) => {
       .filter((e) => e.images.length !== 0)
       .map((capa) => {
         return {
-          directory: capa.directory,
+          directory: capa.directory.replace(" ", ""),
           imgs: capa.images.map((e) => ({
             name: e.name,
             b64:
@@ -252,7 +252,7 @@ const Generator = ({ setLoadingImages }) => {
     const collectionSize = inputProjectCollectionSize.current.value;
     const name = inputProjectName.current.value.replace(/\s+/g, "");
     const description = inputProjectDescription.current.value;
-    let url = `${URL}/p?cantidad=${Number(
+    let url = `${URL}p?cantidad=${Number(
       collectionSize
     )}&nombre=${name}&cb=${correo}&descripcion=${description}`;
     let myInit = {
