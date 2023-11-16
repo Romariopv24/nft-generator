@@ -29,6 +29,7 @@ const listWalletPremiun = [
   "0x7b739a2c9e21e2Ad07eC8898EE89945a93627358",
   "0x63828d59737Aa3744960d6827Ccf457931B84245",
   "0xE6225d9f75CA398F060A2A9B7a3b345e681700dC",
+  "0x278afeeca694808991f70c3e851449434a13ecff",
 ];
 
 const Form = ({
@@ -741,6 +742,7 @@ const Form = ({
     listWalletPremiun.find((wallet) => {
       if (wallet.toLowerCase() === accounts[0]) isPremiun = true;
     });
+    console.log(isPremiun);
     console.log(chainId);
     if (chainId === "0x13881") {
       console.log("karajo?");
