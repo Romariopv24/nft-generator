@@ -68,7 +68,6 @@ const ColeccionNFT = () => {
       const noLoop = localStorage.getItem("noLoop");
 
       if (collectall.length === 0 && !isPromiseReady) {
-        console.log("ah");
         getColletionsRef.current();
         const accounts = await window.ethereum.request({
           method: "eth_accounts",
