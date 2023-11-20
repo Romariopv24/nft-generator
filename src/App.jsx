@@ -161,13 +161,12 @@ function App() {
   useLayoutEffect(() => {
     if (!JSON.parse(localStorage.getItem("firstVisit"))) {
       setShow(true);
+      localStorage.clear();
     }
+    localStorage.clear();
   }, []);
 
   const location = useLocation().pathname;
-
-  
-
 
   const fetchData = async () => {
     if (
@@ -252,10 +251,8 @@ function App() {
   const handleJoyride = (data) => {
     const { action, status } = data;
 
-    console.log(action);
-
     if ([STATUS.FINISHED, STATUS.SKIPPED].includes(status)) {
-      localStorage.setItem("firstVisit", JSON.stringify(true));
+      localStorage.setItem("", JSON.stringify(true));
       setShow(false);
     }
   };
