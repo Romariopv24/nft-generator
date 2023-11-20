@@ -14,6 +14,7 @@ export const CMCURL = "https://nftg-api.devtop.online/preciobnb"
 //  export const CMRURL = "https://api.nftcreator.market/preciobnb"
 
 
+
 // variables de pay para stripe
 
 //precios de prueba de mi stripe personal

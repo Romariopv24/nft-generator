@@ -161,9 +161,10 @@ function App() {
   useLayoutEffect(() => {
     if (!JSON.parse(localStorage.getItem("firstVisit"))) {
       setShow(true);
-      localStorage.clear();
+
+      // localStorage.clear();
     }
-    localStorage.clear();
+    // localStorage.clear();
   }, []);
 
   const location = useLocation().pathname;
@@ -252,10 +253,12 @@ function App() {
     const { action, status } = data;
 
     if ([STATUS.FINISHED, STATUS.SKIPPED].includes(status)) {
-      localStorage.setItem("", JSON.stringify(true));
+      localStorage.setItem("firstVisit", JSON.stringify(true));
       setShow(false);
     }
   };
+
+  console.log(isActiveModalRegister);
 
   return (
     <>
