@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { FormattedMessage } from "react-intl";
+import { ReactComponent as Closer } from "../assets/svg/close.svg";
 import { URL } from "../constantes";
 
 function RegisterUser({
@@ -135,9 +136,12 @@ function RegisterUser({
     <>
       <div className="FatherboxRegisterBefore">
         <div className="boxRegister">
-          {/* <div className= 'regiterCloser' onClick={()=>setIsActiveModalRegister(false)}>
-          <Closer className=''/>
-          </div> */}
+          <div
+            className="regiterCloser"
+            onClick={() => setIsActiveModalRegister(false)}
+          >
+            <Closer className="" />
+          </div>
           <div className="inputRegister">
             <label className="form-label me-2">
               <FormattedMessage id="registerUser.name" defaultMessage="Name*" />
