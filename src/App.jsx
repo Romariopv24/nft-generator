@@ -443,8 +443,6 @@ function App() {
             </span>
             /
             <Link
-              target="_blank"
-              rel="noopener noreferrer"
               style={{ textDecoration: "none", color: "white" }}
               to={"/terms&conditions"}
             >

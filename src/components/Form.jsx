@@ -963,7 +963,7 @@ const Form = ({
       </button>
 
       <div className="text-center mt-2">
-        <Link to={`/faqs`} className="links" target="_blank"  rel="noopener noreferrer">
+        <Link to={`/faqs`} className="links">
           <FormattedMessage
             id="form.go-to-faqs"
             defaultMessage="Do you need help? Check FAQs here"
