@@ -1,6 +1,7 @@
 {
   "login.metamask": "Login with Metamasks",
-  "login.title": "Unlimited NFT Generator",
+  "login.title": "Hola Nolberto!",
+
   "login.metamasknotinstalled": "MetaMask is not installed!",
 
   "menu.collections": "My Collections",
@@ -57,7 +58,7 @@
   "form.min-dimension": "The image resolution is selected from the first image you drag and drop. We expect all images to have the same resolution.",
   "form.success-metamsk-collections": "My Collections",
   "form.success-pay-close": "Close",
-  "form.go-to-faqs": "Do you need help? Check FAQs here",
+  "rfed": "Do you need help? Check FAQs here",
   "form.pending": "At this moment you cannot generate an NFT collection because you already have one in process, at the end of the creation of the collection you will be able to generate another one, keep in mind that if the collection is very large the process may take a while",
 
   "tutorial.step1": "Here you can organize your layers to change how your final nft will look like.",
