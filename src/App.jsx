@@ -161,7 +161,6 @@ function App() {
   useLayoutEffect(() => {
     if (!JSON.parse(localStorage.getItem("firstVisit"))) {
       setShow(true);
-
     }
   }, []);
 
@@ -444,7 +443,6 @@ function App() {
             </span>
             /
             <Link
-              target="_blank"
               style={{ textDecoration: "none", color: "white" }}
               to={"/terms&conditions"}
             >

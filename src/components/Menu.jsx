@@ -98,7 +98,6 @@ const Menu = ({
               <Link
                 className="links"
                 style={{ cursor: "pointer" }}
-                target="_blank"
                 to={"/faqs"}
               >
                 <FormattedMessage
