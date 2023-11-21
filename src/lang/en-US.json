@@ -1,6 +1,6 @@
 {
   "login.metamask": "Login with Metamasks",
-  "login.title": "Unlimited NFT Generator",
+  "login.title": "Unlimited NFT Generatorrrrr",
   "login.metamasknotinstalled": "MetaMask is not installed!",
 
   "menu.collections": "My Collections",
@@ -191,7 +191,6 @@
 
   "contact.alertSuccess": "Message sent",
   "contact.captchaError": "Please complete Captcha",
-  "contact.validationMail":"Please introduce a valid email",
+  "contact.validationMail": "Please introduce a valid email",
   "contact.incompleteFields": "Please complete all the fields"
-
 }
