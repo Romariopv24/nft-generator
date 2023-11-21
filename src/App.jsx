@@ -162,9 +162,7 @@ function App() {
     if (!JSON.parse(localStorage.getItem("firstVisit"))) {
       setShow(true);
 
-      // localStorage.clear();
     }
-    // localStorage.clear();
   }, []);
 
   const location = useLocation().pathname;
