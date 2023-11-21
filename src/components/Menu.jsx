@@ -63,7 +63,7 @@ const Menu = ({
   async function createConection() {
     setDb(await ConexionDB());
   }
-
+  console.log();
   return (
     isAuth && (
       <div className="d-flex align-items-center my-2 ps-2 pe-1">
@@ -98,7 +98,7 @@ const Menu = ({
               <Link
                 className="links"
                 style={{ cursor: "pointer" }}
-                target="_blank"
+                // target="_blank"
                 rel="noopener noreferrer"
                 to={"/faqs"}
               >
