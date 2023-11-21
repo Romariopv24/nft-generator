@@ -55,6 +55,7 @@ const Menu = ({
   }
 
   function ReiniciarTodo() {
+    console.log("PUTABIDA");
     localStorage.clear();
     reiniciar(db, "images");
     reiniciar(db, "smallImages");
