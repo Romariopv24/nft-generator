@@ -182,7 +182,7 @@ function App() {
       }
     } else {
       setIsAuth(false);
-      navigate("/login");
+      // navigate("/login");
     }
   };
 
