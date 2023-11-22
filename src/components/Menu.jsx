@@ -64,140 +64,270 @@ const Menu = ({
     setDb(await ConexionDB());
   }
   console.log();
-  return (
-    isAuth && (
-      <div className="d-flex align-items-center my-2 ps-2 pe-1">
-        <div className="logo_menu">
-          <img src={logo} alt="Logo" />
-        </div>
-        <div
-          style={{
-            width: "100%",
-            display: "flex",
-            justifyContent: !nameUser ? "flex-end" : "center",
-            alignItems: "center",
-          }}
-        >
-          {location.pathname !== "/terms&conditons" && nameUser && (
-            <span className="me-auto user-button">
-              <Edit
-                className="edit-icon"
-                onClick={() => setIsActiveModalRegister(true)}
-              />
-              <div className="divider" />
-              <span>{showName(name, nameUser)}</span>
-              <User className="user-icon" width={30} height={30} />
-            </span>
-          )}
-          {nameUser && (
-            <div class="links">
+  return isAuth ? (
+    <div className="d-flex align-items-center my-2 ps-2 pe-1">
+      <div className="logo_menu">
+        <img src={logo} alt="Logo" />
+      </div>
+      <div
+        style={{
+          width: "100%",
+          display: "flex",
+          justifyContent: !nameUser ? "flex-end" : "center",
+          alignItems: "center",
+        }}
+      >
+        {location.pathname !== "/terms&conditons" && nameUser && (
+          <span className="me-auto user-button">
+            <Edit
+              className="edit-icon"
+              onClick={() => setIsActiveModalRegister(true)}
+            />
+            <div className="divider" />
+            <span>{showName(name, nameUser)}</span>
+            <User className="user-icon" width={30} height={30} />
+          </span>
+        )}
+        {nameUser && (
+          <div class="links">
+            <FormattedMessage
+              id="menu.tutorial"
+              defaultMessage="Don't know where to start?  "
+            />
+            <Link
+              className="links"
+              style={{ cursor: "pointer" }}
+              // target="_blank"
+              rel="noopener noreferrer"
+              to={"/faqs"}
+            >
               <FormattedMessage
-                id="menu.tutorial"
-                defaultMessage="Don't know where to start?  "
+                id="menu.video-tutorial"
+                defaultMessage=" Watch tutorial video!"
               />
-              <Link
-                className="links"
-                style={{ cursor: "pointer" }}
-                // target="_blank"
-                rel="noopener noreferrer"
-                to={"/faqs"}
+            </Link>
+          </div>
+        )}
+
+        {location.pathname === "/" && (
+          <div>
+            <Link to={`/coleccion`} className=" d-none d-sm-block">
+              {" "}
+              <button
+                className="__boton-mediano enphasis-button"
+                id="colecciones"
               >
                 <FormattedMessage
-                  id="menu.video-tutorial"
-                  defaultMessage=" Watch tutorial video!"
+                  id="menu.collections"
+                  defaultMessage="My Collections"
                 />
-              </Link>
-            </div>
-          )}
-
-          {location.pathname === "/" && (
-            <div>
-              <Link to={`/coleccion`} className=" d-none d-sm-block">
-                {" "}
-                <button
-                  className="__boton-mediano enphasis-button"
-                  id="colecciones"
-                >
-                  <FormattedMessage
-                    id="menu.collections"
-                    defaultMessage="My Collections"
-                  />
-                </button>
-              </Link>
-              <Link to={`/coleccion`} className="d-block d-sm-none mx-1">
-                <Colletion style={{ width: "35px" }} fill={"#fff"} />
-              </Link>
-            </div>
-          )}
-          {location.pathname !== "/" && nameUser && (
-            <div>
-              <Link to={`/`} className=" d-none d-sm-block">
-                <button className="__boton-mediano enphasis-button">
-                  <FormattedMessage
-                    id="menu.generateNFT"
-                    defaultMessage="Generate NFT"
-                  />
-                </button>
-              </Link>
-              <Link to={`/`} className=" d-block d-sm-none">
-                <Back style={{ width: "40px" }} fill={"#fff"} />
-              </Link>
-            </div>
-          )}
-
-          <div className="banderas">
-            <button
-              onClick={() => {
-                idioma.cambiarIdioma("es-ES");
-              }}
-            >
-              <img src={es} alt="" />
-            </button>
-            <button
-              onClick={() => {
-                idioma.cambiarIdioma("en-US");
-              }}
-            >
-              <img src={en} alt="" />
-            </button>
+              </button>
+            </Link>
+            <Link to={`/coleccion`} className="d-block d-sm-none mx-1">
+              <Colletion style={{ width: "35px" }} fill={"#fff"} />
+            </Link>
           </div>
+        )}
+        {location.pathname !== "/" && nameUser && (
+          <div>
+            <Link to={`/`} className=" d-none d-sm-block">
+              <button className="__boton-mediano enphasis-button">
+                <FormattedMessage
+                  id="menu.generateNFT"
+                  defaultMessage="Generate NFT"
+                />
+              </button>
+            </Link>
+            <Link to={`/`} className=" d-block d-sm-none">
+              <Back style={{ width: "40px" }} fill={"#fff"} />
+            </Link>
+          </div>
+        )}
 
-          {nameUser ? (
-            <button
-              onClick={() => {
-                setName(null);
-                desLoguearse();
-                ReiniciarTodo();
-                navigate("/");
-              }}
-              className="__boton-signOut enphasis-button d-none d-sm-block "
-            >
-              <FormattedMessage id="menu.logout" defaultMessage="Sign out" />
-              <SignOut
-                onClick={() => {
-                  desLoguearse();
-                }}
-                className=" d-block d-sm-none mx-1"
-                style={{ width: "40px" }}
-                fill={"#fff"}
-              />
-            </button>
-          ) : (
-            <button
-              onClick={() => {
-                setName(null);
-                desLoguearse();
-                ReiniciarTodo();
-                navigate("/");
-              }}
-              className="__boton-signOut enphasis-button d-none d-sm-block "
-            >
-              Login
-            </button>
-          )}
+        <div className="banderas">
+          <button
+            onClick={() => {
+              idioma.cambiarIdioma("es-ES");
+            }}
+          >
+            <img src={es} alt="" />
+          </button>
+          <button
+            onClick={() => {
+              idioma.cambiarIdioma("en-US");
+            }}
+          >
+            <img src={en} alt="" />
+          </button>
         </div>
+
+        {nameUser ? (
+          <button
+            onClick={() => {
+              setName(null);
+              desLoguearse();
+              ReiniciarTodo();
+              navigate("/");
+            }}
+            className="__boton-signOut enphasis-button d-none d-sm-block "
+          >
+            <FormattedMessage id="menu.logout" defaultMessage="Sign out" />
+            <SignOut
+              onClick={() => {
+                desLoguearse();
+              }}
+              className=" d-block d-sm-none mx-1"
+              style={{ width: "40px" }}
+              fill={"#fff"}
+            />
+          </button>
+        ) : (
+          <button
+            onClick={() => {
+              setName(null);
+              desLoguearse();
+              ReiniciarTodo();
+              navigate("/");
+            }}
+            className="__boton-signOut enphasis-button d-none d-sm-block "
+          >
+            Login
+          </button>
+        )}
       </div>
-    )
+    </div>
+  ) : (
+    <div className="d-flex align-items-center my-2 ps-2 pe-1">
+      <div className="logo_menu">
+        <img src={logo} alt="Logo" />
+      </div>
+      <div
+        style={{
+          width: "100%",
+          display: "flex",
+          justifyContent: !nameUser ? "flex-end" : "center",
+          alignItems: "center",
+        }}
+      >
+        {location.pathname !== "/terms&conditons" && nameUser && (
+          <span className="me-auto user-button">
+            <Edit
+              className="edit-icon"
+              onClick={() => setIsActiveModalRegister(true)}
+            />
+            <div className="divider" />
+            <span>{showName(name, nameUser)}</span>
+            <User className="user-icon" width={30} height={30} />
+          </span>
+        )}
+        {nameUser && (
+          <div class="links">
+            <FormattedMessage
+              id="menu.tutorial"
+              defaultMessage="Don't know where to start?  "
+            />
+            <Link
+              className="links"
+              style={{ cursor: "pointer" }}
+              // target="_blank"
+              rel="noopener noreferrer"
+              to={"/faqs"}
+            >
+              <FormattedMessage
+                id="menu.video-tutorial"
+                defaultMessage=" Watch tutorial video!"
+              />
+            </Link>
+          </div>
+        )}
+
+        {location.pathname === "/" && (
+          <div>
+            <Link to={`/coleccion`} className=" d-none d-sm-block">
+              {" "}
+              <button
+                className="__boton-mediano enphasis-button"
+                id="colecciones"
+              >
+                <FormattedMessage
+                  id="menu.collections"
+                  defaultMessage="My Collections"
+                />
+              </button>
+            </Link>
+            <Link to={`/coleccion`} className="d-block d-sm-none mx-1">
+              <Colletion style={{ width: "35px" }} fill={"#fff"} />
+            </Link>
+          </div>
+        )}
+        {location.pathname !== "/" && nameUser && (
+          <div>
+            <Link to={`/`} className=" d-none d-sm-block">
+              <button className="__boton-mediano enphasis-button">
+                <FormattedMessage
+                  id="menu.generateNFT"
+                  defaultMessage="Generate NFT"
+                />
+              </button>
+            </Link>
+            <Link to={`/`} className=" d-block d-sm-none">
+              <Back style={{ width: "40px" }} fill={"#fff"} />
+            </Link>
+          </div>
+        )}
+
+        <div className="banderas">
+          <button
+            onClick={() => {
+              idioma.cambiarIdioma("es-ES");
+            }}
+          >
+            <img src={es} alt="" />
+          </button>
+          <button
+            onClick={() => {
+              idioma.cambiarIdioma("en-US");
+            }}
+          >
+            <img src={en} alt="" />
+          </button>
+        </div>
+
+        {nameUser ? (
+          <button
+            onClick={() => {
+              setName(null);
+              desLoguearse();
+              ReiniciarTodo();
+              navigate("/");
+            }}
+            className="__boton-signOut enphasis-button d-none d-sm-block "
+          >
+            <FormattedMessage id="menu.logout" defaultMessage="Sign out" />
+            <SignOut
+              onClick={() => {
+                desLoguearse();
+              }}
+              className=" d-block d-sm-none mx-1"
+              style={{ width: "40px" }}
+              fill={"#fff"}
+            />
+          </button>
+        ) : (
+          <button
+            onClick={() => {
+              setName(null);
+              desLoguearse();
+              ReiniciarTodo();
+              navigate("/");
+            }}
+            className="__boton-signOut enphasis-button d-none d-sm-block "
+          >
+            Login
+          </button>
+        )}
+      </div>
+    </div>
   );
 };
 
