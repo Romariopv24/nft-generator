@@ -799,7 +799,7 @@ const Form = ({
             <label htmlFor="projectname" className="form-label">
               <FormattedMessage
                 id="form.projectname"
-                defaultMessage="Collection's name"
+                defaultMessage="Collection's NFT name"
               />
             </label>
             <input
@@ -808,6 +808,29 @@ const Form = ({
               id="projectname"
               name="pName"
               ref={inputProjectName}
+              maxLength={100}
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="projectname" className="form-label">
+              <FormattedMessage
+                id="form.exportFormat"
+                defaultMessage="Export Format"
+              />
+            </label>
+            <p style={{ fontSize: "14px", margin: 0, marginTop: 0 }}>
+              <FormattedMessage
+                id="form.recommendedFormat"
+                defaultMessage="Recommended Format: png"
+              />
+            </p>
+            <input
+              type="text"
+              // name="pName"
+              readOnly
+              value="PNG"
+              className="form-control-sm w-100 cursor-denagado --border-blue"
+              disabled
               maxLength={100}
             />
           </div>

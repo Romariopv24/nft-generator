@@ -34,7 +34,9 @@
   "registerUser.wallet": "Billetera",
   "registerUser.btn-send": "Guardar",
 
-  "form.projectname": "Nombre de la Coleccion",
+  "form.projectname": "Nombre de la Coleccion NFT",
+  "form.exportFormat": "Formato de Exportacion",
+  "form.recommendedFormat": "Formato Recomendado: png",
   "form.projectdescription": "Descripcion de la Coleccion",
   "form.combinations": "Combinaciones totales: ",
   "form.dimsension": "Dimensiones",

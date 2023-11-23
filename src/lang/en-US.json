@@ -35,7 +35,9 @@
   "registerUser.wallet": "Wallet",
   "registerUser.btn-send": "Send",
 
-  "form.projectname": "Collection's name",
+  "form.projectname": "Collection's NFT name",
+  "form.exportFormat": "Export Format",
+  "form.recommendedFormat": "Recommended Format: png",
   "form.projectdescription": "Collection's description",
   "form.combinations": "Total Combinations: ",
   "form.dimsension": "Dimension",
