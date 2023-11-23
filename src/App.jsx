@@ -255,8 +255,7 @@ function App() {
     }
   };
 
-  console.log(isActiveModalRegister);
-
+  console.log(show);
   return (
     <>
       <div className="App">
@@ -330,57 +329,58 @@ function App() {
           setName={setName}
         />
       )}
-
-      <Joyride
-        run={show}
-        steps={steps}
-        callback={handleJoyride}
-        locale={{
-          back: (
-            <FormattedMessage
-              id="tutorial.modal.btn-back"
-              defaultMessage="Back"
-            />
-          ),
-          close: intl.formatMessage({
-            id: "tutorial.modal.btn-close",
-            defaultMessage: "Close",
-          }),
-          last: (
-            <FormattedMessage
-              id="tutorial.modal.btn-last"
-              defaultMessage="Finalize"
-            />
-          ),
-          next: (
-            <FormattedMessage
-              id="tutorial.modal.btn-next"
-              defaultMessage="Next"
-            />
-          ),
-          open: intl.formatMessage({
-            id: "tutorial.modal.btn-open",
-            defaultMessage: "Open",
-          }),
-          skip: (
-            <FormattedMessage
-              id="tutorial.modal.btn-skip"
-              defaultMessage="Skip"
-            />
-          ),
-        }}
-        continuous
-        showProgress
-        showSkipButton
-        styles={{
-          options: {
-            textColor: "#FFF",
-            primaryColor: "#00b8ff",
-            backgroundColor: "#00047a",
-            arrowColor: "#00047a",
-          },
-        }}
-      />
+      {show ? (
+        <Joyride
+          run={show}
+          steps={steps}
+          callback={handleJoyride}
+          locale={{
+            back: (
+              <FormattedMessage
+                id="tutorial.modal.btn-back"
+                defaultMessage="Back"
+              />
+            ),
+            close: intl.formatMessage({
+              id: "tutorial.modal.btn-close",
+              defaultMessage: "Close",
+            }),
+            last: (
+              <FormattedMessage
+                id="tutorial.modal.btn-last"
+                defaultMessage="Finalize"
+              />
+            ),
+            next: (
+              <FormattedMessage
+                id="tutorial.modal.btn-next"
+                defaultMessage="Next"
+              />
+            ),
+            open: intl.formatMessage({
+              id: "tutorial.modal.btn-open",
+              defaultMessage: "Open",
+            }),
+            skip: (
+              <FormattedMessage
+                id="tutorial.modal.btn-skip"
+                defaultMessage="Skip"
+              />
+            ),
+          }}
+          continuous
+          showProgress
+          showSkipButton
+          styles={{
+            options: {
+              textColor: "#FFF",
+              primaryColor: "#00b8ff",
+              backgroundColor: "#00047a",
+              arrowColor: "#00047a",
+            },
+          }}
+        />
+      ) : null}
 
       <GenericModal show={showVideo}>
         <div className="p-4">
