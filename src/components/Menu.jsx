@@ -63,7 +63,6 @@ const Menu = ({
   async function createConection() {
     setDb(await ConexionDB());
   }
-  console.log();
   return (
     isAuth && (
       <div className="d-flex align-items-center my-2 ps-2 pe-1">

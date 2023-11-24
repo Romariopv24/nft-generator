@@ -1,97 +1,97 @@
-import React, { useEffect, useRef, useState } from "react";
-import { FormattedMessage, useIntl } from "react-intl";
-import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
-import BodyImage from "../components/BodyImage";
-import Capas from "../components/Capas";
-import Form from "../components/Form";
-import { URL } from "../constantes";
-import { ConexionDB, agregar, obtenerTodo } from "../db/CrudDB";
-import "../styles/scss/app.scss";
-import { crearRarityWeights } from "../utils/crearRarityWeights";
-import getCapas from "../utils/getCapas";
-import getSelectedCapaId from "../utils/getSelectedCapaId";
-import getUniqueId from "../utils/getUniqueId";
-import setCapa from "../utils/setCapa";
+import React, { useEffect, useRef, useState } from "react"
+import { FormattedMessage, useIntl } from "react-intl"
+import "../../node_modules/bootstrap/dist/css/bootstrap.min.css"
+import BodyImage from "../components/BodyImage"
+import Capas from "../components/Capas"
+import Form from "../components/Form"
+import { URL } from "../constantes"
+import { ConexionDB, agregar, obtenerTodo } from "../db/CrudDB"
+import "../styles/scss/app.scss"
+import { crearRarityWeights } from "../utils/crearRarityWeights"
+import getCapas from "../utils/getCapas"
+import getSelectedCapaId from "../utils/getSelectedCapaId"
+import getUniqueId from "../utils/getUniqueId"
+import setCapa from "../utils/setCapa"
 
 const Generator = ({ setLoadingImages }) => {
-  const [capas, setCapas] = useState(getCapas());
+  const [capas, setCapas] = useState(getCapas())
   const [selectedCapa, setSelectedCapa] = useState(
     getCapas().find((s) => s.id === getSelectedCapaId())
-  );
-  const [isChangedCapa, setIsChangedCapa] = useState(true);
-  const [urlNft, setUrlNft] = useState("");
-  const inputProjectName = useRef("");
-  const inputProjectDescription = useRef("");
-  const maxConvinacion = useRef();
-  const inputProjectCollectionSize = useRef(1);
-  const [isExisteNombreProject, setIsExisteNombreProject] = useState(null);
-  const [db, setDb] = useState(null);
+  )
+  const [isChangedCapa, setIsChangedCapa] = useState(true)
+  const [urlNft, setUrlNft] = useState("")
+  const inputProjectName = useRef("")
+  const inputProjectDescription = useRef("")
+  const maxConvinacion = useRef()
+  const inputProjectCollectionSize = useRef(1)
+  const [isExisteNombreProject, setIsExisteNombreProject] = useState(null)
+  const [db, setDb] = useState(null)
   // console.log("SOY GENERATOR--------------")
-  const [listPreview1, setListPreview1] = useState([]);
-  const [listPreview2, setListPreview2] = useState([]);
-  const [listPreview3, setListPreview3] = useState([]);
-  const [isOpenModalPreviewImg, setIsOpenModalPreviewImg] = useState(false);
+  const [listPreview1, setListPreview1] = useState([])
+  const [listPreview2, setListPreview2] = useState([])
+  const [listPreview3, setListPreview3] = useState([])
+  const [isOpenModalPreviewImg, setIsOpenModalPreviewImg] = useState(false)
 
   async function loadImageFromDBB(setListPreview) {
-    console.log("test1");
-    const result = await obtenerTodo(db, "images");
-    let NewCapa = capas.filter((e) => e.images.length !== 0);
+    console.log("test1")
+    const result = await obtenerTodo(db, "images")
+    let NewCapa = capas.filter((e) => e.images.length !== 0)
     if (result) {
       let imagenes = NewCapa.map((e) => {
-        let index = Math.floor(Math.random() * e.images.length);
+        let index = Math.floor(Math.random() * e.images.length)
 
-        return result.find((db) => db.clave === e.images[index].id);
-      });
-      console.log({ imagenes });
+        return result.find((db) => db.clave === e.images[index].id)
+      })
+      console.log({ imagenes })
 
-      setListPreview(imagenes);
-      imagenes.length && setIsOpenModalPreviewImg(!isOpenModalPreviewImg);
+      setListPreview(imagenes)
+      imagenes.length && setIsOpenModalPreviewImg(!isOpenModalPreviewImg)
     }
   }
 
-  const intl = useIntl();
+  const intl = useIntl()
 
   function requiredRarity(isRarity) {
-    console.log("se ejectuta");
-    let capas = getCapas();
-    const capaIndex = capas.findIndex((capa) => capa.id === selectedCapa.id);
-    capas[capaIndex].required = isRarity;
-    localStorage.setItem("capas", JSON.stringify(capas));
-    crearRarityWeights();
-    capas = getCapas();
-    setSelectedCapa(capas.find((capa) => capa.id === selectedCapa.id));
-    setCapas(capas);
+    console.log("se ejectuta")
+    let capas = getCapas()
+    const capaIndex = capas.findIndex((capa) => capa.id === selectedCapa.id)
+    capas[capaIndex].required = isRarity
+    localStorage.setItem("capas", JSON.stringify(capas))
+    crearRarityWeights()
+    capas = getCapas()
+    setSelectedCapa(capas.find((capa) => capa.id === selectedCapa.id))
+    setCapas(capas)
   }
 
   useEffect(() => {
-    let newCapa = capas.filter((e) => e.images.length !== 0);
+    let newCapa = capas.filter((e) => e.images.length !== 0)
     maxConvinacion.current.innerHTML =
       newCapa.length === 0
         ? "0"
-        : newCapa.reduce((result, capa) => result * capa.images.length, 1);
-    createConection();
-  }, []);
+        : newCapa.reduce((result, capa) => result * capa.images.length, 1)
+    createConection()
+  }, [])
 
   async function createConection() {
-    setDb(await ConexionDB());
+    setDb(await ConexionDB())
   }
 
-  const facebook = JSON.parse(localStorage.getItem("facebook"));
-  const google = JSON.parse(localStorage.getItem("google"));
-  const metamask = JSON.parse(localStorage.getItem("metamask"));
+  const facebook = JSON.parse(localStorage.getItem("facebook"))
+  const google = JSON.parse(localStorage.getItem("google"))
+  const metamask = JSON.parse(localStorage.getItem("metamask"))
 
   const createCapaHandle = (name) => {
     let nombre = getCapas().map((e) => {
-      return e.name;
-    });
+      return e.name
+    })
     let id = getCapas().map((e) => {
-      return e.id;
-    });
-    let maxId = Math.max(...id);
-    console.log(maxId);
-    let isExiste = nombre.some((e) => e === name);
+      return e.id
+    })
+    let maxId = Math.max(...id)
+    console.log(maxId)
+    let isExiste = nombre.some((e) => e === name)
     if (isExiste) {
-      throw Error("el nombre ya existe");
+      throw Error("el nombre ya existe")
     } else {
       setCapa({
         id: JSON.stringify((maxId += 1)),
@@ -99,43 +99,43 @@ const Generator = ({ setLoadingImages }) => {
         images: [],
         directory: name,
         required: true,
-        rarity_weights: null,
-      });
-      setCapas(getCapas());
+        rarity_weights: null
+      })
+      setCapas(getCapas())
     }
-  };
+  }
 
   const createCapaImageHandle = async (capaId, archivoOriginal, img) => {
-    let indexPGN = archivoOriginal.name.lastIndexOf(".");
-    let newNombre = archivoOriginal.name.slice(0, indexPGN);
+    let indexPGN = archivoOriginal.name.lastIndexOf(".")
+    let newNombre = archivoOriginal.name.slice(0, indexPGN)
     const nuevaImagen = {
       id: getUniqueId(),
       name: `${newNombre}-${getUniqueId()}.png`,
       dimension: {
         width: img.width,
-        height: img.height,
+        height: img.height
       },
-      isDiferent: false,
-    };
+      isDiferent: false
+    }
     const objImg = {
       clave: nuevaImagen.id,
       name: nuevaImagen.name,
       img: img.image,
       dimension: {
         width: img.width,
-        height: img.height,
+        height: img.height
       },
-      isDiferent: false,
-    };
+      isDiferent: false
+    }
     const objSmallImage = {
       clave: nuevaImagen.id,
-      img: img.smallImage,
-    };
+      img: img.smallImage
+    }
 
-    await agregar(db, "images", objImg);
-    await agregar(db, "smallImages", objSmallImage);
-    return [nuevaImagen, objSmallImage];
-  };
+    await agregar(db, "images", objImg)
+    await agregar(db, "smallImages", objSmallImage)
+    return [nuevaImagen, objSmallImage]
+  }
 
   async function generarObjetoConfigParaElServidor() {
     let obj = getCapas()
@@ -146,170 +146,166 @@ const Generator = ({ setLoadingImages }) => {
           name: capa.name,
           directory: capa.directory,
           required: capa.required ? "True" : "False",
-          rarity_weights: capa["rarity_weights"] || "None",
-        };
-      });
+          rarity_weights: capa["rarity_weights"] || "None"
+        }
+      })
 
-    let correo =
-      facebook?.tokenUser || google?.tokenUser || metamask?.tokenUser;
+    let correo = facebook?.tokenUser || google?.tokenUser || metamask?.tokenUser
 
     let ObjetoConfig = {
       cb: correo,
-      labels: obj,
-    };
-    console.log({ ObjetoConfig });
+      labels: obj
+    }
+    console.log({ ObjetoConfig })
 
     // let username =  btoa('usuario');
     // let password =  btoa('pwd')
 
-    var myHeaders = new Headers();
-    myHeaders.append("Authorization", "Basic dXN1YXJpbzpwd2Q=");
-    myHeaders.append("Content-Type", "application/json");
+    var myHeaders = new Headers()
+    myHeaders.append("Authorization", "Basic dXN1YXJpbzpwd2Q=")
+    myHeaders.append("Content-Type", "application/json")
 
-    let url = `${URL}/config`;
+    let url = `${URL}/config`
     let myInit = {
       method: "POST",
       body: JSON.stringify(ObjetoConfig),
-      headers: myHeaders,
-    };
+      headers: myHeaders
+    }
 
-    let resPost = await fetch(url, myInit);
+    let resPost = await fetch(url, myInit)
     if (!resPost.ok) {
       // console.log({ resPost })
-      throw Error("HTTP status " + resPost.status);
+      throw Error("HTTP status " + resPost.status)
     }
-    let post = await resPost.json();
-    console.log({ status: `generando objecto config`, ...post });
-    return post;
+    let post = await resPost.json()
+    console.log({ status: `generando objecto config`, ...post })
+    return post
   }
 
   const generarObjIMGParaElServidor = async () => {
-    let imagesDB = await obtenerTodo(db, "images");
+    let imagesDB = await obtenerTodo(db, "images")
     let obj = getCapas()
       .filter((e) => e.images.length !== 0)
       .map((capa) => {
         return {
-          directory: capa.directory.replace(" ", ""),
+          directory: capa.directory,
           imgs: capa.images.map((e) => ({
             name: e.name,
             b64:
               imagesDB
                 .find((element) => element.clave === e.id)
-                ?.img.slice(22) || "",
-          })),
-        };
+                ?.img.slice(22) || ""
+          }))
+        }
         // return {
         //   directory: capa.directory,
         //   imgs: capa.images.map(e => ({ name: e.name, b64: e.img.slice(22) }))
         // }
-      });
-    let correo =
-      facebook?.tokenUser || google?.tokenUser || metamask?.tokenUser;
+      })
+    let correo = facebook?.tokenUser || google?.tokenUser || metamask?.tokenUser
     let objConfig2 = {
       cb: correo,
-      data: obj,
-    };
+      data: obj
+    }
     // console.log(JSON.stringify(objConfig2))
-    console.log({ obj });
-    console.log({ objConfig2 });
-    var myHeaders = new Headers();
-    myHeaders.append("Authorization", "Basic dXN1YXJpbzpwd2Q=");
-    myHeaders.append("Content-Type", "application/json");
+    console.log({ obj })
+    console.log({ objConfig2 })
+    var myHeaders = new Headers()
+    myHeaders.append("Authorization", "Basic dXN1YXJpbzpwd2Q=")
+    myHeaders.append("Content-Type", "application/json")
 
-    let url = `${URL}images`;
+    let url = `${URL}images`
     let myInit = {
       method: "POST",
       body: JSON.stringify(objConfig2),
-      headers: myHeaders,
-    };
+      headers: myHeaders
+    }
     try {
-      let resPost = await fetch(url, myInit);
-      let post = await resPost.json();
-      if (!resPost.ok) throw Error("HTTP status " + resPost.status);
+      let resPost = await fetch(url, myInit)
+      let post = await resPost.json()
+      if (!resPost.ok) throw Error("HTTP status " + resPost.status)
       // console.log(`generando objecto config para las imagenes ${post}`)
       console.log({
         status: `generando objecto config para las imagenes`,
-        ...post,
-      });
+        ...post
+      })
 
-      return post;
+      return post
     } catch (e) {
-      console.log(e);
+      console.log(e)
       alert(
         intl.formatMessage({
           id: "generator.error-req",
-          defaultMessage: "Error in the request, contact support",
+          defaultMessage: "Error in the request, contact support"
         })
-      );
+      )
     }
-  };
+  }
 
   async function generarCombinaciones() {
-    let correo =
-      facebook?.tokenUser || google?.tokenUser || metamask?.tokenUser;
+    let correo = facebook?.tokenUser || google?.tokenUser || metamask?.tokenUser
     //let correo = metamask?.tokenUser
 
-    const collectionSize = inputProjectCollectionSize.current.value;
-    const name = inputProjectName.current.value.replace(/\s+/g, "");
-    const description = inputProjectDescription.current.value;
+    const collectionSize = inputProjectCollectionSize.current.value
+    const name = inputProjectName.current.value.replace(/\s+/g, "")
+    const description = inputProjectDescription.current.value
     let url = `${URL}p?cantidad=${Number(
       collectionSize
-    )}&nombre=${name}&cb=${correo}&descripcion=${description}`;
+    )}&nombre=${name}&cb=${correo}&descripcion=${description}`
     let myInit = {
       method: "GET",
-      headers: { "Content-Type": "application/json" },
-    };
+      headers: { "Content-Type": "application/json" }
+    }
     // setTimeout(() => setUrlNft('creando'), 7000)
-    console.log(url);
-    let resPost = await fetch(url, myInit);
-    let post = await resPost.json();
+    console.log(url)
+    let resPost = await fetch(url, myInit)
+    let post = await resPost.json()
 
-    console.log({ status: `Generar combinaciones`, ...post });
+    console.log({ status: `Generar combinaciones`, ...post })
 
-    if (!resPost.ok) throw Error("HTTP status " + resPost.status);
-    return post;
+    if (!resPost.ok) throw Error("HTTP status " + resPost.status)
+    return post
   }
 
   async function ValidarSiExisteNombreProjectServidor() {
-    const name = inputProjectName.current.value.replace(/\s+/g, "");
-    let correo =
-      facebook?.tokenUser || google?.tokenUser || metamask?.tokenUser;
+    const name = inputProjectName.current.value.replace(/\s+/g, "")
+    let correo = facebook?.tokenUser || google?.tokenUser || metamask?.tokenUser
 
-    const isNameValid = validacionForm(name);
-    if (isNameValid) return { valid: false, message: isNameValid };
+    const isNameValid = validacionForm(name)
+    if (isNameValid) return { valid: false, message: isNameValid }
     let obj = {
       id: correo,
-      nombre_collect: name,
-    };
-    var myHeaders = new Headers();
-    myHeaders.append("Authorization", "Basic dXN1YXJpbzpwd2Q=");
-    myHeaders.append("Content-Type", "application/json");
+      nombre_collect: name
+    }
+    var myHeaders = new Headers()
+    myHeaders.append("Authorization", "Basic dXN1YXJpbzpwd2Q=")
+    myHeaders.append("Content-Type", "application/json")
 
-    let url = `${URL}collect`;
+    let url = `${URL}collect`
     let myInit = {
       method: "POST",
       body: JSON.stringify(obj),
-      headers: myHeaders,
-    };
-
-    let resPost = await fetch(url, myInit);
-    if (!resPost.ok) {
-      console.log({ resPost });
-      throw Error("HTTP status " + resPost.status);
+      headers: myHeaders
     }
-    let post = await resPost.json();
-    console.log({ status: `comprovando nombre de proyecto`, ...post });
+
+    let resPost = await fetch(url, myInit)
+    if (!resPost.ok) {
+      console.log({ resPost })
+      throw Error("HTTP status " + resPost.status)
+    }
+    let post = await resPost.json()
+    console.log({ status: `comprovando nombre de proyecto`, ...post })
 
     if (post.nombre === "existe") {
       return {
         valid: false,
         message: intl.formatMessage({
           id: "generator.existe",
-          defaultMessage: "The project name already exists you must rename",
-        }),
-      };
+          defaultMessage: "The project name already exists you must rename"
+        })
+      }
     }
-    return { valid: true, message: post.nombre };
+    return { valid: true, message: post.nombre }
   }
 
   function validacionForm(name) {
@@ -319,7 +315,7 @@ const Generator = ({ setLoadingImages }) => {
           id="generator.proyecnareq"
           defaultMessage="Project name is required"
         />
-      );
+      )
     }
 
     if (name.length <= 1) {
@@ -328,17 +324,17 @@ const Generator = ({ setLoadingImages }) => {
           id="generator.minim-character"
           defaultMessage="The project name must be greater than or equal to 2 characters"
         />
-      );
+      )
     }
-    const cantidadAPedir = Number(inputProjectCollectionSize.current.value);
-    const cantidadMax = Number(maxConvinacion.current.innerText);
+    const cantidadAPedir = Number(inputProjectCollectionSize.current.value)
+    const cantidadMax = Number(maxConvinacion.current.innerText)
     // console.log({ cantidadAPedir, cantidadMax })
     if (cantidadAPedir > cantidadMax) {
       return `${intl.formatMessage({
         id: "generator.max-combinations",
         defaultMessage:
-          "The creation of your collection cannot be greater than the number of established combinations that is",
-      })} ${cantidadMax}`;
+          "The creation of your collection cannot be greater than the number of established combinations that is"
+      })} ${cantidadMax}`
     }
     if (cantidadAPedir < 1 || cantidadMax === 1)
       return (
@@ -346,8 +342,8 @@ const Generator = ({ setLoadingImages }) => {
           id="generator.minim-combinations"
           defaultMessage="The creation of your collection cannot be greater than the number of established combinations that is"
         />
-      );
-    return false;
+      )
+    return false
   }
   function validarSiExisteCapasConImagenes() {
     //tienen que existe mas de 2 capas minimo
@@ -356,59 +352,59 @@ const Generator = ({ setLoadingImages }) => {
         id="generator.minim-layers"
         defaultMessage="There must be a minimum of two layers with one image each in order to create the combinations"
       />
-    );
+    )
     if (capas.length === 1) {
-      console.log(1);
-      return { valid: false, message };
+      console.log(1)
+      return { valid: false, message }
     }
     // tiene que haber 2 capas con imagenes minimo
     if (capas.length === 2) {
-      console.log(2);
+      console.log(2)
 
-      let getimages = capas.map((images) => images.images.length === 0);
-      const res = getimages.every((e) => e !== true);
-      return { valid: res, message };
+      let getimages = capas.map((images) => images.images.length === 0)
+      const res = getimages.every((e) => e !== true)
+      return { valid: res, message }
     }
 
     if (capas.length > 2) {
       let getimages = capas.map((images) =>
         images.images.length === 0 ? -1 : 1
-      );
+      )
       const rta = getimages.reduce(
         (obj, item) => {
           if (item > 0) {
-            obj.siTiene += 1;
+            obj.siTiene += 1
           } else {
-            obj.noTiene += 1;
+            obj.noTiene += 1
           }
-          return obj;
+          return obj
         },
         {
           siTiene: 0,
-          noTiene: 0,
+          noTiene: 0
         }
-      );
-      console.log(rta);
-      let result = rta["siTiene"] >= 2 ? true : false;
-      console.log(3);
-      return { valid: result, message };
+      )
+      console.log(rta)
+      let result = rta["siTiene"] >= 2 ? true : false
+      console.log(3)
+      return { valid: result, message }
     }
   }
 
   async function handleSubmit(callback, hash) {
     try {
-      const res = await generarObjetoConfigParaElServidor();
-      const res1 = await generarObjIMGParaElServidor();
+      const res = await generarObjetoConfigParaElServidor()
+      const res1 = await generarObjIMGParaElServidor()
       if (res && res1) {
         if (inputProjectCollectionSize.current.value <= 100)
-          setUrlNft("creando");
-        generarCombinaciones();
+          setUrlNft("creando")
+        generarCombinaciones()
         if (callback && hash)
-          callback({ content: "success", type: "success", additional: hash });
+          callback({ content: "success", type: "success", additional: hash })
       }
     } catch (error) {
-      console.log(error.message);
-      setUrlNft(false);
+      console.log(error.message)
+      setUrlNft(false)
     }
   }
 
@@ -484,7 +480,7 @@ const Generator = ({ setLoadingImages }) => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default Generator;
+export default Generator
