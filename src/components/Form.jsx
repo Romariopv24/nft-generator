@@ -850,17 +850,52 @@ const Form = ({
                 maxConvinacion &&
                 maxConvinacion.current?.innerText <= 99 &&
                 maxConvinacion.current?.innerText >= 10
-                  ? `${captureValue}-001, ${captureValue}-002 ... ${captureValue}-0${maxConvinacion.current?.innerText}`
+                  ? `${captureValue.replace(
+                      " ",
+                      "-"
+                    )}-001, ${captureValue.replace(
+                      " ",
+                      "-"
+                    )}-002 ... ${captureValue.replace(" ", "-")}-0${
+                      maxConvinacion.current?.innerText
+                    }`
                   : maxConvinacion.current?.innerText >= 99
-                  ? `${captureValue}-001, ${captureValue}-002 ... ${captureValue}-${maxConvinacion.current?.innerText}`
+                  ? `${captureValue.replace(
+                      " ",
+                      "-"
+                    )}-001, ${captureValue.replace(
+                      " ",
+                      "-"
+                    )}-002 ... ${captureValue}-${
+                      maxConvinacion.current?.innerText
+                    }`
                   : maxConvinacion.current?.innerText >= 4
-                  ? `${captureValue}-001, ${captureValue}-002 ... ${captureValue}-00${maxConvinacion.current?.innerText}`
+                  ? `${captureValue.replace(
+                      " ",
+                      "-"
+                    )}-001, ${captureValue.replace(
+                      " ",
+                      "-"
+                    )}-002 ... ${captureValue.replace(" ", "-")}-00${
+                      maxConvinacion.current?.innerText
+                    }`
                   : maxConvinacion.current?.innerText >= 3
-                  ? `${captureValue}-001, ${captureValue}-002 , ${captureValue}-00${maxConvinacion.current?.innerText}`
+                  ? `${captureValue.replace(
+                      " ",
+                      "-"
+                    )}-001, ${captureValue.replace(
+                      " ",
+                      "-"
+                    )}-002 , ${captureValue.replace(" ", "-")}-00${
+                      maxConvinacion.current?.innerText
+                    }`
                   : maxConvinacion.current?.innerText >= 2
-                  ? `${captureValue}-001, ${captureValue}-002`
+                  ? `${captureValue.replace(
+                      " ",
+                      "-"
+                    )}-001, ${captureValue.replace(" ", "-")}-002`
                   : maxConvinacion.current?.innerText >= 1
-                  ? `${captureValue}-001`
+                  ? `${captureValue.replace(" ", "-")}-001`
                   : "000"
               }
               className="form-control-sm w-100 cursor-denagado --border-blue"
@@ -940,7 +975,7 @@ const Form = ({
           </div>
         </form>
         <form className="form-capa-name">
-          <label htmlFor="capaName" className="form-label">
+          {/* <label htmlFor="capaName" className="form-label">
             <FormattedMessage id="form.layername" defaultMessage="Layer Name" />
           </label>
           <input
@@ -950,7 +985,7 @@ const Form = ({
             name="capaName"
             value={selectedCapa.name}
             onChange={setNewNameCapa}
-          />
+          /> */}
         </form>
       </div>
 
