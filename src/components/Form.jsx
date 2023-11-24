@@ -1,36 +1,36 @@
-import { ethers } from "ethers";
-import React, { useEffect, useRef, useState } from "react";
-import { FormattedMessage, useIntl } from "react-intl";
-import { Link } from "react-router-dom";
-import { ReactComponent as MetamaskLogo } from "../assets/svg/metamask.svg";
-import { ReactComponent as Stripe } from "../assets/svg/stripe.svg";
-import * as Const from "../constantes";
-import { obtenerTodo } from "../db/CrudDB.js";
-import pagarConStripe from "../stripe/checkOut.js";
-import "../styles/scss/_container-rarity.scss";
-import "../styles/scss/_form.scss";
-import "../styles/scss/_menu.scss";
-import { crearRarityWeights } from "../utils/crearRarityWeights";
-import getCapas from "../utils/getCapas";
-import getDatosImg from "../utils/getDatosImg";
-import GenericModal from "./GenericModal";
-import PreviewCollection from "./PreviewCollection";
+import { ethers } from "ethers"
+import React, { useEffect, useRef, useState } from "react"
+import { FormattedMessage, useIntl } from "react-intl"
+import { Link } from "react-router-dom"
+import { ReactComponent as MetamaskLogo } from "../assets/svg/metamask.svg"
+import { ReactComponent as Stripe } from "../assets/svg/stripe.svg"
+import * as Const from "../constantes"
+import { obtenerTodo } from "../db/CrudDB.js"
+import pagarConStripe from "../stripe/checkOut.js"
+import "../styles/scss/_container-rarity.scss"
+import "../styles/scss/_form.scss"
+import "../styles/scss/_menu.scss"
+import { crearRarityWeights } from "../utils/crearRarityWeights"
+import getCapas from "../utils/getCapas"
+import getDatosImg from "../utils/getDatosImg"
+import GenericModal from "./GenericModal"
+import PreviewCollection from "./PreviewCollection"
 
 // const paqueteDeMil_NFT = Const.PRECIO_PRUEBA_NFTS // 99$
 // const paqueteDeCincoMil_NFT = Const.PRECIO_PRUEBA_NFTS // 199$
 // const paqueteDeDiezMil_NFT = Const.PRECIO_PRUEBA_NFTS // 299$
 
-const paqueteDeMil_NFT = Const.PRECIO_MIL_NFTS; // 99$
-const paqueteDeCincoMil_NFT = Const.PRECIO_CINCO_MIL_NFTS; // 199$
-const paqueteDeDiezMil_NFT = Const.PRECIO_DIEZ_MIL_NFTS; // 299$
+const paqueteDeMil_NFT = Const.PRECIO_MIL_NFTS // 99$
+const paqueteDeCincoMil_NFT = Const.PRECIO_CINCO_MIL_NFTS // 199$
+const paqueteDeDiezMil_NFT = Const.PRECIO_DIEZ_MIL_NFTS // 299$
 
 const listWalletPremiun = [
   "0xa54927b7af64DdB3e2c5Ac9cbec38c81EC88Be48",
   "0x7b739a2c9e21e2Ad07eC8898EE89945a93627358",
   "0x63828d59737Aa3744960d6827Ccf457931B84245",
   "0xE6225d9f75CA398F060A2A9B7a3b345e681700dC",
-  "0x278afeeca694808991f70c3e851449434a13ecff",
-];
+  "0x278afeeca694808991f70c3e851449434a13ecff"
+]
 
 const Form = ({
   capas,
@@ -59,34 +59,34 @@ const Form = ({
   handleSubmit,
   generarObjIMGParaElServidor,
   generarObjetoConfigParaElServidor,
-  validarSiExisteCapasConImagenes,
+  validarSiExisteCapasConImagenes
 }) => {
-  const intl = useIntl();
+  const intl = useIntl()
 
   const mensajeServer = [
     `${intl.formatMessage({
       id: "form.min-dimension",
       defaultMessage:
-        "The image resolution is selected from the first image you drag and drop. We expect all images to have the same resolution.",
+        "The image resolution is selected from the first image you drag and drop. We expect all images to have the same resolution."
     })}`,
 
     `${intl.formatMessage({
       id: "form.max-generate",
-      defaultMessage: "this is the maximum number to generate",
-    })}`,
-  ];
+      defaultMessage: "this is the maximum number to generate"
+    })}`
+  ]
 
-  const datosImg = getDatosImg();
-  const [dimension, setDimension] = useState({ x: 0, y: 0 });
-  const [isInputGenerate, setIsInputGenerate] = useState(false);
-  const [listImagenDB, setlistImagenDB] = useState([]);
-  const [stripePrice, setStripePrice] = useState();
-  const [isPremiun, setIspremiun] = useState(false);
-  let imagenDimensiones = datosImg.imagenDimension;
-  const facebook = JSON.parse(localStorage.getItem("facebook"));
-  const google = JSON.parse(localStorage.getItem("google"));
-  const metamask = JSON.parse(localStorage.getItem("metamask"));
-  let correo = facebook?.tokenUser || google?.tokenUser || metamask?.tokenUser;
+  const datosImg = getDatosImg()
+  const [dimension, setDimension] = useState({ x: 0, y: 0 })
+  const [isInputGenerate, setIsInputGenerate] = useState(false)
+  const [listImagenDB, setlistImagenDB] = useState([])
+  const [stripePrice, setStripePrice] = useState()
+  const [isPremiun, setIspremiun] = useState(false)
+  let imagenDimensiones = datosImg.imagenDimension
+  const facebook = JSON.parse(localStorage.getItem("facebook"))
+  const google = JSON.parse(localStorage.getItem("google"))
+  const metamask = JSON.parse(localStorage.getItem("metamask"))
+  let correo = facebook?.tokenUser || google?.tokenUser || metamask?.tokenUser
 
   useEffect(() => {
     if (
@@ -98,95 +98,95 @@ const Form = ({
       // console.log(imagenDimensiones[0], dimension, maxConvinacion.current)
       setDimension({
         x: imagenDimensiones[0]?.width || dimension.x,
-        y: imagenDimensiones[0]?.height || dimension.y,
-      });
+        y: imagenDimensiones[0]?.height || dimension.y
+      })
       // console.log('SOY UNSEFECTO DE FORM')
-      inputProjectCollectionSize.current.value = 1;
+      inputProjectCollectionSize.current.value = 1
     }
-  }, [imagenDimensiones]);
+  }, [imagenDimensiones])
 
   const botonGenerate = (condicion) => {
     if (condicion === true) {
-      setIsInputGenerate(true);
+      setIsInputGenerate(true)
     }
     if (condicion === false) {
-      setIsInputGenerate(false);
+      setIsInputGenerate(false)
     }
-  };
+  }
 
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState(false)
 
   const handleChecked = () => {
-    setChecked(!checked);
-  };
+    setChecked(!checked)
+  }
 
-  const capaIndex = getCapas().findIndex((capa) => capa.id === selectedCapa.id);
+  const capaIndex = getCapas().findIndex((capa) => capa.id === selectedCapa.id)
 
   const setNewNameCapa = (e) => {
-    const name = e.target.value;
-    let capas = getCapas();
-    const capaIndex = capas.findIndex((capa) => capa.id === selectedCapa.id);
-    capas[capaIndex].name = name;
-    capas[capaIndex].directory = name;
-    localStorage.setItem("capas", JSON.stringify(capas));
-    capas = getCapas();
-    setSelectedCapa(capas.find((capa) => capa.id === selectedCapa.id));
-    setCapas(capas);
+    const name = e.target.value
+    let capas = getCapas()
+    const capaIndex = capas.findIndex((capa) => capa.id === selectedCapa.id)
+    capas[capaIndex].name = name
+    capas[capaIndex].directory = name
+    localStorage.setItem("capas", JSON.stringify(capas))
+    capas = getCapas()
+    setSelectedCapa(capas.find((capa) => capa.id === selectedCapa.id))
+    setCapas(capas)
     // console.log(capas[0].images)
-  };
+  }
 
   function handleRangeValue(event, element, isRarity) {
-    let capas = getCapas();
-    const capaIndex = capas.findIndex((capa) => capa.id === selectedCapa.id);
-    const imagenes = capas[capaIndex].images;
+    let capas = getCapas()
+    const capaIndex = capas.findIndex((capa) => capa.id === selectedCapa.id)
+    const imagenes = capas[capaIndex].images
     // const imagenIndex = imagenes.findIndex(e=>e.id === element.id )
-    const imagen = imagenes.find((e) => e.id === element.id);
-    imagen.porcentajeBarra = Number(event.target.value);
+    const imagen = imagenes.find((e) => e.id === element.id)
+    imagen.porcentajeBarra = Number(event.target.value)
     const totalPorcentajeBarra = imagenes.reduce(
       (previousValue, currentValue) => {
-        return previousValue + currentValue.porcentajeBarra;
+        return previousValue + currentValue.porcentajeBarra
       },
       0
-    );
-    console.log({ totalPorcentajeBarra });
+    )
+    console.log({ totalPorcentajeBarra })
     imagenes.forEach((i) => {
-      const porcentaje = (i.porcentajeBarra * 100) / totalPorcentajeBarra;
-      i.porcentaje = porcentaje;
-    });
-    localStorage.setItem("capas", JSON.stringify(capas));
-    requiredRarity(isRarity);
+      const porcentaje = (i.porcentajeBarra * 100) / totalPorcentajeBarra
+      i.porcentaje = porcentaje
+    })
+    localStorage.setItem("capas", JSON.stringify(capas))
+    requiredRarity(isRarity)
     // console.log(capas)
   }
 
   document.addEventListener("onKeyPress", function notDecimals() {
-    let onlyNumbers = document.getElementById("collectionsize");
-    onlyNumbers.value = Math.trunc(onlyNumbers.value);
-  });
+    let onlyNumbers = document.getElementById("collectionsize")
+    onlyNumbers.value = Math.trunc(onlyNumbers.value)
+  })
 
   function onlyNumer({ target: { value } }) {
-    let valueAux = value.replace(/^0{1,}/, "");
-    let newValor = valueAux.replaceAll(/[\.A-Za-z.]{0,10}/g, "");
-    if (newValor === "") inputProjectCollectionSize.current.value = "";
+    let valueAux = value.replace(/^0{1,}/, "")
+    let newValor = valueAux.replaceAll(/[\.A-Za-z.]{0,10}/g, "")
+    if (newValor === "") inputProjectCollectionSize.current.value = ""
     // console.log(Number(newValor) > Number(maxConvinacion.current.innerText), Number(newValor), Number(maxConvinacion.current.innerText))
     if (Number(newValor) !== value)
-      inputProjectCollectionSize.current.value = newValor;
+      inputProjectCollectionSize.current.value = newValor
     if (
       Number(newValor) > Number(maxConvinacion.current.innerText) &&
       newValor !== ""
     )
       inputProjectCollectionSize.current.value =
-        maxConvinacion.current.innerText;
+        maxConvinacion.current.innerText
   }
 
   function requiredRarity(isRarity) {
-    let capas = getCapas();
-    const capaIndex = capas.findIndex((capa) => capa.id === selectedCapa.id);
-    capas[capaIndex].required = isRarity;
-    localStorage.setItem("capas", JSON.stringify(capas));
-    crearRarityWeights();
-    capas = getCapas();
-    setSelectedCapa(capas.find((capa) => capa.id === selectedCapa.id));
-    setCapas(capas);
+    let capas = getCapas()
+    const capaIndex = capas.findIndex((capa) => capa.id === selectedCapa.id)
+    capas[capaIndex].required = isRarity
+    localStorage.setItem("capas", JSON.stringify(capas))
+    crearRarityWeights()
+    capas = getCapas()
+    setSelectedCapa(capas.find((capa) => capa.id === selectedCapa.id))
+    setCapas(capas)
   }
 
   const FreeModal = () => {
@@ -223,9 +223,9 @@ const Form = ({
                   <button
                     className="__boton-mediano enphasis-button"
                     onClick={() => {
-                      setListPreview1([]);
-                      setListPreview2([]);
-                      setListPreview3([]);
+                      setListPreview1([])
+                      setListPreview2([])
+                      setListPreview3([])
                     }}
                   >
                     <FormattedMessage
@@ -239,8 +239,8 @@ const Form = ({
                 <button
                   className="__boton-mediano"
                   onClick={() => {
-                    setUrlNft("");
-                    botonGenerate(false);
+                    setUrlNft("")
+                    botonGenerate(false)
                   }}
                 >
                   <FormattedMessage
@@ -253,115 +253,113 @@ const Form = ({
           </div>
         )}
       </>
-    );
-  };
+    )
+  }
 
   const PayModal = () => {
-    const [alertShow, setAlertShow] = useState(false);
+    const [alertShow, setAlertShow] = useState(false)
     const [message, setMessage] = useState({
       content: "pending",
-      type: "pending",
-    });
-    const BNBprice = useRef(0);
-    const [price, setPrice] = useState(0);
-    const [isPriceCalculated, setIsPriceCalculated] = useState(true);
+      type: "pending"
+    })
+    const BNBprice = useRef(0)
+    const [price, setPrice] = useState(0)
+    const [isPriceCalculated, setIsPriceCalculated] = useState(true)
 
     const metodosDePago = [
       {
         nombre: "MetaMask",
         icon: <MetamaskLogo width={60} height={60} />,
-        proceso: (e) => startPaymentMetamask(e),
+        proceso: (e) => startPaymentMetamask(e)
       },
       {
         nombre: "Stripe",
         icon: <Stripe width={90} height={100} />,
-        proceso: () => procesoStripe(),
-      },
-    ];
+        proceso: () => procesoStripe()
+      }
+    ]
 
     useEffect(() => {
       // if (message.type === "success")
-      getBNBPrice();
-    }, [message, price]);
+      getBNBPrice()
+    }, [message, price])
 
     async function procesoStripe() {
-      setAlertShow(true);
-      setMessage({ content: "pending", type: "pending" });
-      setIsPriceCalculated(true);
+      setAlertShow(true)
+      setMessage({ content: "pending", type: "pending" })
+      setIsPriceCalculated(true)
       window.onbeforeunload = function () {
-        return "You must wait for the images to be sent to the server";
-      };
-      await generarObjetoConfigParaElServidor();
-      await generarObjIMGParaElServidor();
-      window.onbeforeunload = function () {};
+        return "You must wait for the images to be sent to the server"
+      }
+      await generarObjetoConfigParaElServidor()
+      await generarObjIMGParaElServidor()
+      window.onbeforeunload = function () {}
       // pagarConStripe(stripePrice, inputProjectName.current.value.replace(/\s+/g, ''), inputProjectCollectionSize.current.value)
       pagarConStripe({
         precio: stripePrice,
         nombre: inputProjectName.current.value.replace(/\s+/g, ""),
-        tamano: inputProjectCollectionSize.current.value,
-      });
+        tamano: inputProjectCollectionSize.current.value
+      })
     }
 
     const startPaymentMetamask = async (event) => {
       // new line
-      event.preventDefault();
-      setMessage({ content: "pending", type: "pending" });
+      event.preventDefault()
+      setMessage({ content: "pending", type: "pending" })
       window.onbeforeunload = function () {
-        return "You must wait for the images to be sent to the server";
-      };
-      setIsPriceCalculated(true);
+        return "You must wait for the images to be sent to the server"
+      }
+      setIsPriceCalculated(true)
       if (inputProjectName.current.value === "") {
-        setMessage({ ...message, content: "noname", type: "error" });
-        setAlertShow(true);
-        return;
+        setMessage({ ...message, content: "noname", type: "error" })
+        setAlertShow(true)
+        return
       }
 
       try {
         if (!window.ethereum) {
-          throw new Error("Metamask no está instalada");
+          throw new Error("Metamask no está instalada")
         }
 
-        await window.ethereum.send("eth_requestAccounts");
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        await window.ethereum.send("eth_requestAccounts")
+        const provider = new ethers.providers.Web3Provider(window.ethereum)
         const chainId = await window.ethereum.request({
-          method: "eth_chainId",
-        });
-        const signer = provider.getSigner();
-        ethers.utils.getAddress(Const.WalletAddress);
+          method: "eth_chainId"
+        })
+        const signer = provider.getSigner()
+        ethers.utils.getAddress(Const.WalletAddress)
 
         if (chainId === "0x61") {
-          setAlertShow(true);
+          setAlertShow(true)
 
           const transactionResponse = await signer.sendTransaction({
             to: Const.WalletAddress,
-            value: ethers.utils.parseEther(price.toString()),
+            value: ethers.utils.parseEther(price.toString())
             // value: ethers.utils.parseEther('0.0001')
-          });
+          })
           if (transactionResponse) {
             const transactionConfirmed =
-              await signer.provider.waitForTransaction(
-                transactionResponse.hash
-              );
+              await signer.provider.waitForTransaction(transactionResponse.hash)
 
             if (transactionConfirmed) {
               // setMessage({ ...message, content: "success", type: "success", additional: transactionConfirmed.transactionHash })
               await handleSubmit(
                 setMessage,
                 transactionConfirmed.transactionHash
-              );
-              window.onbeforeunload = function () {};
+              )
+              window.onbeforeunload = function () {}
             }
           }
         } else {
-          setAlertShow(true);
-          setMessage({ ...message, content: "nowallet", type: "error" });
+          setAlertShow(true)
+          setMessage({ ...message, content: "nowallet", type: "error" })
         }
       } catch (error) {
-        setAlertShow(true);
-        setMessage({ ...message, content: error.code, type: "error" });
-        console.log({ error });
+        setAlertShow(true)
+        setMessage({ ...message, content: error.code, type: "error" })
+        console.log({ error })
       }
-    };
+    }
 
     const ModalAlerts = ({ message }) => {
       const cases = {
@@ -381,39 +379,39 @@ const Form = ({
         ),
         success: `${intl.formatMessage({
           id: "form.pay.success",
-          defaultMessage: "Transaction made, with",
+          defaultMessage: "Transaction made, with"
         })} hash: ${message.additional}`,
         noname: intl.formatMessage({
           id: "form.pay.noname",
-          defaultMessage: "You must give the project a name",
+          defaultMessage: "You must give the project a name"
         }),
         nowallet: intl.formatMessage({
           id: "form.pay.nowallet",
           defaultMessage:
-            "You must be on the Binance Smart Chain network to make the payment",
-        }),
-      };
+            "You must be on the Binance Smart Chain network to make the payment"
+        })
+      }
 
       const styles = {
         error: {
-          backgroundColor: "#ff0000b0",
+          backgroundColor: "#ff0000b0"
         },
         success: {
           backgroundColor: "green",
-          cursor: message.additional ? "pointer" : "default",
+          cursor: message.additional ? "pointer" : "default"
         },
         pending: {
-          backgroundColor: "transparent",
-        },
-      };
+          backgroundColor: "transparent"
+        }
+      }
 
       const handleTrasactionDetails = () => {
         if (message.additional)
           window.open(
             `https://testnet.bscscan.com/tx/${message.additional}`,
             "_blank"
-          );
-      };
+          )
+      }
 
       return (
         <div
@@ -424,43 +422,43 @@ const Form = ({
           {cases[message.content.toString()]}
           <div></div>
         </div>
-      );
-    };
+      )
+    }
 
     const getBNBPrice = async () => {
       const headers = new Headers({
         "X-CMC_PRO_API_KEY": "afeaa4c1-43e4-4d70-86a2-8c59d8ea7641",
-        "Access-Control-Allow-Origin": "*",
-      });
+        "Access-Control-Allow-Origin": "*"
+      })
 
-      const res = await (await fetch(Const.CMCURL, headers)).json();
+      const res = await (await fetch(Const.CMCURL, headers)).json()
       // const res = { data: { BNB: { quote: { USD: { price: 15000 } } } } }
 
       if (res) {
-        BNBprice.current = res.data?.BNB.quote.USD.price;
-        let coleccionSize = inputProjectCollectionSize.current.value;
+        BNBprice.current = res.data?.BNB.quote.USD.price
+        let coleccionSize = inputProjectCollectionSize.current.value
         // console.log(coleccionSize);
         if (coleccionSize >= 101 && coleccionSize <= 1000) {
-          setPrice(99 / BNBprice.current); // cambiar el precio
-          setIsPriceCalculated(false);
-          setStripePrice(paqueteDeMil_NFT);
+          setPrice(99 / BNBprice.current) // cambiar el precio
+          setIsPriceCalculated(false)
+          setStripePrice(paqueteDeMil_NFT)
           // console.log("llegamo aqui para ejectuar el precio");
         }
         if (coleccionSize > 1000 && coleccionSize <= 5000) {
-          setPrice(199 / BNBprice.current);
-          setIsPriceCalculated(false);
-          setStripePrice(paqueteDeCincoMil_NFT);
+          setPrice(199 / BNBprice.current)
+          setIsPriceCalculated(false)
+          setStripePrice(paqueteDeCincoMil_NFT)
         }
         if (coleccionSize > 5000 && coleccionSize <= 10000) {
-          setPrice(299 / BNBprice.current);
-          setIsPriceCalculated(false);
-          setStripePrice(paqueteDeDiezMil_NFT);
+          setPrice(299 / BNBprice.current)
+          setIsPriceCalculated(false)
+          setStripePrice(paqueteDeDiezMil_NFT)
         }
         if (coleccionSize >= 10000) {
-          console.log("a la verga");
+          console.log("a la verga")
         }
       }
-    };
+    }
 
     const PayOptions = ({ items }) => {
       return (
@@ -472,8 +470,8 @@ const Form = ({
           {items.icon}
           {items.nombre}
         </button>
-      );
-    };
+      )
+    }
 
     return (
       <>
@@ -491,8 +489,8 @@ const Form = ({
                 <button
                   className="__boton-mediano"
                   onClick={() => {
-                    setUrlNft("");
-                    botonGenerate(false);
+                    setUrlNft("")
+                    botonGenerate(false)
                   }}
                 >
                   close
@@ -507,7 +505,7 @@ const Form = ({
                   padding: ".7em",
                   boxShadow: "#ffffff1f 0px 2px 3px 0px",
                   borderBottomLeftRadius: 0,
-                  borderBottomRightRadius: 0,
+                  borderBottomRightRadius: 0
                 }}
               >
                 <FormattedMessage
@@ -544,7 +542,7 @@ const Form = ({
                   style={{
                     display: "flex",
                     justifyContent: "space-around",
-                    alignItems: "center",
+                    alignItems: "center"
                   }}
                 >
                   {metodosDePago.map((items, idx) => (
@@ -571,13 +569,13 @@ const Form = ({
                 <button
                   className="__boton-mediano enphasis-button"
                   onClick={() => {
-                    setListPreview1([]);
-                    setListPreview2([]);
-                    setListPreview3([]);
-                    setUrlNft("");
-                    botonGenerate(false);
-                    setIsPriceCalculated(false);
-                    setChecked(false);
+                    setListPreview1([])
+                    setListPreview2([])
+                    setListPreview3([])
+                    setUrlNft("")
+                    botonGenerate(false)
+                    setIsPriceCalculated(false)
+                    setChecked(false)
                   }}
                 >
                   <FormattedMessage
@@ -611,8 +609,8 @@ const Form = ({
           )}
         </div>
       </>
-    );
-  };
+    )
+  }
 
   const NameErrorModal = ({ message }) => {
     return (
@@ -621,175 +619,177 @@ const Form = ({
         <button
           className="__boton-mediano"
           onClick={() => {
-            botonGenerate(false);
+            botonGenerate(false)
           }}
         >
           <FormattedMessage id="form.btn-close" defaultMessage="Close" />
         </button>
       </div>
-    );
-  };
+    )
+  }
 
   const ModalContent = ({ isInputGenerate, inputProjectCollectionSize }) => {
-    const [show, setShow] = useState(false);
+    const [show, setShow] = useState(false)
 
     useEffect(() => {
-      if (isInputGenerate) setShow(true);
-      else setShow(false);
-    }, [isInputGenerate, inputProjectCollectionSize, isExisteNombreProject]);
+      if (isInputGenerate) setShow(true)
+      else setShow(false)
+    }, [isInputGenerate, inputProjectCollectionSize, isExisteNombreProject])
 
     const components = {
       free: <FreeModal />,
       pay: <PayModal />,
-      error: <NameErrorModal message={isExisteNombreProject} />,
-    };
+      error: <NameErrorModal message={isExisteNombreProject} />
+    }
 
     const selectComponent = () => {
-      if (isPremiun) return components.free;
+      if (isPremiun) return components.free
       if (
         inputProjectCollectionSize.current.value <= 100 &&
         isExisteNombreProject === null
       )
-        return components.free;
+        return components.free
       if (
         inputProjectCollectionSize.current.value > 100 &&
         isExisteNombreProject === null
       )
-        return components.pay;
-      return components.error;
-    };
+        return components.pay
+      return components.error
+    }
 
-    return <>{selectComponent()}</>;
-  };
+    return <>{selectComponent()}</>
+  }
 
   async function estadoDePeticionDeGenerarNFT() {
-    let url = `${Const.URL}collectall`;
+    let url = `${Const.URL}collectall`
 
     let usuario = {
-      id: correo,
-    };
+      id: correo
+    }
 
-    var myHeaders = new Headers();
-    myHeaders.append("Authorization", "Basic dXN1YXJpbzpwd2Q=");
-    myHeaders.append("Content-Type", "application/json");
+    var myHeaders = new Headers()
+    myHeaders.append("Authorization", "Basic dXN1YXJpbzpwd2Q=")
+    myHeaders.append("Content-Type", "application/json")
 
     let myInit = {
       method: "POST",
       body: JSON.stringify(usuario),
-      headers: myHeaders,
-    };
+      headers: myHeaders
+    }
     try {
-      let resPost = await fetch(url, myInit);
-      let post = await resPost.json();
-      console.log(post);
-      return post;
+      let resPost = await fetch(url, myInit)
+      let post = await resPost.json()
+      console.log(post)
+      return post
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
   }
 
   function validarSiImagesTienesDimesionesDiferentes() {
     let capas = getCapas().map((e) => {
-      let imagenes = e.images;
-      return imagenes;
-    });
-    let isDiferent = capas.flat().some((e) => e.isDiferent === true);
+      let imagenes = e.images
+      return imagenes
+    })
+    let isDiferent = capas.flat().some((e) => e.isDiferent === true)
     return {
       valid: isDiferent,
-      message: <FormattedMessage id="from.validdimensions" />,
-    };
+      message: <FormattedMessage id="from.validdimensions" />
+    }
   }
 
   const handleGenerate = async () => {
-    let isDiferent = validarSiImagesTienesDimesionesDiferentes();
+    let isDiferent = validarSiImagesTienesDimesionesDiferentes()
     if (isDiferent.valid === true) {
-      setIsExisteNombreProject(isDiferent.message);
-      botonGenerate(true);
-      return;
+      setIsExisteNombreProject(isDiferent.message)
+      botonGenerate(true)
+      return
     }
 
-    let nogenerar = validarSiExisteCapasConImagenes();
+    let nogenerar = validarSiExisteCapasConImagenes()
     if (nogenerar.valid === false) {
-      setIsExisteNombreProject(nogenerar.message);
-      botonGenerate(true);
-      return;
+      setIsExisteNombreProject(nogenerar.message)
+      botonGenerate(true)
+      return
     }
 
-    let isPendiente = await estadoDePeticionDeGenerarNFT();
-    if (isPendiente[0]?.url) isPendiente = isPendiente.pop();
-    console.log(isPendiente);
+    let isPendiente = await estadoDePeticionDeGenerarNFT()
+    if (isPendiente[0]?.url) isPendiente = isPendiente.pop()
+    console.log(isPendiente)
 
-    const res = await ValidarSiExisteNombreProjectServidor();
+    const res = await ValidarSiExisteNombreProjectServidor()
 
     if (isPendiente.url === "En Proceso...") {
       setIsExisteNombreProject(
         intl.formatMessage({
           id: "form.pending",
           defaultMessage:
-            "At this moment you cannot generate an NFT collection because you already have one in process, at the end of the creation of the collection you will be able to generate another one, keep in mind that if the collection is very large the process may take a while",
+            "At this moment you cannot generate an NFT collection because you already have one in process, at the end of the creation of the collection you will be able to generate another one, keep in mind that if the collection is very large the process may take a while"
         })
-      );
-      botonGenerate(true);
-      return;
+      )
+      botonGenerate(true)
+      return
     }
 
-    let isPremiun = false;
+    let isPremiun = false
 
     //esto es mio para ver si eres premiun
-    const chainId = await window.ethereum.request({ method: "eth_chainId" });
-    const accounts = await window.ethereum.request({ method: "eth_accounts" });
-    console.log(accounts[0]);
+    const chainId = await window.ethereum.request({ method: "eth_chainId" })
+    const accounts = await window.ethereum.request({ method: "eth_accounts" })
+    console.log(accounts[0])
     listWalletPremiun.find((wallet) => {
-      if (wallet.toLowerCase() === accounts[0]) isPremiun = true;
-    });
-    console.log(isPremiun);
-    console.log(chainId);
+      if (wallet.toLowerCase() === accounts[0]) isPremiun = true
+    })
+    console.log(isPremiun)
+    console.log(chainId)
     if (chainId === "0x13881") {
-      console.log("karajo?");
+      console.log("karajo?")
       // console.log("si es la red");
       //console.log('entro en la condiciones de ser premiun')
       //console.log(findWallet)
       if (isPremiun) {
-        console.log("si eres premieum con tu direccion wallet");
-        const { valid, message } = await ValidarSiExisteNombreProjectServidor();
+        console.log("si eres premieum con tu direccion wallet")
+        const { valid, message } = await ValidarSiExisteNombreProjectServidor()
         if (valid === false) {
-          console.log(res);
-          setIsExisteNombreProject(message);
-          botonGenerate(true);
-          return;
+          console.log(res)
+          setIsExisteNombreProject(message)
+          botonGenerate(true)
+          return
         } else {
-          setIsExisteNombreProject(null);
-          botonGenerate(true);
-          setIspremiun(!isPremiun);
-          await handleSubmit();
-          setUrlNft("creando");
+          setIsExisteNombreProject(null)
+          botonGenerate(true)
+          setIspremiun(!isPremiun)
+          await handleSubmit()
+          setUrlNft("creando")
         }
       }
     }
     //aqui termina si eres premiun
 
     if (res.valid) {
-      setIsExisteNombreProject(null); //cambiar montos
+      setIsExisteNombreProject(null) //cambiar montos
       if (inputProjectCollectionSize.current.value > 100) {
-        botonGenerate(true);
+        botonGenerate(true)
       } else {
-        botonGenerate(true);
-        await handleSubmit();
+        botonGenerate(true)
+        await handleSubmit()
       }
     }
 
     if (!res.valid) {
-      setIsExisteNombreProject(res.message);
-      botonGenerate(true);
+      setIsExisteNombreProject(res.message)
+      botonGenerate(true)
     }
-  };
+  }
 
   async function loadImageFromDB() {
-    let result = await obtenerTodo(db, "images");
+    let result = await obtenerTodo(db, "images")
     // console.log(result)
-    setlistImagenDB(result);
-    return result;
+    setlistImagenDB(result)
+    return result
   }
+
+  const [captureValue, setCaptureValue] = useState("")
 
   return (
     <>
@@ -809,6 +809,7 @@ const Form = ({
               name="pName"
               ref={inputProjectName}
               maxLength={100}
+              onChange={(e) => setCaptureValue(e.target.value)}
             />
           </div>
           <div className="mb-3">
@@ -829,6 +830,39 @@ const Form = ({
               // name="pName"
               readOnly
               value="PNG"
+              className="form-control-sm w-100 cursor-denagado --border-blue"
+              disabled
+              maxLength={100}
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="projectname" className="form-label">
+              <FormattedMessage
+                id="form.combinationsNumber"
+                defaultMessage="Combinations"
+              />
+            </label>
+            <input
+              type="text"
+              // name="pName"
+              readOnly
+              value={
+                maxConvinacion &&
+                maxConvinacion.current?.innerText <= 99 &&
+                maxConvinacion.current?.innerText >= 10
+                  ? `${captureValue}-001, ${captureValue}-002 ... ${captureValue}-0${maxConvinacion.current?.innerText}`
+                  : maxConvinacion.current?.innerText >= 99
+                  ? `${captureValue}-001, ${captureValue}-002 ... ${captureValue}-${maxConvinacion.current?.innerText}`
+                  : maxConvinacion.current?.innerText >= 4
+                  ? `${captureValue}-001, ${captureValue}-002 ... ${captureValue}-00${maxConvinacion.current?.innerText}`
+                  : maxConvinacion.current?.innerText >= 3
+                  ? `${captureValue}-001, ${captureValue}-002 , ${captureValue}-00${maxConvinacion.current?.innerText}`
+                  : maxConvinacion.current?.innerText >= 2
+                  ? `${captureValue}-001, ${captureValue}-002`
+                  : maxConvinacion.current?.innerText >= 1
+                  ? `${captureValue}-001`
+                  : "000"
+              }
               className="form-control-sm w-100 cursor-denagado --border-blue"
               disabled
               maxLength={100}
@@ -974,10 +1008,10 @@ const Form = ({
       <button
         className="__boton-mediano mx-auto d-block w-100 enphasis-button"
         onClick={() => {
-          handleGenerate();
-          loadImageFromDBB(setListPreview1);
-          loadImageFromDBB(setListPreview2);
-          loadImageFromDBB(setListPreview3);
+          handleGenerate()
+          loadImageFromDBB(setListPreview1)
+          loadImageFromDBB(setListPreview2)
+          loadImageFromDBB(setListPreview3)
         }}
         disabled={isInputGenerate}
         id="generar"
@@ -1004,7 +1038,7 @@ const Form = ({
         />
       </GenericModal>
     </>
-  );
-};
+  )
+}
 
-export default Form;
+export default Form

@@ -37,6 +37,7 @@
   "form.projectname": "Nombre de la Coleccion NFT",
   "form.exportFormat": "Formato de Exportacion",
   "form.recommendedFormat": "Formato Recomendado: png",
+  "form.combinationsNumber":  "Combinaciones",
   "form.projectdescription": "Descripcion de la Coleccion",
   "form.combinations": "Combinaciones totales: ",
   "form.dimsension": "Dimensiones",
