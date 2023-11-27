@@ -1,19 +1,18 @@
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import setSelectedCapaId from "../utils/setSelectedCapaId";
-import CreateCapa from "./CreateCapa";
-import Capa from "./Capa";
-import "../styles/scss/_preview-imgpj.scss";
-import "../styles/scss/_pedir-correro.scss";
-import resetLocalStorage from "../utils/resetLocalStorage";
-import getCapas from "../utils/getCapas";
-import getSelectedCapaId from "../utils/getSelectedCapaId";
-import { useState } from "react";
-import { reiniciar, obtenerTodo, eliminar } from "../db/CrudDB.js";
-import eliminarCapa from "../utils/eliminarCapa";
-import GenericModal from "./GenericModal";
-import getDatosImg from "../utils/getDatosImg";
-import { FormattedMessage } from "react-intl";
-import Modal from "./Modal";
+import { useState } from "react"
+import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd"
+import { FormattedMessage } from "react-intl"
+import { eliminar, obtenerTodo, reiniciar } from "../db/CrudDB.js"
+import "../styles/scss/_pedir-correro.scss"
+import "../styles/scss/_preview-imgpj.scss"
+import eliminarCapa from "../utils/eliminarCapa"
+import getCapas from "../utils/getCapas"
+import getDatosImg from "../utils/getDatosImg"
+import getSelectedCapaId from "../utils/getSelectedCapaId"
+import resetLocalStorage from "../utils/resetLocalStorage"
+import setSelectedCapaId from "../utils/setSelectedCapaId"
+import Capa from "./Capa"
+import CreateCapa from "./CreateCapa"
+import GenericModal from "./GenericModal"
 
 function Capas({
   capas,
@@ -23,117 +22,117 @@ function Capas({
   setSelectedCapa,
   db,
   maxConvinacion,
-  requiredRarity,
+  requiredRarity
 }) {
   // console.log("SOY CAPAS---------------")
-  const [listImagenDB, setlistImagenDB] = useState([]);
-  const [isOpenModalPreviewImg, setIsOpenModalPreviewImg] = useState(false);
-  const [showModal, setShowModal] = useState(false);
-  const [showModal2, setShowModal2] = useState(false);
+  const [listImagenDB, setlistImagenDB] = useState([])
+  const [isOpenModalPreviewImg, setIsOpenModalPreviewImg] = useState(false)
+  const [showModal, setShowModal] = useState(false)
+  const [showModal2, setShowModal2] = useState(false)
 
   const reorder = (list, startIndex, endIndex) => {
-    const result = [...list];
-    const [removed] = result.splice(startIndex, 1);
-    result.splice(endIndex, 0, removed);
+    const result = [...list]
+    const [removed] = result.splice(startIndex, 1)
+    result.splice(endIndex, 0, removed)
 
-    localStorage.setItem("capas", JSON.stringify(result));
-    return result;
-  };
+    localStorage.setItem("capas", JSON.stringify(result))
+    return result
+  }
 
   const clickCapaHandler = (capa) => {
-    setSelectedCapa(capa);
-    setSelectedCapaId(capa.id);
+    setSelectedCapa(capa)
+    setSelectedCapaId(capa.id)
     // console.log(capa)
-  };
-//LYEA PERDONEN KAMEHAMEHAQ
-
-
-
+  }
+  //LYEA PERDONEN KAMEHAMEHAQ
 
   function eliminarCapasHandle() {
-    resetLocalStorage();
-    setCapas(getCapas());
-    setSelectedCapa(getCapas().find((s) => s.id === getSelectedCapaId()));
-    maxConvinacion.current.innerText = "0";
-    reiniciar(db, "images");
-    reiniciar(db, "smallImages");
-    setShowModal2(false);
+    resetLocalStorage()
+    setCapas(getCapas())
+    setSelectedCapa(getCapas().find((s) => s.id === getSelectedCapaId()))
+    maxConvinacion.current.innerText = "0"
+    reiniciar(db, "images")
+    reiniciar(db, "smallImages")
+    setShowModal2(false)
   }
 
   async function loadImageFromDB() {
-    const result = await obtenerTodo(db, "images");
-    let NewCapa = capas.filter((e) => e.images.length !== 0);
+    const result = await obtenerTodo(db, "images")
+    let NewCapa = capas.filter((e) => e.images.length !== 0)
     if (result) {
       let imagenes = NewCapa.map((e) => {
-        let index = Math.floor(Math.random() * e.images.length);
+        let index = Math.floor(Math.random() * e.images.length)
 
-        return result.find((db) => db.clave === e.images[index].id);
-      });
-      console.log({ imagenes });
+        return result.find((db) => db.clave === e.images[index].id)
+      })
+      console.log({ imagenes })
 
-      setlistImagenDB(imagenes);
-      imagenes.length && setIsOpenModalPreviewImg(!isOpenModalPreviewImg);
+      setlistImagenDB(imagenes)
+      imagenes.length && setIsOpenModalPreviewImg(!isOpenModalPreviewImg)
     }
   }
 
   function EliminarImgDeCapasEnDB() {
     // console.log("si entra")
-    let capaId = getSelectedCapaId();
+    let capaId = getSelectedCapaId()
     let IdImag = getCapas()
       .find((e) => e.id === capaId)
-      .images.map((e) => e.id);
+      .images.map((e) => e.id)
     // console.log(IdImag)
     for (let i = 0; i < IdImag.length; i++) {
-      eliminar(db, "images", IdImag[i]);
-      eliminar(db, "smallImages", IdImag[i]);
+      eliminar(db, "images", IdImag[i])
+      eliminar(db, "smallImages", IdImag[i])
     }
   }
 
   function eliminarCapaHandle() {
-    EliminarImgDeCapasEnDB();
-    setSelectedCapa(getCapas()[0]);
-    eliminarCapa();
-    setCapas(getCapas());
-    setShowModal(false);
-    recarcularCombinaciones();
+    EliminarImgDeCapasEnDB()
+    setSelectedCapa(getCapas()[0])
+    eliminarCapa()
+    setCapas(getCapas())
+    setShowModal(false)
+    recarcularCombinaciones()
   }
 
   function recarcularCombinaciones() {
-    const newCapas = getDatosImg().newCapasImageDiferent;
-    let newCapaAux = newCapas.filter((e) => e.images.length !== 0);
+    const newCapas = getDatosImg().newCapasImageDiferent
+    let newCapaAux = newCapas.filter((e) => e.images.length !== 0)
     if (newCapaAux.length !== 0) {
       maxConvinacion.current.innerHTML = newCapas.reduce(
         (result, capa) =>
           capa.images.length > 0 ? result * capa.images.length : result,
         1
-      );
+      )
     } else {
-      maxConvinacion.current.innerHTML = 0;
+      maxConvinacion.current.innerHTML = 0
     }
   }
 
   const handleOpenModal = () => {
-    setShowModal(true);
-  };
+    setShowModal(true)
+  }
+
+  const [capaName, setCapaName] = useState("")
+  // console.log(capaName)
 
   return (
     <>
       <DragDropContext
         onDragEnd={(result) => {
-          const { source, destination } = result;
+          const { source, destination } = result
           if (!destination) {
-            return;
+            return
           }
           if (
             source.index === destination.index &&
             source.droppableId === destination.droppableId
           ) {
-            return;
+            return
           }
 
           setCapas((prevCapas) =>
             reorder(prevCapas, source.index, destination.index)
-          );
+          )
         }}
       >
         <div className="drag-drop" id="capas">
@@ -159,6 +158,7 @@ function Capas({
                         {/* aqui se llama al componente capa */}
                         <Capa
                           capa={capa}
+                          setCapaName={setCapaName}
                           handleOpenModal={handleOpenModal}
                           setCapas={setCapas}
                           selectedCapa={selectedCapa}
@@ -176,14 +176,18 @@ function Capas({
         </div>
 
         <div className="capa capaCreate" id="nuevaCapa">
-          <CreateCapa createCapaHandle={createCapaHandle} />
+          <CreateCapa
+            setCapaName={setCapaName}
+            capaName={capaName}
+            createCapaHandle={createCapaHandle}
+          />
         </div>
 
         <div className="d-flex  flex-nowrap justify-content-evenly align-items-center mt-2">
           <button
             className="__boton-mediano mx-0 color enphasis-button"
             onClick={() => {
-              loadImageFromDB();
+              loadImageFromDB()
             }}
             id="visualizar"
           >
@@ -195,7 +199,7 @@ function Capas({
           <button
             className="__boton-mediano mx-0 enphasis-button"
             onClick={() => {
-              setShowModal2(true);
+              setShowModal2(true)
             }}
             id="reiniciar"
           >
@@ -213,35 +217,37 @@ function Capas({
         </div>
 
         {/* <div className="container-preview"> */}
-        <div className={ isOpenModalPreviewImg ? "cont-wrapper " : "d-none"
-        }>
-        <div
-          className={
-            isOpenModalPreviewImg
-              ? "container-preview"
-              : "container-preview pointerEvent"
-          }
-          style={{ border: "1px solid #00B8FF", padding: "10px" }}
-        >
-          {isOpenModalPreviewImg ? (
-            <div className="container-img">
-              <div
-                className="eliminar-imagen"
-                onClick={() => {
-                  setIsOpenModalPreviewImg(!isOpenModalPreviewImg);
-                  setlistImagenDB([]);
-                }}
-              >
-                <FormattedMessage id="capas.close-modal-preview" defaultMessage="Close"/>
+        <div className={isOpenModalPreviewImg ? "cont-wrapper " : "d-none"}>
+          <div
+            className={
+              isOpenModalPreviewImg
+                ? "container-preview"
+                : "container-preview pointerEvent"
+            }
+            style={{ border: "1px solid #00B8FF", padding: "10px" }}
+          >
+            {isOpenModalPreviewImg ? (
+              <div className="container-img">
+                <div
+                  className="eliminar-imagen"
+                  onClick={() => {
+                    setIsOpenModalPreviewImg(!isOpenModalPreviewImg)
+                    setlistImagenDB([])
+                  }}
+                >
+                  <FormattedMessage
+                    id="capas.close-modal-preview"
+                    defaultMessage="Close"
+                  />
+                </div>
+                {listImagenDB.map((e, index) => (
+                  <img key={index} src={e.img} alt="" className="preview-img" />
+                ))}
               </div>
-              {listImagenDB.map((e, index) => (
-                <img key={index} src={e.img} alt="" className="preview-img" />
-              ))}
-            </div>
-          ) : (
-            ""
-          )}
-        </div>
+            ) : (
+              ""
+            )}
+          </div>
         </div>
       </DragDropContext>
 
@@ -261,18 +267,24 @@ function Capas({
           </p>
         </div>
         <div className="my-3">
-        <button className="__boton-mediano-borrar" onClick={eliminarCapaHandle}>
-          <FormattedMessage
-            id="capas.modal-delete-btn-remove"
-            defaultMessage="Remove"
-          />
-        </button>
-        <button className="__boton-mediano enphasis-button" onClick={() => setShowModal(false)}>
-          <FormattedMessage
-            id="capas.modal-delete-btn-cancel"
-            defaultMessage="Cancel"
-          />
-        </button>
+          <button
+            className="__boton-mediano-borrar"
+            onClick={eliminarCapaHandle}
+          >
+            <FormattedMessage
+              id="capas.modal-delete-btn-remove"
+              defaultMessage="Remove"
+            />
+          </button>
+          <button
+            className="__boton-mediano enphasis-button"
+            onClick={() => setShowModal(false)}
+          >
+            <FormattedMessage
+              id="capas.modal-delete-btn-cancel"
+              defaultMessage="Cancel"
+            />
+          </button>
         </div>
       </GenericModal>
 
@@ -292,22 +304,26 @@ function Capas({
           </p>
         </div>
         <div className="my-3">
-        <button className="__boton-mediano-borrar" onClick={eliminarCapasHandle} style={{width: "100px"}}>
-          <FormattedMessage
-            id="capas.modal-yes"
-            defaultMessage="Yes"
-          />
-        </button>
-        <button className="__boton-mediano enphasis-button" onClick={() => setShowModal2(false)}>
-          <FormattedMessage
-            id="capas.modal-delete-btn-cancel"
-            defaultMessage="Cancel"
-          />
-        </button>
+          <button
+            className="__boton-mediano-borrar"
+            onClick={eliminarCapasHandle}
+            style={{ width: "100px" }}
+          >
+            <FormattedMessage id="capas.modal-yes" defaultMessage="Yes" />
+          </button>
+          <button
+            className="__boton-mediano enphasis-button"
+            onClick={() => setShowModal2(false)}
+          >
+            <FormattedMessage
+              id="capas.modal-delete-btn-cancel"
+              defaultMessage="Cancel"
+            />
+          </button>
         </div>
       </GenericModal>
     </>
-  );
+  )
 }
 
-export default Capas;
+export default Capas

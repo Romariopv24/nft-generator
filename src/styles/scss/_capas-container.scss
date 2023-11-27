@@ -15,8 +15,10 @@
     background-color: variables.$text-color !important;
     .capa-name{
       color: variables.$main-color !important;
-  
-    
+      width: 40%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
     }
   }
 

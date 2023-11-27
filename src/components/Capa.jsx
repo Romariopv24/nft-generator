@@ -13,7 +13,8 @@ const Capa = ({
   setCapas,
   selectedCapa,
   requiredRarity,
-  db
+  db,
+  setCapaName
 }) => {
   const intl = useIntl()
 
@@ -123,7 +124,7 @@ const Capa = ({
   return (
     <>
       <div className="d-flex justify-content-between align-items-center position-relative">
-        <span className="capa-name" >
+        <span className="capa-name">
           {capa.name}
           <Pencil
             className={
