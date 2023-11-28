@@ -1,11 +1,12 @@
-import React, { useState } from "react"
-import { FormattedMessage, useIntl } from "react-intl"
-import { ReactComponent as Pencil } from "../assets/svg/pencil.svg"
-import { ReactComponent as Delete } from "../assets/svg/trash.svg"
-import { obtenerTodo } from "../db/CrudDB.js"
-import "../styles/scss/_capa.scss"
-import getCapas from "../utils/getCapas"
-import Modal from "./Modal"
+import React, { useState } from "react";
+import { FormattedMessage, useIntl } from "react-intl";
+import { ReactComponent as Pencil } from "../assets/svg/pencil.svg";
+import { ReactComponent as Delete } from "../assets/svg/trash.svg";
+import { obtenerTodo } from "../db/CrudDB.js";
+import "../styles/scss/_capa.scss";
+import getCapas from "../utils/getCapas";
+import Modal from "./Modal";
+import setSelectedCapaId from "../utils/setSelectedCapaId.js";
 
 const Capa = ({
   capa,
@@ -14,90 +15,91 @@ const Capa = ({
   selectedCapa,
   requiredRarity,
   db,
-  setCapaName
+  setCapaName,
+  setChangeName,
 }) => {
-  const intl = useIntl()
+  const intl = useIntl();
 
-  const [listImagenDB, setlistImagenDB] = useState([])
+  const [listImagenDB, setlistImagenDB] = useState([]);
 
   async function loadImageFromDB() {
-    let result = await obtenerTodo(db, "images")
+    let result = await obtenerTodo(db, "images");
     // console.log(result)
-    setlistImagenDB(result)
-    return result
+    setlistImagenDB(result);
+    return result;
   }
 
-  const capaIndex = getCapas().findIndex((capa) => capa.id === selectedCapa.id)
+  const capaIndex = getCapas().findIndex((capa) => capa.id === selectedCapa.id);
 
   //Calculo de rareza con barra dependiente
   function handleRangeValue(event, element, isRarity) {
-    let capas = getCapas()
-    const capaIndex = capas.findIndex((capa) => capa.id === selectedCapa.id)
-    const imagenes = capas[capaIndex].images
-    const imagen = imagenes.find((e) => e.id === element.id)
+    let capas = getCapas();
+    const capaIndex = capas.findIndex((capa) => capa.id === selectedCapa.id);
+    const imagenes = capas[capaIndex].images;
+    const imagen = imagenes.find((e) => e.id === element.id);
 
     // Calcula la diferencia entre el valor actual y el nuevo valor
-    const diff = Number(event.target.value) - imagen.porcentajeBarra
+    const diff = Number(event.target.value) - imagen.porcentajeBarra;
 
     // Actualiza el estado de la barra para la imagen actual
-    imagen.porcentajeBarra = Number(event.target.value)
+    imagen.porcentajeBarra = Number(event.target.value);
 
     // Calcula la suma total de los porcentajes de todas las imágenes
     const totalPorcentaje = imagenes.reduce(
       (total, img) => total + img.porcentajeBarra,
       0
-    )
+    );
 
     // Si la suma total excede 100%, redistribuye proporcionalmente
     if (totalPorcentaje > 100) {
-      const scaleFactor = 100 / totalPorcentaje
+      const scaleFactor = 100 / totalPorcentaje;
 
       // Ajusta todos los valores nuevamente para que la suma sea igual a 100%
       imagenes.forEach((i) => {
-        i.porcentajeBarra *= scaleFactor
-        i.porcentaje = i.porcentajeBarra
-      })
+        i.porcentajeBarra *= scaleFactor;
+        i.porcentaje = i.porcentajeBarra;
+      });
     }
 
     // Si la suma total es menor que 100%, redistribuye proporcionalmente
     else if (totalPorcentaje < 100) {
-      const remainingDiff = 100 - totalPorcentaje
-      const proportionalDiff = remainingDiff / imagenes.length
+      const remainingDiff = 100 - totalPorcentaje;
+      const proportionalDiff = remainingDiff / imagenes.length;
 
       // Ajusta los valores de todas las imágenes, incluida la imagen actual
       imagenes.forEach((i) => {
-        i.porcentajeBarra += proportionalDiff
-        i.porcentaje = i.porcentajeBarra
-      })
+        i.porcentajeBarra += proportionalDiff;
+        i.porcentaje = i.porcentajeBarra;
+      });
     }
 
-    localStorage.setItem("capas", JSON.stringify(capas))
-    requiredRarity(isRarity)
+    localStorage.setItem("capas", JSON.stringify(capas));
+    requiredRarity(isRarity);
   }
 
   // Función para restablecer todas las barras al valor inicial
   function resetAllBars() {
-    let capas = getCapas()
-    const capaIndex = capas.findIndex((capa) => capa.id === selectedCapa.id)
-    const imagenes = capas[capaIndex].images
+    let capas = getCapas();
+    const capaIndex = capas.findIndex((capa) => capa.id === selectedCapa.id);
+    const imagenes = capas[capaIndex].images;
 
     // Calcula cuántas imágenes hay
-    const numImages = imagenes.length
+    const numImages = imagenes.length;
 
     // Calcula el valor inicial para cada imagen
-    const initialValue = 100 / numImages
+    const initialValue = 100 / numImages;
 
     // Establece el valor inicial para todas las imágenes
     imagenes.forEach((i) => {
-      i.porcentajeBarra = initialValue
-      i.porcentaje = i.porcentajeBarra
-    })
+      i.porcentajeBarra = initialValue;
+      i.porcentaje = i.porcentajeBarra;
+    });
 
     // Actualiza el estado en el almacenamiento local
-    localStorage.setItem("capas", JSON.stringify(capas))
+    localStorage.setItem("capas", JSON.stringify(capas));
 
     // Llama a la función que verifica la rareza (si es necesario)
-    requiredRarity(/* Indica aquí si esRarity es true o false */)
+    requiredRarity(/* Indica aquí si esRarity es true o false */);
   }
 
   //Calculo de rareza con barra independiente
@@ -126,13 +128,14 @@ const Capa = ({
       <div className="d-flex justify-content-between align-items-center position-relative">
         <span className="capa-name">
           {capa.name}
-          <Pencil
+          {/* <Pencil
+          onClick={() => setChangeName(true)}
             className={
               selectedCapa.id === capa.id && capa.id !== "1"
                 ? "pencil-button-show"
                 : "pencil-button-hide"
             }
-          />
+          /> */}
         </span>
         <div className="position-absolute top-50 start-50 translate-middle">
           <span id="imagesQuantity" className="_image-count">
@@ -195,7 +198,7 @@ const Capa = ({
                           max="100"
                           step="1"
                           onChange={(event) => {
-                            handleRangeValue(event, e, selectedCapa.required)
+                            handleRangeValue(event, e, selectedCapa.required);
                           }}
                           value={e.porcentajeBarra}
                         />
@@ -231,7 +234,7 @@ const Capa = ({
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Capa
+export default Capa;

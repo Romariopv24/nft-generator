@@ -113,7 +113,6 @@ function Capas({
   }
 
   const [capaName, setCapaName] = useState("")
-  // console.log(capaName)
 
   return (
     <>
