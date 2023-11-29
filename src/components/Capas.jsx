@@ -1,5 +1,6 @@
-import { useState } from "react"
+import React, { useState } from "react"
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd"
+import ReactDOM from "react-dom"
 import { FormattedMessage } from "react-intl"
 import { eliminar, obtenerTodo, reiniciar } from "../db/CrudDB.js"
 import "../styles/scss/_pedir-correro.scss"
@@ -13,6 +14,7 @@ import setSelectedCapaId from "../utils/setSelectedCapaId"
 import Capa from "./Capa"
 import CreateCapa from "./CreateCapa"
 import GenericModal from "./GenericModal"
+import ModalChangeName from "./ModalChangeName.jsx"
 
 function Capas({
   capas,
@@ -113,6 +115,8 @@ function Capas({
   }
 
   const [capaName, setCapaName] = useState("")
+  const [openNewModal, setOpenNewModal] = useState(false)
+  const [newCapaName, setNewCapaName] = useState("")
 
   return (
     <>
@@ -143,37 +147,59 @@ function Capas({
                 className="capas-container"
               >
                 {capas.map((capa, index) => (
-                  <Draggable key={capa.id} draggableId={capa.id} index={index}>
-                    {(draggableProvided) => (
-                      <li
-                        {...draggableProvided.draggableProps}
-                        ref={draggableProvided.innerRef}
-                        {...draggableProvided.dragHandleProps}
-                        className={`capa ${
-                          selectedCapa.id === capa.id && "selected-capa"
-                        }`}
-                        onClick={(e) => clickCapaHandler(capa)}
+                  <>
+                    {selectedCapa && selectedCapa?.id && capa && capa.id && (
+                      <Draggable
+                        key={capa.id}
+                        draggableId={capa.id}
+                        index={index}
                       >
-                        {/* aqui se llama al componente capa */}
-                        <Capa
-                          capa={capa}
-                          setCapaName={setCapaName}
-                          handleOpenModal={handleOpenModal}
-                          setCapas={setCapas}
-                          selectedCapa={selectedCapa}
-                          requiredRarity={requiredRarity}
-                          db={db}
-                        />
-                      </li>
+                        {(draggableProvided) => (
+                          <li
+                            {...draggableProvided.draggableProps}
+                            ref={draggableProvided.innerRef}
+                            {...draggableProvided.dragHandleProps}
+                            className={`capa ${
+                              selectedCapa.id === capa.id && "selected-capa"
+                            }`}
+                            onClick={(e) => clickCapaHandler(capa)}
+                          >
+                            {/* aqui se llama al componente capa */}
+
+                            <Capa
+                              setNewCapaName={setNewCapaName}
+                              capa={capa}
+                              newCapaName={newCapaName}
+                              setOpenNewModal={setOpenNewModal}
+                              setCapaName={setCapaName}
+                              handleOpenModal={handleOpenModal}
+                              setCapas={setCapas}
+                              selectedCapa={selectedCapa}
+                              requiredRarity={requiredRarity}
+                              db={db}
+                            />
+                          </li>
+                        )}
+                      </Draggable>
                     )}
-                  </Draggable>
+                  </>
                 ))}
                 {droppableProvided.placeholder}
               </ul>
             )}
           </Droppable>
         </div>
-
+        {openNewModal &&
+          ReactDOM.createPortal(
+            <ModalChangeName
+              setNewCapaName={setNewCapaName}
+              setOpenNewModal={setOpenNewModal}
+              selectedCapa={selectedCapa}
+              setCapas={setCapas}
+              capas={capas}
+            />,
+            document.getElementById("modalPortal")
+          )}
         <div className="capa capaCreate" id="nuevaCapa">
           <CreateCapa
             setCapaName={setCapaName}
