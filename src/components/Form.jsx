@@ -838,6 +838,21 @@ const Form = ({
           </div>
           <div className="mb-3">
             <label htmlFor="projectname" className="form-label">
+              Blockchain
+            </label>
+
+            <input
+              type="text"
+              // name="pName"
+              readOnly
+              value="ETH, BSC, Polygon... MultiChain"
+              className="form-control-sm w-100 cursor-denagado --border-blue"
+              disabled
+              maxLength={100}
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="projectname" className="form-label">
               <FormattedMessage
                 id="form.combinationsNumber"
                 defaultMessage="Combinations"
