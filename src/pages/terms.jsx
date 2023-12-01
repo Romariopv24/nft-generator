@@ -1,11 +1,11 @@
-import React from "react";
-import { FormattedMessage } from "react-intl";
-import "../styles/scss/_terms.scss";
+import React from "react"
+import { FormattedMessage } from "react-intl"
+import "../styles/scss/_terms.scss"
 
 const Terms = () => {
   return (
     <div style={{ paddingTop: "6vh" }}>
-      <div className="justify-content-center d-flex">
+      <div className="principal_container text_justify p-3">
         <h1>
           <FormattedMessage
             id="legalwarning.termsncondition"
@@ -162,7 +162,7 @@ const Terms = () => {
         </p>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Terms;
+export default Terms
