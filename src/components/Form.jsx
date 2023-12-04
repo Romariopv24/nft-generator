@@ -30,7 +30,7 @@ const listWalletPremiun = [
   "0x63828d59737Aa3744960d6827Ccf457931B84245",
   "0xE6225d9f75CA398F060A2A9B7a3b345e681700dC",
   "0x278afeeca694808991f70c3e851449434a13ecff",
-  "0xb265c0F20E35B5e926113F68e41aA1BAb7557981"
+  "0xFAC15a040568a8186212AA2e9CC1A5b2886914E1"
 ]
 
 const Form = ({
@@ -201,57 +201,59 @@ const Form = ({
             ></div>
           </div>
         ) : (
-          <div className="p-4">
-            <PreviewCollection
-              listPreview1={listPreview1}
-              listPreview2={listPreview2}
-              listPreview3={listPreview3}
-              imgTop1={50}
-              imgTop3={50}
-            />
-
-            <h5 class="my-text mt-5">
-              <FormattedMessage
-                id="form.reqcollections"
-                defaultMessage="Your request is being processed go to collections"
+          <>
+            <div className="p-4">
+              <PreviewCollection
+                listPreview1={listPreview1}
+                listPreview2={listPreview2}
+                listPreview3={listPreview3}
+                imgTop1={50}
+                imgTop3={50}
               />
-            </h5>
 
-            <div class="mt-4">
-              {urlNft && (
-                <Link to={`/coleccion`}>
-                  {" "}
+              <h5 class="my-text mt-5">
+                <FormattedMessage
+                  id="form.reqcollections"
+                  defaultMessage="Your request is being processed go to collections"
+                />
+              </h5>
+
+              <div class="mt-4">
+                {urlNft && (
+                  <Link to={`/coleccion`}>
+                    {" "}
+                    <button
+                      className="__boton-mediano enphasis-button"
+                      onClick={() => {
+                        setListPreview1([])
+                        setListPreview2([])
+                        setListPreview3([])
+                      }}
+                    >
+                      <FormattedMessage
+                        id="menu.collections"
+                        defaultMessage=" My Collections"
+                      />
+                    </button>
+                  </Link>
+                )}
+                {urlNft && (
                   <button
-                    className="__boton-mediano enphasis-button"
+                    className="__boton-mediano"
                     onClick={() => {
-                      setListPreview1([])
-                      setListPreview2([])
-                      setListPreview3([])
+                      setUrlNft("")
+                      botonGenerate(false)
                     }}
                   >
                     <FormattedMessage
-                      id="menu.collections"
-                      defaultMessage=" My Collections"
+                      id="form.success-pay-close"
+                      defaultMessage="Close"
                     />
                   </button>
-                </Link>
-              )}
-              {urlNft && (
-                <button
-                  className="__boton-mediano"
-                  onClick={() => {
-                    setUrlNft("")
-                    botonGenerate(false)
-                  }}
-                >
-                  <FormattedMessage
-                    id="form.success-pay-close"
-                    defaultMessage="Close"
-                  />
-                </button>
-              )}
+                )}
+              </div>
             </div>
-          </div>
+          </>
         )}
       </>
     )
@@ -478,26 +480,229 @@ const Form = ({
       <>
         <div className="fs-6 fw-bold">
           {urlNft === "creando" ? (
-            <div className="p-5">
-              <h5>You must wait for the images to be sent to the server</h5>
-              {urlNft && (
-                <Link to={`/coleccion`}>
-                  {" "}
-                  <button className="__boton-mediano">My Collections</button>
-                </Link>
-              )}
-              {urlNft && (
-                <button
-                  className="__boton-mediano"
-                  onClick={() => {
-                    setUrlNft("")
-                    botonGenerate(false)
+            <>
+              <div
+                style={{
+                  fontSize: "1.5rem",
+                  padding: ".7em",
+                  boxShadow: "#ffffff1f 0px 2px 3px 0px",
+                  borderBottomLeftRadius: 0,
+                  borderBottomRightRadius: 0
+                }}
+              >
+               <FormattedMessage
+                  id="form.pay.paymentrequired"
+                  defaultMessage="Usted va a generar la Coleccion: "
+                />
+                <div>{captureValue}</div>
+              </div>
+
+              <div style={{ padding: "1.5em" }}>
+                {/* <p className="fw-normal" style={{ fontSize: "1.2rem" }}>
+                  <FormattedMessage
+                    id="form.pay.freeexceeded"
+                    defaultMessage="Free limit exceeded if you want to continue you must pay"
+                  />
+                </p> */}
+
+                <div className="p-2">
+                  <PreviewCollection
+                    listPreview1={listPreview1}
+                    listPreview2={listPreview2}
+                    listPreview3={listPreview3}
+                    imgTop1={175}
+                    imgTop3={175}
+                  />
+                </div>
+
+                {/* <p className="fw-bold mt-4" style={{ fontSize: "1.7rem" }}>
+                  {price.toFixed(2)} BNB o{" "}
+                  {(price * BNBprice.current).toFixed(2)} USD
+                </p> */}
+
+                {/* <div
+                  className="mb-2"
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-around",
+                    alignItems: "center"
                   }}
                 >
-                  close
-                </button>
-              )}
-            </div>
+                  {metodosDePago.map((items, idx) => (
+                    <PayOptions key={idx} items={items} />
+                  ))}
+                </div> */}
+
+                {alertShow && (
+                  <ModalAlerts message={message} setAlertShow={setAlertShow} />
+                )}
+
+                {/* {message.type === "success" && (
+                  <Link to={`/coleccion`}>
+                    {" "}
+                    <button className="__boton-mediano">
+                      <FormattedMessage
+                        id="form.success-metamsk-collections"
+                        defaultMessage="My Collections"
+                      />
+                    </button>
+                  </Link>
+                )} */}
+
+                {/* <button
+                  className="__boton-mediano enphasis-button"
+                  onClick={() => {
+                    setListPreview1([])
+                    setListPreview2([])
+                    setListPreview3([])
+                    setUrlNft("")
+                    botonGenerate(false)
+                    setIsPriceCalculated(false)
+                    setChecked(false)
+                  }}
+                >
+                  <FormattedMessage
+                    id="form.success-pay-close"
+                    defaultMessage="Close"
+                  />
+                </button> */}
+
+<h5 class="my-text mt-5">
+                <FormattedMessage
+                  id="form.reqcollections"
+                  defaultMessage="Your request is being processed go to collections"
+                />
+               </h5>
+
+                {/* <div class="form-check mt-3 w-auto ">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    checked={checked}
+                    value={checked}
+                    onChange={handleChecked}
+                  />
+                  <Link
+                    to={`/terms&conditions`}
+                    target="_blank"
+                    class="text-reset text-center links"
+                    style={{ fontSize: "15px" }}
+                  >
+                    <FormattedMessage
+                      id="form.pay.terms"
+                      defaultMessage="I agree to the terms of service and privacy policy"
+                    />
+                  </Link>
+                </div> */}
+
+   <div class="mt-4">
+                {urlNft && (
+               <Link to={`/coleccion`}>
+                   {" "}
+                   <button
+                      className="__boton-mediano enphasis-button"
+                       onClick={() => {
+                       setListPreview1([])
+                         setListPreview2([])
+                       setListPreview3([])
+                       }}
+                    >
+            <FormattedMessage
+                        id="menu.collections"
+                         defaultMessage=" My Collections"
+                       />
+                     </button>
+                   </Link>
+                 )}
+                 {urlNft && (
+                  <button
+                  className="__boton-mediano"
+                     onClick={() => {
+                       setUrlNft("")
+                     botonGenerate(false)
+                   }}
+                 >
+                     <FormattedMessage
+                     id="form.success-pay-close"
+                      defaultMessage="Close"
+                   />
+                   </button>
+                 )}
+               </div>
+              </div>
+            </>
+            // <div>
+            //   <div
+            //     style={{
+            //       fontSize: "1.5rem",
+            //       boxShadow: "#ffffff1f 0px 2px 3px 0px",
+            //       borderBottomLeftRadius: 0,
+            //       borderBottomRightRadius: 0,
+            //       display: "flex",
+            //       justifyContent: "center",
+            //       alignItems: "center",
+            //       position: "relative"
+            //     }}
+            //   >
+            //     <FormattedMessage
+            //       id="form.pay.paymentrequired"
+            //       defaultMessage="Usted va a generar la Coleccion: "
+            //     />
+            //     <div>{captureValue}</div>
+            //   </div>
+
+            //   <div>
+            //     <PreviewCollection
+            //       listPreview1={listPreview1}
+            //       listPreview2={listPreview2}
+            //       listPreview3={listPreview3}
+            //       imgTop1={50}
+            //       imgTop3={50}
+            //     />
+            //   </div>
+
+            //   <h5 class="my-text mt-5">
+            //     <FormattedMessage
+            //       id="form.reqcollections"
+            //       defaultMessage="Your request is being processed go to collections"
+            //     />
+            //   </h5>
+
+            //   <div class="mt-4">
+            //     {urlNft && (
+            //       <Link to={`/coleccion`}>
+            //         {" "}
+            //         <button
+            //           className="__boton-mediano enphasis-button"
+            //           onClick={() => {
+            //             setListPreview1([])
+            //             setListPreview2([])
+            //             setListPreview3([])
+            //           }}
+            //         >
+            //           <FormattedMessage
+            //             id="menu.collections"
+            //             defaultMessage=" My Collections"
+            //           />
+            //         </button>
+            //       </Link>
+            //     )}
+            //     {urlNft && (
+            //       <button
+            //         className="__boton-mediano"
+            //         onClick={() => {
+            //           setUrlNft("")
+            //           botonGenerate(false)
+            //         }}
+            //       >
+            //         <FormattedMessage
+            //           id="form.success-pay-close"
+            //           defaultMessage="Close"
+            //         />
+            //       </button>
+            //     )}
+            //   </div>
+            // </div>
           ) : (
             <>
               <div
@@ -744,7 +949,7 @@ const Form = ({
     console.log(isPremiun)
     console.log(chainId)
     if (chainId === "0x13881") {
-      console.log("karajo?")
+      console.log("karajo???")
       // console.log("si es la red");
       //console.log('entro en la condiciones de ser premiun')
       //console.log(findWallet)
