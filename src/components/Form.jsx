@@ -490,11 +490,11 @@ const Form = ({
                   borderBottomRightRadius: 0
                 }}
               >
-               <FormattedMessage
-                  id="form.pay.paymentrequired"
-                  defaultMessage="Usted va a generar la Coleccion: "
+                <FormattedMessage
+                  id="form.pay.paymentfree"
+                  defaultMessage="You will generate the colecction:"
                 />
-                <div>{captureValue}</div>
+                <h3 style={{ fontWeight: "bold" }}>{captureValue}</h3>
               </div>
 
               <div style={{ padding: "1.5em" }}>
@@ -567,12 +567,12 @@ const Form = ({
                   />
                 </button> */}
 
-<h5 class="my-text mt-5">
-                <FormattedMessage
-                  id="form.reqcollections"
-                  defaultMessage="Your request is being processed go to collections"
-                />
-               </h5>
+                <h5 class="my-text mt-5">
+                  <FormattedMessage
+                    id="form.reqcollections"
+                    defaultMessage="Your request is being processed go to collections"
+                  />
+                </h5>
 
                 {/* <div class="form-check mt-3 w-auto ">
                   <input
@@ -595,42 +595,43 @@ const Form = ({
                   </Link>
                 </div> */}
 
-   <div class="mt-4">
-                {urlNft && (
-               <Link to={`/coleccion`}>
-                   {" "}
-                   <button
-                      className="__boton-mediano enphasis-button"
-                       onClick={() => {
-                       setListPreview1([])
-                         setListPreview2([])
-                       setListPreview3([])
-                       }}
+                <div class="mt-4">
+                  {urlNft && (
+                    <Link to={`/coleccion`}>
+                      {" "}
+                      <button
+                        className="__boton-mediano enphasis-button"
+                        onClick={() => {
+                          setListPreview1([])
+                          setListPreview2([])
+                          setListPreview3([])
+                        }}
+                      >
+                        <FormattedMessage
+                          id="menu.collections"
+                          defaultMessage=" My Collections"
+                        />
+                      </button>
+                    </Link>
+                  )}
+                  {urlNft && (
+                    <button
+                      className="__boton-mediano"
+                      onClick={() => {
+                        setUrlNft("")
+                        botonGenerate(false)
+                      }}
                     >
-            <FormattedMessage
-                        id="menu.collections"
-                         defaultMessage=" My Collections"
-                       />
-                     </button>
-                   </Link>
-                 )}
-                 {urlNft && (
-                  <button
-                  className="__boton-mediano"
-                     onClick={() => {
-                       setUrlNft("")
-                     botonGenerate(false)
-                   }}
-                 >
-                     <FormattedMessage
-                     id="form.success-pay-close"
-                      defaultMessage="Close"
-                   />
-                   </button>
-                 )}
-               </div>
+                      <FormattedMessage
+                        id="form.success-pay-close"
+                        defaultMessage="Close"
+                      />
+                    </button>
+                  )}
+                </div>
               </div>
             </>
+          ) : (
             // <div>
             //   <div
             //     style={{
@@ -703,7 +704,6 @@ const Form = ({
             //     )}
             //   </div>
             // </div>
-          ) : (
             <>
               <div
                 style={{

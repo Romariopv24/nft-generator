@@ -51,6 +51,8 @@
   "form.btn-close": "Cerrar",
   "form.reqcollections": "Su solicitud está siendo procesada vaya a colleciones",
   "form.pay.paymentrequired": "Pago Requerido",
+  "form.pay.paymentfree": "Usted va a generar la Coleccion: ",
+
   "form.pay.freeexceeded": "Límite gratuito superado si quiere continuar debe pagar",
   "form.pay.terms": "Acepto las condiciones del servicio y la política de privacidad",
   "form.pay.error": "Error, la tasa o comisión es insuficiente",

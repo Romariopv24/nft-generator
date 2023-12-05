@@ -52,6 +52,8 @@
   "form.btn-close": "Close",
   "form.reqcollections": "Your request is being processed go to collections",
   "form.pay.paymentrequired": "Payment Required",
+  "form.pay.paymentfree": "You will generate the colecction: ",
+
   "form.pay.freeexceeded": "Free limit exceeded if you want to continue you must pay",
   "form.pay.terms": "I agree to the terms of service and privacy policy",
   "form.pay.error": "Error, the fee or commission is insufficient",
