@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd"
 import ReactDOM from "react-dom"
 import { FormattedMessage } from "react-intl"
@@ -11,6 +11,7 @@ import getDatosImg from "../utils/getDatosImg"
 import getSelectedCapaId from "../utils/getSelectedCapaId"
 import resetLocalStorage from "../utils/resetLocalStorage"
 import setSelectedCapaId from "../utils/setSelectedCapaId"
+import { useStore } from "../utils/zustand/store.js"
 import Capa from "./Capa"
 import CreateCapa from "./CreateCapa"
 import GenericModal from "./GenericModal"
@@ -31,6 +32,7 @@ function Capas({
   const [isOpenModalPreviewImg, setIsOpenModalPreviewImg] = useState(false)
   const [showModal, setShowModal] = useState(false)
   const [showModal2, setShowModal2] = useState(false)
+
 
   const reorder = (list, startIndex, endIndex) => {
     const result = [...list]
@@ -95,6 +97,7 @@ function Capas({
     setShowModal(false)
     recarcularCombinaciones()
   }
+
 
   function recarcularCombinaciones() {
     const newCapas = getDatosImg().newCapasImageDiferent

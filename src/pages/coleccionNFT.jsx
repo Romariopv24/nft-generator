@@ -12,6 +12,7 @@ import relativeTime from "dayjs/plugin/relativeTime"
 
 import { FormattedMessage, useIntl } from "react-intl"
 import { Link } from "react-router-dom"
+import resetLocalStorage from "../utils/resetLocalStorage"
 
 dayjs.locale("en") // use Spanish locale globally
 dayjs.extend(relativeTime)
@@ -140,7 +141,6 @@ const ColeccionNFT = () => {
       })
     }
 
-    console.log("kuek")
     return dayjs(date)
       .add(15, "day")
       .fromNow()
@@ -238,6 +238,9 @@ const ColeccionNFT = () => {
     return post
   }
 
+  useEffect(() => {
+    resetLocalStorage()
+  }, [])
   return (
     <>
       {/* tabla pc */}
