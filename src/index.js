@@ -5,6 +5,7 @@ import { BrowserRouter } from "react-router-dom"
 import App from "./App"
 import { LangProvider } from "./context/langContext"
 
+// para que no se vean los logs en production karajo...
 if (process.env.NODE_ENV === "production") {
   console.log = () => {}
 }
