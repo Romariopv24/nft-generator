@@ -13,6 +13,7 @@ import "../styles/scss/_menu.scss"
 import { crearRarityWeights } from "../utils/crearRarityWeights"
 import getCapas from "../utils/getCapas"
 import getDatosImg from "../utils/getDatosImg"
+import { useStoreSignal } from "../utils/zustand/store.js"
 import GenericModal from "./GenericModal"
 import PreviewCollection from "./PreviewCollection"
 
@@ -191,6 +192,8 @@ const Form = ({
   }
 
   const FreeModal = () => {
+    const setSignal = useStoreSignal((state) => state.setSignal)
+
     return (
       <>
         {urlNft === "" ? (
@@ -228,6 +231,7 @@ const Form = ({
                         setListPreview1([])
                         setListPreview2([])
                         setListPreview3([])
+                        setSignal(true)
                       }}
                     >
                       <FormattedMessage
@@ -476,6 +480,8 @@ const Form = ({
       )
     }
 
+    const setSignal = useStoreSignal((state) => state.setSignal)
+
     return (
       <>
         <div className="fs-6 fw-bold">
@@ -605,6 +611,7 @@ const Form = ({
                           setListPreview1([])
                           setListPreview2([])
                           setListPreview3([])
+                          setSignal(true)
                         }}
                       >
                         <FormattedMessage
@@ -763,7 +770,10 @@ const Form = ({
                 {message.type === "success" && (
                   <Link to={`/coleccion`}>
                     {" "}
-                    <button className="__boton-mediano">
+                    <button
+                      onClick={() => setSignal(true)}
+                      className="__boton-mediano"
+                    >
                       <FormattedMessage
                         id="form.success-metamsk-collections"
                         defaultMessage="My Collections"

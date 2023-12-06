@@ -12,7 +12,9 @@ import relativeTime from "dayjs/plugin/relativeTime"
 
 import { FormattedMessage, useIntl } from "react-intl"
 import { Link } from "react-router-dom"
+
 import resetLocalStorage from "../utils/resetLocalStorage"
+import { useStoreSignal } from "../utils/zustand/store"
 
 dayjs.locale("en") // use Spanish locale globally
 dayjs.extend(relativeTime)
@@ -238,8 +240,15 @@ const ColeccionNFT = () => {
     return post
   }
 
+  const signal = useStoreSignal((state) => state.signal)
+  const setSignal = useStoreSignal((state) => state.setSignal)
+  console.log(signal)
+
   useEffect(() => {
-    resetLocalStorage()
+    if (signal === true) {
+      resetLocalStorage()
+      setSignal(false)
+    }
   }, [])
   return (
     <>
