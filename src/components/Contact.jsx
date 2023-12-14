@@ -1,109 +1,125 @@
-import { useSnackbar } from "notistack";
-import React, { useRef, useState } from "react";
-import ReCAPTCHA from "react-google-recaptcha";
-import { FormattedMessage, useIntl } from "react-intl";
-import close from "../assets/svg/cerrar.svg";
-import "../styles/scss/_contact.scss";
+import { useSnackbar } from "notistack"
+import React, { useRef, useState } from "react"
+import ReCAPTCHA from "react-google-recaptcha"
+import { FormattedMessage, useIntl } from "react-intl"
+import close from "../assets/svg/cerrar.svg"
+import { URL } from "../constantes"
+import "../styles/scss/_contact.scss"
 
 export const Contact = ({ showContact, setShowContact }) => {
-  const { enqueueSnackbar } = useSnackbar();
-  const intl = useIntl();
+  const { enqueueSnackbar } = useSnackbar()
+  const intl = useIntl()
 
-  const captcha = useRef(null);
+  const captcha = useRef(null)
 
   function onChange(value) {
-    captcha.current = value;
-    console.log("Captcha value:", value);
+    captcha.current = value
+    console.log("Captcha value:", value)
   }
 
-  const [nombre, setNombre] = useState("");
-  const [correo, setCorreo] = useState("");
-  const [mensaje, setMensaje] = useState("");
+  const [nombre, setNombre] = useState("")
+  const [correo, setCorreo] = useState("")
+  const [mensaje, setMensaje] = useState("")
 
-  const [error, setError] = useState(false);
+  const [error, setError] = useState(false)
 
   const validateEmail = (email) => {
     const reg =
-      /^[a-zA-Z0-9.!#$%&'+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)$/;
-    return reg.test(email);
-  };
+      /^[a-zA-Z0-9.!#$%&'+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)$/
+    return reg.test(email)
+  }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     if (nombre === "" || correo === "" || mensaje === "") {
-      setError(true);
+      setError(true)
       enqueueSnackbar(
         intl.formatMessage({
           id: "contact.incompleteFields",
-          defaultMessage: "Please complete all the fields",
+          defaultMessage: "Please complete all the fields"
         }),
         {
           variant: "error",
           anchorOrigin: {
             vertical: "top",
-            horizontal: "right",
-          },
+            horizontal: "right"
+          }
         }
-      );
-      return;
+      )
+      return
     }
     if (!validateEmail(correo)) {
-      setError(true);
+      setError(true)
       enqueueSnackbar(
         intl.formatMessage({
           id: "contact.validationMail",
-          defaultMessage: "Please introduce a valid email",
+          defaultMessage: "Please introduce a valid email"
         }),
         {
           variant: "error",
           anchorOrigin: {
             vertical: "top",
-            horizontal: "right",
-          },
+            horizontal: "right"
+          }
         }
-      );
-      return;
+      )
+      return
     }
     if (captcha.current === null) {
-      setError(true);
+      setError(true)
       enqueueSnackbar(
         intl.formatMessage({
           id: "contact.captchaError",
-          defaultMessage: "Please complete Captcha",
+          defaultMessage: "Please complete Captcha"
         }),
         {
           variant: "error",
           anchorOrigin: {
             vertical: "top",
-            horizontal: "right",
-          },
+            horizontal: "right"
+          }
         }
-      );
-      return;
+      )
+      return
     }
 
-    setError(false);
+    setError(false)
 
     enqueueSnackbar(
       intl.formatMessage({
         id: "contact.alertSuccess",
-        defaultMessage: "Message sent",
+        defaultMessage: "Message sent"
       }),
       {
         variant: "success",
         action: () => setShowContact(false),
         anchorOrigin: {
           vertical: "top",
-          horizontal: "right",
-        },
+          horizontal: "right"
+        }
       }
-    );
-    return {
+    )
+
+    const datos = {
       nombre: nombre,
-      correo: correo,
+      destinatario: correo,
       mensaje: mensaje,
-      captcha: captcha.current,
-    };
-  };
+      trecaptcha: captcha.current
+    }
+    const url = `${URL}sendmail`
+    const headers = {
+      method: "POST",
+      body: JSON.stringify(datos),
+      headers: { "Content-type": "application/json;charset=UTF-8" }
+    }
+
+    console.log(datos)
+    await fetch(url, headers)
+      .then((res) => res.json())
+      .then((json) => console.log(json))
+      .catch((err) => console.log(err))
+
+    return datos
+  }
 
   return (
     <div className={showContact ? "cont-wrapper " : "d-none"}>
@@ -112,7 +128,7 @@ export const Contact = ({ showContact, setShowContact }) => {
         style={{
           border: "1px solid #00B8FF",
           padding: "10px",
-          maxWidth: "50% !important",
+          maxWidth: "50% !important"
         }}
       >
         <div>
@@ -122,7 +138,7 @@ export const Contact = ({ showContact, setShowContact }) => {
               padding: ".7em",
               boxShadow: "#ffffff1f 0px 2px 3px 0px",
               borderBottomLeftRadius: 0,
-              borderBottomRightRadius: 0,
+              borderBottomRightRadius: 0
             }}
           >
             <FormattedMessage id="contact.title" defaultMessage="Contact" />
@@ -132,7 +148,7 @@ export const Contact = ({ showContact, setShowContact }) => {
             src={close}
             className="btn-close-contact"
             onClick={() => {
-              setShowContact(false);
+              setShowContact(false)
             }}
           />
         </div>
@@ -181,7 +197,7 @@ export const Contact = ({ showContact, setShowContact }) => {
         <div className="d-flex justify-content-center align-items-center">
           <ReCAPTCHA
             onChange={onChange}
-            sitekey="6LdToOAoAAAAACCddxc0a_F380wEUzHvJFuM_lSY"
+            sitekey="6LfulzApAAAAANw5LdP3MWuK1PzSADmBkrk4osKE"
           />
         </div>
 
@@ -196,5 +212,5 @@ export const Contact = ({ showContact, setShowContact }) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
