@@ -77,7 +77,6 @@ function Capas({
   }
 
   function EliminarImgDeCapasEnDB() {
-    // console.log("si entra")
     let capaId = getSelectedCapaId()
     let IdImag = getCapas()
       .find((e) => e.id === capaId)
