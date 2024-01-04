@@ -430,7 +430,7 @@ function App() {
               {""}
               <FormattedMessage
                 id="footer.legalwarning"
-                defaultMessage="Legal warning"
+                defaultMessage="Licence Agreement"
               />
             </a>
             /
