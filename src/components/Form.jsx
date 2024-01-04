@@ -953,7 +953,6 @@ const Form = ({
     //esto es mio para ver si eres premiun
     const chainId = await window.ethereum.request({ method: "eth_chainId" })
     const accounts = await window.ethereum.request({ method: "eth_accounts" })
-    console.log(accounts[0])
     listWalletPremiun.find((wallet) => {
       if (wallet.toLowerCase() === accounts[0]) isPremiun = true
     })

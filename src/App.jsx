@@ -21,6 +21,7 @@ import ColeccionNFT from "./pages/coleccionNFT";
 import Generator from "./pages/generator";
 import Terms from "./pages/terms";
 import "./styles/scss/_pedir-correro.scss";
+import AdminView from "./components/admin/AdminView";
 
 function App() {
   const intl = useIntl();
@@ -319,6 +320,7 @@ function App() {
           <Route path="/pay/:params" element={<Pay />} />
           <Route path="/faqs" element={<FAQs />} />
           <Route path="/terms&conditions" element={<Terms />} />
+          <Route path="/admin" element={<AdminView />} />
         </Routes>
       </div>
       {isActiveModalRegister && (

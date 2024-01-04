@@ -63,6 +63,26 @@ const Menu = ({
   async function createConection() {
     setDb(await ConexionDB());
   }
+
+  const listWalletPremiun = [
+    "0xa54927b7af64DdB3e2c5Ac9cbec38c81EC88Be48",
+    "0x7b739a2c9e21e2Ad07eC8898EE89945a93627358",
+    "0x63828d59737Aa3744960d6827Ccf457931B84245",
+    "0xE6225d9f75CA398F060A2A9B7a3b345e681700dC",
+    "0x278afeeca694808991f70c3e851449434a13ecff",
+    "0xFAC15a040568a8186212AA2e9CC1A5b2886914E1",
+  ];
+
+  const walletUser = JSON.parse(localStorage.getItem("metamask"));
+
+  let isPremiun = false;
+
+  listWalletPremiun.find((wallet) => {
+    if (wallet.toLowerCase() === walletUser?.tokenUser.toLowerCase()) {
+      isPremiun = true;
+    }
+  });
+
   return (
     isAuth && (
       <div className="d-flex align-items-center my-2 ps-2 pe-1">
@@ -108,6 +128,23 @@ const Menu = ({
               </Link>
             </div>
           )}
+
+          {isPremiun ? (
+            <div>
+              <Link to={`/admin`} className=" d-none d-sm-block">
+                {" "}
+                <button
+                  className="__boton-mediano enphasis-button"
+                  id="colecciones"
+                >
+                  Admin
+                </button>
+              </Link>
+              <Link to={`/admin`} className="d-block d-sm-none mx-1">
+                <Colletion style={{ width: "35px" }} fill={"#fff"} />
+              </Link>
+            </div>
+          ) : null}
 
           {location.pathname === "/" && (
             <div>
