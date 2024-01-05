@@ -22,6 +22,7 @@ import Generator from "./pages/generator";
 import Terms from "./pages/terms";
 import "./styles/scss/_pedir-correro.scss";
 import AdminView from "./components/admin/AdminView";
+import Loader from "./components/custom/Loader";
 
 function App() {
   const intl = useIntl();
@@ -152,11 +153,21 @@ function App() {
       ),
     },
   ]);
+  const [loading, setLoading] = useState(true)
+
   let navigate = useNavigate();
 
   useEffect(() => {
     setDatosUserLS({ metamask, google, facebook });
     fetchData();
+    // 
+    // 
+    // 
+    const seconds = 3000
+    setTimeout(() => {
+      setLoading(false)
+    }, seconds);
+
   }, [isAuth]);
 
   useLayoutEffect(() => {
@@ -256,9 +267,14 @@ function App() {
     }
   };
 
-  console.log(show);
+
+
+
   return (
     <>
+    {loading === true ? 
+     ( <Loader /> ) :
+     (<>
       <div className="App">
         {loadingImages.isLoading && (
           <div
@@ -305,7 +321,7 @@ function App() {
           <Route
             path="/"
             element={
-              isAuth && (
+              isAuth &&  (
                 <Generator
                   setIsAuth={setIsAuth}
                   desLoguearse={desLoguearse}
@@ -459,6 +475,8 @@ function App() {
           {/* <a class="text-reset fw-bold" href="https://mdbootstrap.com/">MDBootstrap.com</a> */}
         </div>
       </footer>
+    </>)
+    }
     </>
   );
 }

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useLayoutEffect, useState } from "react";
 import { FormattedMessage } from "react-intl";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../assets/img/logo.png";
@@ -84,9 +84,11 @@ const Menu = ({
     }
   });
 
+  useLayoutEffect(() => {
+    localStorage.setItem("idioma", "en-US");
+  }, []);
   const idiomaFocus = localStorage.getItem("idioma");
 
-  console.log(idiomaFocus);
 
   return isAuth ? (
     <div className="d-flex align-items-center my-2 ps-2 pe-1">
@@ -188,7 +190,7 @@ const Menu = ({
         <div className="banderas">
           <button
             style={{
-              borderRadius:'20px',
+              borderRadius: "20px",
               backgroundColor:
                 idiomaFocus === "es-ES" ? "#C8CCE9" : "transparent",
             }}
