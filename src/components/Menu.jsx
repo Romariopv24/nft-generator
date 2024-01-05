@@ -23,6 +23,7 @@ const Menu = ({
   name,
   setName,
   setShowVideo,
+  setLoading,
 }) => {
   const [nameUser, setNameUser] = useState(null);
   const [db, setDb] = useState(null);
@@ -84,11 +85,8 @@ const Menu = ({
     }
   });
 
-  useLayoutEffect(() => {
-    localStorage.setItem("idioma", "en-US");
-  }, []);
   const idiomaFocus = localStorage.getItem("idioma");
-
+  console.log(idiomaFocus);
 
   return isAuth ? (
     <div className="d-flex align-items-center my-2 ps-2 pe-1">
@@ -204,9 +202,7 @@ const Menu = ({
             style={{
               borderRadius: "20px",
               backgroundColor:
-                idiomaFocus === null || idiomaFocus === "en-US"
-                  ? "#C8CCE9"
-                  : "transparent",
+                idiomaFocus === "en-US" ? "#C8CCE9" : "transparent",
             }}
             onClick={() => {
               idioma.cambiarIdioma("en-US");
@@ -230,6 +226,7 @@ const Menu = ({
             <SignOut
               onClick={() => {
                 desLoguearse();
+                setLoading(true);
               }}
               className=" d-block d-sm-none mx-1"
               style={{ width: "40px" }}
@@ -296,9 +293,6 @@ const Menu = ({
             </div>
             <button
               onClick={() => {
-                setName(null);
-                desLoguearse();
-                ReiniciarTodo();
                 navigate("/login");
               }}
               className="__boton-signOut enphasis-button d-none d-sm-block "

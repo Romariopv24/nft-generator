@@ -27,7 +27,6 @@ const Login = ({ setIsAuth, isAuth }) => {
         const myAddress = await signer.getAddress();
 
         if (firmaMensaje) {
-          console.log(myAddress);
           let obj = {
             tokenUser: myAddress,
           };
@@ -55,6 +54,7 @@ const Login = ({ setIsAuth, isAuth }) => {
   }, [isAuth]);
 
   const idiomaFocus = localStorage.getItem("idioma");
+  console.log(idiomaFocus);
 
   return (
     <>

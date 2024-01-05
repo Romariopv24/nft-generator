@@ -153,21 +153,20 @@ function App() {
       ),
     },
   ]);
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true);
 
   let navigate = useNavigate();
 
   useEffect(() => {
     setDatosUserLS({ metamask, google, facebook });
     fetchData();
-    // 
-    // 
-    // 
-    const seconds = 3000
+    //
+    //
+    //
+    const seconds = 3000;
     setTimeout(() => {
-      setLoading(false)
+      setLoading(false);
     }, seconds);
-
   }, [isAuth]);
 
   useLayoutEffect(() => {
@@ -267,216 +266,219 @@ function App() {
     }
   };
 
-
-
-
   return (
     <>
-    {loading === true ? 
-     ( <Loader /> ) :
-     (<>
-      <div className="App">
-        {loadingImages.isLoading && (
-          <div
-            className="position-fixed row align-items-center justify-content-center"
-            style={{
-              width: "100%",
-              height: "100vh",
-              background: "rgba(0,0,0,0.4)",
-              zIndex: "10000",
-            }}
-          >
-            <div className="w-50 bg-dark">
-              <h1 className="color-white text-center">
-                {loadingImages.cantidadActual} de {loadingImages.cantidadTotal}
-              </h1>
-              <div className="progress mb-5">
-                <div
-                  className="progress-bar progress-bar-striped progress-bar-animated"
-                  role="progressbar"
-                  style={{
-                    width: `${
-                      (100 / loadingImages.cantidadTotal) *
-                      loadingImages.cantidadActual
-                    }%`,
-                  }}
-                  aria-valuenow="75"
-                  aria-valuemin="0"
-                  aria-valuemax={23}
-                ></div>
+      {loading === true ? (
+        <Loader />
+      ) : (
+        <>
+          <div className="App">
+            {loadingImages.isLoading && (
+              <div
+                className="position-fixed row align-items-center justify-content-center"
+                style={{
+                  width: "100%",
+                  height: "100vh",
+                  background: "rgba(0,0,0,0.4)",
+                  zIndex: "10000",
+                }}
+              >
+                <div className="w-50 bg-dark">
+                  <h1 className="color-white text-center">
+                    {loadingImages.cantidadActual} de{" "}
+                    {loadingImages.cantidadTotal}
+                  </h1>
+                  <div className="progress mb-5">
+                    <div
+                      className="progress-bar progress-bar-striped progress-bar-animated"
+                      role="progressbar"
+                      style={{
+                        width: `${
+                          (100 / loadingImages.cantidadTotal) *
+                          loadingImages.cantidadActual
+                        }%`,
+                      }}
+                      aria-valuenow="75"
+                      aria-valuemin="0"
+                      aria-valuemax={23}
+                    ></div>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-        )}
-        <Menu
-          desLoguearse={desLoguearse}
-          isAuth={isAuth}
-          setIsActiveModalRegister={setIsActiveModalRegister}
-          name={name}
-          setName={setName}
-          setShowVideo={setShowVideo}
-        />
-
-        <Routes>
-          <Route
-            path="/"
-            element={
-              isAuth &&  (
-                <Generator
-                  setIsAuth={setIsAuth}
-                  desLoguearse={desLoguearse}
-                  setLoadingImages={setLoadingImages}
-                />
-              )
-            }
-          />
-          {/* <Route path="/tutorial" element={<Tutorial/>} /> */}
-          <Route path="/login" element={<Login setIsAuth={setIsAuth} />} />
-          <Route path="/coleccion" element={<ColeccionNFT />} />
-          <Route path="/pay/:params" element={<Pay />} />
-          <Route path="/faqs" element={<FAQs />} />
-          <Route path="/terms&conditions" element={<Terms />} />
-          <Route path="/admin" element={<AdminView />} />
-        </Routes>
-      </div>
-      {isActiveModalRegister && (
-        <RegisterUser
-          setIsActiveModalRegister={setIsActiveModalRegister}
-          datosUserLS={datosUserLS}
-          fetchData={fetchData}
-          setName={setName}
-        />
-      )}
-      {show ? (
-        <Joyride
-          run={show}
-          steps={steps}
-          callback={handleJoyride}
-          locale={{
-            back: (
-              <FormattedMessage
-                id="tutorial.modal.btn-back"
-                defaultMessage="Back"
-              />
-            ),
-            close: intl.formatMessage({
-              id: "tutorial.modal.btn-close",
-              defaultMessage: "Close",
-            }),
-            last: (
-              <FormattedMessage
-                id="tutorial.modal.btn-last"
-                defaultMessage="Finalize"
-              />
-            ),
-            next: (
-              <FormattedMessage
-                id="tutorial.modal.btn-next"
-                defaultMessage="Next"
-              />
-            ),
-            open: intl.formatMessage({
-              id: "tutorial.modal.btn-open",
-              defaultMessage: "Open",
-            }),
-            skip: (
-              <FormattedMessage
-                id="tutorial.modal.btn-skip"
-                defaultMessage="Skip"
-              />
-            ),
-          }}
-          continuous
-          showProgress
-          showSkipButton
-          styles={{
-            options: {
-              textColor: "#FFF",
-              primaryColor: "#00b8ff",
-              backgroundColor: "#00047a",
-              arrowColor: "#00047a",
-            },
-          }}
-        />
-      ) : null}
-
-      <GenericModal show={showVideo}>
-        <div className="p-4">
-          <iframe
-            width="1280"
-            height="720"
-            src="https://www.youtube.com/embed/LikCPHJDVrY?autoplay=1&rel=0&wmode=transparent"
-            frameborder="0"
-            allowfullscreen
-          />
-        </div>
-        <div className="my-3">
-          <button
-            className="__boton-mediano enphasis-button"
-            onClick={() => {
-              setShowVideo(false);
-            }}
-          >
-            <FormattedMessage
-              id="capas.close-modal-preview"
-              defaultMessage="Close"
+            )}
+            <Menu
+              desLoguearse={desLoguearse}
+              isAuth={isAuth}
+              setIsActiveModalRegister={setIsActiveModalRegister}
+              name={name}
+              setName={setName}
+              setShowVideo={setShowVideo}
+              setLoading={setLoading}
             />
-          </button>
-        </div>
-      </GenericModal>
 
-      <LegalWarning
-        showLegalWarning={showLegalWarning}
-        setShowLegalWarning={setShowLegalWarning}
-      />
-
-      <Contact showContact={showContact} setShowContact={setShowContact} />
-
-      <footer class="text-center text-lg-start  text-muted">
-        {/* Copyright */}
-        <div class="text-center p-2 d-flex justify-content-center align-items-center">
-          <p>
-            <span className="p-2">Copyright © 2023 - Fanaticoins LLC</span>/
-            <a
-              target="_blank"
-              style={{ color: "", cursor: "pointer" }}
-              className="text-reset fw-bold p-2 links"
-              onClick={() => setShowLegalWarning(true)}
-            >
-              {""}
-              <FormattedMessage
-                id="footer.legalwarning"
-                defaultMessage="Licence Agreement"
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  isAuth && (
+                    <Generator
+                      setIsAuth={setIsAuth}
+                      desLoguearse={desLoguearse}
+                      setLoadingImages={setLoadingImages}
+                    />
+                  )
+                }
               />
-            </a>
-            /
-            <span
-              className="p-2"
-              style={{ cursor: "pointer" }}
-              onClick={() => {
-                setShowContact(true);
+              {/* <Route path="/tutorial" element={<Tutorial/>} /> */}
+              <Route path="/login" element={<Login setIsAuth={setIsAuth} />} />
+              <Route path="/coleccion" element={<ColeccionNFT />} />
+              <Route path="/pay/:params" element={<Pay />} />
+              <Route path="/faqs" element={<FAQs />} />
+              <Route path="/terms&conditions" element={<Terms />} />
+              <Route path="/admin" element={<AdminView />} />
+            </Routes>
+          </div>
+          {isActiveModalRegister && (
+            <RegisterUser
+              setIsActiveModalRegister={setIsActiveModalRegister}
+              datosUserLS={datosUserLS}
+              fetchData={fetchData}
+              setName={setName}
+            />
+          )}
+          {show ? (
+            <Joyride
+              run={show}
+              steps={steps}
+              callback={handleJoyride}
+              locale={{
+                back: (
+                  <FormattedMessage
+                    id="tutorial.modal.btn-back"
+                    defaultMessage="Back"
+                  />
+                ),
+                close: intl.formatMessage({
+                  id: "tutorial.modal.btn-close",
+                  defaultMessage: "Close",
+                }),
+                last: (
+                  <FormattedMessage
+                    id="tutorial.modal.btn-last"
+                    defaultMessage="Finalize"
+                  />
+                ),
+                next: (
+                  <FormattedMessage
+                    id="tutorial.modal.btn-next"
+                    defaultMessage="Next"
+                  />
+                ),
+                open: intl.formatMessage({
+                  id: "tutorial.modal.btn-open",
+                  defaultMessage: "Open",
+                }),
+                skip: (
+                  <FormattedMessage
+                    id="tutorial.modal.btn-skip"
+                    defaultMessage="Skip"
+                  />
+                ),
               }}
-            >
-              <FormattedMessage id="footer.contact" defaultMessage="Contact" />
-            </span>
-            /
-            <Link
-              style={{ textDecoration: "none", color: "white" }}
-              to={"/terms&conditions"}
-            >
-              {" "}
-              <FormattedMessage
-                id="footer.terms&conditions"
-                defaultMessage={"Terms & Conditions"}
-              />
-            </Link>
-          </p>
+              continuous
+              showProgress
+              showSkipButton
+              styles={{
+                options: {
+                  textColor: "#FFF",
+                  primaryColor: "#00b8ff",
+                  backgroundColor: "#00047a",
+                  arrowColor: "#00047a",
+                },
+              }}
+            />
+          ) : null}
 
-          {/* <a class="text-reset fw-bold" href="https://mdbootstrap.com/">MDBootstrap.com</a> */}
-        </div>
-      </footer>
-    </>)
-    }
+          <GenericModal show={showVideo}>
+            <div className="p-4">
+              <iframe
+                width="1280"
+                height="720"
+                src="https://www.youtube.com/embed/LikCPHJDVrY?autoplay=1&rel=0&wmode=transparent"
+                frameborder="0"
+                allowfullscreen
+              />
+            </div>
+            <div className="my-3">
+              <button
+                className="__boton-mediano enphasis-button"
+                onClick={() => {
+                  setShowVideo(false);
+                }}
+              >
+                <FormattedMessage
+                  id="capas.close-modal-preview"
+                  defaultMessage="Close"
+                />
+              </button>
+            </div>
+          </GenericModal>
+
+          <LegalWarning
+            showLegalWarning={showLegalWarning}
+            setShowLegalWarning={setShowLegalWarning}
+          />
+
+          <Contact showContact={showContact} setShowContact={setShowContact} />
+
+          <footer class="text-center text-lg-start  text-muted">
+            {/* Copyright */}
+            <div class="text-center p-2 d-flex justify-content-center align-items-center">
+              <p>
+                <span className="p-2">Copyright © 2023 - Fanaticoins LLC</span>/
+                <a
+                  target="_blank"
+                  style={{ color: "", cursor: "pointer" }}
+                  className="text-reset fw-bold p-2 links"
+                  onClick={() => setShowLegalWarning(true)}
+                >
+                  {""}
+                  <FormattedMessage
+                    id="footer.legalwarning"
+                    defaultMessage="Licence Agreement"
+                  />
+                </a>
+                /
+                <span
+                  className="p-2"
+                  style={{ cursor: "pointer" }}
+                  onClick={() => {
+                    setShowContact(true);
+                  }}
+                >
+                  <FormattedMessage
+                    id="footer.contact"
+                    defaultMessage="Contact"
+                  />
+                </span>
+                /
+                <Link
+                  style={{ textDecoration: "none", color: "white" }}
+                  to={"/terms&conditions"}
+                >
+                  {" "}
+                  <FormattedMessage
+                    id="footer.terms&conditions"
+                    defaultMessage={"Terms & Conditions"}
+                  />
+                </Link>
+              </p>
+
+              {/* <a class="text-reset fw-bold" href="https://mdbootstrap.com/">MDBootstrap.com</a> */}
+            </div>
+          </footer>
+        </>
+      )}
     </>
   );
 }
