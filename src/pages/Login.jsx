@@ -54,6 +54,8 @@ const Login = ({ setIsAuth, isAuth }) => {
     }
   }, [isAuth]);
 
+  const idiomaFocus = localStorage.getItem("idioma");
+
   return (
     <>
       <div class="d-flex flex-row-reverse bd-highlight">
@@ -62,12 +64,24 @@ const Login = ({ setIsAuth, isAuth }) => {
             onClick={() => {
               idioma.cambiarIdioma("es-ES");
             }}
+            style={{
+              borderRadius: "20px",
+              backgroundColor:
+                idiomaFocus === "es-ES" ? "#C8CCE9" : "transparent",
+            }}
           >
             <img src={es} alt="" />
           </button>
           <button
             onClick={() => {
               idioma.cambiarIdioma("en-US");
+            }}
+            style={{
+              borderRadius: "20px",
+              backgroundColor:
+                idiomaFocus === null || idiomaFocus === "en-US"
+                  ? "#C8CCE9"
+                  : "transparent",
             }}
           >
             <img src={en} alt="" />

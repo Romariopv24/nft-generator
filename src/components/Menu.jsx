@@ -84,6 +84,10 @@ const Menu = ({
     }
   });
 
+  const idiomaFocus = localStorage.getItem("idioma");
+
+  console.log(idiomaFocus);
+
   return isAuth ? (
     <div className="d-flex align-items-center my-2 ps-2 pe-1">
       <div className="logo_menu">
@@ -183,6 +187,11 @@ const Menu = ({
 
         <div className="banderas">
           <button
+            style={{
+              borderRadius:'20px',
+              backgroundColor:
+                idiomaFocus === "es-ES" ? "#C8CCE9" : "transparent",
+            }}
             onClick={() => {
               idioma.cambiarIdioma("es-ES");
             }}
@@ -190,6 +199,13 @@ const Menu = ({
             <img src={es} alt="" />
           </button>
           <button
+            style={{
+              borderRadius: "20px",
+              backgroundColor:
+                idiomaFocus === null || idiomaFocus === "en-US"
+                  ? "#C8CCE9"
+                  : "transparent",
+            }}
             onClick={() => {
               idioma.cambiarIdioma("en-US");
             }}
@@ -241,40 +257,52 @@ const Menu = ({
             <img src={logo} alt="Logo" />
           </div>
           <div
-        style={{
-          width: "100%",
-          display: "flex",
-          justifyContent: !nameUser ? "flex-end" : "center",
-          alignItems: "center",
-        }}
-      >
-          <div className="banderas">
-            <button
-              onClick={() => {
-                idioma.cambiarIdioma("es-ES");
-              }}
-            >
-              <img src={es} alt="" />
-            </button>
-            <button
-              onClick={() => {
-                idioma.cambiarIdioma("en-US");
-              }}
-            >
-              <img src={en} alt="" />
-            </button>
-          </div>
-          <button
-            onClick={() => {
-              setName(null);
-              desLoguearse();
-              ReiniciarTodo();
-              navigate("/login");
+            style={{
+              width: "100%",
+              display: "flex",
+              justifyContent: !nameUser ? "flex-end" : "center",
+              alignItems: "center",
             }}
-            className="__boton-signOut enphasis-button d-none d-sm-block "
           >
-            Login
-          </button>
+            <div className="banderas">
+              <button
+                onClick={() => {
+                  idioma.cambiarIdioma("es-ES");
+                }}
+                style={{
+                  borderRadius: "20px",
+                  backgroundColor:
+                    idiomaFocus === "es-ES" ? "#C8CCE9" : "transparent",
+                }}
+              >
+                <img src={es} alt="" />
+              </button>
+              <button
+                onClick={() => {
+                  idioma.cambiarIdioma("en-US");
+                }}
+                style={{
+                  borderRadius: "20px",
+                  backgroundColor:
+                    idiomaFocus === null || idiomaFocus === "en-US"
+                      ? "#C8CCE9"
+                      : "transparent",
+                }}
+              >
+                <img src={en} alt="" />
+              </button>
+            </div>
+            <button
+              onClick={() => {
+                setName(null);
+                desLoguearse();
+                ReiniciarTodo();
+                navigate("/login");
+              }}
+              className="__boton-signOut enphasis-button d-none d-sm-block "
+            >
+              Login
+            </button>
           </div>
         </div>
       ) : null}
