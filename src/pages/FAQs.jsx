@@ -191,7 +191,7 @@ const FAQs = () => {
             title="Faqs"
             width="100%"
             height="100%"
-            src="https://www.youtube.com/embed/LikCPHJDVrY?autoplay=1&rel=0&wmode=transparent"
+            src="https://www.youtube.com/embed/AEB6ibtdPZc?si=qNc6LaVVKU7ogPpg"
             frameborder="0"
             allowfullscreen
           />
