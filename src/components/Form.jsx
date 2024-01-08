@@ -1007,6 +1007,45 @@ const Form = ({
 
   const [captureValue, setCaptureValue] = useState("")
 
+  //Number of combinations with the name y the form field
+  const combsWithName =
+    maxConvinacion &&
+    maxConvinacion.current?.innerText <= 99 &&
+    maxConvinacion.current?.innerText >= 10
+      ? `${captureValue.replace(" ", "-")}-001, ${captureValue.replace(
+          " ",
+          "-"
+        )}-002 ... ${captureValue.replace(" ", "-")}-0${
+          maxConvinacion.current?.innerText
+        }`
+      : maxConvinacion.current?.innerText >= 99
+      ? `${captureValue.replace(" ", "-")}-001, ${captureValue.replace(
+          " ",
+          "-"
+        )}-002 ... ${captureValue}-${maxConvinacion.current?.innerText}`
+      : maxConvinacion.current?.innerText >= 4
+      ? `${captureValue.replace(" ", "-")}-001, ${captureValue.replace(
+          " ",
+          "-"
+        )}-002 ... ${captureValue.replace(" ", "-")}-00${
+          maxConvinacion.current?.innerText
+        }`
+      : maxConvinacion.current?.innerText >= 3
+      ? `${captureValue.replace(" ", "-")}-001, ${captureValue.replace(
+          " ",
+          "-"
+        )}-002 , ${captureValue.replace(" ", "-")}-00${
+          maxConvinacion.current?.innerText
+        }`
+      : maxConvinacion.current?.innerText >= 2
+      ? `${captureValue.replace(" ", "-")}-001, ${captureValue.replace(
+          " ",
+          "-"
+        )}-002`
+      : maxConvinacion.current?.innerText >= 1
+      ? `${captureValue.replace(" ", "-")}-001`
+      : "000"
+
   return (
     <>
       <div id="datos">
@@ -1077,58 +1116,7 @@ const Form = ({
               type="text"
               // name="pName"
               readOnly
-              value={
-                maxConvinacion &&
-                maxConvinacion.current?.innerText <= 99 &&
-                maxConvinacion.current?.innerText >= 10
-                  ? `${captureValue.replace(
-                      " ",
-                      "-"
-                    )}-001, ${captureValue.replace(
-                      " ",
-                      "-"
-                    )}-002 ... ${captureValue.replace(" ", "-")}-0${
-                      maxConvinacion.current?.innerText
-                    }`
-                  : maxConvinacion.current?.innerText >= 99
-                  ? `${captureValue.replace(
-                      " ",
-                      "-"
-                    )}-001, ${captureValue.replace(
-                      " ",
-                      "-"
-                    )}-002 ... ${captureValue}-${
-                      maxConvinacion.current?.innerText
-                    }`
-                  : maxConvinacion.current?.innerText >= 4
-                  ? `${captureValue.replace(
-                      " ",
-                      "-"
-                    )}-001, ${captureValue.replace(
-                      " ",
-                      "-"
-                    )}-002 ... ${captureValue.replace(" ", "-")}-00${
-                      maxConvinacion.current?.innerText
-                    }`
-                  : maxConvinacion.current?.innerText >= 3
-                  ? `${captureValue.replace(
-                      " ",
-                      "-"
-                    )}-001, ${captureValue.replace(
-                      " ",
-                      "-"
-                    )}-002 , ${captureValue.replace(" ", "-")}-00${
-                      maxConvinacion.current?.innerText
-                    }`
-                  : maxConvinacion.current?.innerText >= 2
-                  ? `${captureValue.replace(
-                      " ",
-                      "-"
-                    )}-001, ${captureValue.replace(" ", "-")}-002`
-                  : maxConvinacion.current?.innerText >= 1
-                  ? `${captureValue.replace(" ", "-")}-001`
-                  : "000"
-              }
+              value={combsWithName}
               className="form-control-sm w-100 cursor-denagado --border-blue"
               disabled
               maxLength={100}

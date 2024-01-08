@@ -328,7 +328,7 @@ const Generator = ({ setLoadingImages }) => {
     }
     const cantidadAPedir = Number(inputProjectCollectionSize.current.value)
     const cantidadMax = Number(maxConvinacion.current.innerText)
-    // console.log({ cantidadAPedir, cantidadMax })
+    console.log({ cantidadAPedir, cantidadMax })
     if (cantidadAPedir > cantidadMax) {
       return `${intl.formatMessage({
         id: "generator.max-combinations",
