@@ -1,60 +1,60 @@
-import { ethers } from "ethers";
-import React, { useContext, useEffect, useState } from "react";
-import { FormattedMessage } from "react-intl";
-import { useNavigate } from "react-router-dom";
-import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
-import logo from "../assets/img/logo.png";
-import es from "../assets/img/spain.png";
-import en from "../assets/img/united-kingdom.png";
-import { ReactComponent as Metamask } from "../assets/svg/metamask.svg";
-import { langContext } from "../context/langContext";
-import "../styles/scss/_login.scss";
+import { ethers } from "ethers"
+import React, { useContext, useEffect, useState } from "react"
+import { FormattedMessage } from "react-intl"
+import { useNavigate } from "react-router-dom"
+import "../../node_modules/bootstrap/dist/css/bootstrap.min.css"
+import logo from "../assets/img/logo.png"
+import es from "../assets/img/spain.png"
+import en from "../assets/img/united-kingdom.png"
+import { ReactComponent as Metamask } from "../assets/svg/metamask.svg"
+import { langContext } from "../context/langContext"
+import "../styles/scss/_login.scss"
 
 const Login = ({ setIsAuth, isAuth }) => {
-  const [nombreBotonMT, setNombreBotonMT] = useState("Login with Metamasks");
-  const idioma = useContext(langContext);
+  const [nombreBotonMT, setNombreBotonMT] = useState("Login with Metamasks")
+  const idioma = useContext(langContext)
 
-  let navigate = useNavigate();
+  let navigate = useNavigate()
 
   async function connectWalletHandler() {
     try {
       if (typeof window.ethereum !== "undefined") {
-        setNombreBotonMT("Login with MetaMask");
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
-        await provider.send("eth_requestAccounts", []);
-        const signer = provider.getSigner();
-        const firmaMensaje = await signer.signMessage("To Start Firm Section");
-        const myAddress = await signer.getAddress();
+        setNombreBotonMT("Login with MetaMask")
+        const provider = new ethers.providers.Web3Provider(window.ethereum)
+        await provider.send("eth_requestAccounts", [])
+        const signer = provider.getSigner()
+        const firmaMensaje = await signer.signMessage("To Start Firm Section")
+        const myAddress = await signer.getAddress()
 
         if (firmaMensaje) {
           let obj = {
-            tokenUser: myAddress,
-          };
-          localStorage.setItem("metamask", JSON.stringify(obj));
+            tokenUser: myAddress
+          }
+          localStorage.setItem("metamask", JSON.stringify(obj))
         }
 
-        setIsAuth(true);
-        navigate("/");
+        setIsAuth(true)
+        navigate("/")
       } else {
-        setNombreBotonMT("MetaMask is not installed!");
+        setNombreBotonMT("MetaMask is not installed!")
       }
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
   }
 
   useEffect(() => {
-    const metamask = JSON.parse(localStorage.getItem("metamask"));
+    const metamask = JSON.parse(localStorage.getItem("metamask"))
     if (metamask?.tokenUser) {
-      setIsAuth(true);
-      navigate("/");
+      setIsAuth(true)
+      navigate("/")
     } else {
-      setIsAuth(false);
+      setIsAuth(false)
     }
-  }, [isAuth]);
+  }, [isAuth])
 
-  const idiomaFocus = localStorage.getItem("idioma");
-  console.log(idiomaFocus);
+  const idiomaFocus = localStorage.getItem("idioma")
+  console.log(idiomaFocus)
 
   return (
     <>
@@ -62,26 +62,26 @@ const Login = ({ setIsAuth, isAuth }) => {
         <div className="banderas">
           <button
             onClick={() => {
-              idioma.cambiarIdioma("es-ES");
+              idioma.cambiarIdioma("es-ES")
             }}
             style={{
               borderRadius: "20px",
               backgroundColor:
-                idiomaFocus === "es-ES" ? "#C8CCE9" : "transparent",
+                idiomaFocus === "es-ES" ? "#C8CCE9" : "transparent"
             }}
           >
             <img src={es} alt="" />
           </button>
           <button
             onClick={() => {
-              idioma.cambiarIdioma("en-US");
+              idioma.cambiarIdioma("en-US")
             }}
             style={{
               borderRadius: "20px",
               backgroundColor:
                 idiomaFocus === null || idiomaFocus === "en-US"
                   ? "#C8CCE9"
-                  : "transparent",
+                  : "transparent"
             }}
           >
             <img src={en} alt="" />
@@ -130,7 +130,7 @@ const Login = ({ setIsAuth, isAuth }) => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default Login;
+export default Login
