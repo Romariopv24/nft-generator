@@ -1,23 +1,23 @@
-import React, { useEffect, useRef, useState } from "react";
-import { ReactComponent as Descargar } from "../assets/svg/descargar.svg";
-import { ReactComponent as Export } from "../assets/svg/export.svg";
-import { ReactComponent as Delete } from "../assets/svg/trash.svg";
-import GenericModal from "../components/GenericModal";
-import { URL, myHeaders } from "../constantes";
-import "../styles/scss/_table-styles.scss";
+import React, { useEffect, useRef, useState } from "react"
+import { ReactComponent as Descargar } from "../assets/svg/descargar.svg"
+import { ReactComponent as Export } from "../assets/svg/export.svg"
+import { ReactComponent as Delete } from "../assets/svg/trash.svg"
+import GenericModal from "../components/GenericModal"
+import { URL, myHeaders } from "../constantes"
+import "../styles/scss/_table-styles.scss"
 
-import dayjs from "dayjs";
-import "dayjs/locale/es"; // load on demand
-import relativeTime from "dayjs/plugin/relativeTime";
+import dayjs from "dayjs"
+import "dayjs/locale/es" // load on demand
+import relativeTime from "dayjs/plugin/relativeTime"
 
-import { FormattedMessage, useIntl } from "react-intl";
-import { Link } from "react-router-dom";
+import { FormattedMessage, useIntl } from "react-intl"
+import { Link } from "react-router-dom"
 
-import resetLocalStorage from "../utils/resetLocalStorage";
-import { useStoreSignal } from "../utils/zustand/store";
+import resetLocalStorage from "../utils/resetLocalStorage"
+import { useStoreSignal } from "../utils/zustand/store"
 
-dayjs.locale("en"); // use Spanish locale globally
-dayjs.extend(relativeTime);
+dayjs.locale("en") // use Spanish locale globally
+dayjs.extend(relativeTime)
 
 const listWalletPremiun = [
   "0xa54927b7af64DdB3e2c5Ac9cbec38c81EC88Be48",
@@ -27,21 +27,21 @@ const listWalletPremiun = [
   "0xE6225d9f75CA398F060A2A9B7a3b345e681700dC",
   "0x278aFeECa694808991f70c3E851449434A13eCff",
   "0xFAC15a040568a8186212AA2e9CC1A5b2886914E1",
-  "0xCc2b1442a561B0ab9D04599ae11b0fEc5E946112",
-];
+  "0xCc2b1442a561B0ab9D04599ae11b0fEc5E946112"
+]
 
 const ColeccionNFT = () => {
-  const [collectall, setCollectall] = useState([]);
-  const [showModalEliminar, setShowModalEliminar] = useState(false);
-  const [showModalCodigo, setShowModalCodigo] = useState(false);
-  const [showModalMessage, setShowModalMessage] = useState(false);
-  const [selectedItem, setSelectedItem] = useState();
-  const [selectedItemUrl, setSelectedItemUrl] = useState();
-  const [isPromiseReady, setIsPromiseReady] = useState(false);
-  const [code, setCode] = useState("");
-  const [isWalletPremiun, setIsWalletPremiun] = useState(false);
+  const [collectall, setCollectall] = useState([])
+  const [showModalEliminar, setShowModalEliminar] = useState(false)
+  const [showModalCodigo, setShowModalCodigo] = useState(false)
+  const [showModalMessage, setShowModalMessage] = useState(false)
+  const [selectedItem, setSelectedItem] = useState()
+  const [selectedItemUrl, setSelectedItemUrl] = useState()
+  const [isPromiseReady, setIsPromiseReady] = useState(false)
+  const [code, setCode] = useState("")
+  const [isWalletPremiun, setIsWalletPremiun] = useState(false)
 
-  const intl = useIntl();
+  const intl = useIntl()
 
   const codeMessage = [
     // 'En unos minutos veras tu colección en artis.market',
@@ -50,89 +50,88 @@ const ColeccionNFT = () => {
     intl.formatMessage({
       id: "colleccionNFT.modal-export-msg-success",
       defaultMessage:
-        "In a few minutes you will see your collection on artis.market",
+        "In a few minutes you will see your collection on artis.market"
     }),
     intl.formatMessage({
       id: "colleccionNFT.modal-export-msg-error",
-      defaultMessage: "You have run an unexpected error",
+      defaultMessage: "You have run an unexpected error"
     }),
     intl.formatMessage({
       id: "colleccionNFT.modal-export-msg-wait",
-      defaultMessage: "Processing please wait a moment",
-    }),
-  ];
+      defaultMessage: "Processing please wait a moment"
+    })
+  ]
 
   //logica para el fetch
-  const getColletionsRef = useRef(getColletions);
-  const [isIntervalActive, setIsIntervalActive] = useState(false);
-  const [isRequestSent, setIsRequestSent] = useState(false);
+  const getColletionsRef = useRef(getColletions)
+  const [isIntervalActive, setIsIntervalActive] = useState(false)
+  const [isRequestSent, setIsRequestSent] = useState(false)
 
   useEffect(() => {
     async function what() {
-      localStorage.setItem("noLoop", false);
-      const noLoop = localStorage.getItem("noLoop");
+      localStorage.setItem("noLoop", false)
+      const noLoop = localStorage.getItem("noLoop")
 
       if (collectall.length === 0 && !isPromiseReady) {
-        getColletionsRef.current();
+        getColletionsRef.current()
         const accounts = await window.ethereum.request({
-          method: "eth_accounts",
-        });
+          method: "eth_accounts"
+        })
         let findWallet = listWalletPremiun.find(
           (wallet) => wallet.toLowerCase() === accounts[0].toLowerCase()
-        );
+        )
         if (findWallet) {
-          setIsWalletPremiun(true);
+          setIsWalletPremiun(true)
         }
       }
 
       if (!isIntervalActive) {
-        setIsIntervalActive(true);
+        setIsIntervalActive(true)
         const interval = setInterval(() => {
           if (!isRequestSent) {
-            setIsRequestSent(true);
-            getColletionsRef.current();
-            setTimeout(() => setIsRequestSent(false), 5000);
+            setIsRequestSent(true)
+            getColletionsRef.current()
+            setTimeout(() => setIsRequestSent(false), 5000)
           }
-        }, 30000);
-        return () => clearInterval(interval);
+        }, 30000)
+        return () => clearInterval(interval)
       }
     }
 
-    what();
-  }, [isIntervalActive, isPromiseReady, isRequestSent, collectall.length]);
+    what()
+  }, [isIntervalActive, isPromiseReady, isRequestSent, collectall.length])
 
   async function getColletions() {
-    localStorage.setItem("noLoop", true);
-    let url = `${URL}collectall`;
-    const facebook = JSON.parse(localStorage.getItem("facebook"));
-    const google = JSON.parse(localStorage.getItem("google"));
-    const metamask = JSON.parse(localStorage.getItem("metamask"));
-    let correo =
-      facebook?.tokenUser || google?.tokenUser || metamask?.tokenUser;
+    localStorage.setItem("noLoop", true)
+    let url = `${URL}collectall`
+    const facebook = JSON.parse(localStorage.getItem("facebook"))
+    const google = JSON.parse(localStorage.getItem("google"))
+    const metamask = JSON.parse(localStorage.getItem("metamask"))
+    let correo = facebook?.tokenUser || google?.tokenUser || metamask?.tokenUser
 
     let usuario = {
-      id: correo,
-    };
+      id: correo
+    }
 
-    var myHeaders = new Headers();
-    myHeaders.append("Authorization", "Basic dXN1YXJpbzpwd2Q=");
-    myHeaders.append("Content-Type", "application/json");
+    var myHeaders = new Headers()
+    myHeaders.append("Authorization", "Basic dXN1YXJpbzpwd2Q=")
+    myHeaders.append("Content-Type", "application/json")
 
     let myInit = {
       method: "POST",
       body: JSON.stringify(usuario),
-      headers: myHeaders,
-    };
+      headers: myHeaders
+    }
     try {
-      let resPost = await fetch(url, myInit);
-      let post = await resPost.json();
-      console.log(post);
-      setCollectall(post);
-      setIsPromiseReady(true);
-      console.log(post);
-      console.log("se hizo una solicitud");
+      let resPost = await fetch(url, myInit)
+      let post = await resPost.json()
+      console.log(post)
+      setCollectall(post)
+      setIsPromiseReady(true)
+      console.log(post)
+      console.log("se hizo una solicitud")
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
   }
   //aca termina el fetch
@@ -141,8 +140,8 @@ const ColeccionNFT = () => {
     if (isWalletPremiun === true) {
       return intl.formatMessage({
         id: "colleccionNFT.table-column51",
-        defaultMessage: "No Deadline",
-      });
+        defaultMessage: "No Deadline"
+      })
     }
 
     return dayjs(date)
@@ -155,103 +154,103 @@ const ColeccionNFT = () => {
       .replace(
         "days",
         intl.formatMessage({ id: "colleccionNFT.days", defaultMessage: "days" })
-      );
+      )
   }
 
   const handleOpenModalEliminar = (item) => {
-    setShowModalEliminar(true);
-    setSelectedItem(item);
-  };
+    setShowModalEliminar(true)
+    setSelectedItem(item)
+  }
 
   const handleDelete = async () => {
     if (selectedItem) {
       const res = await fetch(`${URL}/delete/${selectedItem}`, {
         method: "GET",
-        headers: myHeaders,
-      });
-      const jsonres = await res.json();
+        headers: myHeaders
+      })
+      const jsonres = await res.json()
       if (jsonres) {
-        const tempArray = JSON.parse(JSON.stringify(collectall));
+        const tempArray = JSON.parse(JSON.stringify(collectall))
         const eliminatedItem = tempArray.findIndex(
           (item) => item._id["$oid"] === selectedItem
-        );
-        tempArray.splice(eliminatedItem, 1);
-        setShowModalEliminar(false);
-        setSelectedItem("");
-        setCollectall(tempArray);
+        )
+        tempArray.splice(eliminatedItem, 1)
+        setShowModalEliminar(false)
+        setSelectedItem("")
+        setCollectall(tempArray)
       }
     }
-  };
+  }
 
   const handleOpenModalCodigo = (item) => {
-    setShowModalCodigo(true);
-    setSelectedItemUrl(item);
-  };
+    setShowModalCodigo(true)
+    setSelectedItemUrl(item)
+  }
 
   const handleEnviarCode = async () => {
     if (selectedItemUrl) {
       try {
-        setShowModalMessage({ state: true, message: codeMessage[2] });
-        let res = await setCodigoApi(code, selectedItemUrl);
-        setCode("");
-        setShowModalMessage({ state: true, message: codeMessage[0] });
-        setTimeout(() => setShowModalMessage(false), 3000);
+        setShowModalMessage({ state: true, message: codeMessage[2] })
+        let res = await setCodigoApi(code, selectedItemUrl)
+        setCode("")
+        setShowModalMessage({ state: true, message: codeMessage[0] })
+        setTimeout(() => setShowModalMessage(false), 3000)
       } catch (error) {
-        console.log(error.message);
-        setShowModalMessage({ state: true, message: codeMessage[1] });
-        setTimeout(() => setShowModalMessage(false), 4000);
+        console.log(error.message)
+        setShowModalMessage({ state: true, message: codeMessage[1] })
+        setTimeout(() => setShowModalMessage(false), 4000)
       }
     }
-  };
+  }
 
   const getDatosForm = (event) => {
-    let { name, value } = event.target;
-    setCode({ ...code, [name]: value });
-  };
+    let { name, value } = event.target
+    setCode({ ...code, [name]: value })
+  }
 
   async function setCodigoApi(code, selectedItem) {
-    const URL = "https://api.artis.market/item/additems";
+    const URL = "https://api.artis.market/item/additems"
     // const URL = 'https://api.artis.market/item/additem'
 
     let objetoConfig = {
       link: selectedItem,
       category_id: code.categoria,
-      collection_id: code.coleccion,
-    };
+      collection_id: code.coleccion
+    }
     // console.log(objetoConfig)
-    var myHeaders = new Headers();
-    myHeaders.append("Authorization", "Basic dXN1YXJpbzpwd2Q=");
-    myHeaders.append("Content-Type", "application/json");
+    var myHeaders = new Headers()
+    myHeaders.append("Authorization", "Basic dXN1YXJpbzpwd2Q=")
+    myHeaders.append("Content-Type", "application/json")
 
-    let url = `${URL}`;
+    let url = `${URL}`
     let myInit = {
       method: "POST",
       body: JSON.stringify(objetoConfig),
-      headers: myHeaders,
-    };
+      headers: myHeaders
+    }
 
-    let resPost = await fetch(url, myInit);
+    let resPost = await fetch(url, myInit)
     // console.log(resPost)
     if (!resPost.ok) {
-      console.log("Error: " + resPost.status);
-      throw { message: "An error has occurred" };
+      console.log("Error: " + resPost.status)
+      throw { message: "An error has occurred" }
     }
-    let post = await resPost.json();
+    let post = await resPost.json()
     // console.log(post)
-    console.log({ status: `Sending Codes`, ...post });
-    return post;
+    console.log({ status: `Sending Codes`, ...post })
+    return post
   }
 
-  const signal = useStoreSignal((state) => state.signal);
-  const setSignal = useStoreSignal((state) => state.setSignal);
-  console.log(signal);
+  const signal = useStoreSignal((state) => state.signal)
+  const setSignal = useStoreSignal((state) => state.setSignal)
+  console.log(signal)
 
   useEffect(() => {
     if (signal === true) {
-      resetLocalStorage();
-      setSignal(false);
+      resetLocalStorage()
+      setSignal(false)
     }
-  }, []);
+  }, [])
   return (
     <>
       {/* tabla pc */}
@@ -277,12 +276,12 @@ const ColeccionNFT = () => {
                   defaultMessage="Download"
                 />
               </th>
-              <th scope="col --max-width" style={{ color: "#00b8ff" }}>
+              {/* <th scope="col --max-width" style={{ color: "#00b8ff" }}>
                 <FormattedMessage
                   id="colleccionNFT.table-column4"
                   defaultMessage="Export to NFanst"
                 />
-              </th>
+              </th> */}
               <th scope="col --max-width" style={{ color: "#00b8ff" }}>
                 <FormattedMessage
                   id="colleccionNFT.table-column5"
@@ -599,7 +598,7 @@ const ColeccionNFT = () => {
         </div>
       </GenericModal>
     </>
-  );
-};
+  )
+}
 
-export default ColeccionNFT;
+export default ColeccionNFT

@@ -199,5 +199,32 @@
   "contact.alertSuccess": "Mensaje enviado",
   "contact.captchaError": "Por favor complete el captcha",
   "contact.validationMail": "Por favor introduzca un correo valido",
-  "contact.incompleteFields": "Por favor complete todos los campos"
+  "contact.incompleteFields": "Por favor complete todos los campos",
+
+  "aviso.legal.item1.title": "Resumen del Acuerdo de Licencia:",
+  "aviso.legal.item1.p1": "Este acuerdo describe los términos bajo los cuales los usuarios del Fanaticoins NFT Generator adquieren el derecho de utilizar el contenido del Fanaticoins NFT Generator . Al crear, publicar, exportar o utilizar diseños que contengan el contenido de Fanaticoins NFT Generator, los usuarios aceptan cumplir con los términos de este Acuerdo de Licencia y los Términos de Uso del Fanaticoins NFT Generator, todos los cuales están incorporados aquí por referencia.",
+  "aviso.legal.item1.p2": "Fanaticoins NFT Generator se reserva el derecho de modificar los términos de este Acuerdo, y los usuarios están obligados a adherirse a tales cambios.",
+  "aviso.legal.item1.p3": "El incumplimiento de estos términos puede dar lugar a acciones legales y la terminación inmediata de la cuenta.",
+
+  "aviso.legal.item2.title": "Puntos Fundamentales y Aclaraciones:",
+  "aviso.legal.item2.p1": "Todos los medios, incluyendo fotos, imágenes, videos, GIFs y audio, así como contenido generado por inteligencia artificial (formas, gradientes, iconos, ilustraciones, fuentes, plantillas, etc.), están protegidos por las leyes de derechos de autor de EE. UU. e internacionales. Fanaticoins NFT Generator y sus colaboradores reservan todos los derechos, incluidos los derechos de autor y de propiedad intelectual.",
+  "aviso.legal.item2.p2": "Fanaticoins NFT Generator puede modificar, cancelar o reemplazar las licencias otorgadas por este Acuerdo y se reserva el derecho de reemplazar el contenido en cualquier momento.",
+  "aviso.legal.item2.p3": "Fanaticoins NFT Generator no garantiza la exactitud de los metadatos o la información que acompaña a los medios y al contenido.",
+
+  "aviso.legal.item3.title": "Licencia de Medios Gratuitos:",
+  "aviso.legal.item3.p1": "Los medios gratuitos proporcionados por Fanaticoins NFT Generator están sujetos a las licencias de fuentes de terceros. Los usuarios deben consultar los acuerdos de licencia de fuentes como Pixabay, Pexels, Unsplash, Shopify, Google Drive, Storyblocks y Giphy.",
+
+  "aviso.legal.item4.title": "Usos Permitidos y Restricciones:",
+  "aviso.legal.item4.p1": "Los usuarios son responsables del uso adecuado de los medios y el contenido dentro de Fanaticoins NFT Generator, incluida la resolución de disputas que surjan de su uso.",
+  "aviso.legal.item4.p2": "Los usuarios pueden transferir diseños a clientes con la condición de que los clientes cumplan con los términos de este Acuerdo. Los usuarios siguen siendo responsables del cumplimiento de sus clientes.",
+  "aviso.legal.item4.p3": "Se aplican diversas restricciones, incluidas prohibiciones de editar contenido de manera ofensiva, pornográfica, comercializar contenido no alterado, implicar respaldos, utilizar contenido en marcas comerciales y participar en actividades competitivas.",
+
+  "aviso.legal.item5.title": "Terminación e Incumplimiento: ",
+  "aviso.legal.item5.p1": "Fanaticoins NFT Generator se reserva el derecho de terminar o suspender cuentas sin previo aviso por violaciones. La terminación resulta en la pérdida de derechos sobre medios y contenido.",
+  "aviso.legal.item5.p2": "Las licencias pueden ser terminadas sin previo aviso por incumplimiento, lo que requiere que los usuarios dejen de usar y confirmen el cumplimiento.",
+  "aviso.legal.item5.p3": "Los usuarios pueden terminar su licencia destruyendo el contenido y dejando de usar los medios, el contenido y el diseño del Fanaticoins NFT Generator.",
+
+  "aviso.legal.item6.title": "Reclamaciones por Infracción:",
+  "aviso.legal.item6.p1": "Los usuarios deben dejar de usar el contenido al conocer reclamaciones por infracción e informar a Fanaticoins NFT Generator. Los usuarios son responsables de adoptar medidas y notificar a Fanaticoins NFT Generator sobre reclamaciones por infracción de inmediato.",
+  "aviso.legal.item6.p2": "El derecho de usar el contenido proporcionado por Fanaticoins NFT Generator se rige por este Acuerdo, y los usuarios aceptan sus términos al descargar o exportar diseños que contengan medios de existencias gratuitos."
 }
