@@ -25,14 +25,7 @@ export default function ModalChangeName(props) {
 
   return (
     <>
-      <div
-        // className={
-        //   isShownModal === true
-        //     ? "container-modal"
-        //     : "container-modal display-none"
-        // }
-        className={"container-modal"}
-      >
+      <div className={"container-modal"}>
         <div
           className="card-modal"
           style={{

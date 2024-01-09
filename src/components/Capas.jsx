@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd"
 import ReactDOM from "react-dom"
 import { FormattedMessage } from "react-intl"
@@ -11,7 +11,6 @@ import getDatosImg from "../utils/getDatosImg"
 import getSelectedCapaId from "../utils/getSelectedCapaId"
 import resetLocalStorage from "../utils/resetLocalStorage"
 import setSelectedCapaId from "../utils/setSelectedCapaId"
-import { useStore } from "../utils/zustand/store.js"
 import Capa from "./Capa"
 import CreateCapa from "./CreateCapa"
 import GenericModal from "./GenericModal"
@@ -32,7 +31,6 @@ function Capas({
   const [isOpenModalPreviewImg, setIsOpenModalPreviewImg] = useState(false)
   const [showModal, setShowModal] = useState(false)
   const [showModal2, setShowModal2] = useState(false)
-
 
   const reorder = (list, startIndex, endIndex) => {
     const result = [...list]
@@ -97,7 +95,6 @@ function Capas({
     recarcularCombinaciones()
   }
 
-
   function recarcularCombinaciones() {
     const newCapas = getDatosImg().newCapasImageDiferent
     let newCapaAux = newCapas.filter((e) => e.images.length !== 0)
@@ -119,6 +116,7 @@ function Capas({
   const [capaName, setCapaName] = useState("")
   const [openNewModal, setOpenNewModal] = useState(false)
   const [newCapaName, setNewCapaName] = useState("")
+  const [clickCapa, setClickedCapa] = useState(false)
 
   return (
     <>
@@ -164,7 +162,12 @@ function Capas({
                             className={`capa ${
                               selectedCapa.id === capa.id && "selected-capa"
                             }`}
-                            onClick={(e) => clickCapaHandler(capa)}
+                            onClick={(e) => {
+                              clickCapaHandler(capa)
+                            }}
+                            onChange={() => {
+                              if (clickCapa === true) clickCapaHandler(capa)
+                            }}
                           >
                             {/* aqui se llama al componente capa */}
 
@@ -207,6 +210,7 @@ function Capas({
             setCapaName={setCapaName}
             capaName={capaName}
             createCapaHandle={createCapaHandle}
+            setClickedCapa={setClickedCapa}
           />
         </div>
 

@@ -3,7 +3,12 @@ import { useIntl } from "react-intl"
 import { ReactComponent as Agregar } from "../assets/svg/plus-circleWhite.svg"
 import getCapas from "../utils/getCapas"
 
-const CreateCapa = ({ createCapaHandle, setCapaName, capaName }) => {
+const CreateCapa = ({
+  createCapaHandle,
+  setCapaName,
+  capaName,
+  setClickedCapa
+}) => {
   const intl = useIntl()
 
   let ArrayIds = getCapas().map((e) => e.id)
@@ -26,6 +31,7 @@ const CreateCapa = ({ createCapaHandle, setCapaName, capaName }) => {
         console.log(error)
       }
       setCapaName("")
+      setClickedCapa(true)
     }
   }
 
