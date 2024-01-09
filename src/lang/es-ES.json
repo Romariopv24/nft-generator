@@ -92,6 +92,7 @@
   "generator.max-combinations": "La creación de su colección no puede ser superior al número de combinaciones establecidas que es",
   "generator.minim-layers": "Debe haber un mínimo de dos capas con una imagen cada una para crear las combinaciones",
   "generator.no-image": "No puede realizar una solicitud sin imágenes para enviar",
+  "generator.max-combinatios2": "El minimo de combinaciones totales debe ser de 10",
 
   "colleccionNFT.loading": "Cargando...",
   "colleccionNFT.in": "en ",

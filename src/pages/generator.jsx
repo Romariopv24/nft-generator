@@ -328,7 +328,6 @@ const Generator = ({ setLoadingImages }) => {
     }
     const cantidadAPedir = Number(inputProjectCollectionSize.current.value)
     const cantidadMax = Number(maxConvinacion.current.innerText)
-    console.log({ cantidadAPedir, cantidadMax })
     if (cantidadAPedir > cantidadMax) {
       return `${intl.formatMessage({
         id: "generator.max-combinations",
@@ -343,6 +342,14 @@ const Generator = ({ setLoadingImages }) => {
           defaultMessage="The creation of your collection cannot be greater than the number of established combinations that is"
         />
       )
+    if (cantidadAPedir < 10) {
+      return (
+        <FormattedMessage
+          id="generator.max-combinatios2"
+          defaultMessage="Minimun of the total combinations must be 10"
+        />
+      )
+    }
     return false
   }
   function validarSiExisteCapasConImagenes() {
@@ -444,6 +451,7 @@ const Generator = ({ setLoadingImages }) => {
 
           <div className="col-lg-3 col-md-4 col-12">
             <Form
+              maxCombToGenerate={maxCombToGenerate}
               capas={capas}
               listPreview1={listPreview1}
               listPreview2={listPreview2}

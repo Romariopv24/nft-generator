@@ -62,7 +62,8 @@ const Form = ({
   handleSubmit,
   generarObjIMGParaElServidor,
   generarObjetoConfigParaElServidor,
-  validarSiExisteCapasConImagenes
+  validarSiExisteCapasConImagenes,
+  maxCombToGenerate
 }) => {
   const intl = useIntl()
 
@@ -932,9 +933,9 @@ const Form = ({
 
     let isPendiente = await estadoDePeticionDeGenerarNFT()
     if (isPendiente[0]?.url) isPendiente = isPendiente.pop()
-    console.log(isPendiente)
 
     const res = await ValidarSiExisteNombreProjectServidor()
+
 
     if (isPendiente.url === "En Proceso...") {
       setIsExisteNombreProject(
@@ -956,13 +957,8 @@ const Form = ({
     listWalletPremiun.find((wallet) => {
       if (wallet.toLowerCase() === accounts[0]) isPremiun = true
     })
-    console.log(isPremiun)
-    console.log(chainId)
+
     if (chainId === "0x13881") {
-      console.log("karajo???")
-      // console.log("si es la red");
-      //console.log('entro en la condiciones de ser premiun')
-      //console.log(findWallet)
       if (isPremiun) {
         console.log("si eres premieum con tu direccion wallet")
         const { valid, message } = await ValidarSiExisteNombreProjectServidor()
@@ -1046,6 +1042,7 @@ const Form = ({
       ? `${captureValue.replace(" ", "-")}-001`
       : "000"
 
+  console.log()
   return (
     <>
       <div id="datos">
@@ -1159,7 +1156,9 @@ const Form = ({
               autoComplete="off"
               name="collectionSize"
               ref={inputProjectCollectionSize}
-              onChange={(e) => onlyNumer(e)}
+              onChange={(e) => {
+                onlyNumer(e)
+              }}
             />
           </div>
           <div className="row" id="resolucion">
