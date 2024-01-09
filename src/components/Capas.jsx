@@ -146,7 +146,12 @@ function Capas({
                 ref={droppableProvided.innerRef}
                 className="capas-container"
               >
-                {capas.map((capa, index) => (
+                {capas.map((capa, index) => {
+                  if(clickCapa) {
+                    clickCapaHandler(capa)
+                    setClickedCapa(false)
+ }
+                  return(
                   <>
                     {selectedCapa && selectedCapa?.id && capa && capa.id && (
                       <Draggable
@@ -185,7 +190,7 @@ function Capas({
                       </Draggable>
                     )}
                   </>
-                ))}
+                )})}
                 {droppableProvided.placeholder}
               </ul>
             )}
@@ -208,6 +213,7 @@ function Capas({
             capaName={capaName}
             createCapaHandle={createCapaHandle}
             clickCapaHandler={setClickedCapa}
+            setClickedCapa={setClickedCapa}
           />
         </div>
 
