@@ -7,7 +7,8 @@ const CreateCapa = ({
   createCapaHandle,
   setCapaName,
   capaName,
-  setClickedCapa
+  setClickedCapa,
+  clickCapaHandler
 }) => {
   const intl = useIntl()
 
@@ -27,11 +28,10 @@ const CreateCapa = ({
     if (e.key === "Enter" || e.type === "click") {
       try {
         createCapaHandle(capaName || crearAux())
-      } catch (error) {
+        // clickCapaHandler(localStorage.getItem('selectedCapaId')) } catch (error) {
         console.log(error)
       }
       setCapaName("")
-      setClickedCapa(true)
     }
   }
 
