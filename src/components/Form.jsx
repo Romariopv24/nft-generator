@@ -63,7 +63,6 @@ const Form = ({
   generarObjIMGParaElServidor,
   generarObjetoConfigParaElServidor,
   validarSiExisteCapasConImagenes,
-  maxCombToGenerate
 }) => {
   const intl = useIntl()
 

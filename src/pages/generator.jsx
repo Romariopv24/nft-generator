@@ -451,7 +451,7 @@ const Generator = ({ setLoadingImages }) => {
 
           <div className="col-lg-3 col-md-4 col-12">
             <Form
-              maxCombToGenerate={maxCombToGenerate}
+             
               capas={capas}
               listPreview1={listPreview1}
               listPreview2={listPreview2}
