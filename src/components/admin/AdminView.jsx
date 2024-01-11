@@ -1,16 +1,16 @@
-import { Stack } from "@mui/material";
-import Graph from "./components/Graph";
-import Table from "./components/Table";
+import { Stack } from "@mui/material"
+import Graph from "./components/Graph"
+import Table from "./components/Table"
 
 export default function AdminView() {
   return (
     <Stack alignItems={"center"}>
-      <div style={{ width: "100vw", height: "60vh", marginTop: "2rem" }}>
+      <Stack my={5} mx={"auto"}>
         <Graph />
-      </div>
+      </Stack>
       <Stack direction={"row"} mt={1} justifyContent={"center"} width={"80%"}>
         <Table />
       </Stack>
     </Stack>
-  );
+  )
 }
