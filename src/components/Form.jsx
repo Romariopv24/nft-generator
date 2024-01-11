@@ -16,6 +16,7 @@ import getDatosImg from "../utils/getDatosImg"
 import { useStoreSignal } from "../utils/zustand/store.js"
 import GenericModal from "./GenericModal"
 import PreviewCollection from "./PreviewCollection"
+import { listWalletPremiun } from "../constantes"
 
 // const paqueteDeMil_NFT = Const.PRECIO_PRUEBA_NFTS // 99$
 // const paqueteDeCincoMil_NFT = Const.PRECIO_PRUEBA_NFTS // 199$
@@ -25,15 +26,7 @@ const paqueteDeMil_NFT = Const.PRECIO_MIL_NFTS // 99$
 const paqueteDeCincoMil_NFT = Const.PRECIO_CINCO_MIL_NFTS // 199$
 const paqueteDeDiezMil_NFT = Const.PRECIO_DIEZ_MIL_NFTS // 299$
 
-const listWalletPremiun = [
-  "0xa54927b7af64DdB3e2c5Ac9cbec38c81EC88Be48",
-  "0x7b739a2c9e21e2Ad07eC8898EE89945a93627358",
-  "0x63828d59737Aa3744960d6827Ccf457931B84245",
-  "0xE6225d9f75CA398F060A2A9B7a3b345e681700dC",
-  "0x278afeeca694808991f70c3e851449434a13ecff",
-  "0xFAC15a040568a8186212AA2e9CC1A5b2886914E1",
-  "0xCc2b1442a561B0ab9D04599ae11b0fEc5E946112"
-]
+
 
 const Form = ({
   capas,

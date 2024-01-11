@@ -3,7 +3,7 @@ import { ReactComponent as Descargar } from "../assets/svg/descargar.svg"
 import { ReactComponent as Export } from "../assets/svg/export.svg"
 import { ReactComponent as Delete } from "../assets/svg/trash.svg"
 import GenericModal from "../components/GenericModal"
-import { URL, myHeaders } from "../constantes"
+import { URL, listWalletPremiun, myHeaders } from "../constantes"
 import "../styles/scss/_table-styles.scss"
 
 import dayjs from "dayjs"
@@ -19,16 +19,7 @@ import { useStoreSignal } from "../utils/zustand/store"
 dayjs.locale("en") // use Spanish locale globally
 dayjs.extend(relativeTime)
 
-const listWalletPremiun = [
-  "0xa54927b7af64DdB3e2c5Ac9cbec38c81EC88Be48",
-  "0x7b739a2c9e21e2Ad07eC8898EE89945a93627358",
-  "0x63828d59737Aa3744960d6827Ccf457931B84245",
-  "0x1A3Bd3C1f6f4c9e73AF91C21dbcB143bf2B2E5Da",
-  "0xE6225d9f75CA398F060A2A9B7a3b345e681700dC",
-  "0x278aFeECa694808991f70c3E851449434A13eCff",
-  "0xFAC15a040568a8186212AA2e9CC1A5b2886914E1",
-  "0xCc2b1442a561B0ab9D04599ae11b0fEc5E946112"
-]
+
 
 const ColeccionNFT = () => {
   const [collectall, setCollectall] = useState([])
