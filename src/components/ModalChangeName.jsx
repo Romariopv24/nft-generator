@@ -18,9 +18,11 @@ export default function ModalChangeName(props) {
     capas[capaIndex].directory = name
     localStorage.setItem("capas", JSON.stringify(capas))
     capas = getCapas()
-    setSelectedCapaId(capas.find((capa) => capa.id === selectedCapa.id))
     setCapas(capas)
     setCapita(name)
+    // setSelectedCapaId(
+    //   capas.find((capa) => capa.id === selectedCapa.id && selectedCapa.id)
+    // )
   }
 
   return (
@@ -92,7 +94,9 @@ export default function ModalChangeName(props) {
               />
               <button
                 className="__boton-mediano mx-0 color enphasis-button"
-                onClick={() => setOpenNewModal(false)}
+                onClick={() => {
+                  setOpenNewModal(false)
+                }}
               >
                 <FormattedMessage
                   id="form.changelayerButton"

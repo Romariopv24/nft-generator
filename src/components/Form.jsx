@@ -62,7 +62,7 @@ const Form = ({
   handleSubmit,
   generarObjIMGParaElServidor,
   generarObjetoConfigParaElServidor,
-  validarSiExisteCapasConImagenes,
+  validarSiExisteCapasConImagenes
 }) => {
   const intl = useIntl()
 
@@ -123,7 +123,7 @@ const Form = ({
     setChecked(!checked)
   }
 
-  const capaIndex = getCapas().findIndex((capa) => capa.id === selectedCapa.id)
+  // const capaIndex = getCapas().findIndex((capa) => capa.id === selectedCapa.id)
 
   const setNewNameCapa = (e) => {
     const name = e.target.value
@@ -934,7 +934,6 @@ const Form = ({
     if (isPendiente[0]?.url) isPendiente = isPendiente.pop()
 
     const res = await ValidarSiExisteNombreProjectServidor()
-
 
     if (isPendiente.url === "En Proceso...") {
       setIsExisteNombreProject(

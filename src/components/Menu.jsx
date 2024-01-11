@@ -88,7 +88,6 @@ const Menu = ({
   })
 
   const idiomaFocus = localStorage.getItem("idioma")
-  console.log(idiomaFocus)
 
   return isAuth ? (
     <div className="d-flex align-items-center my-2 ps-2 pe-1">
