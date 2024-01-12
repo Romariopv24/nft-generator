@@ -49,4 +49,3 @@ export default function Graph() {
   )
 }
 
-// MuiPieArc-root MuiPieArc-series-auto-generated-id-0 css-1mhcdve-MuiPieArc-root

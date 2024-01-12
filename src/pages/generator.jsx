@@ -350,6 +350,14 @@ const Generator = ({ setLoadingImages }) => {
         />
       )
     }
+    if (cantidadAPedir > 10000) {
+      return (
+        <FormattedMessage
+          id="generator.min-combinations2"
+          defaultMessage="Max of the total combinations must be 10.000"
+        />
+      )
+    }
     return false
   }
   function validarSiExisteCapasConImagenes() {
@@ -451,7 +459,6 @@ const Generator = ({ setLoadingImages }) => {
 
           <div className="col-lg-3 col-md-4 col-12">
             <Form
-             
               capas={capas}
               listPreview1={listPreview1}
               listPreview2={listPreview2}

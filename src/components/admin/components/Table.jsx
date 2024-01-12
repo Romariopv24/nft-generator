@@ -4,15 +4,15 @@ import { DataGrid } from "@mui/x-data-grid"
 const columns = [
   {
     field: "name",
-    headerName: "Name",
+    headerName: "Name Collection",
     width: 200,
     headerClassName: "super-app-theme--header",
     headerAlign: "center",
     cellClassName: "super-app-theme--cell"
   },
   {
-    field: "email",
-    headerName: "Email",
+    field: "User",
+    headerName: "User",
     width: 330,
     headerClassName: "super-app-theme--header",
     headerAlign: "center",
@@ -171,8 +171,8 @@ const columns = [
     // }
   },
   {
-    field: "status",
-    headerName: "Status",
+    field: "size",
+    headerName: "Image Size",
     width: 240,
     headerClassName: "super-app-theme--header",
     headerAlign: "center",
@@ -209,109 +209,13 @@ const columns = [
     // }
   },
   {
-    field: "pais",
-    headerName: "Pais",
+    field: "date",
+    headerName: "Date Download",
     width: 100,
     headerClassName: "super-app-theme--header",
     headerAlign: "center",
     cellClassName: "super-app-theme--cell"
   },
-  {
-    field: "created_at",
-    headerName: "Created At",
-    width: 120,
-    headerClassName: "super-app-theme--header",
-    headerAlign: "center",
-    cellClassName: "super-app-theme--cell"
-    // renderCell: (row) => {
-    //   const fecha = DateLocal(row.formattedValue)
-    //   return fecha
-    // }
-  },
-  {
-    field: "deliveryOption",
-    headerName: "Delivery Option",
-    description: "This column has a value getter and is not sortable.",
-    width: 170,
-    headerClassName: "super-app-theme--header",
-    headerAlign: "center",
-    cellClassName: "super-app-theme--cell"
-  },
-  {
-    field: "deliveryType",
-    headerName: "Delivery Type",
-    width: 120,
-    headerClassName: "super-app-theme--header",
-    headerAlign: "center",
-    cellClassName: "super-app-theme--cell"
-    // renderCell: (e) => {
-    //   return (
-    //     <>
-    //       <p>{e.row.deliveryType.replace("Sent", "Pick Up")}</p>
-    //     </>
-    //   );
-    // },
-  },
-  {
-    field: "price",
-    headerName: "Price",
-    width: 120,
-    headerClassName: "super-app-theme--header",
-    headerAlign: "center",
-    cellClassName: "super-app-theme--cell"
-  },
-
-  {
-    field: "provincia",
-    headerName: "Provincia",
-    width: 100,
-    headerClassName: "super-app-theme--header",
-    headerAlign: "center",
-    cellClassName: "super-app-theme--cell"
-  },
-  {
-    field: "address",
-    headerName: "Address",
-    width: 200,
-    headerClassName: "super-app-theme--header",
-    headerAlign: "center",
-    cellClassName: "super-app-theme--cell"
-  },
-
-  {
-    field: "codigo_postal",
-    headerName: "Codigo Postal",
-    width: 100,
-    headerClassName: "super-app-theme--header",
-    headerAlign: "center",
-    cellClassName: "super-app-theme--cell"
-  },
-  {
-    field: "phone",
-    headerName: "Phone",
-    width: 120,
-    headerClassName: "super-app-theme--header",
-    headerAlign: "center",
-    cellClassName: "super-app-theme--cell"
-  },
-
-  {
-    field: "imageSecond",
-    headerName: "NFT",
-    width: 129,
-    headerClassName: "super-app-theme--header",
-    headerAlign: "center",
-    cellClassName: "super-app-theme--cell"
-    // renderCell: (e) => {
-    //   return (
-    //     <>
-    //       <Link href={e.row.imageSecond} target="_blank">
-    //         <Image sx={{ color: "white", cursor: "pointer" }} />
-    //       </Link>
-    //     </>
-    //   )
-    // }
-  }
 ]
 
 const rows = [

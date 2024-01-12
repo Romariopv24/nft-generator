@@ -5,6 +5,7 @@ import { Link } from "react-router-dom"
 import { ReactComponent as MetamaskLogo } from "../assets/svg/metamask.svg"
 import { ReactComponent as Stripe } from "../assets/svg/stripe.svg"
 import * as Const from "../constantes"
+import { listWalletPremiun } from "../constantes"
 import { obtenerTodo } from "../db/CrudDB.js"
 import pagarConStripe from "../stripe/checkOut.js"
 import "../styles/scss/_container-rarity.scss"
@@ -16,7 +17,6 @@ import getDatosImg from "../utils/getDatosImg"
 import { useStoreSignal } from "../utils/zustand/store.js"
 import GenericModal from "./GenericModal"
 import PreviewCollection from "./PreviewCollection"
-import { listWalletPremiun } from "../constantes"
 
 // const paqueteDeMil_NFT = Const.PRECIO_PRUEBA_NFTS // 99$
 // const paqueteDeCincoMil_NFT = Const.PRECIO_PRUEBA_NFTS // 199$
@@ -25,8 +25,6 @@ import { listWalletPremiun } from "../constantes"
 const paqueteDeMil_NFT = Const.PRECIO_MIL_NFTS // 99$
 const paqueteDeCincoMil_NFT = Const.PRECIO_CINCO_MIL_NFTS // 199$
 const paqueteDeDiezMil_NFT = Const.PRECIO_DIEZ_MIL_NFTS // 299$
-
-
 
 const Form = ({
   capas,
@@ -266,6 +264,7 @@ const Form = ({
     const BNBprice = useRef(0)
     const [price, setPrice] = useState(0)
     const [isPriceCalculated, setIsPriceCalculated] = useState(true)
+    const [openStripeModal, setOpenStripeModal] = useState(false)
 
     const metodosDePago = [
       {
@@ -276,7 +275,7 @@ const Form = ({
       {
         nombre: "Stripe",
         icon: <Stripe width={90} height={100} />,
-        proceso: () => procesoStripe()
+        proceso: () => setOpenStripeModal(true)
       }
     ]
 

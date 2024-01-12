@@ -18,7 +18,7 @@ export const listWalletPremiun = [
   "0x278afeeca694808991f70c3e851449434a13ecff",
   "0xFAC15a040568a8186212AA2e9CC1A5b2886914E1",
   "0xCc2b1442a561B0ab9D04599ae11b0fEc5E946112",
-  "0x0bb14aDFc5ED1e126592042FDFED913F4d5E71f0"
+  // "0x0bb14aDFc5ED1e126592042FDFED913F4d5E71f0"
 ]
 
 export const CMCURL = "https://nftg-nfanst-api.devtop.online/preciobnb"

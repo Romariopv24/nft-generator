@@ -94,6 +94,8 @@
   "generator.minim-layers": "There must be a minimum of two layers with one image each in order to create the combinations",
   "generator.no-image": "You cannot make a request without images to send",
   "generator.max-combinatios2": "Minimun of the total combinations must be 10",
+  "generator.min-combinations2": "Max of the total combinations must be 10.000",
+
 
   "colleccionNFT.loading": "Loading...",
   "colleccionNFT.in": "in ",
