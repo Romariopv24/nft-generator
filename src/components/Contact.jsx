@@ -105,11 +105,18 @@ export const Contact = ({ showContact, setShowContact }) => {
       mensaje: mensaje,
       trecaptcha: captcha.current
     }
+
+    var myHeaders = new Headers()
+    myHeaders.append(
+      "Authorization",
+      `Bearer ${localStorage.getItem("access_token")}`
+    )
+    myHeaders.append("Content-Type", "application/json")
     const url = `${URL}sendmail`
     const headers = {
       method: "POST",
       body: JSON.stringify(datos),
-      headers: { "Content-type": "application/json;charset=UTF-8" }
+      headers: myHeaders
     }
 
     console.log(datos)

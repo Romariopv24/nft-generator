@@ -877,7 +877,10 @@ const Form = ({
     }
 
     var myHeaders = new Headers()
-    myHeaders.append("Authorization", "Basic dXN1YXJpbzpwd2Q=")
+    myHeaders.append(
+      "Authorization",
+      `Bearer ${localStorage.getItem("access_token")}`
+    )
     myHeaders.append("Content-Type", "application/json")
 
     let myInit = {

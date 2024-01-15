@@ -17,6 +17,7 @@ import ColeccionNFT from "./pages/coleccionNFT"
 import Generator from "./pages/generator"
 import Terms from "./pages/terms"
 import "./styles/scss/_pedir-correro.scss"
+import { useStoreSignal } from "./utils/zustand/store"
 
 function App() {
   const intl = useIntl()
@@ -148,7 +149,7 @@ function App() {
     }
   ])
   const [loading, setLoading] = useState(true)
-
+  const setAccess_token = useStoreSignal((state) => state.setAccess_token)
   let navigate = useNavigate()
 
   useEffect(() => {
@@ -216,7 +217,10 @@ function App() {
       let post = await resPost.json()
       if (post.usuario !== "creado") {
         localStorage.setItem("name", post[0].nombre)
+        localStorage.setItem("access_token", post[0].access_token)
         setName(post[0].nombre)
+        const accesToken = localStorage.getItem("access_token")
+        setAccess_token(accesToken)
       }
       validarDatosUserDesdeServidor(post)
       return post
@@ -225,7 +229,6 @@ function App() {
 
   function validarDatosUserDesdeServidor(res) {
     if (res.usuario === "creado") setIsActiveModalRegister(true)
-    console.log(res.nombre)
     if (res[0]?.email === null) {
       setIsActiveModalRegister(true)
     }

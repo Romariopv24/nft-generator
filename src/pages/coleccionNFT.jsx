@@ -3,7 +3,7 @@ import { ReactComponent as Descargar } from "../assets/svg/descargar.svg"
 import { ReactComponent as Export } from "../assets/svg/export.svg"
 import { ReactComponent as Delete } from "../assets/svg/trash.svg"
 import GenericModal from "../components/GenericModal"
-import { URL, listWalletPremiun, myHeaders } from "../constantes"
+import { URL, myHeaders } from "../constantes"
 import "../styles/scss/_table-styles.scss"
 
 import dayjs from "dayjs"
@@ -18,8 +18,6 @@ import { useStoreSignal } from "../utils/zustand/store"
 
 dayjs.locale("en") // use Spanish locale globally
 dayjs.extend(relativeTime)
-
-
 
 const ColeccionNFT = () => {
   const [collectall, setCollectall] = useState([])
@@ -60,37 +58,36 @@ const ColeccionNFT = () => {
 
   useEffect(() => {
     async function what() {
-      localStorage.setItem("noLoop", false)
-      const noLoop = localStorage.getItem("noLoop")
-
-      if (collectall.length === 0 && !isPromiseReady) {
-        getColletionsRef.current()
-        const accounts = await window.ethereum.request({
-          method: "eth_accounts"
-        })
-        let findWallet = listWalletPremiun.find(
-          (wallet) => wallet.toLowerCase() === accounts[0].toLowerCase()
-        )
-        if (findWallet) {
-          setIsWalletPremiun(true)
-        }
-      }
-
-      if (!isIntervalActive) {
-        setIsIntervalActive(true)
-        const interval = setInterval(() => {
-          if (!isRequestSent) {
-            setIsRequestSent(true)
-            getColletionsRef.current()
-            setTimeout(() => setIsRequestSent(false), 5000)
-          }
-        }, 30000)
-        return () => clearInterval(interval)
-      }
+      // console.log(getColletionsRef.current())
+      // localStorage.setItem("noLoop", false)
+      // const noLoop = localStorage.getItem("noLoop")
+      // if (collectall.length === 0 && !isPromiseReady) {
+      //   getColletionsRef.current()
+      //   const accounts = await window.ethereum.request({
+      //     method: "eth_accounts"
+      //   })
+      //   let findWallet = listWalletPremiun.find(
+      //     (wallet) => wallet.toLowerCase() === accounts[0].toLowerCase()
+      //   )
+      //   if (findWallet) {
+      //     setIsWalletPremiun(true)
+      //   }
+      // }
+      // if (!isIntervalActive) {
+      //   setIsIntervalActive(true)
+      //   const interval = setInterval(() => {
+      //     if (!isRequestSent) {
+      //       setIsRequestSent(true)
+      //       getColletionsRef.current()
+      //       setTimeout(() => setIsRequestSent(false), 5000)
+      //     }
+      //   }, 30000)
+      //   return () => clearInterval(interval)
+      // }
     }
 
     what()
-  }, [isIntervalActive, isPromiseReady, isRequestSent, collectall.length])
+  }, [isIntervalActive, isPromiseReady, isRequestSent, collectall])
 
   async function getColletions() {
     localStorage.setItem("noLoop", true)
@@ -105,7 +102,10 @@ const ColeccionNFT = () => {
     }
 
     var myHeaders = new Headers()
-    myHeaders.append("Authorization", "Basic dXN1YXJpbzpwd2Q=")
+    myHeaders.append(
+      "Authorization",
+      `Bearer ${localStorage.getItem("access_token")}`
+    )
     myHeaders.append("Content-Type", "application/json")
 
     let myInit = {
@@ -210,7 +210,10 @@ const ColeccionNFT = () => {
     }
     // console.log(objetoConfig)
     var myHeaders = new Headers()
-    myHeaders.append("Authorization", "Basic dXN1YXJpbzpwd2Q=")
+    myHeaders.append(
+      "Authorization",
+      `Bearer ${localStorage.getItem("access_token")}`
+    )
     myHeaders.append("Content-Type", "application/json")
 
     let url = `${URL}`

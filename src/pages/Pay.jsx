@@ -1,47 +1,47 @@
-import { useEffect, useState } from "react";
-import { FormattedMessage } from "react-intl";
-import { useNavigate, useParams } from "react-router-dom";
-import { ReactComponent as Check } from "../assets/svg/check-circle.svg";
-import { URL } from "../constantes";
-const bcrypt = require("bcryptjs");
+import { useEffect, useState } from "react"
+import { FormattedMessage } from "react-intl"
+import { useNavigate, useParams } from "react-router-dom"
+import { ReactComponent as Check } from "../assets/svg/check-circle.svg"
+import { URL } from "../constantes"
+const bcrypt = require("bcryptjs")
 
 const Pay = () => {
-  const [isPay, setIsPay] = useState(false);
-  let params = useParams();
-  let visual = params.params.split("&&");
-  const [id, nombre, cantidad] = visual;
-  console.log(id, nombre, cantidad);
-  const navegate = useNavigate();
+  const [isPay, setIsPay] = useState(false)
+  let params = useParams()
+  let visual = params.params.split("&&")
+  const [id, nombre, cantidad] = visual
+  console.log(id, nombre, cantidad)
+  const navegate = useNavigate()
 
-  const facebook = JSON.parse(localStorage.getItem("facebook"));
-  const google = JSON.parse(localStorage.getItem("google"));
-  const metamask = JSON.parse(localStorage.getItem("metamask"));
+  const facebook = JSON.parse(localStorage.getItem("facebook"))
+  const google = JSON.parse(localStorage.getItem("google"))
+  const metamask = JSON.parse(localStorage.getItem("metamask"))
   const {
     idHash = "no",
     name = "no",
-    qtty = "no",
-  } = JSON.parse(localStorage.getItem("pay"));
+    qtty = "no"
+  } = JSON.parse(localStorage.getItem("pay"))
 
   useEffect(() => {
     bcrypt.compare(id, idHash, function (err, res) {
-      console.log(res);
+      console.log(res)
       bcrypt.compare(nombre, name, function (err, res) {
-        console.log(res);
+        console.log(res)
         bcrypt.compare(cantidad, qtty, async function (err, res) {
-          console.log(res);
+          console.log(res)
           if (res) {
-            setIsPay(res);
-            await generarCombinaciones(cantidad, nombre);
+            setIsPay(res)
+            await generarCombinaciones(cantidad, nombre)
           } else {
-            navegate("/");
+            navegate("/")
           }
-          localStorage.setItem("pay", "vacio");
-        });
-      });
-    });
-    console.log(isPay);
+          localStorage.setItem("pay", "vacio")
+        })
+      })
+    })
+    console.log(isPay)
     //setTimeout(()=> navegate('/coleccion'),30000)
-  }, []);
+  }, [])
 
   //  const generateCollection = async(cantidad,nombre) =>{
   //   let correo = facebook?.tokenUser || google?.tokenUser || metamask?.tokenUser
@@ -54,27 +54,32 @@ const Pay = () => {
   //  }
 
   async function generarCombinaciones(cantidad, nombre) {
-    let correo =
-      facebook?.tokenUser || google?.tokenUser || metamask?.tokenUser;
-    console.log({ correo }, { cantidad }, { nombre });
+    let correo = facebook?.tokenUser || google?.tokenUser || metamask?.tokenUser
+    console.log({ correo }, { cantidad }, { nombre })
 
-    let url = `${URL}p?cantidad=${cantidad}&nombre=${nombre}&cb=${correo}`;
+    let url = `${URL}p?cantidad=${cantidad}&nombre=${nombre}&cb=${correo}`
+    var myHeaders = new Headers()
+    myHeaders.append("Content-Type", "application/json")
+    myHeaders.append(
+      "Authorization",
+      `Bearer ${localStorage.getItem("access_token")}`
+    )
     let myInit = {
       method: "GET",
-      headers: { "Content-Type": "application/json" },
-    };
-    let resPost = await fetch(url, myInit);
-    let post = await resPost.json();
+      headers: myHeaders
+    }
+    let resPost = await fetch(url, myInit)
+    let post = await resPost.json()
 
-    console.log({ status: `Generar combinaciones`, ...post });
-    console.log({ resPost }, { post });
+    console.log({ status: `Generar combinaciones`, ...post })
+    console.log({ resPost }, { post })
 
-    if (!resPost.ok) throw Error("HTTP status " + resPost.status);
-    return post;
+    if (!resPost.ok) throw Error("HTTP status " + resPost.status)
+    return post
   }
 
   function rediredAtHome() {
-    navegate("/coleccion");
+    navegate("/coleccion")
   }
 
   return (
@@ -117,7 +122,7 @@ const Pay = () => {
         </div>
       )}
     </>
-  );
-};
+  )
+}
 
-export default Pay;
+export default Pay

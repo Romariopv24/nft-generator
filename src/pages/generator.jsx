@@ -162,7 +162,10 @@ const Generator = ({ setLoadingImages }) => {
     // let password =  btoa('pwd')
 
     var myHeaders = new Headers()
-    myHeaders.append("Authorization", "Basic dXN1YXJpbzpwd2Q=")
+    myHeaders.append(
+      "Authorization",
+      `Bearer ${localStorage.getItem("access_token")}`
+    )
     myHeaders.append("Content-Type", "application/json")
 
     let url = `${URL}/config`
@@ -211,7 +214,10 @@ const Generator = ({ setLoadingImages }) => {
     console.log({ obj })
     console.log({ objConfig2 })
     var myHeaders = new Headers()
-    myHeaders.append("Authorization", "Basic dXN1YXJpbzpwd2Q=")
+    myHeaders.append(
+      "Authorization",
+      `Bearer ${localStorage.getItem("access_token")}`
+    )
     myHeaders.append("Content-Type", "application/json")
 
     let url = `${URL}images`
@@ -249,12 +255,25 @@ const Generator = ({ setLoadingImages }) => {
     const collectionSize = inputProjectCollectionSize.current.value
     const name = inputProjectName.current.value.replace(/\s+/g, "")
     const description = inputProjectDescription.current.value
+
+
+
     let url = `${URL}p?cantidad=${Number(
       collectionSize
     )}&nombre=${name}&cb=${correo}&descripcion=${description}`
+
+
+    var myHeaders = new Headers()
+    myHeaders.append(
+      "Authorization",
+      `Bearer ${localStorage.getItem("access_token")}`
+    )
+    myHeaders.append("Content-Type", "application/json")
+
+
     let myInit = {
       method: "GET",
-      headers: { "Content-Type": "application/json" }
+      headers:myHeaders
     }
     // setTimeout(() => setUrlNft('creando'), 7000)
     console.log(url)
@@ -278,7 +297,10 @@ const Generator = ({ setLoadingImages }) => {
       nombre_collect: name
     }
     var myHeaders = new Headers()
-    myHeaders.append("Authorization", "Basic dXN1YXJpbzpwd2Q=")
+    myHeaders.append(
+      "Authorization",
+      `Bearer ${localStorage.getItem("access_token")}`
+    )
     myHeaders.append("Content-Type", "application/json")
 
     let url = `${URL}collect`
