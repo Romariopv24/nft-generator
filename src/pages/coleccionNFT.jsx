@@ -58,7 +58,6 @@ const ColeccionNFT = () => {
 
   useEffect(() => {
     async function what() {
-      console.log(getColletionsRef.current());
       localStorage.setItem("noLoop", false);
       const noLoop = localStorage.getItem("noLoop");
       if (collectall.length === 0 && !isPromiseReady) {

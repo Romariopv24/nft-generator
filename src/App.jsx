@@ -1,42 +1,49 @@
-import { useEffect, useLayoutEffect, useState } from "react"
-import { FormattedMessage, useIntl } from "react-intl"
-import Joyride, { STATUS } from "react-joyride"
-import { Link, Route, Routes, useLocation, useNavigate } from "react-router-dom"
-import { Contact } from "./components/Contact"
-import GenericModal from "./components/GenericModal"
-import { LegalWarning } from "./components/LegalWarning"
-import Menu from "./components/Menu"
-import RegisterUser from "./components/RegisterUser"
-import AdminView from "./components/admin/AdminView"
-import Loader from "./components/custom/Loader"
-import { URL } from "./constantes"
-import FAQs from "./pages/FAQs"
-import Login from "./pages/Login"
-import Pay from "./pages/Pay"
-import ColeccionNFT from "./pages/coleccionNFT"
-import Generator from "./pages/generator"
-import Terms from "./pages/terms"
-import "./styles/scss/_pedir-correro.scss"
-import { useStoreSignal } from "./utils/zustand/store"
+import { useEffect, useLayoutEffect, useState } from "react";
+import { FormattedMessage, useIntl } from "react-intl";
+import Joyride, { STATUS } from "react-joyride";
+import {
+  Link,
+  Route,
+  Routes,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
+import { Contact } from "./components/Contact";
+import GenericModal from "./components/GenericModal";
+import { LegalWarning } from "./components/LegalWarning";
+import Menu from "./components/Menu";
+import RegisterUser from "./components/RegisterUser";
+import AdminView from "./components/admin/AdminView";
+import Loader from "./components/custom/Loader";
+import { URL } from "./constantes";
+import FAQs from "./pages/FAQs";
+import Login from "./pages/Login";
+import Pay from "./pages/Pay";
+import ColeccionNFT from "./pages/coleccionNFT";
+import Generator from "./pages/generator";
+import Terms from "./pages/terms";
+import "./styles/scss/_pedir-correro.scss";
+import { useStoreSignal } from "./utils/zustand/store";
+import { jwtDecode } from "jwt-decode";
 
 function App() {
-  const intl = useIntl()
-  const [isAuth, setIsAuth] = useState(null)
-  const [datosUserLS, setDatosUserLS] = useState({})
-  const [isActiveModalRegister, setIsActiveModalRegister] = useState(false)
-  const facebook = JSON.parse(localStorage.getItem("facebook"))
-  const google = JSON.parse(localStorage.getItem("google"))
-  const metamask = JSON.parse(localStorage.getItem("metamask"))
-  const [name, setName] = useState(null)
+  const intl = useIntl();
+  const [isAuth, setIsAuth] = useState(null);
+  const [datosUserLS, setDatosUserLS] = useState({});
+  const [isActiveModalRegister, setIsActiveModalRegister] = useState(false);
+  const facebook = JSON.parse(localStorage.getItem("facebook"));
+  const google = JSON.parse(localStorage.getItem("google"));
+  const metamask = JSON.parse(localStorage.getItem("metamask"));
+  const [name, setName] = useState(null);
   const [loadingImages, setLoadingImages] = useState({
     cantidadTotal: 0,
     cantidadActual: 0,
-    isLoading: false
-  })
-  const [show, setShow] = useState(false)
-  const [showVideo, setShowVideo] = useState(false)
-  const [showLegalWarning, setShowLegalWarning] = useState(false)
-  const [showContact, setShowContact] = useState(false)
+    isLoading: false,
+  });
+  const [show, setShow] = useState(false);
+  const [showVideo, setShowVideo] = useState(false);
+  const [showLegalWarning, setShowLegalWarning] = useState(false);
+  const [showContact, setShowContact] = useState(false);
   const [steps, _] = useState([
     {
       target: "#capas",
@@ -46,7 +53,7 @@ function App() {
           id="tutorial.step1"
           defaultMessage="Here you can organize your layers to change how your final nft will look like."
         />
-      )
+      ),
     },
     {
       target: "#nuevaCapa",
@@ -55,7 +62,7 @@ function App() {
           id="tutorial.step2"
           defaultMessage="You can assign a name and create a new layer or create it with a temporary name."
         />
-      )
+      ),
     },
     {
       target: "#visualizar",
@@ -64,7 +71,7 @@ function App() {
           id="tutorial.step3"
           defaultMessage="You can view your nft whenever you want using this button."
         />
-      )
+      ),
     },
     {
       target: "#reiniciar",
@@ -73,7 +80,7 @@ function App() {
           id="tutorial.step4"
           defaultMessage="If you want to start a new project you can restart it with this button (this will delete all previous settings)."
         />
-      )
+      ),
     },
     {
       target: "#imagenes",
@@ -82,7 +89,7 @@ function App() {
           id="tutorial.step5"
           defaultMessage="Here you can see all the images you have added to your project."
         />
-      )
+      ),
     },
     {
       target: "#agregarImagenes",
@@ -91,7 +98,7 @@ function App() {
           id="tutorial.step6"
           defaultMessage="And if you want to add new images drag them here or click to select them."
         />
-      )
+      ),
     },
     {
       target: "#colecciones",
@@ -100,7 +107,7 @@ function App() {
           id="tutorial.step7"
           defaultMessage="From here you can navigate to your already generated collections."
         />
-      )
+      ),
     },
     {
       target: "#datos",
@@ -109,7 +116,7 @@ function App() {
           id="tutorial.step8"
           defaultMessage="In this section you can customize the data of your collection."
         />
-      )
+      ),
     },
     {
       target: "#combinaciones",
@@ -118,7 +125,7 @@ function App() {
           id="tutorial.step9"
           defaultMessage="Here you can see the total possible combinations with the added images."
         />
-      )
+      ),
     },
     {
       target: "#resolucion",
@@ -127,7 +134,7 @@ function App() {
           id="tutorial.step10"
           defaultMessage="This field allows you to see the supported resolution for the images (it is calculated based on the first image added)."
         />
-      )
+      ),
     },
     {
       target: "#rareza",
@@ -136,7 +143,7 @@ function App() {
           id="tutorial.step11"
           defaultMessage="In this option you can customize the probability that an image appears in each layer."
         />
-      )
+      ),
     },
     {
       target: "#generar",
@@ -145,32 +152,32 @@ function App() {
           id="tutorial.step12"
           defaultMessage="With this button you can generate your collection (certain conditions apply)."
         />
-      )
-    }
-  ])
-  const [loading, setLoading] = useState(true)
-  const setAccess_token = useStoreSignal((state) => state.setAccess_token)
-  let navigate = useNavigate()
+      ),
+    },
+  ]);
+  const [loading, setLoading] = useState(true);
+  const setAccess_token = useStoreSignal((state) => state.setAccess_token);
+  let navigate = useNavigate();
 
   useEffect(() => {
-    setDatosUserLS({ metamask, google, facebook })
-    fetchData()
+    setDatosUserLS({ metamask, google, facebook });
+    fetchData();
     //
     //
     //
-    const seconds = 3000
+    const seconds = 3000;
     setTimeout(() => {
-      setLoading(false)
-    }, seconds)
-  }, [isAuth])
+      setLoading(false);
+    }, seconds);
+  }, [isAuth]);
 
   useLayoutEffect(() => {
     if (!JSON.parse(localStorage.getItem("firstVisit"))) {
-      setShow(true)
+      setShow(true);
     }
-  }, [])
+  }, []);
 
-  const location = useLocation().pathname
+  const location = useLocation().pathname;
 
   const fetchData = async () => {
     if (
@@ -180,88 +187,90 @@ function App() {
       location === "/terms&conditions"
     ) {
       try {
-        let res = await createFolderUserServer()
-        setIsAuth(true)
-        return res
+        let res = await createFolderUserServer();
+        setIsAuth(true);
+        return res;
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
     } else {
-      setIsAuth(false)
-      navigate("/login")
+      setIsAuth(false);
+      navigate("/login");
     }
-  }
+  };
 
   async function createFolderUserServer() {
     let ObjetoUser = {
-      id: facebook?.tokenUser || google?.tokenUser || metamask?.tokenUser
-    }
+      id: facebook?.tokenUser || google?.tokenUser || metamask?.tokenUser,
+    };
 
-    var myHeaders = new Headers()
-    myHeaders.append("Content-Type", "application/json")
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
 
-    let url = `${URL}user`
+    let url = `${URL}user`;
     let myInit = {
       method: "POST",
       body: JSON.stringify(ObjetoUser),
-      headers: myHeaders
-    }
+      headers: myHeaders,
+    };
 
     if (location !== "/terms&conditions") {
-      let resPost = await fetch(url, myInit)
+      let resPost = await fetch(url, myInit);
       if (!resPost.ok) {
         // console.log({ resPost })
-        throw Error("HTTP status " + resPost.status)
+        throw Error("HTTP status " + resPost.status);
       }
 
-      let post = await resPost.json()
+      let post = await resPost.json();
       if (post.usuario !== "creado") {
-        localStorage.setItem("name", post[0].nombre)
-        localStorage.setItem("access_token", post[0].access_token)
-        setName(post[0].nombre)
-        const accesToken = localStorage.getItem("access_token")
-        setAccess_token(accesToken)
+        localStorage.setItem("name", post[0].nombre);
+        localStorage.setItem("access_token", post[0].access_token);
+        setName(post[0].nombre);
+        const accesToken = localStorage.getItem("access_token");
+        // console.log(accesToken);
+        setAccess_token(accesToken);
       }
-      validarDatosUserDesdeServidor(post)
-      return post
+      validarDatosUserDesdeServidor(post);
+      return post;
     }
   }
 
   function validarDatosUserDesdeServidor(res) {
-    if (res.usuario === "creado") setIsActiveModalRegister(true)
+    if (res.usuario === "creado") setIsActiveModalRegister(true);
     if (res[0]?.email === null) {
-      setIsActiveModalRegister(true)
+      setIsActiveModalRegister(true);
     }
     if (res[0]?.email === "") {
-      setIsActiveModalRegister(true)
+      setIsActiveModalRegister(true);
     }
     if (res[0]?.nombre === null) {
-      setIsActiveModalRegister(true)
+      setIsActiveModalRegister(true);
     }
     if (res[0]?.nombre === "") {
-      setIsActiveModalRegister(true)
+      setIsActiveModalRegister(true);
     }
   }
 
   function desLoguearse() {
-    localStorage.setItem("facebook", JSON.stringify(null))
-    localStorage.setItem("google", JSON.stringify(null))
-    localStorage.setItem("metamask", JSON.stringify(null))
-    setIsAuth(false)
+    localStorage.setItem("facebook", JSON.stringify(null));
+    localStorage.setItem("google", JSON.stringify(null));
+    localStorage.setItem("metamask", JSON.stringify(null));
+
+    setIsAuth(false);
   }
 
   if (isAuth === null) {
-    return null
+    return null;
   }
 
   const handleJoyride = (data) => {
-    const { action, status } = data
+    const { action, status } = data;
 
     if ([STATUS.FINISHED, STATUS.SKIPPED].includes(status)) {
-      localStorage.setItem("firstVisit", JSON.stringify(true))
-      setShow(false)
+      localStorage.setItem("firstVisit", JSON.stringify(true));
+      setShow(false);
     }
-  }
+  };
 
   return (
     <>
@@ -277,7 +286,7 @@ function App() {
                   width: "100%",
                   height: "100vh",
                   background: "rgba(0,0,0,0.4)",
-                  zIndex: "10000"
+                  zIndex: "10000",
                 }}
               >
                 <div className="w-50 bg-dark">
@@ -293,7 +302,7 @@ function App() {
                         width: `${
                           (100 / loadingImages.cantidadTotal) *
                           loadingImages.cantidadActual
-                        }%`
+                        }%`,
                       }}
                       aria-valuenow="75"
                       aria-valuemin="0"
@@ -357,7 +366,7 @@ function App() {
                 ),
                 close: intl.formatMessage({
                   id: "tutorial.modal.btn-close",
-                  defaultMessage: "Close"
+                  defaultMessage: "Close",
                 }),
                 last: (
                   <FormattedMessage
@@ -373,14 +382,14 @@ function App() {
                 ),
                 open: intl.formatMessage({
                   id: "tutorial.modal.btn-open",
-                  defaultMessage: "Open"
+                  defaultMessage: "Open",
                 }),
                 skip: (
                   <FormattedMessage
                     id="tutorial.modal.btn-skip"
                     defaultMessage="Skip"
                   />
-                )
+                ),
               }}
               continuous
               showProgress
@@ -390,8 +399,8 @@ function App() {
                   textColor: "#FFF",
                   primaryColor: "#00b8ff",
                   backgroundColor: "#00047a",
-                  arrowColor: "#00047a"
-                }
+                  arrowColor: "#00047a",
+                },
               }}
             />
           ) : null}
@@ -410,7 +419,7 @@ function App() {
               <button
                 className="__boton-mediano enphasis-button"
                 onClick={() => {
-                  setShowVideo(false)
+                  setShowVideo(false);
                 }}
               >
                 <FormattedMessage
@@ -450,7 +459,7 @@ function App() {
                   className="p-2"
                   style={{ cursor: "pointer" }}
                   onClick={() => {
-                    setShowContact(true)
+                    setShowContact(true);
                   }}
                 >
                   <FormattedMessage
@@ -477,7 +486,7 @@ function App() {
         </>
       )}
     </>
-  )
+  );
 }
 
-export default App
+export default App;
