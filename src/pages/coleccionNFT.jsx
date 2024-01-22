@@ -116,11 +116,15 @@ const ColeccionNFT = () => {
     try {
       let resPost = await fetch(url, myInit);
       let post = await resPost.json();
-      console.log(post);
-      setCollectall(post);
-      setIsPromiseReady(true);
-      console.log(post);
-      console.log("se hizo una solicitud");
+      if (post.message === "Usuario sin colecciones" || post.length === 0) {
+        setIsPromiseReady(false)
+        setCollectall([])
+      } else {
+        setCollectall(post)
+        setIsPromiseReady(true)
+        console.log(post)
+        console.log("se hizo una solicitud")
+      }
     } catch (error) {
       console.log(error);
     }
