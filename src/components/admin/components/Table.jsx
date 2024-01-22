@@ -1,5 +1,7 @@
 import { Box } from "@mui/material"
 import { DataGrid } from "@mui/x-data-grid"
+import { useEffect, useState } from "react"
+import { axiosClass } from "../../../api/api.config"
 
 const columns = [
   {
@@ -215,7 +217,7 @@ const columns = [
     headerClassName: "super-app-theme--header",
     headerAlign: "center",
     cellClassName: "super-app-theme--cell"
-  },
+  }
 ]
 
 const rows = [
@@ -230,6 +232,24 @@ const rows = [
   { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 }
 ]
 export default function Table() {
+  const [data, setData] = useState([])
+
+  const getDataTable = () => {
+    const response = axiosClass
+      .get("/history")
+      .then((res) => {
+        setData(res.data)
+      })
+      .catch((err) => console.log(err))
+
+    return response
+  }
+
+  useEffect(() => {
+    getDataTable()
+  }, [])
+
+  console.log(data)
   return (
     <Box sx={{ height: 400, width: "100%" }}>
       <DataGrid
