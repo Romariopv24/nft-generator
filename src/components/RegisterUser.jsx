@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { FormattedMessage } from "react-intl"
 import { ReactComponent as Closer } from "../assets/svg/close.svg"
 import { URL } from "../constantes"
+import { useStoreSignal } from "../utils/zustand/store"
 
 function RegisterUser({
   setIsActiveModalRegister,
@@ -9,6 +10,7 @@ function RegisterUser({
   fetchData,
   setName
 }) {
+  const setEmail = useStoreSignal((state) => state.setEmail)
   const [isErrorForm, setIsErrorForm] = useState({
     nombreEF: false,
     correoEF: false
@@ -84,6 +86,7 @@ function RegisterUser({
       console.log(ObjetoUser.nombre)
       setName(ObjetoUser.nombre)
       localStorage.setItem("name", ObjetoUser.nombre)
+      setEmail(localStorage.setItem("email", ObjetoUser.correo))
       console.log(res)
     } catch (error) {
       console.log(error)

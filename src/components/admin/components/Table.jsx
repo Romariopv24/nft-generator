@@ -12,7 +12,7 @@ export default function Table({ dataAdmin }) {
       cellClassName: "super-app-theme--cell"
     },
     {
-      field: "usuario",
+      field: "correo",
       headerName: "User",
       width: 500,
       headerClassName: "super-app-theme--header",
@@ -217,7 +217,7 @@ export default function Table({ dataAdmin }) {
       headerAlign: "center",
       cellClassName: "super-app-theme--cell",
       renderCell: (e) => {
-        const today = new Date(e.row.fecha.$date)
+        const today = new Date(e.row.fecha)
         return (
           <Typography textAlign={"center"} color={"white"} fontWeight={"bold"}>
             {today.toLocaleDateString("en-US")}
@@ -232,7 +232,7 @@ export default function Table({ dataAdmin }) {
       <DataGrid
         rows={dataAdmin.length !== 0 ? dataAdmin : []}
         columns={columns}
-        getRowId={(e) => e._id.$oid}
+        getRowId={(e) => e._id}
         initialState={{
           pagination: {
             paginationModel: {
@@ -270,6 +270,13 @@ export default function Table({ dataAdmin }) {
           "& .MuiDataGrid-columnHeaders": {
             backgroundColor: "#2731C8",
             borderRadius: "15px 15px"
+          },
+          "& .MuiDataGrid-virtualScroller::-webkit-scrollbar-thumb": {
+            backgroundColor: "#2731C8",
+            borderRadius: "20px"
+          },
+          "& .MuiDataGrid-virtualScroller::-webkit-scrollbar-thumb:hover": {
+            background: "#12175f"
           }
         }}
       />

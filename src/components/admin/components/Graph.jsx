@@ -1,7 +1,5 @@
 import { PieChart, pieArcLabelClasses } from "@mui/x-charts/PieChart"
 export default function Graph() {
-
-
   const data = [
     { id: 0, value: 10, label: "series A" },
     { id: 1, value: 15, label: "series B" },
@@ -34,7 +32,7 @@ export default function Graph() {
             fontSize: 14,
             fill: "#fff"
           },
-          padding: 0,
+          padding: 180,
           position: { vertical: "middle", horizontal: "left" }
         }
       }}
@@ -44,10 +42,9 @@ export default function Graph() {
           fontWeight: "bold"
         },
         [`& .css-1mhcdve-MuiPieArc-root `]: {
-          stroke: '#000'
+          stroke: "#000"
         }
       }}
     />
   )
 }
-

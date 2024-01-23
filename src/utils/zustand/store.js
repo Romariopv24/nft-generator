@@ -8,7 +8,9 @@ const useStoreSignal = create((set) => ({
   access_token: "",
   setAccess_token: (newState) => set((state) => ({ access_token: newState })),
   dataAdmin: [],
-  setDataAdmin: (newData) => set(() => ({ dataAdmin: newData }))
+  setDataAdmin: (newData) => set(() => ({ dataAdmin: newData })),
+  email: "",
+  setEmail: (newEmail) => set(() => ({ email: newEmail }))
 }))
 
 export { useStoreSignal }

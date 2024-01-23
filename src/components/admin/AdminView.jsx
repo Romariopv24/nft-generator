@@ -38,6 +38,7 @@ export default function AdminView() {
     getDataTable()
   }, [])
 
+
   return (
     <Stack alignItems={"center"}>
       <Stack my={5} mx={"auto"}>

@@ -12,8 +12,10 @@ import getCapas from "../utils/getCapas"
 import getSelectedCapaId from "../utils/getSelectedCapaId"
 import getUniqueId from "../utils/getUniqueId"
 import setCapa from "../utils/setCapa"
+import { useStoreSignal } from "../utils/zustand/store"
 
 const Generator = ({ setLoadingImages }) => {
+  const email = useStoreSignal((state) => state.email)
   const [capas, setCapas] = useState(getCapas())
   const [selectedCapa, setSelectedCapa] = useState(
     getCapas().find((s) => s.id === getSelectedCapaId())
@@ -256,12 +258,9 @@ const Generator = ({ setLoadingImages }) => {
     const name = inputProjectName.current.value.replace(/\s+/g, "")
     const description = inputProjectDescription.current.value
 
-
-
     let url = `${URL}p?cantidad=${Number(
       collectionSize
     )}&nombre=${name}&cb=${correo}&descripcion=${description}`
-
 
     var myHeaders = new Headers()
     myHeaders.append(
@@ -270,10 +269,9 @@ const Generator = ({ setLoadingImages }) => {
     )
     myHeaders.append("Content-Type", "application/json")
 
-
     let myInit = {
       method: "GET",
-      headers:myHeaders
+      headers: myHeaders
     }
     // setTimeout(() => setUrlNft('creando'), 7000)
     console.log(url)
@@ -379,6 +377,12 @@ const Generator = ({ setLoadingImages }) => {
           defaultMessage="Max of the total combinations must be 10.000"
         />
       )
+    }
+    if (email.length < 0) {
+      ;<FormattedMessage
+        id="generator.must-have-email"
+        defaultMessage="Please introduce your email to generate NFTs"
+      />
     }
     return false
   }
