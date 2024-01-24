@@ -17,7 +17,7 @@ import "../styles/scss/_menu.scss";
 import "../styles/scss/app.scss";
 import { listWalletPremiun } from "../constantes";
 import { jwtDecode } from "jwt-decode";
-import { useStoreSignal } from "../utils/zustand/store";
+import { useStoreProv } from "../utils/zustand/store";
 
 const Menu = ({
   desLoguearse,
@@ -46,7 +46,7 @@ const Menu = ({
     }
     createConection();
   }, [nameUser, location, name]);
-  const { access_token, setAccess_token } = useStoreSignal();
+  const { access_token, setAccess_token } = useStoreProv();
   const idioma = useContext(langContext);
 
   //setName = localStorage.getItem('name')

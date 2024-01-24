@@ -1,14 +1,14 @@
 // let URL = `https://apinftg.devmitsoftware.com`
 //export const URL = `http://38.242.196.143:5000`
 //export const URL = 'https://api.nftcreator.market'
-export const URL = "https://nftg-nfanst-api.devtop.online/"
+export const URL = "https://nftg-nfanst-api.devtop.online/";
 // export const WalletAddress = "0x70FDDe02e61981c1e21d0C33d04497116996CE7B" // wallet de nolverto
-export const WalletAddress = "0x5cBB31D9Cf75766342a8D048E09dEFb0071BfE2e" //wallet del jefe
-export const Ammount = 0.001
+export const WalletAddress = "0x5cBB31D9Cf75766342a8D048E09dEFb0071BfE2e"; //wallet del jefe
+export const Ammount = 0.001;
 export var myHeaders = new Headers({
   Authorization: "Basic dXN1YXJpbzpwd2Q=",
-  "Content-Type": "application/json"
-})
+  "Content-Type": "application/json",
+});
 
 export const listWalletPremiun = [
   "0xa54927b7af64DdB3e2c5Ac9cbec38c81EC88Be48",
@@ -18,11 +18,11 @@ export const listWalletPremiun = [
   "0x278afeeca694808991f70c3e851449434a13ecff",
   "0xFAC15a040568a8186212AA2e9CC1A5b2886914E1",
   "0xCc2b1442a561B0ab9D04599ae11b0fEc5E946112",
-  "0x0DD7986BC57B718583D788F28632F0D17d543C7A"
+  "0x6632E29366Cd872680Ac8a0895bD7A508227c92C",
   // "0x0bb14aDFc5ED1e126592042FDFED913F4d5E71f0"
-]
+];
 
-export const CMCURL = "https://nftg-nfanst-api.devtop.online/preciobnb"
+export const CMCURL = "https://nftg-nfanst-api.devtop.online/preciobnb";
 //  export const CMRURL = "https://api.nftcreator.market/preciobnb"
 
 // variables de pay para stripe
@@ -36,11 +36,11 @@ export const CMCURL = "https://nftg-nfanst-api.devtop.online/preciobnb"
 
 //precios de prueba de stripe de la empresa
 export const PUBLICKEY =
-  "pk_test_51IntJPHHbdm3JgV0ORseFLbrrflH4RdTK1kQo3TQetTo7RZAkvPvBCoC2T73WrjWMWXAfZq8woKFEQiow8FY8aJb00LvCuulNw"
-export const PRECIO_MIL_NFTS = "price_1L5VZnHHbdm3JgV0XeAN46KP" // 99$
-export const PRECIO_CINCO_MIL_NFTS = "price_1L5Va5HHbdm3JgV0Du93Spud" // 199$
-export const PRECIO_DIEZ_MIL_NFTS = "price_1L5VaLHHbdm3JgV0vPIUGLid" // 299$
-export const PRECIO_PRUEBA_NFTS = "price_1L5VaLHHbdm3JgV0vPIUGLid" // 299$
+  "pk_test_51IntJPHHbdm3JgV0ORseFLbrrflH4RdTK1kQo3TQetTo7RZAkvPvBCoC2T73WrjWMWXAfZq8woKFEQiow8FY8aJb00LvCuulNw";
+export const PRECIO_MIL_NFTS = "price_1L5VZnHHbdm3JgV0XeAN46KP"; // 99$
+export const PRECIO_CINCO_MIL_NFTS = "price_1L5Va5HHbdm3JgV0Du93Spud"; // 199$
+export const PRECIO_DIEZ_MIL_NFTS = "price_1L5VaLHHbdm3JgV0vPIUGLid"; // 299$
+export const PRECIO_PRUEBA_NFTS = "price_1L5VaLHHbdm3JgV0vPIUGLid"; // 299$
 
 //PRECIOS REALES PARA EL COBRO EN STRIPE DE LA EMPRESA
 // export const PUBLICKEY = 'pk_live_51IntJPHHbdm3JgV0f7uTOB1iCBRzrrA80ptbyqHh5Ze1aB6iskeIeYpxfPXhUti28v4cMEIlu9vZDPsPoazrqwbt006NLf13Mf'

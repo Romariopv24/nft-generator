@@ -2,12 +2,12 @@ import { Stack } from "@mui/material"
 import axios from "axios"
 import { useEffect } from "react"
 import { URL } from "../../constantes"
-import { useStoreSignal } from "../../utils/zustand/store"
+import { useStoreProv } from "../../utils/zustand/store"
 import Graph from "./components/Graph"
 import Table from "./components/Table"
 
 export default function AdminView() {
-  const { access_token, dataAdmin, setDataAdmin } = useStoreSignal((state) => ({
+  const { access_token, dataAdmin, setDataAdmin } = useStoreProv((state) => ({
     access_token: state.access_token,
     dataAdmin: state.dataAdmin,
     setDataAdmin: state.setDataAdmin

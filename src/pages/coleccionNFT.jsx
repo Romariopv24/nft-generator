@@ -14,7 +14,7 @@ import { FormattedMessage, useIntl } from "react-intl"
 import { Link } from "react-router-dom"
 
 import resetLocalStorage from "../utils/resetLocalStorage"
-import { useStoreSignal } from "../utils/zustand/store"
+import { useStoreProv } from "../utils/zustand/store"
 
 dayjs.locale("en") // use Spanish locale globally
 dayjs.extend(relativeTime)
@@ -239,8 +239,8 @@ const ColeccionNFT = () => {
     return post
   }
 
-  const signal = useStoreSignal((state) => state.signal)
-  const setSignal = useStoreSignal((state) => state.setSignal)
+  const signal = useStoreProv((state) => state.signal)
+  const setSignal = useStoreProv((state) => state.setSignal)
 
   useEffect(() => {
     if (signal === true) {

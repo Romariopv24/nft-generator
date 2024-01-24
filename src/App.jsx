@@ -23,7 +23,7 @@ import ColeccionNFT from "./pages/coleccionNFT";
 import Generator from "./pages/generator";
 import Terms from "./pages/terms";
 import "./styles/scss/_pedir-correro.scss";
-import { useStoreSignal } from "./utils/zustand/store";
+import { useStoreProv } from "./utils/zustand/store";
 import { jwtDecode } from "jwt-decode";
 
 function App() {
@@ -156,7 +156,7 @@ function App() {
     },
   ]);
   const [loading, setLoading] = useState(true);
-  const setAccess_token = useStoreSignal((state) => state.setAccess_token);
+  const setAccess_token = useStoreProv((state) => state.setAccess_token);
   let navigate = useNavigate();
 
   useEffect(() => {
@@ -331,6 +331,7 @@ function App() {
                       setIsAuth={setIsAuth}
                       desLoguearse={desLoguearse}
                       setLoadingImages={setLoadingImages}
+                      setIsActiveModalRegister={setIsActiveModalRegister}
                     />
                   )
                 }

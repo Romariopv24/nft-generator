@@ -49,6 +49,8 @@
   "form.btn-generate": "Generar",
   "from.validdimensions": "Hay una imagen con diferentes dimensiones, que se refleja con un fondo de color rojo, asegúrese de que todas las imágenes son de la misma dimensión.",
   "form.btn-close": "Cerrar",
+  "form.btn-form": "Editar tus Datos",
+
   "form.reqcollections": "Su solicitud está siendo procesada vaya a colleciones",
   "form.pay.paymentrequired": "Pago Requerido",
   "form.pay.paymentfree": "Usted va a generar la Coleccion: ",
@@ -94,7 +96,7 @@
   "generator.no-image": "No puede realizar una solicitud sin imágenes para enviar",
   "generator.max-combinatios2": "El minimo de combinaciones totales debe ser de 10",
   "generator.min-combinations2": "El maximo total de las imagenes debe ser de 10.000",
-  "generator.must-have-email": "Porfavor introduce tu correo electronico para generar NFTs",
+  "generator.must-have-email": "Por favor introduce tu datos en el formulario para generar NFTs",
 
   "colleccionNFT.loading": "Cargando...",
   "colleccionNFT.in": "en ",

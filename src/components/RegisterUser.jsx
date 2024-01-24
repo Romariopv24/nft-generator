@@ -1,41 +1,41 @@
-import { useEffect, useState } from "react"
-import { FormattedMessage } from "react-intl"
-import { ReactComponent as Closer } from "../assets/svg/close.svg"
-import { URL } from "../constantes"
-import { useStoreSignal } from "../utils/zustand/store"
+import { useEffect, useState } from "react";
+import { FormattedMessage } from "react-intl";
+import { ReactComponent as Closer } from "../assets/svg/close.svg";
+import { URL } from "../constantes";
+import { useStoreProv } from "../utils/zustand/store";
 
 function RegisterUser({
   setIsActiveModalRegister,
   datosUserLS,
   fetchData,
-  setName
+  setName,
 }) {
-  const setEmail = useStoreSignal((state) => state.setEmail)
+  const setEmail = useStoreProv((state) => state.setEmail);
   const [isErrorForm, setIsErrorForm] = useState({
     nombreEF: false,
-    correoEF: false
-  })
-  const [messageError, setMessageError] = useState()
-  const { metamask, google, facebook } = datosUserLS
-  const id = facebook?.tokenUser || google?.tokenUser || metamask?.tokenUser
-  const nombre = facebook?.nameUser || google?.nameUser
-  const correo = facebook?.correo || google?.correo
-  const wallet = metamask?.tokenUser
+    correoEF: false,
+  });
+  const [messageError, setMessageError] = useState();
+  const { metamask, google, facebook } = datosUserLS;
+  const id = facebook?.tokenUser || google?.tokenUser || metamask?.tokenUser;
+  const nombre = facebook?.nameUser || google?.nameUser;
+  const correo = facebook?.correo || google?.correo;
+  const wallet = metamask?.tokenUser;
   const [userData, setUserData] = useState({
     nombre: nombre || "",
     correo: correo || "",
     correob: "",
     telefono: "",
-    wallet: wallet || ""
-  })
+    wallet: wallet || "",
+  });
 
   useEffect(() => {
-    esperar()
-  }, [])
+    esperar();
+  }, []);
 
   async function esperar() {
     try {
-      let res = await fetchData()
+      let res = await fetchData();
       // console.log(res)
       if (userData.nombre === "") {
         if (res) {
@@ -44,86 +44,86 @@ function RegisterUser({
             correo: res[0].correo || userData.correo,
             correob: res[0].correob || userData.correob,
             telefono: res[0].telefono || userData.telefono,
-            wallet: res[0].wallet || userData.wallet
-          }
-          setUserData({ ...obj })
+            wallet: res[0].wallet || userData.wallet,
+          };
+          setUserData({ ...obj });
         }
       }
-      return res
+      return res;
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }
 
   function validarSiLosDatosRequeridosSonRellenados() {
     const regExpCorrero =
-      /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i
-    const regExpName = /\s+/g
+      /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+    const regExpName = /\s+/g;
 
     setIsErrorForm({
       ...isErrorForm,
       correoEF:
         !regExpCorrero.test(userData.correo) || userData.correo.length === 0,
-      nombreEF: userData.nombre.replace(regExpName, "").length === 0
-    })
+      nombreEF: userData.nombre.replace(regExpName, "").length === 0,
+    });
 
     if (userData.nombre.length === 0)
-      throw new Error("the name field cannot be empty")
+      throw new Error("the name field cannot be empty");
     if (!regExpCorrero.test(userData.correo) || userData.correo.length === 0)
-      throw new Error("the email must be a valid email")
+      throw new Error("the email must be a valid email");
 
-    return { ...userData, id: id }
+    return { ...userData, id: id };
   }
 
   async function handlesDatosUser() {
     try {
-      const ObjetoUser = validarSiLosDatosRequeridosSonRellenados()
-      const res = await submitDatosUser(ObjetoUser)
+      const ObjetoUser = validarSiLosDatosRequeridosSonRellenados();
+      const res = await submitDatosUser(ObjetoUser);
       if (res.menssage === "actualizado") {
-        setIsActiveModalRegister(false)
+        setIsActiveModalRegister(false);
       }
       // setUserData({ nombre: "", correo: "", correob: "", telefono: "", wallet: "" })
-      console.log(ObjetoUser.nombre)
-      setName(ObjetoUser.nombre)
-      localStorage.setItem("name", ObjetoUser.nombre)
-      setEmail(localStorage.setItem("email", ObjetoUser.correo))
-      console.log(res)
+      console.log(ObjetoUser.nombre);
+      setName(ObjetoUser.nombre);
+      localStorage.setItem("name", ObjetoUser.nombre);
+      setEmail(ObjetoUser.correo);
+      console.log(res);
     } catch (error) {
-      console.log(error)
+      console.log(error);
       setMessageError({
         nombre: "the name field cannot be empty",
-        correo: "You must enter a valid email"
-      })
+        correo: "You must enter a valid email",
+      });
     }
   }
 
   async function submitDatosUser(ObjetoUser) {
-    var myHeaders = new Headers()
-    myHeaders.append("Content-Type", "application/json")
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
     myHeaders.append(
       "Authorization",
       `Bearer ${localStorage.getItem("access_token")}`
-    )
+    );
 
-    let url = `${URL}/registrardatos`
+    let url = `${URL}/registrardatos`;
     let myInit = {
       method: "POST",
       body: JSON.stringify(ObjetoUser),
-      headers: myHeaders
-    }
+      headers: myHeaders,
+    };
 
-    let resPost = await fetch(url, myInit)
+    let resPost = await fetch(url, myInit);
     if (!resPost.ok) {
-      console.log({ resPost })
-      throw Error("HTTP status " + resPost.status)
+      console.log({ resPost });
+      throw Error("HTTP status " + resPost.status);
     }
-    let post = await resPost.json()
+    let post = await resPost.json();
     // console.log({status:`generando objecto User`,...post})
-    return post
+    return post;
   }
 
   const hanledChange = (e) => {
-    const { name, value } = e.target
+    const { name, value } = e.target;
 
     setUserData({
       ...userData,
@@ -134,10 +134,10 @@ function RegisterUser({
               .replace(/[^\+{1}(\d{1,3})|(\s)(\d+)$]/g, "")
               .replace(/\+/g, "")
               .replace(/\,/g, "")
-          : value
-    })
+          : value,
+    });
     // console.log(userData)
-  }
+  };
 
   return (
     <>
@@ -255,7 +255,7 @@ function RegisterUser({
         </div>
       </div>
     </>
-  )
+  );
 }
 
-export default RegisterUser
+export default RegisterUser;
