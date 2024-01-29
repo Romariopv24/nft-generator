@@ -10,7 +10,9 @@ const useStoreProv = create((set) => ({
   dataAdmin: [],
   setDataAdmin: (newData) => set(() => ({ dataAdmin: newData })),
   email: "",
-  setEmail: (newEmail) => set(() => ({ email: newEmail }))
+  setEmail: (newEmail) => set(() => ({ email: newEmail })),
+  signalToken: false,
+  setSignalToken: (state) => set(() => ({signalToken: !state.signal}))
 }))
 
 export { useStoreProv }
