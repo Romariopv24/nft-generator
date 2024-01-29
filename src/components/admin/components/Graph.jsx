@@ -1,8 +1,28 @@
 import { PieChart, pieArcLabelClasses } from "@mui/x-charts/PieChart"
-export default function Graph() {
+import { useIntl } from "react-intl"
+
+export default function Graph({ dataAdmin }) {
+  const intl = useIntl()
+  const dataUserEmail = dataAdmin.map((value) => value.correo)
+  const dataUserCollection = dataAdmin.map((value) => value.cantidad)
+
   const data = [
-    { id: 0, value: 10, label: "Usuarios" },
-    { id: 1, value: 15, label: "Colecciones" }
+    {
+      id: 0,
+      value: dataUserEmail.length,
+      label: intl.formatMessage({
+        id: "graph.data.value.user",
+        defaultMessage: "Users"
+      })
+    },
+    {
+      id: 1,
+      value: dataUserCollection.length,
+      label: intl.formatMessage({
+        id: "graph.data.value.collection",
+        defaultMessage: "Collections"
+      })
+    }
   ]
   return (
     <PieChart

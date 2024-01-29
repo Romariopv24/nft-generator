@@ -231,5 +231,7 @@
 
   "aviso.legal.item6.title": "Infringement Claims",
   "aviso.legal.item6.p1": "Users must cease using content upon awareness of infringement claims and inform Fanaticoins NFT Generator. Users are responsible for adopting measures and notifying Fanaticoins NFT Generator of infringement claims promptly.",
-  "aviso.legal.item6.p2": "The right to use content provided by Fanaticoins NFT Generator is governed by this Agreement, and users agree to its terms by downloading or exporting designs containing free stock media."
+  "aviso.legal.item6.p2": "The right to use content provided by Fanaticoins NFT Generator is governed by this Agreement, and users agree to its terms by downloading or exporting designs containing free stock media.",
+  "graph.data.value.user": "Users",
+  "graph.data.value.collection": "Collections"
 }

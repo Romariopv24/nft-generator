@@ -231,5 +231,10 @@
 
   "aviso.legal.item6.title": "Reclamaciones por Infracción:",
   "aviso.legal.item6.p1": "Los usuarios deben dejar de usar el contenido al conocer reclamaciones por infracción e informar a Fanaticoins NFT Generator. Los usuarios son responsables de adoptar medidas y notificar a Fanaticoins NFT Generator sobre reclamaciones por infracción de inmediato.",
-  "aviso.legal.item6.p2": "El derecho de usar el contenido proporcionado por Fanaticoins NFT Generator se rige por este Acuerdo, y los usuarios aceptan sus términos al descargar o exportar diseños que contengan medios de existencias gratuitos."
+  "aviso.legal.item6.p2": "El derecho de usar el contenido proporcionado por Fanaticoins NFT Generator se rige por este Acuerdo, y los usuarios aceptan sus términos al descargar o exportar diseños que contengan medios de existencias gratuitos.",
+
+  "graph.data.value.user": "Usuarios",
+  "graph.data.value.collection": "Colecciones"
+
+
 }
