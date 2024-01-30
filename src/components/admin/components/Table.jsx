@@ -277,6 +277,9 @@ export default function Table({ dataAdmin }) {
           },
           "& .MuiDataGrid-virtualScroller::-webkit-scrollbar-thumb:hover": {
             background: "#12175f"
+          },
+          "& .MuiDataGrid-menuIcon": {
+            display: "none"
           }
         }}
       />

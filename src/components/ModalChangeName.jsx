@@ -2,7 +2,6 @@ import React, { useState } from "react"
 import { FormattedMessage } from "react-intl"
 import { ReactComponent as Close } from "../assets/svg/close-ellipse.svg"
 import getCapas from "../utils/getCapas"
-import setSelectedCapaId from "../utils/setSelectedCapaId"
 
 export default function ModalChangeName(props) {
   const { capas, setCapas, selectedCapa, setOpenNewModal, setNewCapaName } =

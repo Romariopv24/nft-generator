@@ -1,8 +1,9 @@
-import { Stack } from "@mui/material"
+import { Button, Stack } from "@mui/material"
 import axios from "axios"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { URL } from "../../constantes"
 import { useStoreProv } from "../../utils/zustand/store"
+import AssingWalletsModal from "./components/AssingWalletsModal"
 import Graph from "./components/Graph"
 import Table from "./components/Table"
 
@@ -12,6 +13,10 @@ export default function AdminView() {
     dataAdmin: state.dataAdmin,
     setDataAdmin: state.setDataAdmin
   }))
+
+  const [open, setOpen] = useState(false)
+  const handleOpen = () => setOpen(true)
+  const handleClose = () => setOpen(false)
 
   const getDataTable = async () => {
     const headers = {
@@ -38,11 +43,17 @@ export default function AdminView() {
     getDataTable()
   }, [])
 
-
   return (
     <Stack alignItems={"center"}>
       <Stack my={5} mx={"auto"}>
         <Graph dataAdmin={dataAdmin} />
+      </Stack>
+      <Stack>
+        <Button onClick={handleOpen}>Open modal</Button>
+        <AssingWalletsModal
+          open={open}
+          handleClose={handleClose}
+        />
       </Stack>
       <Stack direction={"row"} mt={1} justifyContent={"center"} width={"80%"}>
         <Table dataAdmin={dataAdmin} />
