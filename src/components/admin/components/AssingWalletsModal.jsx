@@ -1,4 +1,4 @@
-import { Close, Send } from "@mui/icons-material"
+import { Close, Send } from "@mui/icons-material";
 import {
   Backdrop,
   Box,
@@ -6,11 +6,15 @@ import {
   Modal,
   OutlinedInput,
   Stack,
-  Typography
-} from "@mui/material"
-import TableWallets from "./TableWallets"
+  Typography,
+} from "@mui/material";
+import TableWallets from "./TableWallets";
+import { FormattedMessage, useIntl } from "react-intl";
 
 export default function AssingWalletsModal({ open, handleClose }) {
+  const intl = useIntl();
+
+
   return (
     <>
       <Modal
@@ -22,8 +26,8 @@ export default function AssingWalletsModal({ open, handleClose }) {
         slots={{ backdrop: Backdrop }}
         slotProps={{
           backdrop: {
-            timeout: 500
-          }
+            timeout: 500,
+          },
         }}
       >
         <Fade in={open}>
@@ -37,10 +41,13 @@ export default function AssingWalletsModal({ open, handleClose }) {
               variant="h4"
               component="h2"
               sx={{
-                color: "white"
+                color: "white",
               }}
             >
-              Free Wallets
+              <FormattedMessage
+                id="assing.wallet.title"
+                defaultMessage="Free Wallets"
+              />
             </Typography>
             <Box sx={divider} />
             <Typography
@@ -49,12 +56,18 @@ export default function AssingWalletsModal({ open, handleClose }) {
               sx={{ mt: 5, fontSize: "20px" }}
               component="h4"
             >
-              Enter the wallet that you want to be free
+              <FormattedMessage
+                id="assing.wallet.subtitle"
+                defaultMessage="Enter the wallet that you want to be free"
+              />
             </Typography>
             <Stack sx={boxWalletSend}>
               <OutlinedInput
                 sx={outLinedInputStyle}
-                placeholder="Enter a wallet 0x..."
+                placeholder={intl.formatMessage({
+                  id: "assing.wallet.placeholder",
+                  defaultMessage: "Enter a wallet 0x...",
+                })}
               />
               <Send sx={icon} />
             </Stack>
@@ -64,7 +77,7 @@ export default function AssingWalletsModal({ open, handleClose }) {
         </Fade>
       </Modal>
     </>
-  )
+  );
 }
 
 const style = {
@@ -81,8 +94,8 @@ const style = {
   justifyContent: "start",
   flexDirection: "column",
   textAlign: "center",
-  alignItems: "center"
-}
+  alignItems: "center",
+};
 
 const outLinedInputStyle = {
   border: "1px solid #00B8FF",
@@ -90,30 +103,30 @@ const outLinedInputStyle = {
   marginTop: 3.5,
   marginBottom: 3.5,
   color: "white",
-  width: "95%"
-}
+  width: "95%",
+};
 
 const boxWalletSend = {
   display: "flex",
   flexDirection: "row",
   width: "80%",
   alignItems: "center",
-  gap: 2
-}
+  gap: 2,
+};
 
 const divider = {
   background: "#00B8FF",
   width: "50%",
-  height: "3px"
-}
+  height: "3px",
+};
 
 const icon = {
   cursor: "pointer",
-  color: "#00B8FF"
-}
+  color: "#00B8FF",
+};
 
 const boxClose = {
   width: "100%",
   display: "flex",
-  justifyContent: "flex-end"
-}
+  justifyContent: "flex-end",
+};

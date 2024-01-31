@@ -1,23 +1,32 @@
-import { Box, Typography } from "@mui/material"
-import { DataGrid } from "@mui/x-data-grid"
+import { Box, Typography } from "@mui/material";
+import { DataGrid } from "@mui/x-data-grid";
+import { useIntl } from "react-intl";
 
 export default function Table({ dataAdmin }) {
+  const intl = useIntl();
+
   const columns = [
     {
       field: "nombre",
-      headerName: "Name Collection",
+      headerName: intl.formatMessage({
+        id: "table.admin.name-collection",
+        defaultMessage: "Collection Name",
+      }),
       width: 300,
       headerClassName: "super-app-theme--header",
       headerAlign: "center",
-      cellClassName: "super-app-theme--cell"
+      cellClassName: "super-app-theme--cell",
     },
     {
       field: "correo",
-      headerName: "User",
+      headerName: intl.formatMessage({
+        id: "table.admin.user",
+        defaultMessage: "User",
+      }),
       width: 500,
       headerClassName: "super-app-theme--header",
       headerAlign: "center",
-      cellClassName: "super-app-theme--cell"
+      cellClassName: "super-app-theme--cell",
       // renderCell: (e) => {
       //   const [open, setOpen] = useState(false)
       //   const [notificationBody, setNotificationBody] = useState({
@@ -173,11 +182,14 @@ export default function Table({ dataAdmin }) {
     },
     {
       field: "peso",
-      headerName: "Image Size",
+      headerName: intl.formatMessage({
+        id: "table.admin.size",
+        defaultMessage: "Size",
+      }),
       width: 150,
       headerClassName: "super-app-theme--header",
       headerAlign: "center",
-      cellClassName: "super-app-theme--cell"
+      cellClassName: "super-app-theme--cell",
       // renderCell: (e) => {
       //   // const handleRadioChange = (event) => {
       //   //   const newStatus = event.target.value
@@ -211,21 +223,24 @@ export default function Table({ dataAdmin }) {
     },
     {
       field: "fecha",
-      headerName: "Date Download",
+      headerName: intl.formatMessage({
+        id: "table.admin.download",
+        defaultMessage: "Download Date",
+      }),
       width: 190,
       headerClassName: "super-app-theme--header",
       headerAlign: "center",
       cellClassName: "super-app-theme--cell",
       renderCell: (e) => {
-        const today = new Date(e.row.fecha)
+        const today = new Date(e.row.fecha);
         return (
           <Typography textAlign={"center"} color={"white"} fontWeight={"bold"}>
             {today.toLocaleDateString("en-US")}
           </Typography>
-        )
-      }
-    }
-  ]
+        );
+      },
+    },
+  ];
 
   return (
     <Box sx={{ height: 400, width: "75%", marginBottom: 10 }}>
@@ -236,9 +251,9 @@ export default function Table({ dataAdmin }) {
         initialState={{
           pagination: {
             paginationModel: {
-              pageSize: 5
-            }
-          }
+              pageSize: 5,
+            },
+          },
         }}
         pageSizeOptions={[5]}
         checkboxSelection={false}
@@ -251,38 +266,38 @@ export default function Table({ dataAdmin }) {
           borderRadius: "20px",
           "& .super-app-theme--cell": {
             display: "flex",
-            justifyContent: "center"
+            justifyContent: "center",
           },
           "& .MuiToolbar-root": {
-            color: "white"
+            color: "white",
           },
           "& MuiTablePagination-actions": {
-            color: "white"
+            color: "white",
           },
           "& .MuiDataGrid-virtualScroller::-webkit-scrollbar": {
             width: "5px",
-            height: "10px"
+            height: "10px",
           },
           "& .MuiDataGrid-columnHeaderTitle ": {
             color: "white",
-            fontWeight: "bold"
+            fontWeight: "bold",
           },
           "& .MuiDataGrid-columnHeaders": {
             backgroundColor: "#2731C8",
-            borderRadius: "15px 15px"
+            borderRadius: "15px 15px",
           },
           "& .MuiDataGrid-virtualScroller::-webkit-scrollbar-thumb": {
             backgroundColor: "#2731C8",
-            borderRadius: "20px"
+            borderRadius: "20px",
           },
           "& .MuiDataGrid-virtualScroller::-webkit-scrollbar-thumb:hover": {
-            background: "#12175f"
+            background: "#12175f",
           },
           "& .MuiDataGrid-menuIcon": {
-            display: "none"
-          }
+            display: "none",
+          },
         }}
       />
     </Box>
-  )
+  );
 }
