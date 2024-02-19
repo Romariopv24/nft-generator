@@ -1,14 +1,32 @@
-import { Delete } from "@mui/icons-material"
-import { Box, Typography } from "@mui/material"
+import { Box } from "@mui/material"
 import { DataGrid } from "@mui/x-data-grid"
+import { useEffect, useState } from "react"
+import { axiosClass } from "../../../api/api.config"
 
 export default function TableWallets() {
+  const [getWallet, setGetWallet] = useState([])
+  const getWallets = () => {
+    axiosClass
+      .get("getwallet")
+      .then((res) => {
+        if (res.status === 200) {
+          setGetWallet(res.data)
+          return
+        }
+      })
+      .catch((err) => console.log(err))
+  }
+
+  useEffect(() => {
+    getWallets()
+  }, [])
+
   return (
     <Box sx={{ height: 400, width: "100%", marginTop: 5 }}>
       <DataGrid
-        rows={rows}
+        rows={getWallet}
         columns={columns}
-        // getRowId={(e) => e._id}
+        getRowId={(e) => e._id.$oid}
         initialState={{
           pagination: {
             paginationModel: {
@@ -65,39 +83,40 @@ export default function TableWallets() {
 
 const columns = [
   {
-    field: "user",
-    headerName: "User",
+    field: "usuario",
+    headerName: "usuario",
     width: 270,
     headerAlign: "center",
     cellClassName: "super-app-theme--cell",
     editable: true,
     renderCell: (e) => {
-      return <Typography fontSize={"15px"}>{e.formattedValue}</Typography>
+      console.log(e)
+      // return <Typography fontSize={"15px"}>{e.formattedValue}</Typography>
     }
   },
   {
     field: "wallet",
-    headerName: "Wallet",
+    headerName: "wallet",
     type: "number",
     width: 400,
     headerAlign: "center",
     cellClassName: "super-app-theme--cell",
     editable: true,
     renderCell: (e) => {
-      return <Typography fontSize={"15px"}>{e.formattedValue}</Typography>
-    }
-  },
-  {
-    field: "delete",
-    headerName: "Delete",
-    type: "number",
-    width: 110,
-    headerAlign: "center",
-    cellClassName: "super-app-theme--cell",
-    renderCell: (e) => {
-      return <Delete sx={{ cursor: "pointer" }} color="red" />
+      // return <Typography fontSize={"15px"}>{e.formattedValue}</Typography>
     }
   }
+  // {
+  //   field: "delete",
+  //   headerName: "Delete",
+  //   type: "number",
+  //   width: 110,
+  //   headerAlign: "center",
+  //   cellClassName: "super-app-theme--cell",
+  //   renderCell: (e) => {
+  //     // return <Delete sx={{ cursor: "pointer" }} color="red" />
+  //   }
+  // }
 ]
 
 const rows = [

@@ -8,61 +8,77 @@ import {
   Stack,
   Typography
 } from "@mui/material"
+import { useState } from "react"
+import { axiosClass } from "../../../api/api.config"
 import TableWallets from "./TableWallets"
 
 export default function AssingWalletsModal({ open, handleClose }) {
+  const [wallet, setWallet] = useState("")
+
+  const handleSubmit = () => {
+    axiosClass
+      .post("/setwallet", { wallet: wallet })
+      .then((res) => {
+        console.log("post setwallet", res)
+      })
+      .catch((err) => console.log(err))
+  }
+
   return (
     <>
-      <Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
-        open={open}
-        onClose={handleClose}
-        closeAfterTransition
-        slots={{ backdrop: Backdrop }}
-        slotProps={{
-          backdrop: {
-            timeout: 500
-          }
-        }}
-      >
-        <Fade in={open}>
-          <Box sx={style}>
-            <Box sx={boxClose}>
-              <Close onClick={handleClose} sx={icon} />
+      <form handleSubmit={handleSubmit}>
+        <Modal
+          aria-labelledby="transition-modal-title"
+          aria-describedby="transition-modal-description"
+          open={open}
+          onClose={handleClose}
+          closeAfterTransition
+          slots={{ backdrop: Backdrop }}
+          slotProps={{
+            backdrop: {
+              timeout: 500
+            }
+          }}
+        >
+          <Fade in={open}>
+            <Box sx={style}>
+              <Box sx={boxClose}>
+                <Close onClick={handleClose} sx={icon} />
+              </Box>
+
+              <Typography
+                id="transition-modal-title"
+                variant="h4"
+                component="h2"
+                sx={{
+                  color: "white"
+                }}
+              >
+                Free Wallets
+              </Typography>
+              <Box sx={divider} />
+              <Typography
+                color={"white"}
+                id="transition-modal-description"
+                sx={{ mt: 5, fontSize: "20px" }}
+                component="h4"
+              >
+                Enter the wallet that you want to be free
+              </Typography>
+              <Stack sx={boxWalletSend}>
+                <OutlinedInput
+                  onChange={(e) => setWallet(e.target.value)}
+                  sx={outLinedInputStyle}
+                  placeholder="Enter a wallet 0x..."
+                />
+                <Send onClick={handleSubmit} sx={icon} />
+              </Stack>
+
+              <TableWallets />
             </Box>
-
-            <Typography
-              id="transition-modal-title"
-              variant="h4"
-              component="h2"
-              sx={{
-                color: "white"
-              }}
-            >
-              Free Wallets
-            </Typography>
-            <Box sx={divider} />
-            <Typography
-              color={"white"}
-              id="transition-modal-description"
-              sx={{ mt: 5, fontSize: "20px" }}
-              component="h4"
-            >
-              Enter the wallet that you want to be free
-            </Typography>
-            <Stack sx={boxWalletSend}>
-              <OutlinedInput
-                sx={outLinedInputStyle}
-                placeholder="Enter a wallet 0x..."
-              />
-              <Send sx={icon} />
-            </Stack>
-
-            <TableWallets />
-          </Box>
-        </Fade>
-      </Modal>
+          </Fade>
+        </Modal>
+      </form>
     </>
   )
 }

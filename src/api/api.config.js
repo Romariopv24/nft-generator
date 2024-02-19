@@ -15,13 +15,20 @@ class Api {
     }
   }
 
-  async get(url = this.axiosConfig.baseURL, headers) {
+  async get(
+    url = this.axiosConfig.baseURL,
+    headers = this.axiosConfig.headers
+  ) {
     const fetcher = axios.create(this.axiosConfig)
     const response = await fetcher.get(url, headers)
     return response
   }
 
-  async post(url = this.axiosConfig.baseURL, data, headers) {
+  async post(
+    url = this.axiosConfig.baseURL,
+    data,
+    headers = this.axiosConfig.headers
+  ) {
     const fetcher = axios.create(this.axiosConfig)
     const response = await fetcher.post(url, data, headers)
     return response
