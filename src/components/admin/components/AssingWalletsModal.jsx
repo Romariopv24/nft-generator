@@ -1,4 +1,4 @@
-import { Close, Send } from "@mui/icons-material"
+import { Close, Send } from "@mui/icons-material";
 import {
   Backdrop,
   Box,
@@ -80,7 +80,7 @@ export default function AssingWalletsModal({ open, handleClose }) {
         </Modal>
       </form>
     </>
-  )
+  );
 }
 
 const style = {
@@ -97,8 +97,8 @@ const style = {
   justifyContent: "start",
   flexDirection: "column",
   textAlign: "center",
-  alignItems: "center"
-}
+  alignItems: "center",
+};
 
 const outLinedInputStyle = {
   border: "1px solid #00B8FF",
@@ -106,30 +106,30 @@ const outLinedInputStyle = {
   marginTop: 3.5,
   marginBottom: 3.5,
   color: "white",
-  width: "95%"
-}
+  width: "95%",
+};
 
 const boxWalletSend = {
   display: "flex",
   flexDirection: "row",
   width: "80%",
   alignItems: "center",
-  gap: 2
-}
+  gap: 2,
+};
 
 const divider = {
   background: "#00B8FF",
   width: "50%",
-  height: "3px"
-}
+  height: "3px",
+};
 
 const icon = {
   cursor: "pointer",
-  color: "#00B8FF"
-}
+  color: "#00B8FF",
+};
 
 const boxClose = {
   width: "100%",
   display: "flex",
-  justifyContent: "flex-end"
-}
+  justifyContent: "flex-end",
+};

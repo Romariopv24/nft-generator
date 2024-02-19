@@ -234,7 +234,20 @@
   "aviso.legal.item6.p2": "El derecho de usar el contenido proporcionado por Fanaticoins NFT Generator se rige por este Acuerdo, y los usuarios aceptan sus términos al descargar o exportar diseños que contengan medios de existencias gratuitos.",
 
   "graph.data.value.user": "Usuarios",
-  "graph.data.value.collection": "Colecciones"
+  "graph.data.value.collection": "Colecciones",
 
+  "table.admin.name-collection": "Nombre de la Coleccion",
+  "table.admin.user": "Usuario",
+  "table.admin.size": "Tamaño",
+  "table.admin.download": "Fecha de Descarga",
 
+  "assing.wallet.button": "Asignar Wallets",
+  "assing.wallet.title": "Wallets Gratis",
+  "assing.wallet.subtitle": "Ingrese la cartera que desea que sea gratuita",
+  "assing.wallet.placeholder": "Ingrese una wallet 0x...",
+
+  "assing.wallet.table-user": "Usuario",
+  "assing.wallet.table-wallet": "Cartera",
+  "assing.wallet.table-delete": "Eliminar"
+  
 }

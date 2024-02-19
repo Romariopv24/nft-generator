@@ -233,5 +233,20 @@
   "aviso.legal.item6.p1": "Users must cease using content upon awareness of infringement claims and inform Fanaticoins NFT Generator. Users are responsible for adopting measures and notifying Fanaticoins NFT Generator of infringement claims promptly.",
   "aviso.legal.item6.p2": "The right to use content provided by Fanaticoins NFT Generator is governed by this Agreement, and users agree to its terms by downloading or exporting designs containing free stock media.",
   "graph.data.value.user": "Users",
-  "graph.data.value.collection": "Collections"
+  "graph.data.value.collection": "Collections",
+
+  "table.admin.name-collection": "Collection Name",
+  "table.admin.user": "User",
+  "table.admin.size": "Size",
+  "table.admin.download": "Download Date",
+
+  "assing.wallet.button": "Assing Wallets",
+  "assing.wallet.title": "Free Wallets",
+  "assing.wallet.subtitle": "Enter the wallet that you want to be free",
+  "assing.wallet.placeholder":"Enter a wallet 0x...",
+
+  "assing.wallet.table-user": "User",
+  "assing.wallet.table-wallet": "Wallet",
+  "assing.wallet.table-delete": "Delete"
+
 }

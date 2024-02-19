@@ -30,9 +30,9 @@ export default function TableWallets() {
         initialState={{
           pagination: {
             paginationModel: {
-              pageSize: 5
-            }
-          }
+              pageSize: 5,
+            },
+          },
         }}
         pageSizeOptions={[5]}
         checkboxSelection={false}
@@ -45,40 +45,40 @@ export default function TableWallets() {
           borderRadius: "20px",
           "& .super-app-theme--cell": {
             display: "flex",
-            justifyContent: "center"
+            justifyContent: "center",
           },
           "& .MuiToolbar-root": {
-            color: "white"
+            color: "white",
           },
           "& MuiTablePagination-actions": {
-            color: "white"
+            color: "white",
           },
           "& .MuiDataGrid-virtualScroller::-webkit-scrollbar": {
             width: "5px",
-            height: "10px"
+            height: "10px",
           },
           "& .MuiDataGrid-columnHeaderTitle ": {
             color: "white",
-            fontWeight: "bold"
+            fontWeight: "bold",
           },
           "& .MuiDataGrid-columnHeaders": {
             backgroundColor: "#2731C8",
-            borderRadius: "15px 15px"
+            borderRadius: "15px 15px",
           },
           "& .MuiDataGrid-virtualScroller::-webkit-scrollbar-thumb": {
             backgroundColor: "#2731C8",
-            borderRadius: "20px"
+            borderRadius: "20px",
           },
           "& .MuiDataGrid-virtualScroller::-webkit-scrollbar-thumb:hover": {
-            background: "#12175f"
+            background: "#12175f",
           },
           "& .MuiDataGrid-menuIcon": {
-            display: "none"
-          }
+            display: "none",
+          },
         }}
       />
     </Box>
-  )
+  );
 }
 
 const columns = [

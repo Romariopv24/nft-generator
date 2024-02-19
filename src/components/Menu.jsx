@@ -16,7 +16,6 @@ import "../styles/scss/_logo.scss";
 import "../styles/scss/_menu.scss";
 import "../styles/scss/app.scss";
 import { listWalletPremiun } from "../constantes";
-import { jwtDecode } from "jwt-decode";
 import { useStoreProv } from "../utils/zustand/store";
 
 const Menu = ({

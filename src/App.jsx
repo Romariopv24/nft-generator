@@ -42,7 +42,7 @@ function App() {
       target: "#capas",
       disableBeacon: true,
       content: (
-        <FormattedMessage
+        <ttedMessage
           id="tutorial.step1"
           defaultMessage="Here you can organize your layers to change how your final nft will look like."
         />
