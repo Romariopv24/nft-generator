@@ -210,7 +210,7 @@ function App() {
     if (location !== "/terms&conditions") {
       let resPost = await fetch(url, myInit)
       if (!resPost.ok) {
-        // console.log({ resPost })
+        console.log({ resPost })
         throw Error("HTTP status " + resPost.status)
       }
 

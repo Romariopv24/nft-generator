@@ -1,26 +1,7 @@
-import { Box } from "@mui/material"
+import { Box, Typography } from "@mui/material"
 import { DataGrid } from "@mui/x-data-grid"
-import { useEffect, useState } from "react"
-import { axiosClass } from "../../../api/api.config"
 
-export default function TableWallets() {
-  const [getWallet, setGetWallet] = useState([])
-  const getWallets = () => {
-    axiosClass
-      .get("getwallet")
-      .then((res) => {
-        if (res.status === 200) {
-          setGetWallet(res.data)
-          return
-        }
-      })
-      .catch((err) => console.log(err))
-  }
-
-  useEffect(() => {
-    getWallets()
-  }, [])
-
+export default function TableWallets({ getWallet }) {
   return (
     <Box sx={{ height: 400, width: "100%", marginTop: 5 }}>
       <DataGrid
@@ -30,9 +11,9 @@ export default function TableWallets() {
         initialState={{
           pagination: {
             paginationModel: {
-              pageSize: 5,
-            },
-          },
+              pageSize: 5
+            }
+          }
         }}
         pageSizeOptions={[5]}
         checkboxSelection={false}
@@ -45,53 +26,52 @@ export default function TableWallets() {
           borderRadius: "20px",
           "& .super-app-theme--cell": {
             display: "flex",
-            justifyContent: "center",
+            justifyContent: "center"
           },
           "& .MuiToolbar-root": {
-            color: "white",
+            color: "white"
           },
           "& MuiTablePagination-actions": {
-            color: "white",
+            color: "white"
           },
           "& .MuiDataGrid-virtualScroller::-webkit-scrollbar": {
             width: "5px",
-            height: "10px",
+            height: "10px"
           },
           "& .MuiDataGrid-columnHeaderTitle ": {
             color: "white",
-            fontWeight: "bold",
+            fontWeight: "bold"
           },
           "& .MuiDataGrid-columnHeaders": {
             backgroundColor: "#2731C8",
-            borderRadius: "15px 15px",
+            borderRadius: "15px 15px"
           },
           "& .MuiDataGrid-virtualScroller::-webkit-scrollbar-thumb": {
             backgroundColor: "#2731C8",
-            borderRadius: "20px",
+            borderRadius: "20px"
           },
           "& .MuiDataGrid-virtualScroller::-webkit-scrollbar-thumb:hover": {
-            background: "#12175f",
+            background: "#12175f"
           },
           "& .MuiDataGrid-menuIcon": {
-            display: "none",
-          },
+            display: "none"
+          }
         }}
       />
     </Box>
-  );
+  )
 }
 
 const columns = [
   {
-    field: "usuario",
-    headerName: "usuario",
+    field: "correo",
+    headerName: "correo",
     width: 270,
     headerAlign: "center",
     cellClassName: "super-app-theme--cell",
     editable: true,
     renderCell: (e) => {
-      console.log(e)
-      // return <Typography fontSize={"15px"}>{e.formattedValue}</Typography>
+      return <Typography fontSize={"15px"}>{e.row.correo}</Typography>
     }
   },
   {
@@ -103,7 +83,7 @@ const columns = [
     cellClassName: "super-app-theme--cell",
     editable: true,
     renderCell: (e) => {
-      // return <Typography fontSize={"15px"}>{e.formattedValue}</Typography>
+      return <Typography fontSize={"15px"}>{e.row.usuario}</Typography>
     }
   }
   // {

@@ -1,4 +1,4 @@
-import { Close, Send } from "@mui/icons-material";
+import { Close, Send } from "@mui/icons-material"
 import {
   Backdrop,
   Box,
@@ -8,20 +8,47 @@ import {
   Stack,
   Typography
 } from "@mui/material"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { axiosClass } from "../../../api/api.config"
 import TableWallets from "./TableWallets"
 
 export default function AssingWalletsModal({ open, handleClose }) {
   const [wallet, setWallet] = useState("")
+  const [getWallet, setGetWallet] = useState([])
 
   const handleSubmit = () => {
     axiosClass
       .post("/setwallet", { wallet: wallet })
       .then((res) => {
-        console.log("post setwallet", res)
+        if (res.status === 200) {
+          getWallets()
+          return
+        }
       })
       .catch((err) => console.log(err))
+  }
+
+  const getWallets = () => {
+    axiosClass
+      .get("getwallet")
+      .then((res) => {
+        if (res.status === 200) {
+          setGetWallet(res.data)
+          return
+        }
+      })
+      .catch((err) => console.log(err))
+  }
+
+  useEffect(() => {
+    getWallets()
+  }, [])
+
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      handleSubmit()
+      return
+    }
   }
 
   return (
@@ -67,20 +94,23 @@ export default function AssingWalletsModal({ open, handleClose }) {
               </Typography>
               <Stack sx={boxWalletSend}>
                 <OutlinedInput
+                  value={wallet.trim()}
                   onChange={(e) => setWallet(e.target.value)}
+                  inputProps={{ maxLength: 42 }}
                   sx={outLinedInputStyle}
                   placeholder="Enter a wallet 0x..."
+                  onKeyDown={handleKeyDown}
                 />
                 <Send onClick={handleSubmit} sx={icon} />
               </Stack>
 
-              <TableWallets />
+              <TableWallets getWallet={getWallet} />
             </Box>
           </Fade>
         </Modal>
       </form>
     </>
-  );
+  )
 }
 
 const style = {
@@ -97,8 +127,8 @@ const style = {
   justifyContent: "start",
   flexDirection: "column",
   textAlign: "center",
-  alignItems: "center",
-};
+  alignItems: "center"
+}
 
 const outLinedInputStyle = {
   border: "1px solid #00B8FF",
@@ -106,30 +136,30 @@ const outLinedInputStyle = {
   marginTop: 3.5,
   marginBottom: 3.5,
   color: "white",
-  width: "95%",
-};
+  width: "95%"
+}
 
 const boxWalletSend = {
   display: "flex",
   flexDirection: "row",
   width: "80%",
   alignItems: "center",
-  gap: 2,
-};
+  gap: 2
+}
 
 const divider = {
   background: "#00B8FF",
   width: "50%",
-  height: "3px",
-};
+  height: "3px"
+}
 
 const icon = {
   cursor: "pointer",
-  color: "#00B8FF",
-};
+  color: "#00B8FF"
+}
 
 const boxClose = {
   width: "100%",
   display: "flex",
-  justifyContent: "flex-end",
-};
+  justifyContent: "flex-end"
+}
