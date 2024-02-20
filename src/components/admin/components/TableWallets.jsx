@@ -1,3 +1,4 @@
+import { Delete } from "@mui/icons-material"
 import { Box, Typography } from "@mui/material"
 import { DataGrid } from "@mui/x-data-grid"
 
@@ -85,18 +86,18 @@ const columns = [
     renderCell: (e) => {
       return <Typography fontSize={"15px"}>{e.row.usuario}</Typography>
     }
+  },
+  {
+    field: "delete",
+    headerName: "",
+    type: "number",
+    width: 110,
+    headerAlign: "center",
+    cellClassName: "super-app-theme--cell",
+    renderCell: (e) => {
+      return <Delete sx={{ cursor: "pointer" }} color="red" />
+    }
   }
-  // {
-  //   field: "delete",
-  //   headerName: "Delete",
-  //   type: "number",
-  //   width: 110,
-  //   headerAlign: "center",
-  //   cellClassName: "super-app-theme--cell",
-  //   renderCell: (e) => {
-  //     // return <Delete sx={{ cursor: "pointer" }} color="red" />
-  //   }
-  // }
 ]
 
 const rows = [
