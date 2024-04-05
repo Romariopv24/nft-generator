@@ -442,7 +442,7 @@ const Form = ({
       myHeaders.append("Content-Type", "application/json")
 
       let myInit = {
-        method: "GET",
+        method: "POST",
         headers: myHeaders
       }
 
