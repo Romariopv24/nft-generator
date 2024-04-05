@@ -1020,7 +1020,6 @@ const Form = ({
 
   async function loadImageFromDB() {
     let result = await obtenerTodo(db, "images")
-    // console.log(result)
     setlistImagenDB(result)
     return result
   }
