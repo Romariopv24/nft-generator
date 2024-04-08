@@ -1,5 +1,5 @@
 {
-  "login.metamask": "Login with Metamasks",
+  "login.metamask": "Login with Metamaskssss",
   "login.title": "Unlimited NFT Generator!",
 
   "login.metamasknotinstalled": "MetaMask is not installed!",
@@ -243,10 +243,9 @@
   "assing.wallet.button": "Assing Wallets",
   "assing.wallet.title": "Free Wallets",
   "assing.wallet.subtitle": "Enter the wallet that you want to be free",
-  "assing.wallet.placeholder":"Enter a wallet 0x...",
+  "assing.wallet.placeholder": "Enter a wallet 0x...",
 
   "assing.wallet.table-user": "User",
   "assing.wallet.table-wallet": "Wallet",
   "assing.wallet.table-delete": "Delete"
-
 }

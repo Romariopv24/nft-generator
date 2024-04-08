@@ -386,7 +386,7 @@ const Generator = ({
         />
       )
     }
-    if (email.length < 1) {
+    if (email.length > 1) {
       return (
         <FormattedMessage
           id="generator.must-have-email"
@@ -458,36 +458,39 @@ const Generator = ({
       setUrlNft(false)
     }
   }
-  useEffect(function validateToken() {
-    setTimeout(() => {
-      setSignalToken(true)
-    }, 500)
-    let interval = null
-    if (access_token !== null) {
-      const decoded = jwtDecode(access_token)?.exp
-      const decoded_time = new Date(decoded * 1000)
-      if (signalToken)
-        interval = setInterval(() => {
-          const currentDate = new Date()
-          if (currentDate > decoded_time) {
-            setName(null)
-            desLoguearse()
-            localStorage.clear()
-            setAccess_token(null)
-            clearInterval(interval)
-            setSignalToken(false)
-          } else if (currentDate < decoded_time && access_token.length > 0) {
-            console.log(currentDate > decoded_time)
-            console.log(currentDate)
-            console.log(decoded_time)
-          }
-        }, 3000)
-    }
+  useEffect(
+    function validateToken() {
+      setTimeout(() => {
+        setSignalToken(true)
+      }, 500)
+      let interval = null
+      if (access_token !== null) {
+        const decoded = jwtDecode(access_token)?.exp
+        const decoded_time = new Date(decoded * 1000)
+        if (signalToken)
+          interval = setInterval(() => {
+            const currentDate = new Date()
+            if (currentDate > decoded_time) {
+              setName(null)
+              desLoguearse()
+              localStorage.clear()
+              setAccess_token(null)
+              clearInterval(interval)
+              setSignalToken(false)
+            } else if (currentDate < decoded_time && access_token.length > 0) {
+              console.log(currentDate > decoded_time)
+              console.log(currentDate)
+              console.log(decoded_time)
+            }
+          }, 3000)
+      }
 
-    return () => {
-      clearInterval(interval)
-    }
-  }, [signalToken])
+      return () => {
+        clearInterval(interval)
+      }
+    },
+    [signalToken]
+  )
 
   return (
     <>
