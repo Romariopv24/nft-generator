@@ -248,6 +248,30 @@
 
   "assing.wallet.table-user": "Usuario",
   "assing.wallet.table-wallet": "Cartera",
-  "assing.wallet.table-delete": "Eliminar"
-  
+  "assing.wallet.table-delete": "Eliminar",
+
+  "to": "HASTA",
+  "item": "ACTIVA PARA GENERAR",
+  "features1[0]": "100 COMBINACIONES ÚNICAS",
+  "features1[1]": "VISTAS PREVIAS ILIMITADAS",
+  "features1[2]": "GENERACIÓN DE COLECCIONES",
+  "features1[3]": "METADATOS",
+
+  "features2[0]": "1000 COMBINACIONES ÚNICAS",
+  "features2[1]": "VISTAS PREVIAS ILIMITADAS",
+  "features2[2]": "GENERACIÓN DE COLECCIONES",
+  "features2[3]": "METADATOS",
+
+  "features3[0]": "5000 COMBINACIONES ÚNICAS",
+  "features3[1]": "VISTAS PREVIAS ILIMITADAS",
+  "features3[2]": "GENERACIÓN DE COLECCIONES",
+  "features3[3]": "METADATOS",
+  "features3[4]": "SOPORTE PERSONALIZADO",
+
+  "features4[0]": "10000 COMBINACIONES ÚNICAS",
+  "features4[1]": "VISTAS PREVIAS ILIMITADAS",
+  "features4[2]": "GENERACIÓN DE COLECCIONES",
+  "features4[3]": "METADATOS",
+  "features4[4]": "SOPORTE PERSONALIZADO",
+  "Free": "GRATIS"
 }

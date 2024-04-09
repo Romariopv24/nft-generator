@@ -247,5 +247,30 @@
 
   "assing.wallet.table-user": "User",
   "assing.wallet.table-wallet": "Wallet",
-  "assing.wallet.table-delete": "Delete"
+  "assing.wallet.table-delete": "Delete",
+
+  "to": "TO",
+  "item": "ACTIVATED GENERATED",
+  "features1[0]": "100 UNIQUE COMBINATIONS",
+  "features1[1]": "UNLIMITED PREVIEWS",
+  "features1[2]": "COLLECTION GENERATION",
+  "features1[3]": "METADATA",
+
+  "features2[0]": "1000 UNIQUE COMBINATIONS",
+  "features2[1]": "UNLIMITED PREVIEWS",
+  "features2[2]": "COLLECTION GENERATION",
+  "features2[3]": " METADATA",
+
+  "features3[0]": "5000 UNIQUE COMBINATIONS",
+  "features3[1]": "UNLIMITED PREVIEWS",
+  "features3[2]": "COLLECTION GENERATION",
+  "features3[3]": "METADATA",
+  "features3[4]": "CUSTOM SUPPORT",
+
+  "features4[0]": "10000 UNIQUE COMBINATIONS",
+  "features4[1]": "UNLIMITED PREVIEWS",
+  "features4[2]": "COLLECTION GENERATION",
+  "features4[3]": "METADATA",
+  "features4[4]": "CUSTOM SUPPORT",
+  "Free": "FREE"
 }

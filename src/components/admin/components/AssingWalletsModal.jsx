@@ -20,6 +20,7 @@ export default function AssingWalletsModal({ open, handleClose }) {
     axiosClass
       .post("/setwallet", { wallet: wallet })
       .then((res) => {
+        console.log(res)
         if (res.status === 200) {
           getWallets()
           return

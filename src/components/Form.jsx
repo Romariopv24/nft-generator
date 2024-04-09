@@ -17,6 +17,7 @@ import getDatosImg from "../utils/getDatosImg"
 import { useStoreProv } from "../utils/zustand/store.js"
 import GenericModal from "./GenericModal"
 import PreviewCollection from "./PreviewCollection"
+import SeePrices from "./mui-components/modal/SeePrices.jsx"
 
 // const paqueteDeMil_NFT = Const.PRECIO_PRUEBA_NFTS // 99$
 // const paqueteDeCincoMil_NFT = Const.PRECIO_PRUEBA_NFTS // 199$
@@ -1065,7 +1066,10 @@ const Form = ({
       ? `${captureValue.replace(" ", "-")}-001`
       : "000"
 
-  console.log()
+  const [openMuiModal, setOpenMuiModal] = useState(false)
+  const handleOpen = () => setOpenMuiModal(true)
+  const handleClose = () => setOpenMuiModal(false)
+
   return (
     <>
       <div id="datos">
@@ -1214,6 +1218,16 @@ const Form = ({
               />
             </div>
           </div>
+          <button
+            onClick={(e) => {
+              e.preventDefault()
+              handleOpen()
+            }}
+            className="__boton-mediano mx-auto d-block w-30 enphasis-button"
+            style={{ marginTop: "2rem" }}
+          >
+            See Prices List
+          </button>
         </form>
         {/* <form className="form-capa-name">
           <label htmlFor="capaName" className="form-label">
@@ -1313,6 +1327,7 @@ const Form = ({
           inputProjectCollectionSize={inputProjectCollectionSize}
         />
       </GenericModal>
+      <SeePrices openMuiModal={openMuiModal} handleClose={handleClose} />
     </>
   )
 }
