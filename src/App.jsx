@@ -1,3 +1,4 @@
+import axios from "axios"
 import { useEffect, useLayoutEffect, useState } from "react"
 import { FormattedMessage, useIntl } from "react-intl"
 import Joyride, { STATUS } from "react-joyride"
@@ -150,7 +151,7 @@ function App() {
   ])
   const [loading, setLoading] = useState(true)
   let navigate = useNavigate()
-  const { access_token, setAccess_token } = useStoreProv()
+  const { setAccess_token, setTypeUser } = useStoreProv()
 
   useEffect(() => {
     setDatosUserLS({ metamask, google, facebook })
@@ -183,9 +184,7 @@ function App() {
         let res = await createFolderUserServer()
         setIsAuth(true)
         return res
-      } catch (error) {
-        console.log(error)
-      }
+      } catch (error) {}
     } else {
       setIsAuth(false)
       navigate("/login")
@@ -197,37 +196,38 @@ function App() {
       id: facebook?.tokenUser || google?.tokenUser || metamask?.tokenUser
     }
 
-    var myHeaders = new Headers()
-    myHeaders.append("Content-Type", "application/json")
-
     let url = `${URL}user`
-    let myInit = {
-      method: "POST",
-      body: JSON.stringify(ObjetoUser),
-      headers: myHeaders
-    }
 
-    if (location !== "/terms&conditions") {
-      let resPost = await fetch(url, myInit)
-      if (!resPost.ok) {
-        console.log({ resPost })
-        throw Error("HTTP status " + resPost.status)
-      }
+    try {
+      if (location !== "/terms&conditions") {
+        const response = await axios.post(url, ObjetoUser, {
+          headers: {
+            "Content-Type": "application/json"
+          }
+        })
 
-      let post = await resPost.json()
-      if (post.usuario !== "creado") {
-        localStorage.setItem("name", post[0].nombre)
-        localStorage.setItem("access_token", post[0].access_token)
-        setName(post[0].nombre)
-        const accesToken = localStorage.getItem("access_token")
-        // console.log(accesToken);
-        setAccess_token(accesToken)
+        if (response.status !== 200) {
+          throw new Error("HTTP status " + response.status)
+        }
+
+        const post = response.data
+        if (post.usuario !== "creado") {
+          setTypeUser(post[0].tipo)
+          localStorage.setItem("name", post[0].nombre)
+          localStorage.setItem("access_token", post[0].access_token)
+          setName(post[0].nombre)
+          const accesToken = localStorage.getItem("access_token")
+          setAccess_token(accesToken)
+        }
+
+        validarDatosUserDesdeServidor(post)
+        return post
       }
-      validarDatosUserDesdeServidor(post)
-      return post
+    } catch (error) {
+      console.error(error)
+      // Manejar el error según sea necesario
     }
   }
-
   function validarDatosUserDesdeServidor(res) {
     if (res.usuario === "creado") setIsActiveModalRegister(true)
     if (res[0]?.email === null) {

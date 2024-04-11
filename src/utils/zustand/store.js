@@ -1,7 +1,5 @@
 import { create } from "zustand"
 
-//Va pues cree un store pa un conio... pero bueno espero que algun dia se use porque este proyecto esta horrible
-// Al final si se uso esta mieldaaa ajajaja
 const useStoreProv = create((set) => ({
   signal: false,
   setSignal: () => set((state) => ({ signal: !state.signal })),
@@ -12,7 +10,9 @@ const useStoreProv = create((set) => ({
   email: "",
   setEmail: (newEmail) => set(() => ({ email: newEmail })),
   signalToken: false,
-  setSignalToken: (state) => set(() => ({signalToken: !state.signal}))
+  setSignalToken: (state) => set(() => ({ signalToken: !state.signal })),
+  typeUser: "",
+  setTypeUser: (state) => set(() => ({ typeUser: state }))
 }))
 
 export { useStoreProv }

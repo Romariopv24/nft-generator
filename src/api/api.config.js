@@ -33,6 +33,16 @@ class Api {
     const response = await fetcher.post(url, data, headers)
     return response
   }
+
+  async put(
+    url = this.axiosConfig.baseURL,
+    data,
+    headers = this.axiosConfig.headers
+  ) {
+    const fetcher = axios.create(this.axiosConfig)
+    const response = await fetcher.put(url, data, headers)
+    return response
+  }
 }
 
 export const axiosClass = new Api()

@@ -478,9 +478,9 @@ const Generator = ({
               clearInterval(interval)
               setSignalToken(false)
             } else if (currentDate < decoded_time && access_token.length > 0) {
-              console.log(currentDate > decoded_time)
-              console.log(currentDate)
-              console.log(decoded_time)
+              // console.log(currentDate > decoded_time)
+              // console.log(currentDate)
+              // console.log(decoded_time)
             }
           }, 3000)
       }

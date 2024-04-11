@@ -144,7 +144,7 @@ const Form = ({
       },
       0
     )
-    console.log({ totalPorcentajeBarra })
+    // console.log({ totalPorcentajeBarra })
     imagenes.forEach((i) => {
       const porcentaje = (i.porcentajeBarra * 100) / totalPorcentajeBarra
       i.porcentaje = porcentaje
@@ -359,7 +359,7 @@ const Form = ({
       } catch (error) {
         setAlertShow(true)
         setMessage({ ...message, content: error.code, type: "error" })
-        console.log({ error })
+        // console.log({ error })
       }
     }
 
@@ -451,7 +451,7 @@ const Form = ({
       // const res = { data: { BNB: { quote: { USD: { price: 15000 } } } } }
       if (res) {
         BNBprice.current = res.data?.BNB.quote.USD.price
-        console.log(res)
+        // console.log(res)
         let coleccionSize = inputProjectCollectionSize.current.value
         // console.log(coleccionSize);
         if (coleccionSize >= 101 && coleccionSize <= 1000) {
@@ -471,7 +471,7 @@ const Form = ({
           setStripePrice(paqueteDeDiezMil_NFT)
         }
         if (coleccionSize >= 10000) {
-          console.log("a la verga")
+          // console.log("a la verga")
         }
       }
     }
@@ -924,10 +924,10 @@ const Form = ({
     try {
       let resPost = await fetch(url, myInit)
       let post = await resPost.json()
-      console.log(post)
+      // console.log(post)
       return post
     } catch (error) {
-      console.log(error)
+      // console.log(error)
     }
   }
 
@@ -988,7 +988,7 @@ const Form = ({
       if (isPremiun) {
         const { valid, message } = await ValidarSiExisteNombreProjectServidor()
         if (valid === false) {
-          console.log(res)
+          // console.log(res)
           setIsExisteNombreProject(message)
           botonGenerate(true)
           return

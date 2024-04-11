@@ -1,22 +1,22 @@
-import React, { useContext, useEffect, useState } from "react";
-import { FormattedMessage } from "react-intl";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import logo from "../assets/img/logo.png";
-import es from "../assets/img/spain.png";
-import en from "../assets/img/united-kingdom.png";
-import { ReactComponent as Back } from "../assets/svg/carpetaEngrane.svg";
-import { ReactComponent as Colletion } from "../assets/svg/coleccion+.svg";
-import { ReactComponent as Edit } from "../assets/svg/edit.svg";
-import { ReactComponent as SignOut } from "../assets/svg/signout.svg";
-import { ReactComponent as User } from "../assets/svg/user.svg";
-import { langContext } from "../context/langContext";
-import { ConexionDB, reiniciar } from "../db/CrudDB";
-import "../styles/scss/_banderas.scss";
-import "../styles/scss/_logo.scss";
-import "../styles/scss/_menu.scss";
-import "../styles/scss/app.scss";
-import { listWalletPremiun } from "../constantes";
-import { useStoreProv } from "../utils/zustand/store";
+import React, { useContext, useEffect, useState } from "react"
+import { FormattedMessage } from "react-intl"
+import { Link, useLocation, useNavigate } from "react-router-dom"
+import logo from "../assets/img/logo.png"
+import es from "../assets/img/spain.png"
+import en from "../assets/img/united-kingdom.png"
+import { ReactComponent as Back } from "../assets/svg/carpetaEngrane.svg"
+import { ReactComponent as Colletion } from "../assets/svg/coleccion+.svg"
+import { ReactComponent as Edit } from "../assets/svg/edit.svg"
+import { ReactComponent as SignOut } from "../assets/svg/signout.svg"
+import { ReactComponent as User } from "../assets/svg/user.svg"
+import { listWalletPremiun } from "../constantes"
+import { langContext } from "../context/langContext"
+import { ConexionDB, reiniciar } from "../db/CrudDB"
+import "../styles/scss/_banderas.scss"
+import "../styles/scss/_logo.scss"
+import "../styles/scss/_menu.scss"
+import "../styles/scss/app.scss"
+import { useStoreProv } from "../utils/zustand/store"
 
 const Menu = ({
   desLoguearse,
@@ -25,75 +25,74 @@ const Menu = ({
   name,
   setName,
   setShowVideo,
-  setLoading,
+  setLoading
 }) => {
-  const [nameUser, setNameUser] = useState(null);
-  const [db, setDb] = useState(null);
-
-  let location = useLocation();
-
-  let navigate = useNavigate();
+  const [nameUser, setNameUser] = useState(null)
+  const [db, setDb] = useState(null)
+  let location = useLocation()
+  const { typeUser } = useStoreProv()
+  let navigate = useNavigate()
 
   useEffect(() => {
-    const facebook = JSON.parse(localStorage.getItem("facebook"));
-    const google = JSON.parse(localStorage.getItem("google"));
-    const metamask = JSON.parse(localStorage.getItem("metamask"));
-    setName = localStorage.getItem("name");
+    const facebook = JSON.parse(localStorage.getItem("facebook"))
+    const google = JSON.parse(localStorage.getItem("google"))
+    const metamask = JSON.parse(localStorage.getItem("metamask"))
+    setName = localStorage.getItem("name")
 
     if (metamask?.tokenUser) {
-      setNameUser(metamask.tokenUser.substr(0, 20));
+      setNameUser(metamask.tokenUser.substr(0, 20))
     }
-    createConection();
-  }, [nameUser, location, name]);
-  const { access_token, setAccess_token } = useStoreProv();
-  const idioma = useContext(langContext);
+    createConection()
+  }, [nameUser, location, name])
+  const { access_token, setAccess_token } = useStoreProv()
+  const idioma = useContext(langContext)
 
   //setName = localStorage.getItem('name')
 
   function showName(name, NameUser) {
     if (name) {
-      return name;
+      return name
     }
-    return NameUser;
+    return NameUser
   }
 
   function ReiniciarTodo() {
-    const idioma = localStorage.getItem("idioma");
-    localStorage.clear();
-    localStorage.setItem("idioma", idioma);
-    reiniciar(db, "images");
-    reiniciar(db, "smallImages");
-    setNameUser(null);
-    setAccess_token(null);
+    const idioma = localStorage.getItem("idioma")
+    localStorage.clear()
+    localStorage.setItem("idioma", idioma)
+    reiniciar(db, "images")
+    reiniciar(db, "smallImages")
+    setNameUser(null)
+    setAccess_token(null)
   }
 
   async function createConection() {
-    setDb(await ConexionDB());
+    setDb(await ConexionDB())
   }
 
-  const walletUser = JSON.parse(localStorage.getItem("metamask"));
+  const walletUser = JSON.parse(localStorage.getItem("metamask"))
 
-  let isPremiun = false;
+  let isPremiun = false
 
   listWalletPremiun.find((wallet) => {
     if (wallet.toLowerCase() === walletUser?.tokenUser.toLowerCase()) {
-      isPremiun = true;
+      isPremiun = true
     }
-  });
+  })
 
-  const idiomaFocus = localStorage.getItem("idioma");
+  const idiomaFocus = localStorage.getItem("idioma")
 
   const allSignOut = () => {
-    setName(null);
-    desLoguearse();
-    ReiniciarTodo();
-    navigate("/");
-  };
+    setName(null)
+    desLoguearse()
+    ReiniciarTodo()
+    navigate("/")
+  }
 
   const signOutBtn = () => {
-    desLoguearse();
-    setLoading(true);
-  };
+    desLoguearse()
+    setLoading(true)
+  }
 
   // if (access_token !== null || access_token) {
   //   setInterval(() => {
@@ -122,7 +121,7 @@ const Menu = ({
           width: "100%",
           display: "flex",
           justifyContent: !nameUser ? "flex-end" : "center",
-          alignItems: "center",
+          alignItems: "center"
         }}
       >
         {location.pathname !== "/terms&conditons" && nameUser && (
@@ -157,7 +156,7 @@ const Menu = ({
           </div>
         )}
 
-        {isPremiun ? (
+        {typeUser === 2 ? (
           <div>
             <Link to={`/admin`} className=" d-none d-sm-block">
               {" "}
@@ -214,10 +213,10 @@ const Menu = ({
             style={{
               borderRadius: "20px",
               backgroundColor:
-                idiomaFocus === "es-ES" ? "#C8CCE9" : "transparent",
+                idiomaFocus === "es-ES" ? "#C8CCE9" : "transparent"
             }}
             onClick={() => {
-              idioma.cambiarIdioma("es-ES");
+              idioma.cambiarIdioma("es-ES")
             }}
           >
             <img src={es} alt="" />
@@ -226,10 +225,10 @@ const Menu = ({
             style={{
               borderRadius: "20px",
               backgroundColor:
-                idiomaFocus === "en-US" ? "#C8CCE9" : "transparent",
+                idiomaFocus === "en-US" ? "#C8CCE9" : "transparent"
             }}
             onClick={() => {
-              idioma.cambiarIdioma("en-US");
+              idioma.cambiarIdioma("en-US")
             }}
           >
             <img src={en} alt="" />
@@ -239,14 +238,14 @@ const Menu = ({
         {nameUser ? (
           <button
             onClick={() => {
-              allSignOut();
+              allSignOut()
             }}
             className="__boton-signOut enphasis-button d-none d-sm-block "
           >
             <FormattedMessage id="menu.logout" defaultMessage="Sign out" />
             <SignOut
               onClick={() => {
-                signOutBtn();
+                signOutBtn()
               }}
               className=" d-block d-sm-none mx-1"
               style={{ width: "40px" }}
@@ -256,7 +255,7 @@ const Menu = ({
         ) : (
           <button
             onClick={() => {
-              allSignOut();
+              allSignOut()
             }}
             className="__boton-signOut enphasis-button d-none d-sm-block "
           >
@@ -277,32 +276,32 @@ const Menu = ({
               width: "100%",
               display: "flex",
               justifyContent: !nameUser ? "flex-end" : "center",
-              alignItems: "center",
+              alignItems: "center"
             }}
           >
             <div className="banderas">
               <button
                 onClick={() => {
-                  idioma.cambiarIdioma("es-ES");
+                  idioma.cambiarIdioma("es-ES")
                 }}
                 style={{
                   borderRadius: "20px",
                   backgroundColor:
-                    idiomaFocus === "es-ES" ? "#C8CCE9" : "transparent",
+                    idiomaFocus === "es-ES" ? "#C8CCE9" : "transparent"
                 }}
               >
                 <img src={es} alt="" />
               </button>
               <button
                 onClick={() => {
-                  idioma.cambiarIdioma("en-US");
+                  idioma.cambiarIdioma("en-US")
                 }}
                 style={{
                   borderRadius: "20px",
                   backgroundColor:
                     idiomaFocus === null || idiomaFocus === "en-US"
                       ? "#C8CCE9"
-                      : "transparent",
+                      : "transparent"
                 }}
               >
                 <img src={en} alt="" />
@@ -310,7 +309,7 @@ const Menu = ({
             </div>
             <button
               onClick={() => {
-                navigate("/login");
+                navigate("/login")
               }}
               className="__boton-signOut enphasis-button d-none d-sm-block "
             >
@@ -320,7 +319,7 @@ const Menu = ({
         </div>
       ) : null}
     </>
-  );
-};
+  )
+}
 
-export default Menu;
+export default Menu

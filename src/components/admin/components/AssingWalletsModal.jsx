@@ -42,8 +42,8 @@ export default function AssingWalletsModal({ open, handleClose }) {
   }
 
   useEffect(() => {
-    getWallets()
-  }, [])
+    open === true && getWallets()
+  }, [open])
 
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {

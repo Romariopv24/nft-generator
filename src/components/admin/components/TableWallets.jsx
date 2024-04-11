@@ -1,8 +1,65 @@
 import { Delete } from "@mui/icons-material"
 import { Box, Typography } from "@mui/material"
 import { DataGrid } from "@mui/x-data-grid"
+import { axiosClass } from "../../../api/api.config"
 
 export default function TableWallets({ getWallet }) {
+  const putUser = (wallet) => {
+    axiosClass
+      .put("/setwallet", { wallet: wallet })
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+
+  const columns = [
+    {
+      field: "correo",
+      headerName: "correo",
+      width: 270,
+      headerAlign: "center",
+      cellClassName: "super-app-theme--cell",
+      editable: true,
+      renderCell: (e) => {
+        return <Typography fontSize={"15px"}>{e.row.correo}</Typography>
+      }
+    },
+    {
+      field: "wallet",
+      headerName: "wallet",
+      type: "number",
+      width: 400,
+      headerAlign: "center",
+      cellClassName: "super-app-theme--cell",
+      editable: true,
+      renderCell: (e) => {
+        return <Typography fontSize={"15px"}>{e.row.usuario}</Typography>
+      }
+    },
+    {
+      field: "delete",
+      headerName: "",
+      type: "number",
+      width: 110,
+      headerAlign: "center",
+      cellClassName: "super-app-theme--cell",
+      renderCell: (e) => {
+        return (
+          <Delete
+            onClick={() => {
+              putUser(e.row.wallet)
+            }}
+            sx={{ cursor: "pointer" }}
+            color="red"
+          />
+        )
+      }
+    }
+  ]
+
   return (
     <Box sx={{ height: 400, width: "100%", marginTop: 5 }}>
       <DataGrid
@@ -62,48 +119,3 @@ export default function TableWallets({ getWallet }) {
     </Box>
   )
 }
-
-const columns = [
-  {
-    field: "correo",
-    headerName: "correo",
-    width: 270,
-    headerAlign: "center",
-    cellClassName: "super-app-theme--cell",
-    editable: true,
-    renderCell: (e) => {
-      return <Typography fontSize={"15px"}>{e.row.correo}</Typography>
-    }
-  },
-  {
-    field: "wallet",
-    headerName: "wallet",
-    type: "number",
-    width: 400,
-    headerAlign: "center",
-    cellClassName: "super-app-theme--cell",
-    editable: true,
-    renderCell: (e) => {
-      return <Typography fontSize={"15px"}>{e.row.usuario}</Typography>
-    }
-  },
-  {
-    field: "delete",
-    headerName: "",
-    type: "number",
-    width: 110,
-    headerAlign: "center",
-    cellClassName: "super-app-theme--cell",
-    renderCell: (e) => {
-      return <Delete sx={{ cursor: "pointer" }} color="red" />
-    }
-  }
-]
-
-const rows = [
-  {
-    id: 1,
-    user: "Snow@gmail.com",
-    wallet: "0xa54927b7af64DdB3e2c5Ac9cbec38c81EC88Be48"
-  }
-]
