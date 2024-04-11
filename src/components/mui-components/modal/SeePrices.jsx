@@ -1,5 +1,6 @@
 import { Box, Modal, styled, Typography } from "@mui/material"
 import { useIntl } from "react-intl"
+import { ReactComponent as Close } from "../../../assets/svg/close-ellipse.svg"
 import PricesList from "./PricesList"
 
 export default function SeePrices({ openMuiModal, handleClose }) {
@@ -147,34 +148,44 @@ export default function SeePrices({ openMuiModal, handleClose }) {
       aria-describedby="modal-modal-description"
     >
       <Box sx={style}>
-        <Typography
-          textAlign={"center"}
-          id="modal-modal-title"
-          variant="h4"
-          component="h2"
-          sx={{
-            color: "white",
-            textTransform: "uppercase"
-          }}
-        >
-          Prices
-        </Typography>
-        <Box sx={divider} />
+        <Box sx={mainContainer}>
+          <Box sx={headerContainer}>
+            <Typography
+              textAlign={"center"}
+              id="modal-modal-title"
+              variant="h4"
+              component="h2"
+              sx={{
+                color: "white",
+                textTransform: "uppercase",
+                width: "100%",
+                textAlign: "center"
+              }}
+            >
+              Prices
+            </Typography>
+            <Close
+              style={{ width: "20px", height: "20px" }}
+              onClick={handleClose}
+            />
+          </Box>
+          <Box sx={divider} />
 
-        <Typography
-          textAlign={"center"}
-          variant="h5"
-          component="h2"
-          id="modal-modal-description"
-          sx={{ mt: 2 }}
-        >
-          These are the lists to generate NFTs.
-        </Typography>
-        <ListItems>
-          {data.map((item, index) => (
-            <PricesList item={item} key={index} />
-          ))}
-        </ListItems>
+          <Typography
+            textAlign={"center"}
+            variant="h5"
+            component="h2"
+            id="modal-modal-description"
+            sx={{ mt: 2 }}
+          >
+            These are the lists to generate NFTs.
+          </Typography>
+          <ListItems>
+            {data.map((item, index) => (
+              <PricesList item={item} key={index} />
+            ))}
+          </ListItems>
+        </Box>
       </Box>
     </Modal>
   )
@@ -189,23 +200,43 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 1200,
+  width: { md: "90%", lg: 1200 },
+  height: { md: "100%", lg: "79%" },
   bgcolor: "#000446",
   border: "2px solid #00B8FF",
   boxShadow: 24,
   p: 4
 }
 
+const mainContainer = {
+  height: "80vh",
+  overflow: "auto"
+}
+const headerContainer = {
+  width: "100%",
+  display: "flex",
+  flexDirection: "row",
+  justifyContent: "space-between",
+  alignItems: "center"
+}
+
 const divider = {
   background: "#00B8FF",
   width: "70%",
-  height: "3px"
+  height: "3px",
+  margin: "5px  auto"
 }
 
 const ListItems = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "row",
   justifyContent: "space-around",
-  // maxWidth: "2000px",
-  width: "100%"
+  width: "100%",
+  flexWrap: "wrap",
+  marginTop: "5rem",
+  marginBottom: "5rem",
+  [theme.breakpoints.down("md")]: {
+    flexDirection: "column",
+    justifyContent: "center"
+  }
 }))
