@@ -70,7 +70,11 @@ export default function AdminView() {
             defaultMessage="Assing Wallets."
           />
         </Button>
-        <AssingWalletsModal open={open} handleClose={handleClose} />
+        <AssingWalletsModal
+          getDataTable={getDataTable}
+          open={open}
+          handleClose={handleClose}
+        />
       </Stack>
       <Stack direction={"row"} mt={1} justifyContent={"center"} width={"80%"}>
         <Table dataAdmin={dataAdmin} />

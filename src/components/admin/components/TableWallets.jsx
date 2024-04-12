@@ -1,20 +1,44 @@
 import { Delete } from "@mui/icons-material"
 import { Box, Typography } from "@mui/material"
 import { DataGrid } from "@mui/x-data-grid"
+import { enqueueSnackbar } from "notistack"
 import { axiosClass } from "../../../api/api.config"
 
-export default function TableWallets({ getWallet }) {
+export default function TableWallets({ getWallet, setGetWallet }) {
   const putUser = (wallet) => {
     axiosClass
       .put("/setwallet", { wallet: wallet })
       .then((res) => {
-        console.log(res)
+        if (res.status === 200) {
+          const getAFeeling = getWallet.findIndex(
+            (index) => index.wallet === wallet
+          )
+
+          // Crear una copia del array getWallet
+          const updatedWallet = [...getWallet]
+          updatedWallet.splice(getAFeeling, 1) // Eliminar 1 elemento en la posición getAFeeling
+
+          setGetWallet(updatedWallet) // Actualizar el estado con la nueva copia
+          enqueueSnackbar("Wallet has been remove", {
+            variant: "success",
+            anchorOrigin: {
+              vertical: "top",
+              horizontal: "right"
+            }
+          })
+        }
       })
       .catch((err) => {
         console.log(err)
+        enqueueSnackbar("An error has ocurred!", {
+          variant: "error",
+          anchorOrigin: {
+            vertical: "top",
+            horizontal: "right"
+          }
+        })
       })
   }
-
   const columns = [
     {
       field: "correo",
@@ -50,7 +74,7 @@ export default function TableWallets({ getWallet }) {
         return (
           <Delete
             onClick={() => {
-              putUser(e.row.wallet)
+              putUser(e.row.usuario)
             }}
             sx={{ cursor: "pointer" }}
             color="red"

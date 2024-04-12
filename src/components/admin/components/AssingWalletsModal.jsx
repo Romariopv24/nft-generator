@@ -8,11 +8,16 @@ import {
   Stack,
   Typography
 } from "@mui/material"
+import { enqueueSnackbar } from "notistack"
 import { useEffect, useState } from "react"
 import { axiosClass } from "../../../api/api.config"
 import TableWallets from "./TableWallets"
 
-export default function AssingWalletsModal({ open, handleClose }) {
+export default function AssingWalletsModal({
+  open,
+  handleClose,
+  getDataTable
+}) {
   const [wallet, setWallet] = useState("")
   const [getWallet, setGetWallet] = useState([])
 
@@ -22,11 +27,29 @@ export default function AssingWalletsModal({ open, handleClose }) {
       .then((res) => {
         console.log(res)
         if (res.status === 200) {
+          setWallet("")
           getWallets()
+          enqueueSnackbar("Wallet has succesfully asign!", {
+            variant: "success",
+            anchorOrigin: {
+              vertical: "top",
+              horizontal: "right"
+            }
+          })
           return
         }
       })
-      .catch((err) => console.log(err))
+      .catch((err) => {
+        if (err.response.status === 404) {
+          enqueueSnackbar("Wallet is not registered!", {
+            variant: "error",
+            anchorOrigin: {
+              vertical: "top",
+              horizontal: "right"
+            }
+          })
+        }
+      })
   }
 
   const getWallets = () => {
@@ -105,7 +128,7 @@ export default function AssingWalletsModal({ open, handleClose }) {
                 <Send onClick={handleSubmit} sx={icon} />
               </Stack>
 
-              <TableWallets getWallet={getWallet} />
+              <TableWallets getWallet={getWallet} setGetWallet={setGetWallet} />
             </Box>
           </Fade>
         </Modal>

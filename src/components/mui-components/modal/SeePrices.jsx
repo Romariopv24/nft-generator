@@ -12,7 +12,7 @@ export default function SeePrices({ openMuiModal, handleClose }) {
         id: "to",
         defaultMessage: "TO"
       }),
-      number: 100,
+      number: "100",
       item: intl.formatMessage({
         id: "item",
         defaultMessage: "ACTIVATED GENERATED"
@@ -45,7 +45,7 @@ export default function SeePrices({ openMuiModal, handleClose }) {
         id: "to",
         defaultMessage: "TO"
       }),
-      number: 1000,
+      number: "1.000",
       item: intl.formatMessage({
         id: "item",
         defaultMessage: "ACTIVATED GENERATED"
@@ -75,7 +75,7 @@ export default function SeePrices({ openMuiModal, handleClose }) {
         id: "to",
         defaultMessage: "TO"
       }),
-      number: 5000,
+      number: "5.000",
       item: intl.formatMessage({
         id: "item",
         defaultMessage: "ACTIVATED GENERATED"
@@ -109,7 +109,7 @@ export default function SeePrices({ openMuiModal, handleClose }) {
         id: "to",
         defaultMessage: "TO"
       }),
-      number: 10000,
+      number: "10.000",
       item: intl.formatMessage({
         id: "item",
         defaultMessage: "ACTIVATED GENERATED"
@@ -165,7 +165,7 @@ export default function SeePrices({ openMuiModal, handleClose }) {
               Prices
             </Typography>
             <Close
-              style={{ width: "20px", height: "20px" }}
+              style={{ width: "20px", height: "20px", cursor: "pointer" }}
               onClick={handleClose}
             />
           </Box>
