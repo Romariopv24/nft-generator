@@ -1,3 +1,6 @@
+import { Box, Modal } from "@mui/material"
+import { Elements } from "@stripe/react-stripe-js"
+import { loadStripe } from "@stripe/stripe-js"
 import { ethers } from "ethers"
 import React, { useEffect, useRef, useState } from "react"
 import { FormattedMessage, useIntl } from "react-intl"
@@ -17,6 +20,7 @@ import getDatosImg from "../utils/getDatosImg"
 import { useStoreProv } from "../utils/zustand/store.js"
 import GenericModal from "./GenericModal"
 import PreviewCollection from "./PreviewCollection"
+import CheckoutForm from "./mui-components/modal/CheckoutForm.jsx"
 import SeePrices from "./mui-components/modal/SeePrices.jsx"
 
 // const paqueteDeMil_NFT = Const.PRECIO_PRUEBA_NFTS // 99$
@@ -83,6 +87,7 @@ const Form = ({
   const google = JSON.parse(localStorage.getItem("google"))
   const metamask = JSON.parse(localStorage.getItem("metamask"))
   let correo = facebook?.tokenUser || google?.tokenUser || metamask?.tokenUser
+  const { typeUser } = useStoreProv()
 
   useEffect(() => {
     if (
@@ -257,6 +262,10 @@ const Form = ({
     )
   }
 
+  const stripePromise = loadStripe(
+    "pk_test_51P4lD8078MpJgJBLWduFkgSSdFjwEbwktwQ5RzVW703AE2PVBPaqySNvuviJoYQgYLJ32dRAlQCoZidgwDrZqu1Q00RZxMwXR2"
+  )
+
   const PayModal = () => {
     const [alertShow, setAlertShow] = useState(false)
     const [message, setMessage] = useState({
@@ -267,6 +276,32 @@ const Form = ({
     const [price, setPrice] = useState(0)
     const [isPriceCalculated, setIsPriceCalculated] = useState(true)
     const [openStripeModal, setOpenStripeModal] = useState(false)
+    const [clientSecret, setClientSecret] = useState("")
+
+    useEffect(() => {
+      // Create PaymentIntent as soon as the page loads
+      if (openStripeModal) {
+        const priceString = (price * BNBprice.current).toFixed(2)
+        const amount = +priceString
+        fetch(`${Const.URL}create-payment-intent`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ amount: amount })
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            setClientSecret(data.clientSecret)
+          })
+      }
+    }, [openStripeModal])
+
+    const appearance = {
+      theme: "stripe"
+    }
+    const options = {
+      clientSecret,
+      appearance
+    }
 
     const metodosDePago = [
       {
@@ -277,7 +312,10 @@ const Form = ({
       {
         nombre: "Stripe",
         icon: <Stripe width={90} height={100} />,
-        proceso: () => setOpenStripeModal(true)
+        proceso: () => {
+          console.log("straip")
+          setOpenStripeModal(true)
+        }
       }
     ]
 
@@ -490,7 +528,20 @@ const Form = ({
     }
 
     const setSignal = useStoreProv((state) => state.setSignal)
+    const style = {
+      position: "absolute",
+      top: "50%",
+      left: "50%",
+      transform: "translate(-50%, -50%)",
+      width: "30%",
+      height: "40%",
+      bgcolor: "#1E2235",
+      border: "2px solid #000",
+      boxShadow: 24,
+      p: 4
+    }
 
+    const handleClose = () => setOpenStripeModal(false)
     return (
       <>
         <div className="fs-6 fw-bold">
@@ -833,6 +884,25 @@ const Form = ({
             </>
           )}
         </div>
+
+        <Modal
+          open={openStripeModal}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            {clientSecret && (
+              <Elements
+                handleClose={handleClose}
+                options={options}
+                stripe={stripePromise}
+              >
+                <CheckoutForm />
+              </Elements>
+            )}
+          </Box>
+        </Modal>
       </>
     )
   }
@@ -985,7 +1055,7 @@ const Form = ({
     })
 
     if (chainId === "0x13881") {
-      if (isPremiun) {
+      if (typeUser === 1 || typeUser === 2) {
         const { valid, message } = await ValidarSiExisteNombreProjectServidor()
         if (valid === false) {
           // console.log(res)

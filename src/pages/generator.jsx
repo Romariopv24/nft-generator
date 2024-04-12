@@ -386,7 +386,7 @@ const Generator = ({
         />
       )
     }
-    if (email.length > 1) {
+    if (email.length < 1) {
       return (
         <FormattedMessage
           id="generator.must-have-email"
