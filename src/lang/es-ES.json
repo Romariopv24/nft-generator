@@ -250,6 +250,11 @@
   "assing.wallet.table-wallet": "Cartera",
   "assing.wallet.table-delete": "Eliminar",
 
+
+  "button.prices.list":"Ver precios", 
+  "prices.title": "PRECIOS",
+  "prices.subtitle": "Lista de precios para la generar de colecciones de NFTs",
+
   "to": "HASTA",
   "item": "ACTIVA PARA GENERAR",
   "features1[0]": "100 COMBINACIONES ÚNICAS",

@@ -151,7 +151,7 @@ function App() {
   ])
   const [loading, setLoading] = useState(true)
   let navigate = useNavigate()
-  const { setAccess_token, setTypeUser } = useStoreProv()
+  const { setAccess_token, setTypeUser,setEmail } = useStoreProv()
 
   useEffect(() => {
     setDatosUserLS({ metamask, google, facebook })
@@ -216,6 +216,7 @@ function App() {
           localStorage.setItem("name", post[0].nombre)
           localStorage.setItem("access_token", post[0].access_token)
           setName(post[0].nombre)
+          setEmail(post[0].correo)
           const accesToken = localStorage.getItem("access_token")
           setAccess_token(accesToken)
         }

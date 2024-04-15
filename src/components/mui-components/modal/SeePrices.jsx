@@ -1,5 +1,5 @@
 import { Box, Modal, styled, Typography } from "@mui/material"
-import { useIntl } from "react-intl"
+import { FormattedMessage, useIntl } from "react-intl"
 import { ReactComponent as Close } from "../../../assets/svg/close-ellipse.svg"
 import PricesList from "./PricesList"
 
@@ -162,7 +162,11 @@ export default function SeePrices({ openMuiModal, handleClose }) {
                 textAlign: "center"
               }}
             >
-              Prices
+               <FormattedMessage
+          id="prices.title"
+          defaultMessage="PRICES"
+        />
+        
             </Typography>
             <Close
               style={{ width: "20px", height: "20px", cursor: "pointer" }}
@@ -178,7 +182,10 @@ export default function SeePrices({ openMuiModal, handleClose }) {
             id="modal-modal-description"
             sx={{ mt: 2 }}
           >
-            These are the lists to generate NFTs.
+                   <FormattedMessage
+          id="prices.subtitle"
+          defaultMessage="Price list for generating NFT collections"
+        />
           </Typography>
           <ListItems>
             {data.map((item, index) => (

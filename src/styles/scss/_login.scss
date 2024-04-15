@@ -13,7 +13,8 @@ $metamaskColor :#6b78b8;
 
 .formularioLogin{
   display: flex;
-  height:90vh;
+  flex-direction: column;
+  // height:90vh;
 }
 .formFields{
  padding: 2.2em;
@@ -125,7 +126,7 @@ text:hover a:hover{
 
 .logo {
   max-width: 30%;
-  margin-bottom: -45vh;
+  // margin-bottom: -45vh;
 }
 
 @media (max-width: 1400px){

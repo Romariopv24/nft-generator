@@ -24,7 +24,6 @@ const Generator = ({
 }) => {
   const { access_token, setAccess_token, email, signalToken, setSignalToken } =
     useStoreProv()
-
   const [capas, setCapas] = useState(getCapas())
   const [selectedCapa, setSelectedCapa] = useState(
     getCapas().find((s) => s.id === getSelectedCapaId())

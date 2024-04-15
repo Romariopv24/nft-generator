@@ -33,6 +33,8 @@ function RegisterUser({
     esperar()
   }, [])
 
+
+
   async function esperar() {
     try {
       let res = await fetchData()
@@ -47,6 +49,7 @@ function RegisterUser({
             wallet: res[0].wallet || userData.wallet
           }
           setUserData({ ...obj })
+          setEmail(res[0].correo || userData.correo)
         }
       }
       return res
@@ -86,6 +89,7 @@ function RegisterUser({
       console.log(ObjetoUser.nombre)
       setName(ObjetoUser.nombre)
       localStorage.setItem("name", ObjetoUser.nombre)
+      console.log(ObjetoUser.correo)
       setEmail(ObjetoUser.correo)
       console.log(res)
     } catch (error) {
@@ -149,7 +153,8 @@ function RegisterUser({
           >
             <Closer className="" />
           </div>
-          <div className="inputRegister">
+
+          {!userData?.nombre && (  <div className="inputRegister">
             <label className="form-label me-2">
               <FormattedMessage id="registerUser.name" defaultMessage="Name*" />
             </label>
@@ -168,7 +173,8 @@ function RegisterUser({
               name={"nombre"}
               required
             />
-          </div>
+          </div>)}
+        
 
           <div className="inputRegister">
             <label className="form-label me-2">

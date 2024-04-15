@@ -28,6 +28,8 @@ const Menu = ({
   setLoading
 }) => {
   const [nameUser, setNameUser] = useState(null)
+  const [hovered, setHovered] = useState(null)
+
   const [db, setDb] = useState(null)
   let location = useLocation()
   const { typeUser } = useStoreProv()
@@ -208,32 +210,46 @@ const Menu = ({
           </div>
         )}
 
-        <div className="banderas">
-          <button
-            style={{
-              borderRadius: "20px",
-              backgroundColor:
-                idiomaFocus === "es-ES" ? "#C8CCE9" : "transparent"
-            }}
-            onClick={() => {
-              idioma.cambiarIdioma("es-ES")
-            }}
-          >
-            <img src={es} alt="" />
-          </button>
-          <button
-            style={{
-              borderRadius: "20px",
-              backgroundColor:
-                idiomaFocus === "en-US" ? "#C8CCE9" : "transparent"
-            }}
-            onClick={() => {
-              idioma.cambiarIdioma("en-US")
-            }}
-          >
-            <img src={en} alt="" />
-          </button>
-        </div>
+<div className="banderas">
+  <button
+    onClick={() => {
+      idioma.cambiarIdioma("es-ES")
+    }}
+    style={{
+      borderRadius: "20px",
+      backgroundColor: "transparent"
+    }}
+  >
+    <img 
+      src={es} 
+      alt="" 
+      style={{
+        filter: (idiomaFocus === "es-ES" || hovered === "es-ES") ? "none" : "grayscale(100%)"
+      }}
+      onMouseEnter={() => setHovered("es-ES")}
+      onMouseLeave={() => setHovered(null)}
+    />
+  </button>
+  <button
+    onClick={() => {
+      idioma.cambiarIdioma("en-US")
+    }}
+    style={{
+      borderRadius: "20px",
+      backgroundColor: "transparent"
+    }}
+  >
+    <img 
+      src={en} 
+      alt="" 
+      style={{
+        filter: (idiomaFocus === "en-US" || hovered === "en-US") ? "none" : "grayscale(100%)"
+      }}
+      onMouseEnter={() => setHovered("en-US")}
+      onMouseLeave={() => setHovered(null)}
+    />
+  </button>
+</div>
 
         {nameUser ? (
           <button
@@ -279,34 +295,46 @@ const Menu = ({
               alignItems: "center"
             }}
           >
-            <div className="banderas">
-              <button
-                onClick={() => {
-                  idioma.cambiarIdioma("es-ES")
-                }}
-                style={{
-                  borderRadius: "20px",
-                  backgroundColor:
-                    idiomaFocus === "es-ES" ? "#C8CCE9" : "transparent"
-                }}
-              >
-                <img src={es} alt="" />
-              </button>
-              <button
-                onClick={() => {
-                  idioma.cambiarIdioma("en-US")
-                }}
-                style={{
-                  borderRadius: "20px",
-                  backgroundColor:
-                    idiomaFocus === null || idiomaFocus === "en-US"
-                      ? "#C8CCE9"
-                      : "transparent"
-                }}
-              >
-                <img src={en} alt="" />
-              </button>
-            </div>
+         <div className="banderas">
+  <button
+    onClick={() => {
+      idioma.cambiarIdioma("es-ES")
+    }}
+    style={{
+      borderRadius: "20px",
+      backgroundColor: "transparent"
+    }}
+  >
+    <img 
+      src={es} 
+      alt="" 
+      style={{
+        filter: (idiomaFocus === "es-ES" || hovered === "es-ES") ? "none" : "grayscale(100%)"
+      }}
+      onMouseEnter={() => setHovered("es-ES")}
+      onMouseLeave={() => setHovered(null)}
+    />
+  </button>
+  <button
+    onClick={() => {
+      idioma.cambiarIdioma("en-US")
+    }}
+    style={{
+      borderRadius: "20px",
+      backgroundColor: "transparent"
+    }}
+  >
+    <img 
+      src={en} 
+      alt="" 
+      style={{
+        filter: (idiomaFocus === "en-US" || hovered === "en-US") ? "none" : "grayscale(100%)"
+      }}
+      onMouseEnter={() => setHovered("en-US")}
+      onMouseLeave={() => setHovered(null)}
+    />
+  </button>
+</div>
             <button
               onClick={() => {
                 navigate("/login")

@@ -1313,7 +1313,10 @@ const Form = ({
             className="__boton-mediano mx-auto d-block w-30 enphasis-button"
             style={{ marginTop: "2rem" }}
           >
-            See Prices List
+             <FormattedMessage
+          id="button.prices.list"
+          defaultMessage="Prices List"
+        />
           </button>
         </form>
         {/* <form className="form-capa-name">

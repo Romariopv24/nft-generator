@@ -9,9 +9,11 @@ import en from "../assets/img/united-kingdom.png"
 import { ReactComponent as Metamask } from "../assets/svg/metamask.svg"
 import { langContext } from "../context/langContext"
 import "../styles/scss/_login.scss"
+import { Stack } from "@mui/material"
 
 const Login = ({ setIsAuth, isAuth }) => {
   const [nombreBotonMT, setNombreBotonMT] = useState("Login with Metamasks")
+  const [hovered, setHovered] = useState(null)
   const idioma = useContext(langContext)
 
   let navigate = useNavigate()
@@ -54,43 +56,12 @@ const Login = ({ setIsAuth, isAuth }) => {
   }, [isAuth])
 
   const idiomaFocus = localStorage.getItem("idioma")
-  console.log(idiomaFocus)
 
   return (
     <>
-      <div class="d-flex flex-row-reverse bd-highlight">
-        <div className="banderas">
-          <button
-            onClick={() => {
-              idioma.cambiarIdioma("es-ES")
-            }}
-            style={{
-              borderRadius: "20px",
-              backgroundColor:
-                idiomaFocus === "es-ES" ? "#C8CCE9" : "transparent"
-            }}
-          >
-            <img src={es} alt="" />
-          </button>
-          <button
-            onClick={() => {
-              idioma.cambiarIdioma("en-US")
-            }}
-            style={{
-              borderRadius: "20px",
-              backgroundColor:
-                idiomaFocus === null || idiomaFocus === "en-US"
-                  ? "#C8CCE9"
-                  : "transparent"
-            }}
-          >
-            <img src={en} alt="" />
-          </button>
-        </div>
-      </div>
-      <div className="align-items-center justify-content-center d-flex">
-        <img className="logo" src={logo} />
-      </div>
+      <Stack sx={{display:'flex', flexDirection:'column', width:'100%', height:'90vh', alignContent:'center', alignItems:'center', justifyContent:'center'}}>
+      <div className="d-flex flex-column align-items-center justify-content-center">
+        <img className="logo" alt="logo" src={logo} />
       <div className="formularioLogin ">
         <div className="formFields">
           {/* LOGIN CON METAMASK */}
@@ -128,7 +99,52 @@ const Login = ({ setIsAuth, isAuth }) => {
             </p>
           </div>
         </div>
+        
+        <div class="d-flex justify-content-center align-items-center" style={{ marginTop: '2rem' }}>
+        <div className="banderas">
+  <button
+    onClick={() => {
+      idioma.cambiarIdioma("es-ES")
+    }}
+    style={{
+      borderRadius: "20px",
+      backgroundColor: "transparent"
+    }}
+  >
+    <img 
+      src={es} 
+      alt="" 
+      style={{
+        filter: (idiomaFocus === "es-ES" || hovered === "es-ES") ? "none" : "grayscale(100%)"
+      }}
+      onMouseEnter={() => setHovered("es-ES")}
+      onMouseLeave={() => setHovered(null)}
+    />
+  </button>
+  <button
+    onClick={() => {
+      idioma.cambiarIdioma("en-US")
+    }}
+    style={{
+      borderRadius: "20px",
+      backgroundColor: "transparent"
+    }}
+  >
+    <img 
+      src={en} 
+      alt="" 
+      style={{
+        filter: (idiomaFocus === "en-US" || hovered === "en-US") ? "none" : "grayscale(100%)"
+      }}
+      onMouseEnter={() => setHovered("en-US")}
+      onMouseLeave={() => setHovered(null)}
+    />
+  </button>
+</div>
       </div>
+      </div>
+      </div>
+      </Stack>
     </>
   )
 }

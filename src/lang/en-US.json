@@ -249,6 +249,11 @@
   "assing.wallet.table-wallet": "Wallet",
   "assing.wallet.table-delete": "Delete",
 
+  "button.prices.list":"Prices List", 
+  "prices.title": "PRICES",
+  "prices.subtitle": "Price list for generating NFT collections",
+
+
   "to": "TO",
   "item": "ACTIVATED GENERATED",
   "features1[0]": "100 UNIQUE COMBINATIONS",
