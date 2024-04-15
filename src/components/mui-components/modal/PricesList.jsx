@@ -89,8 +89,8 @@ const Bullet = styled(Box)(({ theme }) => ({
 
 const RoundButton = styled(Button)(({ theme }) => ({
   backgroundColor: "#6b78b8",
-  marginTop: "2em",
-  marginBottom: "1.2em",
+  // marginTop: "2em",
+  // marginBottom: "1.2em",
   borderRadius: "20px",
   color: "white",
   minWidth: "12em",

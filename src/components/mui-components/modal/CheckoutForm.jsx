@@ -138,7 +138,7 @@ export default function CheckoutForm({
 }
 
 const btnStyle = {
-  bgcolor: "red",
+  bgcolor: "#6B78B8",
   height: "2rem",
   marginY: 2
 }

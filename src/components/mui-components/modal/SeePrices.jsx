@@ -201,7 +201,7 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: { md: "90%", lg: 1200 },
-  height: { md: "100%", lg: "79%" },
+  height: { md: "100%", lg: "95%" },
   bgcolor: "#000446",
   border: "2px solid #00B8FF",
   boxShadow: 24,
@@ -209,8 +209,8 @@ const style = {
 }
 
 const mainContainer = {
-  height: "80vh",
-  overflow: "auto"
+  height: {xs:"80vh", lg:"100%"},
+  overflow: {xs:"auto", lg:"visible"},
 }
 const headerContainer = {
   width: "100%",
@@ -233,8 +233,8 @@ const ListItems = styled(Box)(({ theme }) => ({
   justifyContent: "space-around",
   width: "100%",
   flexWrap: "wrap",
-  marginTop: "5rem",
-  marginBottom: "5rem",
+  marginTop: "2rem",
+  marginBottom: "2rem",
   [theme.breakpoints.down("md")]: {
     flexDirection: "column",
     justifyContent: "center"
