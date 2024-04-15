@@ -295,7 +295,6 @@ const Generator = ({
   async function ValidarSiExisteNombreProjectServidor() {
     const name = inputProjectName.current.value.replace(/\s+/g, "")
     let correo = facebook?.tokenUser || google?.tokenUser || metamask?.tokenUser
-
     const isNameValid = validacionForm(name)
     if (isNameValid) return { valid: false, message: isNameValid }
     let obj = {

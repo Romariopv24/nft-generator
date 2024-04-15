@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { FormattedMessage } from "react-intl";
 import "../styles/scss/_modalPortal.scss";
 
-const Modal = (props) => {
+const ModalComponent = (props) => {
   const [isShownModal, setIsShownModal] = useState(false);
 
   function hideModal() {
@@ -91,4 +91,4 @@ const Modal = (props) => {
   );
 };
 
-export default Modal;
+export default ModalComponent;

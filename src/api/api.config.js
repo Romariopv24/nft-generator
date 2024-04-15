@@ -26,7 +26,6 @@ class Api {
       "Content-Type": "application/json"
       // Authorization: `Bearer ${localStorage.getItem("access_token")}`
     },
-    body: JSON.stringify({ items: [{ id: "xl-tshirt" }] })
   }
 
   async get(

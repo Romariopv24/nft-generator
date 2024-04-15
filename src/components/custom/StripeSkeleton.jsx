@@ -1,6 +1,6 @@
 import { Skeleton, Stack } from "@mui/material"
 
-export function StripeSkeleton() {
+export default function StripeSkeleton() {
   return (
     <Stack spacing={1} py={5}>
       <Skeleton

@@ -1,19 +1,18 @@
-/* eslint-disable react/prop-types */
+// /* eslint-disable react/prop-types */
+// import { Box, Button, Stack } from "@mui/material"
+// import {
+//   LinkAuthenticationElement,
+//   PaymentElement,
+//   useElements,
+//   useStripe,
+// } from "@stripe/react-stripe-js"
+// import { useEffect, useState } from "react"
+import StripeSkeleton from "../../custom/StripeSkeleton"
+
 import { Box, Button, Stack } from "@mui/material"
-import {
-  LinkAuthenticationElement,
-  PaymentElement,
-  useElements,
-  useStripe
-} from "@stripe/react-stripe-js"
+import { LinkAuthenticationElement, PaymentElement, useElements, useStripe } from "@stripe/react-stripe-js"
 import { useEffect, useState } from "react"
 
-// import { useStore } from '../../../../../../store/store'
-import { axiosPost, axiosPut } from "../../../../../../api/apiConfig"
-import { useStore } from "../../../../../../store/store"
-import { StripeSkeleton } from "../../../../../custom/SkeletonStripe"
-
-// eslint-disable-next-line react/prop-types
 export default function CheckoutForm({
   // setIsConfirmed,
   // handleDownload,
@@ -25,7 +24,6 @@ export default function CheckoutForm({
   stripePromise
 }) {
   const [lie, setLie] = useState(false)
-  const { userData, urlImage, setUserDatax } = useStore()
   // const { setStripe } = useStore()
   const stripe = useStripe()
   const elements = useElements()
@@ -72,73 +70,34 @@ export default function CheckoutForm({
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    if (!stripe || !elements) {
-      // Stripe.js hasn't yet loaded.
-      // Make sure to disable form submission until Stripe.js has loaded.
-      return
-    }
+     if (!stripe || !elements) {
+       // Stripe.js hasn't yet loaded.
+       // Make sure to disable form submission until Stripe.js has loaded.
+       return
+     }
 
-    setIsProcessing(true)
+     setIsProcessing(true)
 
-    stripe
-      .confirmPayment({
-        elements,
-        confirmParams: {
-          // Make sure to change this to your payment completion page
-          return_url: "http://localhost:3000"
-        },
-        redirect: "if_required"
-      })
-      .then((res) => {
-        if (res.error) {
-          setMessage(res.error.message)
-          axiosPut("/update/imagine", {
-            txtCorreo: userData.email,
-            newImagine: urlImage
-          })
-          setUserDatax()
-        }
-        //Your card has been declined
-        //Your card has insufficient funds.
-        if (!res.paymentIntent) {
-          return
-        }
+     const { error } = await stripe.confirmPayment({
+       elements,
+       confirmParams: {
+         // Make sure to change this to your payment completion page
+         return_url: "http://localhost:3000"
+       }
+     })
 
-        console.log(res)
-        if (res.error) {
-          if (
-            res.error.type === "card_error" ||
-            res.error.type === "validation_error" ||
-            res.error.type === "invalid_request_error"
-          ) {
-            setMessage(res.error.message)
-          }
-        }
-        // setStripe(data)
+    // This point will only be reached if there is an immediate error when
+     // confirming the payment. Otherwise, your customer will be redirected to
+     // your `return_url`. For some payment methods like iDEAL, your customer will
+     // be redirected to an intermediate site first to authorize the payment, then
+    // redirected to the `return_url`.
+     if (error.type === "card_error" || error.type === "validation_error") {
+       setMessage(error.message)
+    } else {
+      setMessage("An unexpected error occurred.")
+     }
 
-        axiosPost("/gallery/confirm_payment", {
-          // paymentIntentId: paymentIntentId
-        })
-          .then((res) => {
-            console.log(res)
-            console.log("pago hecho")
-            // setShowModal(false)
-            // handleDownload(paymentIntentId)
-          })
-          .catch((err) => {
-            console.log(err)
-          })
-        // setIsConfirmed(true)
-      })
-      .catch((error) => {
-        console.log(error)
-        if (error.type === "card_error" || error.type === "validation_error") {
-          setMessage(error.message)
-        } else {
-          setMessage("An unexpected error occurred.")
-        }
-      })
-      .finally(() => setIsProcessing(false))
+     setIsProcessing(false)
   }
 
   const paymentElementOptions = {

@@ -22,6 +22,8 @@ import { useStoreProv } from "../utils/zustand/store.js"
 import GenericModal from "./GenericModal"
 import PreviewCollection from "./PreviewCollection"
 import SeePrices from "./mui-components/modal/SeePrices.jsx"
+import { axiosClass } from "../api/api.config.js"
+import CheckoutForm from "./mui-components/modal/CheckoutForm.jsx"
 
 // const paqueteDeMil_NFT = Const.PRECIO_PRUEBA_NFTS // 99$
 // const paqueteDeCincoMil_NFT = Const.PRECIO_PRUEBA_NFTS // 199$
@@ -290,6 +292,7 @@ const Form = ({
         })
           .then((res) => res.json())
           .then((data) => {
+            console.log(data)
             setClientSecret(data.clientSecret)
           })
       }
@@ -535,7 +538,7 @@ const Form = ({
       left: "50%",
       transform: "translate(-50%, -50%)",
       width: "30%",
-      height: "40%",
+      // height: "40%",
       bgcolor: "#1E2235",
       border: "2px solid #000",
       boxShadow: 24,
@@ -892,6 +895,7 @@ const Form = ({
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
+          <Box sx={style}>
           {clientSecret && (
             <Elements
               options={{
@@ -901,25 +905,20 @@ const Form = ({
               }}
               stripe={stripePromise}
             >
-              <Box sx={style}>
                 <Stack alignItems={"end"} sx={{ width: "100%" }}>
                   <Button onClick={handleClose} sx={{ height: "1.5rem" }}>
                     <Close sx={{ color: "white", fontSize: "1.25rem" }} />
                   </Button>
                 </Stack>
-                {/* <CheckoutForm
+                <CheckoutForm
                   options={options}
                   handleClose={handleClose}
                   stripePromise={stripePromise}
-                  // state={state}
-                  // setShowModal={setShowModal}
-                  // handleDownload={handleDownload}
-                  // setIsConfirmed={setIsConfirmed}
-                  // paymentIntentId={paymentIntentId}
-                /> */}
-              </Box>
+
+                />
             </Elements>
           )}
+          </Box>
         </Modal>
       </>
     )

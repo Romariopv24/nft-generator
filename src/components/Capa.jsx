@@ -5,7 +5,8 @@ import { ReactComponent as Delete } from "../assets/svg/trash.svg"
 import { obtenerTodo } from "../db/CrudDB.js"
 import "../styles/scss/_capa.scss"
 import getCapas from "../utils/getCapas"
-import Modal from "./Modal"
+import Modal from "./ModalComponent.jsx"
+import ModalComponent from "./ModalComponent.jsx"
 
 const Capa = ({
   capa,
@@ -150,7 +151,7 @@ const Capa = ({
 
         <div className="d-flex justify-content-between align-items-center position-absolute top-50 end-0 translate-middle-y ">
           <div class="form-check form-switch ">
-            <Modal
+            <ModalComponent
               classButton="form-check-input capa-name "
               textButton=<FormattedMessage
                 id="form.btn-rarity"
@@ -222,7 +223,7 @@ const Capa = ({
                   </div>
                 ))}
               </div>
-            </Modal>
+            </ModalComponent>
           </div>
 
           <div class="">
