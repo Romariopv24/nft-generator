@@ -1,4 +1,5 @@
-import { Box, Modal } from "@mui/material"
+import { Close } from "@mui/icons-material"
+import { Box, Button, Modal, Stack } from "@mui/material"
 import { Elements } from "@stripe/react-stripe-js"
 import { loadStripe } from "@stripe/stripe-js"
 import { ethers } from "ethers"
@@ -20,7 +21,6 @@ import getDatosImg from "../utils/getDatosImg"
 import { useStoreProv } from "../utils/zustand/store.js"
 import GenericModal from "./GenericModal"
 import PreviewCollection from "./PreviewCollection"
-import CheckoutForm from "./mui-components/modal/CheckoutForm.jsx"
 import SeePrices from "./mui-components/modal/SeePrices.jsx"
 
 // const paqueteDeMil_NFT = Const.PRECIO_PRUEBA_NFTS // 99$
@@ -529,6 +529,7 @@ const Form = ({
 
     const setSignal = useStoreProv((state) => state.setSignal)
     const style = {
+      color: "#fff",
       position: "absolute",
       top: "50%",
       left: "50%",
@@ -891,17 +892,34 @@ const Form = ({
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
-          <Box sx={style}>
-            {clientSecret && (
-              <Elements
-                handleClose={handleClose}
-                options={options}
-                stripe={stripePromise}
-              >
-                <CheckoutForm />
-              </Elements>
-            )}
-          </Box>
+          {clientSecret && (
+            <Elements
+              options={{
+                clientSecret,
+                appearance: { theme: "night" }
+                // locale: selectedLanguage === "eng" ? "en" : "es"
+              }}
+              stripe={stripePromise}
+            >
+              <Box sx={style}>
+                <Stack alignItems={"end"} sx={{ width: "100%" }}>
+                  <Button onClick={handleClose} sx={{ height: "1.5rem" }}>
+                    <Close sx={{ color: "white", fontSize: "1.25rem" }} />
+                  </Button>
+                </Stack>
+                {/* <CheckoutForm
+                  options={options}
+                  handleClose={handleClose}
+                  stripePromise={stripePromise}
+                  // state={state}
+                  // setShowModal={setShowModal}
+                  // handleDownload={handleDownload}
+                  // setIsConfirmed={setIsConfirmed}
+                  // paymentIntentId={paymentIntentId}
+                /> */}
+              </Box>
+            </Elements>
+          )}
         </Modal>
       </>
     )
