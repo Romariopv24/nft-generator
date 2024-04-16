@@ -438,7 +438,18 @@ function App() {
             {/* Copyright */}
             <div class="text-center p-2 d-flex justify-content-center align-items-center">
               <p>
-                <span className="p-2">Copyright © 2023 - Fanaticoins LLC</span>/
+              <a
+                  href="https://nftglanding.devtop.online/"
+                  style={{ color: "", cursor: "pointer" }}
+                  className="text-reset fw-bold p-2 links"
+                  // onClick={() => setShowLegalWarning(true)}
+                >
+                  {""}
+                  <FormattedMessage
+                    id="footer.home"
+                    defaultMessage="Home"
+                  />
+                </a>/
                 <a
                   target="_blank"
                   style={{ color: "", cursor: "pointer" }}

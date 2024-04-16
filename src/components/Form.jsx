@@ -315,10 +315,7 @@ const Form = ({
       {
         nombre: "Stripe",
         icon: <Stripe width={90} height={100} />,
-        proceso: () => {
-          console.log("straip")
-          setOpenStripeModal(true)
-        }
+        proceso: () => setOpenStripeModal(true)
       }
     ]
 
