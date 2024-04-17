@@ -24,6 +24,7 @@ import PreviewCollection from "./PreviewCollection"
 import SeePrices from "./mui-components/modal/SeePrices.jsx"
 import { axiosClass } from "../api/api.config.js"
 import CheckoutForm from "./mui-components/modal/CheckoutForm.jsx"
+import { closeSnackbar, enqueueSnackbar } from "notistack"
 
 // const paqueteDeMil_NFT = Const.PRECIO_PRUEBA_NFTS // 99$
 // const paqueteDeCincoMil_NFT = Const.PRECIO_PRUEBA_NFTS // 199$
@@ -89,7 +90,7 @@ const Form = ({
   const google = JSON.parse(localStorage.getItem("google"))
   const metamask = JSON.parse(localStorage.getItem("metamask"))
   let correo = facebook?.tokenUser || google?.tokenUser || metamask?.tokenUser
-  const { typeUser } = useStoreProv()
+  const { typeUser,payConfirm, setPayConfirm,setHandleSubmitFunc } = useStoreProv()
 
   useEffect(() => {
     if (
@@ -285,16 +286,12 @@ const Form = ({
       if (openStripeModal) {
         const priceString = (price * BNBprice.current).toFixed(2)
         const amount = +priceString
-        fetch(`${Const.URL}create-payment-intent`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ amount: amount })
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            console.log(data)
-            setClientSecret(data.clientSecret)
-          })
+
+        axiosClass.post("create-payment-intent", { amount }).then((res) => { 
+          
+          setClientSecret(res.data.clientSecret) 
+        }).catch((err) => { console.log(err) }  )
+        
       }
     }, [openStripeModal])
 
@@ -542,7 +539,21 @@ const Form = ({
       p: 4
     }
 
-    const handleClose = () => setOpenStripeModal(false)
+    const handleClose = () => {
+      setOpenStripeModal(false)
+    }
+
+    const closePaymentModal = () => {
+      setListPreview1([])
+      setListPreview2([])
+      setListPreview3([])
+      setUrlNft("")
+      botonGenerate(false)
+      setIsPriceCalculated(false)
+      setChecked(false)
+
+    }
+
     return (
       <>
         <div className="fs-6 fw-bold">
@@ -673,6 +684,7 @@ const Form = ({
                           setListPreview2([])
                           setListPreview3([])
                           setSignal(true)
+                      
                         }}
                       >
                         <FormattedMessage
@@ -688,6 +700,7 @@ const Form = ({
                       onClick={() => {
                         setUrlNft("")
                         botonGenerate(false)
+
                       }}
                     >
                       <FormattedMessage
@@ -845,15 +858,7 @@ const Form = ({
 
                 <button
                   className="__boton-mediano enphasis-button"
-                  onClick={() => {
-                    setListPreview1([])
-                    setListPreview2([])
-                    setListPreview3([])
-                    setUrlNft("")
-                    botonGenerate(false)
-                    setIsPriceCalculated(false)
-                    setChecked(false)
-                  }}
+                  onClick={closePaymentModal}
                 >
                   <FormattedMessage
                     id="form.success-pay-close"
@@ -911,6 +916,8 @@ const Form = ({
                   options={options}
                   handleClose={handleClose}
                   stripePromise={stripePromise}
+                  closePaymentModal={closePaymentModal}
+                  botonGenerate={botonGenerate}
 
                 />
             </Elements>
@@ -969,7 +976,7 @@ const Form = ({
     }
 
     const selectComponent = () => {
-      if (isPremiun) return components.free
+      if (typeUser === 1 || typeUser === 2 ) return components.free
       if (
         inputProjectCollectionSize.current.value <= 100 &&
         isExisteNombreProject === null
@@ -1061,15 +1068,11 @@ const Form = ({
 
     let isPremiun = false
 
-    //esto es mio para ver si eres premiun
     const chainId = await window.ethereum.request({ method: "eth_chainId" })
-    const accounts = await window.ethereum.request({ method: "eth_accounts" })
-    listWalletPremiun.find((wallet) => {
-      if (wallet.toLowerCase() === accounts[0]) isPremiun = true
-    })
 
     if (chainId === "0x13881") {
-      if (typeUser === 1 || typeUser === 2) {
+      if (typeUser === 1 || typeUser === 2 || payConfirm === true ) {
+        console.log('entro aqui')
         const { valid, message } = await ValidarSiExisteNombreProjectServidor()
         if (valid === false) {
           // console.log(res)
@@ -1153,6 +1156,40 @@ const Form = ({
   const [openMuiModal, setOpenMuiModal] = useState(false)
   const handleOpen = () => setOpenMuiModal(true)
   const handleClose = () => setOpenMuiModal(false)
+
+  useEffect(() => {
+    if(payConfirm === true) {
+        // Mostrar la notificación antes de iniciar la promesa
+        const snackbarKey = enqueueSnackbar("Please wait a few seconds to see you Free Collection!", {
+            variant: "success",
+            anchorOrigin: {
+                vertical: "top",
+                horizontal: "right"
+            },
+            persist: true // Hacer que la notificación persista
+        })
+
+        handleGenerate().then((res) =>{ 
+            console.log(res)
+        }).catch((err) => console.log(err)).finally(() => {
+            setPayConfirm(false)
+            console.log(payConfirm)
+
+            // Cerrar la notificación específica cuando la promesa termine
+            closeSnackbar(snackbarKey)
+
+            // Mostrar la nueva notificación
+            enqueueSnackbar("Generating collection", {
+                variant: "success",
+                anchorOrigin: {
+                    vertical: "top",
+                    horizontal: "right"
+                }
+            })
+        })
+        console.log('generando')
+    }
+}, [payConfirm])
 
   return (
     <>
@@ -1389,6 +1426,7 @@ const Form = ({
           loadImageFromDBB(setListPreview1)
           loadImageFromDBB(setListPreview2)
           loadImageFromDBB(setListPreview3)
+  
         }}
         disabled={isInputGenerate}
         id="generar"

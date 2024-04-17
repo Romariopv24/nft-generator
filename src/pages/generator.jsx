@@ -408,7 +408,6 @@ const Generator = ({
     }
     // tiene que haber 2 capas con imagenes minimo
     if (capas.length === 2) {
-      console.log(2)
 
       let getimages = capas.map((images) => images.images.length === 0)
       const res = getimages.every((e) => e !== true)

@@ -12,7 +12,11 @@ const useStoreProv = create((set) => ({
   signalToken: false,
   setSignalToken: (state) => set(() => ({ signalToken: !state.signal })),
   typeUser: "",
-  setTypeUser: (state) => set(() => ({ typeUser: state }))
+  setTypeUser: (state) => set(() => ({ typeUser: state })),
+  payConfirm: false,
+  setPayConfirm: (state) => set(() => ({ payConfirm: state })),
+  handleSubmitFunc: null,
+
 }))
 
 export { useStoreProv }

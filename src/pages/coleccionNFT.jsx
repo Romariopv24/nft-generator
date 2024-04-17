@@ -29,7 +29,9 @@ const ColeccionNFT = () => {
   const [isPromiseReady, setIsPromiseReady] = useState(false)
   const [code, setCode] = useState("")
   const [isWalletPremiun, setIsWalletPremiun] = useState(false)
-
+  // const signal = useStoreProv((state) => state.signal)
+  // const setSignal = useStoreProv((state) => state.setSignal)
+  const {signal, setSignal, setPayConfirm} = useStoreProv()
   const intl = useIntl()
 
   const codeMessage = [
@@ -119,18 +121,20 @@ const ColeccionNFT = () => {
       if (post.message === "Usuario sin colecciones" || post.length === 0) {
         setIsPromiseReady(true)
         setCollectall([])
+      //  collectall.find((collection) => collection.url === "En Proceso..." && setPayConfirm(false) )
+
       } else {
         setCollectall(post)
         setIsPromiseReady(true)
         console.log(post)
         console.log("se hizo una solicitud")
+      
       }
     } catch (error) {
       console.log(error)
     }
   }
   //aca termina el fetch
-
   function date(date) {
     if (isWalletPremiun === true) {
       return intl.formatMessage({
@@ -239,8 +243,7 @@ const ColeccionNFT = () => {
     return post
   }
 
-  const signal = useStoreProv((state) => state.signal)
-  const setSignal = useStoreProv((state) => state.setSignal)
+
 
   useEffect(() => {
     if (signal === true) {
@@ -249,7 +252,6 @@ const ColeccionNFT = () => {
     }
   }, [])
 
-  console.log(isPromiseReady)
 
   return (
     <>

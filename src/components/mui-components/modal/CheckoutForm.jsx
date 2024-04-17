@@ -12,6 +12,9 @@ import StripeSkeleton from "../../custom/StripeSkeleton"
 import { Box, Button, Stack } from "@mui/material"
 import { LinkAuthenticationElement, PaymentElement, useElements, useStripe } from "@stripe/react-stripe-js"
 import { useEffect, useState } from "react"
+import { axiosClass } from "../../../api/api.config"
+import { enqueueSnackbar } from "notistack"
+import { useStoreProv } from "../../../utils/zustand/store"
 
 export default function CheckoutForm({
   // setIsConfirmed,
@@ -21,18 +24,22 @@ export default function CheckoutForm({
   // state
   options,
   handleClose,
-  stripePromise
+  stripePromise,
+  botonGenerate,
+  closePaymentModal,
 }) {
   const [lie, setLie] = useState(false)
+ 
   // const { setStripe } = useStore()
   const stripe = useStripe()
   const elements = useElements()
 
+  const {payConfirm, setPayConfirm, handleSubmitFunc} = useStoreProv()
+console.log(payConfirm)
   // const [email, setEmail] = useState('')
   const [message, setMessage] = useState("")
 
   const [isProcessing, setIsProcessing] = useState(false)
-
   useEffect(() => {
     if (!stripe || !elements) return
 
@@ -66,39 +73,51 @@ export default function CheckoutForm({
       }
     })
   }, [stripe])
-
+  
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-     if (!stripe || !elements) {
-       // Stripe.js hasn't yet loaded.
-       // Make sure to disable form submission until Stripe.js has loaded.
-       return
-     }
+    if (!stripe || !elements) {
+        // Stripe.js hasn't yet loaded.
+        // Make sure to disable form submission until Stripe.js has loaded.
+        return
+    }
 
-     setIsProcessing(true)
+    setIsProcessing(true)
 
-     const { error } = await stripe.confirmPayment({
-       elements,
-       confirmParams: {
-         // Make sure to change this to your payment completion page
-         return_url: "http://localhost:3000"
-       }
-     })
+    stripe.confirmPayment({
+        elements,
+        confirmParams: {
+            // Make sure to change this to your payment completion page
+            return_url: "http://localhost:3000",
+        },
+        redirect: "if_required",
 
-    // This point will only be reached if there is an immediate error when
-     // confirming the payment. Otherwise, your customer will be redirected to
-     // your `return_url`. For some payment methods like iDEAL, your customer will
-     // be redirected to an intermediate site first to authorize the payment, then
-    // redirected to the `return_url`.
-     if (error.type === "card_error" || error.type === "validation_error") {
-       setMessage(error.message)
-    } else {
-      setMessage("An unexpected error occurred.")
-     }
+    }).then((res) => {
+        if (res.paymentIntent) {
+            axiosClass.post('confirm_payment', { paymentIntentId: res.paymentIntent.id }).then(async (res) => {
+                if (res.status === 200) {
+                    enqueueSnackbar("Payment Confirmed", {
+                        variant: "success",
+                        anchorOrigin: {
+                            vertical: "top",
+                            horizontal: "right"
+                        }
+                    })
+                    setPayConfirm(true)
+                    handleClose()
+                }
+            }).catch((err) => {
+                setPayConfirm(false)
+            })
+        }
+    }).catch((err) => {
+        setIsProcessing(false)
+        setPayConfirm(false)
+    })
+}
 
-     setIsProcessing(false)
-  }
+
 
   const paymentElementOptions = {
     layout: "tabs",
