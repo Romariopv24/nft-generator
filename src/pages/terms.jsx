@@ -4,15 +4,25 @@ import "../styles/scss/_terms.scss"
 
 const Terms = () => {
   return (
-    <div style={{ paddingTop: "6vh" }}>
-      <div className="principal_container text_justify p-3">
-        <h1>
+    <div>
+      <div className="principal_container p-3">
+        <h3
+          className="p-3"
+          style={{
+            fontSize: "1.5rem",
+            padding: ".7em",
+            boxShadow: "#ffffff1f 0px 2px 3px 0px",
+            borderBottomLeftRadius: 0,
+            borderBottomRightRadius: 0
+          }}
+        >
           <FormattedMessage
             id="legalwarning.termsncondition"
             defaultMessage="Términos y Condiciones del Generador de Colecciones de NFTs"
           />
-        </h1>
+        </h3>
       </div>
+
       <div className="principal_container text_justify p-3">
         <p>
           <FormattedMessage

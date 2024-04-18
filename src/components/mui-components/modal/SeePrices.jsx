@@ -162,11 +162,7 @@ export default function SeePrices({ openMuiModal, handleClose }) {
                 textAlign: "center"
               }}
             >
-               <FormattedMessage
-          id="prices.title"
-          defaultMessage="PRICES"
-        />
-        
+              <FormattedMessage id="prices.title" defaultMessage="PRICES" />
             </Typography>
             <Close
               style={{ width: "20px", height: "20px", cursor: "pointer" }}
@@ -182,10 +178,10 @@ export default function SeePrices({ openMuiModal, handleClose }) {
             id="modal-modal-description"
             sx={{ mt: 2 }}
           >
-                   <FormattedMessage
-          id="prices.subtitle"
-          defaultMessage="Price list for generating NFT collections"
-        />
+            <FormattedMessage
+              id="prices.subtitle"
+              defaultMessage="Price list for generating NFT collections"
+            />
           </Typography>
           <ListItems>
             {data.map((item, index) => (
@@ -208,7 +204,7 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: { md: "90%", lg: 1200 },
-  height: { md: "100%", lg: "95%" },
+  height: { md: "100%", lg: "95%", xl: "70%" },
   bgcolor: "#000446",
   border: "2px solid #00B8FF",
   boxShadow: 24,
@@ -216,8 +212,8 @@ const style = {
 }
 
 const mainContainer = {
-  height: {xs:"80vh", lg:"100%"},
-  overflow: {xs:"auto", lg:"visible"},
+  height: { xs: "80vh", lg: "100%" },
+  overflow: { xs: "auto", lg: "visible" }
 }
 const headerContainer = {
   width: "100%",

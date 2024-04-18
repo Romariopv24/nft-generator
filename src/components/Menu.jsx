@@ -210,46 +210,52 @@ const Menu = ({
           </div>
         )}
 
-<div className="banderas">
-  <button
-    onClick={() => {
-      idioma.cambiarIdioma("es-ES")
-    }}
-    style={{
-      borderRadius: "20px",
-      backgroundColor: "transparent"
-    }}
-  >
-    <img 
-      src={es} 
-      alt="" 
-      style={{
-        filter: (idiomaFocus === "es-ES" || hovered === "es-ES") ? "none" : "grayscale(100%)"
-      }}
-      onMouseEnter={() => setHovered("es-ES")}
-      onMouseLeave={() => setHovered(null)}
-    />
-  </button>
-  <button
-    onClick={() => {
-      idioma.cambiarIdioma("en-US")
-    }}
-    style={{
-      borderRadius: "20px",
-      backgroundColor: "transparent"
-    }}
-  >
-    <img 
-      src={en} 
-      alt="" 
-      style={{
-        filter: (idiomaFocus === "en-US" || hovered === "en-US") ? "none" : "grayscale(100%)"
-      }}
-      onMouseEnter={() => setHovered("en-US")}
-      onMouseLeave={() => setHovered(null)}
-    />
-  </button>
-</div>
+        <div className="banderas">
+          <button
+            onClick={() => {
+              idioma.cambiarIdioma("es-ES")
+            }}
+            style={{
+              borderRadius: "20px",
+              backgroundColor: "transparent"
+            }}
+          >
+            <img
+              src={es}
+              alt=""
+              style={{
+                filter:
+                  idiomaFocus === "es-ES" || hovered === "es-ES"
+                    ? "none"
+                    : "grayscale(100%)"
+              }}
+              onMouseEnter={() => setHovered("es-ES")}
+              onMouseLeave={() => setHovered(null)}
+            />
+          </button>
+          <button
+            onClick={() => {
+              idioma.cambiarIdioma("en-US")
+            }}
+            style={{
+              borderRadius: "20px",
+              backgroundColor: "transparent"
+            }}
+          >
+            <img
+              src={en}
+              alt=""
+              style={{
+                filter:
+                  idiomaFocus === "en-US" || hovered === "en-US"
+                    ? "none"
+                    : "grayscale(100%)"
+              }}
+              onMouseEnter={() => setHovered("en-US")}
+              onMouseLeave={() => setHovered(null)}
+            />
+          </button>
+        </div>
 
         {nameUser ? (
           <button
@@ -282,7 +288,7 @@ const Menu = ({
     </div>
   ) : (
     <>
-      {location.pathname === "/terms&conditions" ? (
+      {/* {location.pathname === "/terms&conditions" ? (
         <div className="d-flex align-items-center my-2 ps-2 pe-1">
           <div className="logo_menu">
             <img src={logo} alt="Logo" />
@@ -345,7 +351,7 @@ const Menu = ({
             </button>
           </div>
         </div>
-      ) : null}
+      ) : null} */}
     </>
   )
 }

@@ -2,12 +2,13 @@ import axios from "axios"
 import { useEffect, useLayoutEffect, useState } from "react"
 import { FormattedMessage, useIntl } from "react-intl"
 import Joyride, { STATUS } from "react-joyride"
-import { Link, Route, Routes, useLocation, useNavigate } from "react-router-dom"
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom"
 import { Contact } from "./components/Contact"
 import GenericModal from "./components/GenericModal"
 import { LegalWarning } from "./components/LegalWarning"
 import Menu from "./components/Menu"
 import RegisterUser from "./components/RegisterUser"
+import { TermsNConditionModal } from "./components/TermsNConditionModal"
 import AdminView from "./components/admin/AdminView"
 import Loader from "./components/custom/Loader"
 import { URL } from "./constantes"
@@ -16,7 +17,6 @@ import Login from "./pages/Login"
 import Pay from "./pages/Pay"
 import ColeccionNFT from "./pages/coleccionNFT"
 import Generator from "./pages/generator"
-import Terms from "./pages/terms"
 import "./styles/scss/_pedir-correro.scss"
 import { useStoreProv } from "./utils/zustand/store"
 
@@ -38,6 +38,7 @@ function App() {
   const [showVideo, setShowVideo] = useState(false)
   const [showLegalWarning, setShowLegalWarning] = useState(false)
   const [showContact, setShowContact] = useState(false)
+  const [showTerms, setShowTerms] = useState(false)
   const [steps, _] = useState([
     {
       target: "#capas",
@@ -174,12 +175,7 @@ function App() {
   const location = useLocation().pathname
 
   const fetchData = async () => {
-    if (
-      facebook?.tokenUser ||
-      google?.tokenUser ||
-      metamask?.tokenUser ||
-      location === "/terms&conditions"
-    ) {
+    if (facebook?.tokenUser || google?.tokenUser || metamask?.tokenUser) {
       try {
         let res = await createFolderUserServer()
         setIsAuth(true)
@@ -218,7 +214,6 @@ function App() {
           setEmail(post[0].correo)
           const accesToken = localStorage.getItem("access_token")
           setAccess_token(accesToken)
-          console.log(email)
         }
 
         validarDatosUserDesdeServidor(post)
@@ -337,7 +332,7 @@ function App() {
               <Route path="/coleccion" element={<ColeccionNFT />} />
               <Route path="/pay/:params" element={<Pay />} />
               <Route path="/faqs" element={<FAQs />} />
-              <Route path="/terms&conditions" element={<Terms />} />
+              {/* <Route path="/terms&conditions" element={<Terms />} /> */}
               <Route path="/admin" element={<AdminView />} />
             </Routes>
           </div>
@@ -434,6 +429,10 @@ function App() {
 
           <Contact showContact={showContact} setShowContact={setShowContact} />
 
+          <TermsNConditionModal
+            showTerms={showTerms}
+            setShowTerms={setShowTerms}
+          />
           <footer class="text-center text-lg-start  text-muted">
             {/* Copyright */}
             <div class="text-center p-2 d-flex justify-content-center align-items-center">
@@ -474,7 +473,19 @@ function App() {
                   />
                 </span>
                 /
-                <Link
+                <a
+                  target="_blank"
+                  style={{ color: "", cursor: "pointer" }}
+                  className="text-reset fw-bold p-2 links"
+                  onClick={() => setShowTerms(true)}
+                >
+                  {""}
+                  <FormattedMessage
+                    id="footer.terms&conditions"
+                    defaultMessage={"Terms & Conditions"}
+                  />
+                </a>
+                {/* <Link
                   style={{ textDecoration: "none", color: "white" }}
                   to={"/terms&conditions"}
                 >
@@ -483,7 +494,7 @@ function App() {
                     id="footer.terms&conditions"
                     defaultMessage={"Terms & Conditions"}
                   />
-                </Link>
+                </Link> */}
               </p>
 
               {/* <a class="text-reset fw-bold" href="https://mdbootstrap.com/">MDBootstrap.com</a> */}

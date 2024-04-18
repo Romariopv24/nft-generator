@@ -21,9 +21,10 @@ import getCapas from "../utils/getCapas"
 import getDatosImg from "../utils/getDatosImg"
 import { useStoreProv } from "../utils/zustand/store.js"
 import GenericModal from "./GenericModal"
-import PreviewCollection from "./PreviewCollection"
 import CheckoutForm from "./mui-components/modal/CheckoutForm.jsx"
 import SeePrices from "./mui-components/modal/SeePrices.jsx"
+import PreviewCollection from "./PreviewCollection"
+import { TermsNConditionModal } from "./TermsNConditionModal.jsx"
 
 // const paqueteDeMil_NFT = Const.PRECIO_PRUEBA_NFTS // 99$
 // const paqueteDeCincoMil_NFT = Const.PRECIO_PRUEBA_NFTS // 199$
@@ -97,6 +98,7 @@ const Form = ({
     setDisableCloseButton
   } = useStoreProv()
 
+  const idioma = localStorage.getItem("idioma")
   useEffect(() => {
     if (
       (dimension.x === 0 ||
@@ -530,6 +532,8 @@ const Form = ({
     }
 
     const setSignal = useStoreProv((state) => state.setSignal)
+    const [showTerms, setShowTerms] = useState(false)
+
     const style = {
       color: "#fff",
       position: "absolute",
@@ -810,7 +814,6 @@ const Form = ({
                     defaultMessage="Free limit exceeded if you want to continue you must pay"
                   />
                 </p>
-
                 <div className="p-2">
                   <PreviewCollection
                     listPreview1={listPreview1}
@@ -820,12 +823,10 @@ const Form = ({
                     imgTop3={175}
                   />
                 </div>
-
                 <p className="fw-bold mt-4" style={{ fontSize: "1.7rem" }}>
                   {price.toFixed(2)} BNB o{" "}
                   {(price * BNBprice.current).toFixed(2)} USD
                 </p>
-
                 <div
                   className="mb-2"
                   style={{
@@ -838,11 +839,9 @@ const Form = ({
                     <PayOptions key={idx} items={items} />
                   ))}
                 </div>
-
                 {alertShow && (
                   <ModalAlerts message={message} setAlertShow={setAlertShow} />
                 )}
-
                 {message.type === "success" && (
                   <Link to={`/coleccion`}>
                     {" "}
@@ -857,7 +856,6 @@ const Form = ({
                     </button>
                   </Link>
                 )}
-
                 <button
                   className="__boton-mediano enphasis-button"
                   onClick={closePaymentModal}
@@ -877,23 +875,27 @@ const Form = ({
                     value={checked}
                     onChange={handleChecked}
                   />
-                  <Link
-                    to={`/terms&conditions`}
+                  <a
                     target="_blank"
-                    class="text-reset text-center links"
-                    style={{ fontSize: "15px" }}
+                    style={{ color: "", cursor: "pointer" }}
+                    className="text-reset fw-bold p-2 links"
+                    onClick={() => setShowTerms(true)}
                   >
                     <FormattedMessage
                       id="form.pay.terms"
                       defaultMessage="I agree to the terms of service and privacy policy"
                     />
-                  </Link>
+                  </a>
                 </div>
               </div>
             </>
           )}
         </div>
 
+        <TermsNConditionModal
+          showTerms={showTerms}
+          setShowTerms={setShowTerms}
+        />
         <Modal
           open={openStripeModal}
           onClose={handleClose}
@@ -905,8 +907,9 @@ const Form = ({
               <Elements
                 options={{
                   clientSecret,
-                  appearance: { theme: "night" }
+                  appearance: { theme: "night" },
                   // locale: selectedLanguage === "eng" ? "en" : "es"
+                  locale: idioma === null || idioma === "en-US" ? "en" : "es"
                 }}
                 stripe={stripePromise}
               >
@@ -1169,7 +1172,7 @@ const Form = ({
           variant: "success",
           anchorOrigin: {
             vertical: "top",
-            horizontal: "center"
+            horizontal: "right"
           },
           persist: true
         }
@@ -1182,7 +1185,6 @@ const Form = ({
         .catch((err) => console.log(err))
         .finally(() => {
           setPayConfirm(false)
-          console.log(payConfirm)
 
           closeSnackbar(snackbarKey)
 
