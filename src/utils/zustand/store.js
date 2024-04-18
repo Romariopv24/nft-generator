@@ -15,8 +15,8 @@ const useStoreProv = create((set) => ({
   setTypeUser: (state) => set(() => ({ typeUser: state })),
   payConfirm: false,
   setPayConfirm: (state) => set(() => ({ payConfirm: state })),
-  handleSubmitFunc: null,
-
+  disableCloseButton: false,
+  setDisableCloseButton: (state) => set(() => ({ disableCloseButton: state }))
 }))
 
 export { useStoreProv }

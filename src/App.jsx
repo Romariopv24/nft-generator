@@ -151,7 +151,7 @@ function App() {
   ])
   const [loading, setLoading] = useState(true)
   let navigate = useNavigate()
-  const { setAccess_token, setTypeUser,setEmail } = useStoreProv()
+  const { setAccess_token, setTypeUser, setEmail, email } = useStoreProv()
 
   useEffect(() => {
     setDatosUserLS({ metamask, google, facebook })
@@ -212,13 +212,13 @@ function App() {
 
         const post = response.data
         if (post.usuario !== "creado") {
-          setTypeUser(post[0].tipo)
           localStorage.setItem("name", post[0].nombre)
           localStorage.setItem("access_token", post[0].access_token)
           setName(post[0].nombre)
           setEmail(post[0].correo)
           const accesToken = localStorage.getItem("access_token")
           setAccess_token(accesToken)
+          console.log(email)
         }
 
         validarDatosUserDesdeServidor(post)
@@ -438,18 +438,16 @@ function App() {
             {/* Copyright */}
             <div class="text-center p-2 d-flex justify-content-center align-items-center">
               <p>
-              <a
+                <a
                   href="https://nftglanding.devtop.online/"
                   style={{ color: "", cursor: "pointer" }}
                   className="text-reset fw-bold p-2 links"
                   // onClick={() => setShowLegalWarning(true)}
                 >
                   {""}
-                  <FormattedMessage
-                    id="footer.home"
-                    defaultMessage="Home"
-                  />
-                </a>/
+                  <FormattedMessage id="footer.home" defaultMessage="Home" />
+                </a>
+                /
                 <a
                   target="_blank"
                   style={{ color: "", cursor: "pointer" }}

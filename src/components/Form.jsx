@@ -3,13 +3,14 @@ import { Box, Button, Modal, Stack } from "@mui/material"
 import { Elements } from "@stripe/react-stripe-js"
 import { loadStripe } from "@stripe/stripe-js"
 import { ethers } from "ethers"
+import { closeSnackbar, enqueueSnackbar } from "notistack"
 import React, { useEffect, useRef, useState } from "react"
 import { FormattedMessage, useIntl } from "react-intl"
 import { Link } from "react-router-dom"
+import { axiosClass } from "../api/api.config.js"
 import { ReactComponent as MetamaskLogo } from "../assets/svg/metamask.svg"
 import { ReactComponent as Stripe } from "../assets/svg/stripe.svg"
 import * as Const from "../constantes"
-import { listWalletPremiun } from "../constantes"
 import { obtenerTodo } from "../db/CrudDB.js"
 import pagarConStripe from "../stripe/checkOut.js"
 import "../styles/scss/_container-rarity.scss"
@@ -21,10 +22,8 @@ import getDatosImg from "../utils/getDatosImg"
 import { useStoreProv } from "../utils/zustand/store.js"
 import GenericModal from "./GenericModal"
 import PreviewCollection from "./PreviewCollection"
-import SeePrices from "./mui-components/modal/SeePrices.jsx"
-import { axiosClass } from "../api/api.config.js"
 import CheckoutForm from "./mui-components/modal/CheckoutForm.jsx"
-import { closeSnackbar, enqueueSnackbar } from "notistack"
+import SeePrices from "./mui-components/modal/SeePrices.jsx"
 
 // const paqueteDeMil_NFT = Const.PRECIO_PRUEBA_NFTS // 99$
 // const paqueteDeCincoMil_NFT = Const.PRECIO_PRUEBA_NFTS // 199$
@@ -90,7 +89,13 @@ const Form = ({
   const google = JSON.parse(localStorage.getItem("google"))
   const metamask = JSON.parse(localStorage.getItem("metamask"))
   let correo = facebook?.tokenUser || google?.tokenUser || metamask?.tokenUser
-  const { typeUser,payConfirm, setPayConfirm,setHandleSubmitFunc } = useStoreProv()
+  const {
+    typeUser,
+    payConfirm,
+    setPayConfirm,
+    disableCloseButton,
+    setDisableCloseButton
+  } = useStoreProv()
 
   useEffect(() => {
     if (
@@ -168,18 +173,15 @@ const Form = ({
   })
 
   function onlyNumer({ target: { value } }) {
-    let valueAux = value.replace(/^0{1,}/, "")
-    let newValor = valueAux.replaceAll(/[\.A-Za-z.]{0,10}/g, "")
-    if (newValor === "") inputProjectCollectionSize.current.value = ""
-    // console.log(Number(newValor) > Number(maxConvinacion.current.innerText), Number(newValor), Number(maxConvinacion.current.innerText))
-    if (Number(newValor) !== value)
-      inputProjectCollectionSize.current.value = newValor
-    if (
-      Number(newValor) > Number(maxConvinacion.current.innerText) &&
-      newValor !== ""
-    )
+    let newValor = value.replace(/[^0-9]/g, "") // Remove all non-numeric characters
+    if (newValor === "") {
+      inputProjectCollectionSize.current.value = ""
+    } else if (Number(newValor) > Number(maxConvinacion.current.innerText)) {
       inputProjectCollectionSize.current.value =
         maxConvinacion.current.innerText
+    } else {
+      inputProjectCollectionSize.current.value = newValor
+    }
   }
 
   function requiredRarity(isRarity) {
@@ -287,11 +289,14 @@ const Form = ({
         const priceString = (price * BNBprice.current).toFixed(2)
         const amount = +priceString
 
-        axiosClass.post("create-payment-intent", { amount }).then((res) => { 
-          
-          setClientSecret(res.data.clientSecret) 
-        }).catch((err) => { console.log(err) }  )
-        
+        axiosClass
+          .post("create-payment-intent", { amount })
+          .then((res) => {
+            setClientSecret(res.data.clientSecret)
+          })
+          .catch((err) => {
+            console.log(err)
+          })
       }
     }, [openStripeModal])
 
@@ -551,7 +556,6 @@ const Form = ({
       botonGenerate(false)
       setIsPriceCalculated(false)
       setChecked(false)
-
     }
 
     return (
@@ -684,7 +688,6 @@ const Form = ({
                           setListPreview2([])
                           setListPreview3([])
                           setSignal(true)
-                      
                         }}
                       >
                         <FormattedMessage
@@ -700,7 +703,6 @@ const Form = ({
                       onClick={() => {
                         setUrlNft("")
                         botonGenerate(false)
-
                       }}
                     >
                       <FormattedMessage
@@ -859,6 +861,7 @@ const Form = ({
                 <button
                   className="__boton-mediano enphasis-button"
                   onClick={closePaymentModal}
+                  disabled={disableCloseButton}
                 >
                   <FormattedMessage
                     id="form.success-pay-close"
@@ -898,15 +901,15 @@ const Form = ({
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
-          {clientSecret && (
-            <Elements
-              options={{
-                clientSecret,
-                appearance: { theme: "night" }
-                // locale: selectedLanguage === "eng" ? "en" : "es"
-              }}
-              stripe={stripePromise}
-            >
+            {clientSecret && (
+              <Elements
+                options={{
+                  clientSecret,
+                  appearance: { theme: "night" }
+                  // locale: selectedLanguage === "eng" ? "en" : "es"
+                }}
+                stripe={stripePromise}
+              >
                 <Stack alignItems={"end"} sx={{ width: "100%" }}>
                   <Button onClick={handleClose} sx={{ height: "1.5rem" }}>
                     <Close sx={{ color: "white", fontSize: "1.25rem" }} />
@@ -918,10 +921,9 @@ const Form = ({
                   stripePromise={stripePromise}
                   closePaymentModal={closePaymentModal}
                   botonGenerate={botonGenerate}
-
                 />
-            </Elements>
-          )}
+              </Elements>
+            )}
           </Box>
         </Modal>
       </>
@@ -976,7 +978,7 @@ const Form = ({
     }
 
     const selectComponent = () => {
-      if (typeUser === 1 || typeUser === 2 ) return components.free
+      if (typeUser === 1 || typeUser === 2) return components.free
       if (
         inputProjectCollectionSize.current.value <= 100 &&
         isExisteNombreProject === null
@@ -1071,8 +1073,8 @@ const Form = ({
     const chainId = await window.ethereum.request({ method: "eth_chainId" })
 
     if (chainId === "0x13881") {
-      if (typeUser === 1 || typeUser === 2 || payConfirm === true ) {
-        console.log('entro aqui')
+      if (typeUser === 1 || typeUser === 2 || payConfirm === true) {
+        console.log("entro aqui")
         const { valid, message } = await ValidarSiExisteNombreProjectServidor()
         if (valid === false) {
           // console.log(res)
@@ -1158,38 +1160,44 @@ const Form = ({
   const handleClose = () => setOpenMuiModal(false)
 
   useEffect(() => {
-    if(payConfirm === true) {
-        // Mostrar la notificación antes de iniciar la promesa
-        const snackbarKey = enqueueSnackbar("Please wait a few seconds to see you Free Collection!", {
+    if (payConfirm === true) {
+      setDisableCloseButton(true) // Disable the button
+
+      const snackbarKey = enqueueSnackbar(
+        "Please wait a few seconds to see you Free Collection!",
+        {
+          variant: "success",
+          anchorOrigin: {
+            vertical: "top",
+            horizontal: "center"
+          },
+          persist: true
+        }
+      )
+
+      handleGenerate()
+        .then((res) => {
+          console.log(res)
+        })
+        .catch((err) => console.log(err))
+        .finally(() => {
+          setPayConfirm(false)
+          console.log(payConfirm)
+
+          closeSnackbar(snackbarKey)
+
+          setDisableCloseButton(false) // Enable the button
+
+          enqueueSnackbar("Generating collection", {
             variant: "success",
             anchorOrigin: {
-                vertical: "top",
-                horizontal: "right"
-            },
-            persist: true // Hacer que la notificación persista
+              vertical: "top",
+              horizontal: "right"
+            }
+          })
         })
-
-        handleGenerate().then((res) =>{ 
-            console.log(res)
-        }).catch((err) => console.log(err)).finally(() => {
-            setPayConfirm(false)
-            console.log(payConfirm)
-
-            // Cerrar la notificación específica cuando la promesa termine
-            closeSnackbar(snackbarKey)
-
-            // Mostrar la nueva notificación
-            enqueueSnackbar("Generating collection", {
-                variant: "success",
-                anchorOrigin: {
-                    vertical: "top",
-                    horizontal: "right"
-                }
-            })
-        })
-        console.log('generando')
     }
-}, [payConfirm])
+  }, [payConfirm])
 
   return (
     <>
@@ -1298,7 +1306,7 @@ const Form = ({
             </span>
 
             <input
-              type="text"
+              type="number"
               className="form-control-sm w-100 --border-blue"
               id="collectionsize"
               autoComplete="off"
@@ -1306,6 +1314,10 @@ const Form = ({
               ref={inputProjectCollectionSize}
               onChange={(e) => {
                 onlyNumer(e)
+              }}
+              style={{
+                appearance: "textfield", // This removes the arrows
+                MozAppearance: "textfield" // This is for Firefox
               }}
             />
           </div>
@@ -1347,10 +1359,10 @@ const Form = ({
             className="__boton-mediano mx-auto d-block w-30 enphasis-button"
             style={{ marginTop: "2rem" }}
           >
-             <FormattedMessage
-          id="button.prices.list"
-          defaultMessage="Prices List"
-        />
+            <FormattedMessage
+              id="button.prices.list"
+              defaultMessage="Prices List"
+            />
           </button>
         </form>
         {/* <form className="form-capa-name">
@@ -1426,7 +1438,6 @@ const Form = ({
           loadImageFromDBB(setListPreview1)
           loadImageFromDBB(setListPreview2)
           loadImageFromDBB(setListPreview3)
-  
         }}
         disabled={isInputGenerate}
         id="generar"

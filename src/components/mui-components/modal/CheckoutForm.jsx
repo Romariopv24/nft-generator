@@ -10,10 +10,15 @@
 import StripeSkeleton from "../../custom/StripeSkeleton"
 
 import { Box, Button, Stack } from "@mui/material"
-import { LinkAuthenticationElement, PaymentElement, useElements, useStripe } from "@stripe/react-stripe-js"
+import {
+  LinkAuthenticationElement,
+  PaymentElement,
+  useElements,
+  useStripe
+} from "@stripe/react-stripe-js"
+import { enqueueSnackbar } from "notistack"
 import { useEffect, useState } from "react"
 import { axiosClass } from "../../../api/api.config"
-import { enqueueSnackbar } from "notistack"
 import { useStoreProv } from "../../../utils/zustand/store"
 
 export default function CheckoutForm({
@@ -26,17 +31,15 @@ export default function CheckoutForm({
   handleClose,
   stripePromise,
   botonGenerate,
-  closePaymentModal,
+  closePaymentModal
 }) {
   const [lie, setLie] = useState(false)
- 
+
   // const { setStripe } = useStore()
   const stripe = useStripe()
   const elements = useElements()
 
-  const {payConfirm, setPayConfirm, handleSubmitFunc} = useStoreProv()
-console.log(payConfirm)
-  // const [email, setEmail] = useState('')
+  const { payConfirm, setPayConfirm, email } = useStoreProv()
   const [message, setMessage] = useState("")
 
   const [isProcessing, setIsProcessing] = useState(false)
@@ -73,57 +76,60 @@ console.log(payConfirm)
       }
     })
   }, [stripe])
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault()
 
     if (!stripe || !elements) {
-        // Stripe.js hasn't yet loaded.
-        // Make sure to disable form submission until Stripe.js has loaded.
-        return
+      // Stripe.js hasn't yet loaded.
+      // Make sure to disable form submission until Stripe.js has loaded.
+      return
     }
 
     setIsProcessing(true)
 
-    stripe.confirmPayment({
+    stripe
+      .confirmPayment({
         elements,
         confirmParams: {
-            // Make sure to change this to your payment completion page
-            return_url: "http://localhost:3000",
+          // Make sure to change this to your payment completion page
+          return_url: "http://localhost:3000"
         },
-        redirect: "if_required",
-
-    }).then((res) => {
+        redirect: "if_required"
+      })
+      .then((res) => {
         if (res.paymentIntent) {
-            axiosClass.post('confirm_payment', { paymentIntentId: res.paymentIntent.id }).then(async (res) => {
-                if (res.status === 200) {
-                    enqueueSnackbar("Payment Confirmed", {
-                        variant: "success",
-                        anchorOrigin: {
-                            vertical: "top",
-                            horizontal: "right"
-                        }
-                    })
-                    setPayConfirm(true)
-                    handleClose()
-                }
-            }).catch((err) => {
-                setPayConfirm(false)
+          axiosClass
+            .post("confirm_payment", { paymentIntentId: res.paymentIntent.id })
+            .then(async (res) => {
+              if (res.status === 200) {
+                enqueueSnackbar("Payment Confirmed", {
+                  variant: "success",
+                  anchorOrigin: {
+                    vertical: "top",
+                    horizontal: "right"
+                  }
+                })
+                setPayConfirm(true)
+                handleClose()
+              }
+            })
+            .catch((err) => {
+              setPayConfirm(false)
             })
         }
-    }).catch((err) => {
+      })
+      .catch((err) => {
         setIsProcessing(false)
         setPayConfirm(false)
-    })
-}
-
-
+      })
+  }
 
   const paymentElementOptions = {
     layout: "tabs",
     defaultValues: {
       billingDetails: {
-        // email: state.email !== "" ? state.email : ""
+        email: email !== "" ? email : ""
       }
     }
   }
