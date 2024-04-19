@@ -208,10 +208,12 @@ function App() {
 
         const post = response.data
         if (post.usuario !== "creado") {
+          console.log(post[0])
           localStorage.setItem("name", post[0].nombre)
           localStorage.setItem("access_token", post[0].access_token)
           setName(post[0].nombre)
           setEmail(post[0].correo)
+          setTypeUser(post[0].tipo)
           const accesToken = localStorage.getItem("access_token")
           setAccess_token(accesToken)
         }
