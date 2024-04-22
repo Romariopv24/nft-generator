@@ -29,6 +29,9 @@ export const Contact = ({ showContact, setShowContact }) => {
     return reg.test(email)
   }
 
+  const language = localStorage.getItem("idioma")
+  console.log(" Programing Lagujes:", language)
+
   const handleSubmit = async (event) => {
     if (nombre === "" || correo === "" || mensaje === "") {
       setError(true)
@@ -103,6 +106,7 @@ export const Contact = ({ showContact, setShowContact }) => {
       nombre: nombre,
       destinatario: correo,
       mensaje: mensaje,
+      lenguaje: language === null || language === "en-US" ? "en" : "es",
       trecaptcha: captcha.current
     }
 

@@ -22,8 +22,14 @@ const Generator = ({
   setName,
   name
 }) => {
-  const { access_token, setAccess_token, email, signalToken, setSignalToken } =
-    useStoreProv()
+  const {
+    access_token,
+    setAccess_token,
+    email,
+    signalToken,
+    setSignalToken,
+    typeUser
+  } = useStoreProv()
   const [capas, setCapas] = useState(getCapas())
   const [selectedCapa, setSelectedCapa] = useState(
     getCapas().find((s) => s.id === getSelectedCapaId())
@@ -256,7 +262,6 @@ const Generator = ({
       )
     }
   }
-
   async function generarCombinaciones() {
     let correo = facebook?.tokenUser || google?.tokenUser || metamask?.tokenUser
     //let correo = metamask?.tokenUser
@@ -352,8 +357,11 @@ const Generator = ({
         />
       )
     }
+
     const cantidadAPedir = Number(inputProjectCollectionSize.current.value)
     const cantidadMax = Number(maxConvinacion.current.innerText)
+
+    console.log(typeUser === 2 && cantidadAPedir > 11150)
     if (cantidadAPedir > cantidadMax) {
       return `${intl.formatMessage({
         id: "generator.max-combinations",
@@ -384,6 +392,14 @@ const Generator = ({
         />
       )
     }
+    if (typeUser === 2 && cantidadAPedir > 11150) {
+      return (
+        <FormattedMessage
+          id="generator.min-combinations2"
+          defaultMessage="Max of the total combinations must be 11.150"
+        />
+      )
+    }
     if (email.length < 1) {
       return (
         <FormattedMessage
@@ -394,6 +410,7 @@ const Generator = ({
     }
     return false
   }
+
   function validarSiExisteCapasConImagenes() {
     //tienen que existe mas de 2 capas minimo
     const message = (
@@ -408,7 +425,6 @@ const Generator = ({
     }
     // tiene que haber 2 capas con imagenes minimo
     if (capas.length === 2) {
-
       let getimages = capas.map((images) => images.images.length === 0)
       const res = getimages.every((e) => e !== true)
       return { valid: res, message }

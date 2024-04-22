@@ -10,7 +10,7 @@ function RegisterUser({
   fetchData,
   setName
 }) {
-  const setEmail = useStoreProv((state) => state.setEmail)
+  const { nameUser, setEmail, setNameUser } = useStoreProv()
   const [isErrorForm, setIsErrorForm] = useState({
     nombreEF: false,
     correoEF: false
@@ -33,8 +33,6 @@ function RegisterUser({
     esperar()
   }, [])
 
-
-
   async function esperar() {
     try {
       let res = await fetchData()
@@ -50,6 +48,7 @@ function RegisterUser({
           }
           setUserData({ ...obj })
           setEmail(res[0].correo || userData.correo)
+          setNameUser(res[0].nombre || userData.nombre)
         }
       }
       return res
@@ -154,27 +153,33 @@ function RegisterUser({
             <Closer className="" />
           </div>
 
-          {!userData?.nombre && (  <div className="inputRegister">
-            <label className="form-label me-2">
-              <FormattedMessage id="registerUser.name" defaultMessage="Name*" />
-            </label>
-            <small className={isErrorForm.nombreEF ? "text-danger" : "d-none"}>
-              {messageError?.nombre}
-            </small>
-            <input
-              type="text"
-              className={
-                isErrorForm.nombreEF
-                  ? " form-control border border-danger"
-                  : "form-control"
-              }
-              onChange={hanledChange}
-              value={userData?.nombre}
-              name={"nombre"}
-              required
-            />
-          </div>)}
-        
+          {!nameUser && (
+            <div className="inputRegister">
+              <label className="form-label me-2">
+                <FormattedMessage
+                  id="registerUser.name"
+                  defaultMessage="Name*"
+                />
+              </label>
+              <small
+                className={isErrorForm.nombreEF ? "text-danger" : "d-none"}
+              >
+                {messageError?.nombre}
+              </small>
+              <input
+                type="text"
+                className={
+                  isErrorForm.nombreEF
+                    ? " form-control border border-danger"
+                    : "form-control"
+                }
+                onChange={hanledChange}
+                value={userData?.nombre}
+                name={"nombre"}
+                required
+              />
+            </div>
+          )}
 
           <div className="inputRegister">
             <label className="form-label me-2">

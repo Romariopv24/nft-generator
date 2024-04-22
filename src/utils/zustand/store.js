@@ -7,6 +7,8 @@ const useStoreProv = create((set) => ({
   setAccess_token: (newState) => set((state) => ({ access_token: newState })),
   dataAdmin: [],
   setDataAdmin: (newData) => set(() => ({ dataAdmin: newData })),
+  nameUser: "",
+  setNameUser: (newName) => set(() => ({ nameUser: newName })),
   email: "",
   setEmail: (newEmail) => set(() => ({ email: newEmail })),
   signalToken: false,
