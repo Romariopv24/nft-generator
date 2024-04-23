@@ -20,27 +20,9 @@ export default function Table({ dataAdmin }) {
   const outLinedInputStyle = {
     border: "1px solid #00B8FF",
     borderRadius: "15px",
-    marginTop: 3.5,
     marginBottom: 3.5,
     color: "white",
     width: "95%"
-  }
-
-  const style = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: { xs: "90%", sm: "90%", md: "90%", lg: "60%", xl: "45%" },
-    bgcolor: "#000446",
-    boxShadow: 24,
-    p: 4,
-    border: "1px solid #00B8FF",
-    display: "flex",
-    justifyContent: "start",
-    flexDirection: "column",
-    textAlign: "center",
-    alignItems: "center"
   }
 
   const columns = [
@@ -98,8 +80,11 @@ export default function Table({ dataAdmin }) {
     },
     {
       field: "email",
-      headerName: "Send Email",
-      width: 200,
+      headerName: intl.formatMessage({
+        id: "Send.mail",
+        defaultMessage: "Send mail"
+      }),
+      width: 150,
       headerClassName: "super-app-theme--header",
       headerAlign: "center",
       cellClassName: "super-app-theme--cell",
@@ -124,6 +109,30 @@ export default function Table({ dataAdmin }) {
   ]
 
   const ModalDialog = () => {
+    console.log(info)
+
+    const [inputs, setInputs] = useState({
+      subject: "",
+      text: ""
+    })
+
+    const handleChangeSubject = (e) =>
+      setInputs({ ...inputs, subject: e.target.value })
+
+    const handleChangeText = (e) =>
+      setInputs({ ...inputs, text: e.target.value })
+
+    const handleSubmit = () => {
+      const obj = {
+        subject: inputs.subject,
+        text: inputs.text,
+        email: info.correo
+      }
+
+      setInputs({ subject: "", text: "" })
+      console.log(obj)
+    }
+
     return (
       <Dialog
         onClose={() => setOpen(false)}
@@ -149,10 +158,13 @@ export default function Table({ dataAdmin }) {
           >
             <Stack direction={"column"}>
               <Typography fontSize={"2rem"} textAlign={"center"}>
-                mensaje para
+                {intl.formatMessage({
+                  id: "message.to",
+                  defaultMessage: "MESSAGE TO"
+                })}
               </Typography>
               <Typography fontSize={"2rem"} textAlign={"center"}>
-                {info.name}
+                {info.nombre}
               </Typography>
               <Box
                 sx={{
@@ -161,23 +173,27 @@ export default function Table({ dataAdmin }) {
                   width: "50%"
                 }}
               />
-              <Typography mt={2}>
-                {/* {language[selectedLanguage].sendMessageFromApp.writeSub} */}
-                subject
+              <Typography fontSize={"17px"} fontWeight={"bold"} mt={4}>
+                {intl.formatMessage({
+                  id: "write.subject",
+                  defaultMessage: "Write the subject"
+                })}
               </Typography>
               <OutlinedInput
                 name="subject"
                 sx={outLinedInputStyle}
-                // onChange={handleNotiChange}
+                onChange={handleChangeSubject}
               />
-              <Typography mt={2}>
-                {/* {language[selectedLanguage].sendMessageFromApp.writeMess}{" "} */}
-                escribe un mensaje
+              <Typography fontSize={"17px"} fontWeight={"bold"} mt={2}>
+                {intl.formatMessage({
+                  id: "write.message",
+                  defaultMessage: "Write the message"
+                })}
               </Typography>
               <OutlinedInput
                 sx={outLinedInputStyle}
                 name="text"
-                // onChange={handleNotiChange}
+                onChange={handleChangeText}
                 multiline
                 maxRows={4}
               />
@@ -195,12 +211,14 @@ export default function Table({ dataAdmin }) {
                   }
                 }}
               >
-                {/* {language[selectedLanguage].sendMessageFromApp.cancelBtn} */}
-                cancel
+                {intl.formatMessage({
+                  id: "button.cancel",
+                  defaultMessage: "Cancel"
+                })}
               </Button>
 
               <Button
-                // onClick={sendNoti}
+                onClick={handleSubmit}
                 sx={{
                   backgroundColor: "#00B8FF",
                   margin: "0 5px",
@@ -210,8 +228,10 @@ export default function Table({ dataAdmin }) {
                   }
                 }}
               >
-                {/* {language[selectedLanguage].sendMessageFromApp.sendBtn} */}
-                send
+                {intl.formatMessage({
+                  id: "button.send",
+                  defaultMessage: "Send"
+                })}
               </Button>
             </Stack>
           </DialogContent>

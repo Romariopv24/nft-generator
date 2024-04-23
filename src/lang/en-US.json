@@ -250,10 +250,9 @@
   "assing.wallet.table-wallet": "Wallet",
   "assing.wallet.table-delete": "Delete",
 
-  "button.prices.list":"Prices List", 
+  "button.prices.list": "Prices List",
   "prices.title": "PRICES",
   "prices.subtitle": "Price list for generating NFT collections",
-
 
   "to": "TO",
   "item": "ACTIVATED GENERATED",
@@ -278,5 +277,12 @@
   "features4[2]": "COLLECTION GENERATION",
   "features4[3]": "METADATA",
   "features4[4]": "CUSTOM SUPPORT",
-  "Free": "FREE"
+  "Free": "FREE",
+
+  "Send.mail": "Send mail",
+  "message.to": "MESSAGE TO",
+  "write.subject": "Write the subject",
+  "write.message": "Write the message",
+  "button.send": "Send",
+  "button.cancel": "Cancel"
 }

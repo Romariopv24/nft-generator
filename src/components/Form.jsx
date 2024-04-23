@@ -368,11 +368,16 @@ const Form = ({
         await window.ethereum.send("eth_requestAccounts")
         const provider = new ethers.providers.Web3Provider(window.ethereum)
         const chainId = await window.ethereum.request({
-          method: "eth_chainId"
+          method: "eth_chainId",
+          nativeCurrency: {
+            name: "BNB",
+            symbol: "bnb",
+            decimals: 18
+          },
+          rpcUrls: ["https://data-seed-prebsc-1-s1.binance.org:8545/"]
         })
         const signer = provider.getSigner()
         ethers.utils.getAddress(Const.WalletAddress)
-
         if (chainId === "0x61") {
           setAlertShow(true)
 

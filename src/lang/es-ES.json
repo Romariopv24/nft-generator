@@ -251,8 +251,7 @@
   "assing.wallet.table-wallet": "Cartera",
   "assing.wallet.table-delete": "Eliminar",
 
-
-  "button.prices.list":"Ver precios", 
+  "button.prices.list": "Ver precios",
   "prices.title": "PRECIOS",
   "prices.subtitle": "Lista de precios para la generar de colecciones de NFTs",
 
@@ -279,5 +278,12 @@
   "features4[2]": "GENERACIÓN DE COLECCIONES",
   "features4[3]": "METADATOS",
   "features4[4]": "SOPORTE PERSONALIZADO",
-  "Free": "GRATIS"
+  "Free": "GRATIS",
+
+  "Send.mail": "Enviar Correo",
+  "message.to": "MENSAJE PARA",
+  "write.subject": "Escribe el asunto",
+  "write.message": "Escribe el mensaje",
+  "button.send": "Enviar",
+  "button.cancel": "Cancelar"
 }
