@@ -285,5 +285,7 @@
   "write.subject": "Escribe el asunto",
   "write.message": "Escribe el mensaje",
   "button.send": "Enviar",
-  "button.cancel": "Cancelar"
+  "button.cancel": "Cancelar",
+  "message.sent": "Mensaje enviado exitosamente",
+  "message.error": "Ha ocurrido un error"
 }

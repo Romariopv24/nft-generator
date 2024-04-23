@@ -9,8 +9,10 @@ import {
   Typography
 } from "@mui/material"
 import { DataGrid } from "@mui/x-data-grid"
+import { enqueueSnackbar } from "notistack"
 import { useState } from "react"
 import { useIntl } from "react-intl"
+import { URL } from "../../../constantes"
 
 export default function Table({ dataAdmin }) {
   const intl = useIntl()
@@ -109,8 +111,6 @@ export default function Table({ dataAdmin }) {
   ]
 
   const ModalDialog = () => {
-    console.log(info)
-
     const [inputs, setInputs] = useState({
       subject: "",
       text: ""
@@ -122,15 +122,61 @@ export default function Table({ dataAdmin }) {
     const handleChangeText = (e) =>
       setInputs({ ...inputs, text: e.target.value })
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
+      let url = `${URL}sendadminmail`
+
       const obj = {
-        subject: inputs.subject,
-        text: inputs.text,
+        asunto: inputs.subject,
+        mensaje: inputs.text,
         email: info.correo
       }
+      var myHeaders = new Headers()
+      myHeaders.append(
+        "Authorization",
+        `Bearer ${localStorage.getItem("access_token")}`
+      )
+      myHeaders.append("Content-Type", "application/json")
 
-      setInputs({ subject: "", text: "" })
-      console.log(obj)
+      let myInit = {
+        method: "POST",
+        body: JSON.stringify(obj),
+        headers: myHeaders
+      }
+
+      const messageSuccess = intl.formatMessage({
+        id: "message.sent",
+        defaultMessage: "Message sent successfully"
+      })
+
+      const messageError = intl.formatMessage({
+        id: "message.error",
+        defaultMessage: "An error has ocurred:"
+      })
+
+      try {
+        let response = await fetch(url, myInit)
+        let data = await response.json()
+        setInputs({ subject: "", text: "" })
+        setOpen(false)
+        if (data.mensaje === "Correo enviado exitosamente") {
+          enqueueSnackbar(messageSuccess, {
+            variant: "success",
+            anchorOrigin: {
+              vertical: "top",
+              horizontal: "right"
+            }
+          })
+        }
+      } catch (error) {
+        console.log(error)
+        enqueueSnackbar(`${messageError} ${error}`, {
+          variant: "error",
+          anchorOrigin: {
+            vertical: "top",
+            horizontal: "right"
+          }
+        })
+      }
     }
 
     return (
