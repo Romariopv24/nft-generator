@@ -113,7 +113,6 @@ const Menu = ({
   //   }, 10000);
   // }
 
-  console.log('type', typeUser)
   return isAuth ? (
     <div className="d-flex align-items-center my-2 ps-2 pe-1">
       <div className="logo_menu">

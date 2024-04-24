@@ -85,6 +85,10 @@ const Form = ({
   const [listImagenDB, setlistImagenDB] = useState([])
   const [stripePrice, setStripePrice] = useState()
   const [isPremiun, setIspremiun] = useState(false)
+  const [message, setMessage] = useState({
+    content: "pending",
+    type: "pending"
+  })
   let imagenDimensiones = datosImg.imagenDimension
   const facebook = JSON.parse(localStorage.getItem("facebook"))
   const google = JSON.parse(localStorage.getItem("google"))
@@ -273,12 +277,9 @@ const Form = ({
     "pk_test_51P4lD8078MpJgJBLWduFkgSSdFjwEbwktwQ5RzVW703AE2PVBPaqySNvuviJoYQgYLJ32dRAlQCoZidgwDrZqu1Q00RZxMwXR2"
   )
 
-  const PayModal = () => {
+  const PayModal = ({message, setMessage}) => {
     const [alertShow, setAlertShow] = useState(false)
-    const [message, setMessage] = useState({
-      content: "pending",
-      type: "pending"
-    })
+ 
     const BNBprice = useRef(0)
     const [price, setPrice] = useState(0)
     const [isPriceCalculated, setIsPriceCalculated] = useState(true)
@@ -566,6 +567,8 @@ const Form = ({
       setIsPriceCalculated(false)
       setChecked(false)
     }
+
+
 
     return (
       <>
@@ -971,7 +974,7 @@ const Form = ({
     )
   }
 
-  const ModalContent = ({ isInputGenerate, inputProjectCollectionSize }) => {
+  const ModalContent = ({ isInputGenerate, inputProjectCollectionSize, message, setMessage }) => {
     const [show, setShow] = useState(false)
 
     useEffect(() => {
@@ -981,7 +984,7 @@ const Form = ({
 
     const components = {
       free: <FreeModal />,
-      pay: <PayModal />,
+      pay: <PayModal message={message} setMessage={setMessage} />,
       error: <NameErrorModal message={isExisteNombreProject} />
     }
 
@@ -1164,6 +1167,7 @@ const Form = ({
       : "000"
 
   const [openMuiModal, setOpenMuiModal] = useState(false)
+
   const handleOpen = () => setOpenMuiModal(true)
   const handleClose = () => setOpenMuiModal(false)
 
@@ -1183,7 +1187,8 @@ const Form = ({
         }
       )
 
-      handleGenerate()
+      // handleGenerate()
+      handleSubmit(setMessage)
         .then((res) => {
           console.log(res)
         })
@@ -1194,7 +1199,7 @@ const Form = ({
           closeSnackbar(snackbarKey)
 
           setDisableCloseButton(false) // Enable the button
-
+          setMessage({content: 'success', type: 'success'})
           enqueueSnackbar("Generating collection", {
             variant: "success",
             anchorOrigin: {
@@ -1466,6 +1471,8 @@ const Form = ({
         style={{ border: "1px solid #00B8FF", padding: "10px" }}
       >
         <ModalContent
+        message={message}
+        setMessage={setMessage}
           isInputGenerate={isInputGenerate}
           inputProjectCollectionSize={inputProjectCollectionSize}
         />
