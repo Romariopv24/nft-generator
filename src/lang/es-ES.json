@@ -241,11 +241,18 @@
   "table.admin.user": "Usuario",
   "table.admin.size": "Tamaño",
   "table.admin.download": "Fecha de Descarga",
+  "table.admin.assing.wallet": "Correo",
+  "table.admin.assing.wallet.wallet": "Wallet",
 
   "assing.wallet.button": "Asignar Wallets",
-  "assing.wallet.title": "Wallets Gratis",
-  "assing.wallet.subtitle": "Ingrese la cartera que desea que sea gratuita",
-  "assing.wallet.placeholder": "Ingrese una wallet 0x...",
+
+  "free.wallets": "Wallets Gratuitas",
+  "free.wallets.subtitle": "Ingresa la cartera que quieres que sea gratuita",
+  "free.wallets.placeholder": "Ingresa una cartera 0x...",
+  "free.wallets.alert": "La wallet fue exitosamente asignada!",
+  "free.wallets.error": "La wallet no fue registrada, por favor intenta de nuevo",
+  "free.wallet.remove": "La cartera ha sido eliminada exitosamente",
+  "free.wallet.remove.error": "Ha ocurrido un error, por favor intenta de nuevo",
 
   "assing.wallet.table-user": "Usuario",
   "assing.wallet.table-wallet": "Cartera",

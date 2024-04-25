@@ -241,10 +241,18 @@
   "table.admin.size": "Size",
   "table.admin.download": "Download Date",
 
+  "table.admin.assing.wallet": "Email",
+  "table.admin.assing.wallet.wallet": "Wallet",
+
   "assing.wallet.button": "Assing Wallets",
-  "assing.wallet.title": "Free Wallets",
-  "assing.wallet.subtitle": "Enter the wallet that you want to be free",
-  "assing.wallet.placeholder": "Enter a wallet 0x...",
+
+  "free.wallets": "Free Wallets",
+  "free.wallets.subtitle": "Enter the wallet that you want to be free",
+  "free.wallets.placeholder": "Enter a wallet 0x...",
+  "free.wallets.alert": "The wallet was successfully assigned!",
+  "free.wallets.error": "The wallet was not registered, please try again",
+  "free.wallet.remove": "Wallet has successfully removed!",
+  "free.wallet.remove.error": "An error has ocurred, please try again",
 
   "assing.wallet.table-user": "User",
   "assing.wallet.table-wallet": "Wallet",

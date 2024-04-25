@@ -10,6 +10,7 @@ import {
 } from "@mui/material"
 import { enqueueSnackbar } from "notistack"
 import { useEffect, useState } from "react"
+import { useIntl } from "react-intl"
 import { axiosClass } from "../../../api/api.config"
 import TableWallets from "./TableWallets"
 
@@ -18,10 +19,22 @@ export default function AssingWalletsModal({
   handleClose,
   getDataTable
 }) {
+  const intl = useIntl()
+
   const [wallet, setWallet] = useState("")
   const [getWallet, setGetWallet] = useState([])
 
   const handleSubmit = () => {
+    const walletAlertSuccess = intl.formatMessage({
+      id: "free.wallets.alert",
+      defaultMessage: "The wallet was successfully assigned!"
+    })
+
+    const walletAlertError = intl.formatMessage({
+      id: "free.wallets.error",
+      defaultMessage: "The wallet was not registered, please try again"
+    })
+
     axiosClass
       .post("/setwallet", { wallet: wallet })
       .then((res) => {
@@ -29,7 +42,7 @@ export default function AssingWalletsModal({
         if (res.status === 200) {
           setWallet("")
           getWallets()
-          enqueueSnackbar("Wallet has succesfully asign!", {
+          enqueueSnackbar(walletAlertSuccess, {
             variant: "success",
             anchorOrigin: {
               vertical: "top",
@@ -41,7 +54,7 @@ export default function AssingWalletsModal({
       })
       .catch((err) => {
         if (err.response.status === 404) {
-          enqueueSnackbar("Wallet is not registered!", {
+          enqueueSnackbar(walletAlertError, {
             variant: "error",
             anchorOrigin: {
               vertical: "top",
@@ -105,7 +118,10 @@ export default function AssingWalletsModal({
                   color: "white"
                 }}
               >
-                Free Wallets
+                {intl.formatMessage({
+                  id: "free.wallets",
+                  defaultMessage: "Free Wallets"
+                })}
               </Typography>
               <Box sx={divider} />
               <Typography
@@ -114,7 +130,10 @@ export default function AssingWalletsModal({
                 sx={{ mt: 5, fontSize: "20px" }}
                 component="h4"
               >
-                Enter the wallet that you want to be free
+                {intl.formatMessage({
+                  id: "free.wallets.subtitle",
+                  defaultMessage: "Enter the wallet that you want to be free"
+                })}
               </Typography>
               <Stack sx={boxWalletSend}>
                 <OutlinedInput
@@ -122,7 +141,10 @@ export default function AssingWalletsModal({
                   onChange={(e) => setWallet(e.target.value)}
                   inputProps={{ maxLength: 42 }}
                   sx={outLinedInputStyle}
-                  placeholder="Enter a wallet 0x..."
+                  placeholder={intl.formatMessage({
+                    id: "free.wallets.placeholder",
+                    defaultMessage: "Enter a wallet 0x..."
+                  })}
                   onKeyDown={handleKeyDown}
                 />
                 <Send onClick={handleSubmit} sx={icon} />

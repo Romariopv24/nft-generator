@@ -2,10 +2,23 @@ import { Delete } from "@mui/icons-material"
 import { Box, Typography } from "@mui/material"
 import { DataGrid } from "@mui/x-data-grid"
 import { enqueueSnackbar } from "notistack"
+import { useIntl } from "react-intl"
 import { axiosClass } from "../../../api/api.config"
 
 export default function TableWallets({ getWallet, setGetWallet }) {
+  const intl = useIntl()
+
   const putUser = (wallet) => {
+    const walletAlertSuccess = intl.formatMessage({
+      id: "free.wallet.remove",
+      defaultMessage: "Wallet has successfully removed!"
+    })
+
+    const walletAlertError = intl.formatMessage({
+      id: "free.wallet.remove.error",
+      defaultMessage: "An error has ocurred, please try again"
+    })
+
     axiosClass
       .put("/setwallet", { wallet: wallet })
       .then((res) => {
@@ -19,7 +32,7 @@ export default function TableWallets({ getWallet, setGetWallet }) {
           updatedWallet.splice(getAFeeling, 1) // Eliminar 1 elemento en la posición getAFeeling
 
           setGetWallet(updatedWallet) // Actualizar el estado con la nueva copia
-          enqueueSnackbar("Wallet has been remove", {
+          enqueueSnackbar(walletAlertSuccess, {
             variant: "success",
             anchorOrigin: {
               vertical: "top",
@@ -29,8 +42,7 @@ export default function TableWallets({ getWallet, setGetWallet }) {
         }
       })
       .catch((err) => {
-        console.log(err)
-        enqueueSnackbar("An error has ocurred!", {
+        enqueueSnackbar(walletAlertError, {
           variant: "error",
           anchorOrigin: {
             vertical: "top",
@@ -42,7 +54,10 @@ export default function TableWallets({ getWallet, setGetWallet }) {
   const columns = [
     {
       field: "correo",
-      headerName: "correo",
+      headerName: intl.formatMessage({
+        id: "contact.email",
+        defaultMessage: "Email"
+      }),
       width: 270,
       headerAlign: "center",
       cellClassName: "super-app-theme--cell",
@@ -53,7 +68,7 @@ export default function TableWallets({ getWallet, setGetWallet }) {
     },
     {
       field: "wallet",
-      headerName: "wallet",
+      headerName: "Wallet",
       type: "number",
       width: 400,
       headerAlign: "center",
