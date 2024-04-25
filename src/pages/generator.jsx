@@ -381,23 +381,25 @@ const Generator = ({
       return (
         <FormattedMessage
           id="generator.max-combinatios2"
-          defaultMessage="Minimun of the total combinations must be 10"
+          defaultMessage="Minimum of the total combinations must be 10"
         />
       )
     }
-    if (cantidadAPedir > 10000) {
+
+    if (typeUser === 2 && (cantidadAPedir <= 10000 || cantidadAPedir > 11150)) {
       return (
         <FormattedMessage
           id="generator.min-combinations2"
-          defaultMessage="Max of the total combinations must be 10.000"
+          defaultMessage="For admin, total combinations must be more than 10.000 and less than or equal to 11.150"
         />
       )
     }
-    if (typeUser === 2 && cantidadAPedir > 11150) {
+
+    if (typeUser !== 2 && cantidadAPedir > 10000) {
       return (
         <FormattedMessage
           id="generator.min-combinations2"
-          defaultMessage="Max of the total combinations must be 11.150"
+          defaultMessage="For non-admin, max of the total combinations must be 10.000"
         />
       )
     }
