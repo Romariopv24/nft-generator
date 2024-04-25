@@ -294,5 +294,9 @@
   "button.send": "Send",
   "button.cancel": "Cancel",
   "message.sent": "Message sent successfully",
-  "message.error": "An error has ocurred:"
+  "message.error": "An error has ocurred:",
+
+  "alert.stripe.wait": "Please wait a few seconds to see you Free Collection!",
+  "alert.stripe.generate": "Generating collection",
+  "alert.email.sent": "An email will be sent once the collection is ready"
 }

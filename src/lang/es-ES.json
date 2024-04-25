@@ -294,5 +294,9 @@
   "button.send": "Enviar",
   "button.cancel": "Cancelar",
   "message.sent": "Mensaje enviado exitosamente",
-  "message.error": "Ha ocurrido un error"
+  "message.error": "Ha ocurrido un error",
+
+  "alert.stripe.wait": "Por favor espera unos segundos para ver tu Colección Gratuita!",
+  "alert.stripe.generate": "Generando colección",
+  "alert.email.sent": "Se le enviara un correo cuando la coleccion este terminada"
 }

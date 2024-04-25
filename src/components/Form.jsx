@@ -277,9 +277,9 @@ const Form = ({
     "pk_test_51P4lD8078MpJgJBLWduFkgSSdFjwEbwktwQ5RzVW703AE2PVBPaqySNvuviJoYQgYLJ32dRAlQCoZidgwDrZqu1Q00RZxMwXR2"
   )
 
-  const PayModal = ({message, setMessage}) => {
+  const PayModal = ({ message, setMessage }) => {
     const [alertShow, setAlertShow] = useState(false)
- 
+
     const BNBprice = useRef(0)
     const [price, setPrice] = useState(0)
     const [isPriceCalculated, setIsPriceCalculated] = useState(true)
@@ -567,8 +567,6 @@ const Form = ({
       setIsPriceCalculated(false)
       setChecked(false)
     }
-
-
 
     return (
       <>
@@ -974,7 +972,12 @@ const Form = ({
     )
   }
 
-  const ModalContent = ({ isInputGenerate, inputProjectCollectionSize, message, setMessage }) => {
+  const ModalContent = ({
+    isInputGenerate,
+    inputProjectCollectionSize,
+    message,
+    setMessage
+  }) => {
     const [show, setShow] = useState(false)
 
     useEffect(() => {
@@ -1175,17 +1178,24 @@ const Form = ({
     if (payConfirm === true) {
       setDisableCloseButton(true) // Disable the button
 
-      const snackbarKey = enqueueSnackbar(
-        "Please wait a few seconds to see you Free Collection!",
-        {
-          variant: "success",
-          anchorOrigin: {
-            vertical: "top",
-            horizontal: "right"
-          },
-          persist: true
-        }
-      )
+      const alertStripewait = intl.formatMessage({
+        id: "alert.stripe.wait",
+        defaultMessage: "Please wait a few seconds to see you Free Collection!"
+      })
+
+      const alertGenerating = intl.formatMessage({
+        id: "alert.stripe.generate",
+        defaultMessage: "Generating collection"
+      })
+
+      const snackbarKey = enqueueSnackbar(alertStripewait, {
+        variant: "success",
+        anchorOrigin: {
+          vertical: "top",
+          horizontal: "right"
+        },
+        persist: true
+      })
 
       // handleGenerate()
       handleSubmit(setMessage)
@@ -1199,8 +1209,8 @@ const Form = ({
           closeSnackbar(snackbarKey)
 
           setDisableCloseButton(false) // Enable the button
-          setMessage({content: 'success', type: 'success'})
-          enqueueSnackbar("Generating collection", {
+          setMessage({ content: "success", type: "success" })
+          enqueueSnackbar(alertGenerating, {
             variant: "success",
             anchorOrigin: {
               vertical: "top",
@@ -1471,8 +1481,8 @@ const Form = ({
         style={{ border: "1px solid #00B8FF", padding: "10px" }}
       >
         <ModalContent
-        message={message}
-        setMessage={setMessage}
+          message={message}
+          setMessage={setMessage}
           isInputGenerate={isInputGenerate}
           inputProjectCollectionSize={inputProjectCollectionSize}
         />

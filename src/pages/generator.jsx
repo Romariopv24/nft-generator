@@ -1,4 +1,5 @@
 import { jwtDecode } from "jwt-decode"
+import { enqueueSnackbar } from "notistack"
 import React, { useEffect, useRef, useState } from "react"
 import { FormattedMessage, useIntl } from "react-intl"
 import "../../node_modules/bootstrap/dist/css/bootstrap.min.css"
@@ -465,6 +466,19 @@ const Generator = ({
         generarCombinaciones()
         if (callback && hash)
           callback({ content: "success", type: "success", additional: hash })
+
+        const alertEmail = intl.formatMessage({
+          id: "alert.email.sent",
+          defaultMessage: "An email will be sent once the collection is ready"
+        })
+        enqueueSnackbar(alertEmail, {
+          variant: "success",
+          anchorOrigin: {
+            vertical: "top",
+            horizontal: "right"
+          },
+          autoHideDuration: 5000
+        })
       }
     } catch (error) {
       console.log(error.message)
