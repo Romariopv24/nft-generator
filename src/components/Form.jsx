@@ -99,7 +99,8 @@ const Form = ({
     payConfirm,
     setPayConfirm,
     disableCloseButton,
-    setDisableCloseButton
+    setDisableCloseButton,
+    adminMax
   } = useStoreProv()
 
   const idioma = localStorage.getItem("idioma")
@@ -1085,10 +1086,13 @@ const Form = ({
     let isPremiun = false
 
     const chainId = await window.ethereum.request({ method: "eth_chainId" })
-
-    if (chainId === "0x13881") {
-      if (typeUser === 1 || typeUser === 2 || payConfirm === true) {
-        console.log("entro aqui")
+    if (chainId === "0x61") {
+      if (
+        typeUser === 1 ||
+        (typeUser === 2 && adminMax === true) ||
+        payConfirm === true
+      ) {
+        debugger
         const { valid, message } = await ValidarSiExisteNombreProjectServidor()
         if (valid === false) {
           // console.log(res)

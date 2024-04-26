@@ -29,7 +29,8 @@ const Generator = ({
     email,
     signalToken,
     setSignalToken,
-    typeUser
+    typeUser,
+    setAdminMax
   } = useStoreProv()
   const [capas, setCapas] = useState(getCapas())
   const [selectedCapa, setSelectedCapa] = useState(
@@ -361,14 +362,20 @@ const Generator = ({
 
     const cantidadAPedir = Number(inputProjectCollectionSize.current.value)
     const cantidadMax = Number(maxConvinacion.current.innerText)
-
-    console.log(typeUser === 2 && cantidadAPedir > 11150)
     if (cantidadAPedir > cantidadMax) {
       return `${intl.formatMessage({
         id: "generator.max-combinations",
         defaultMessage:
           "The creation of your collection cannot be greater than the number of established combinations that is"
       })} ${cantidadMax}`
+    }
+    if (typeUser === 2 && cantidadAPedir > 11150) {
+      return (
+        <FormattedMessage
+          id="generator.min-combinations2"
+          defaultMessage="Max of the total combinations must be 10.000"
+        />
+      )
     }
     if (cantidadAPedir < 1 || cantidadMax === 1)
       return (
@@ -386,20 +393,12 @@ const Generator = ({
       )
     }
 
-    if (typeUser === 2 && (cantidadAPedir <= 10000 || cantidadAPedir > 11150)) {
-      return (
-        <FormattedMessage
-          id="generator.min-combinations2"
-          defaultMessage="For admin, total combinations must be more than 10.000 and less than or equal to 11.150"
-        />
-      )
-    }
-
     if (typeUser !== 2 && cantidadAPedir > 10000) {
+      setAdminMax(false)
       return (
         <FormattedMessage
           id="generator.min-combinations2"
-          defaultMessage="For non-admin, max of the total combinations must be 10.000"
+          defaultMessage="Max of the total combinations must be 10.000"
         />
       )
     }
@@ -411,6 +410,7 @@ const Generator = ({
         />
       )
     }
+
     return false
   }
 
@@ -556,6 +556,7 @@ const Generator = ({
           </div>
 
           <div className="col-lg-3 col-md-4 col-12">
+            {/* Odio a Jose rosales, esto es una aberracion */}
             <Form
               capas={capas}
               listPreview1={listPreview1}
