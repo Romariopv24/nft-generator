@@ -132,41 +132,35 @@ text:hover a:hover{
 @media (max-width: 1400px){
   .logo {
     max-width: 40%;
-    margin-bottom: -22vw;
   }
 }
 
 @media (max-width: 1200px){
   .logo {
     max-width: 45%;
-    margin-bottom: -30vw;
   }
 }
 
 @media (max-width: 1100px){
   .logo {
     max-width: 50%;
-    margin-bottom: -15vw;
   }
 }
 
 @media (max-width: 800px) and (max-height: 600px){
   .logo {
     max-width: 60%;
-    margin-bottom: -10vw;
   }
 }
 
 @media (max-width: 450px) and (max-height: 920px){
   .logo {
     max-width: 85%;
-    margin-bottom: -55vh;
   }
 }
 
 @media (max-width: 400px) and (max-height: 700px){
   .logo {
     max-width: 90%;
-    margin-bottom: -44vh;
   }
 }
