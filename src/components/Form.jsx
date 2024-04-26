@@ -99,8 +99,7 @@ const Form = ({
     payConfirm,
     setPayConfirm,
     disableCloseButton,
-    setDisableCloseButton,
-    adminMax
+    setDisableCloseButton
   } = useStoreProv()
 
   const idioma = localStorage.getItem("idioma")
@@ -1089,10 +1088,10 @@ const Form = ({
     if (chainId === "0x61") {
       if (
         typeUser === 1 ||
-        (typeUser === 2 && adminMax === true) ||
+        (typeUser === 2 &&
+          Number(inputProjectCollectionSize.current.value) <= 11150) ||
         payConfirm === true
       ) {
-        debugger
         const { valid, message } = await ValidarSiExisteNombreProjectServidor()
         if (valid === false) {
           // console.log(res)

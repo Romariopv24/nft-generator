@@ -29,8 +29,7 @@ const Generator = ({
     email,
     signalToken,
     setSignalToken,
-    typeUser,
-    setAdminMax
+    typeUser
   } = useStoreProv()
   const [capas, setCapas] = useState(getCapas())
   const [selectedCapa, setSelectedCapa] = useState(
@@ -394,7 +393,6 @@ const Generator = ({
     }
 
     if (typeUser !== 2 && cantidadAPedir > 10000) {
-      setAdminMax(false)
       return (
         <FormattedMessage
           id="generator.min-combinations2"

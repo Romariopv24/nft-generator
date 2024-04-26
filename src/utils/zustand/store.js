@@ -18,9 +18,7 @@ const useStoreProv = create((set) => ({
   payConfirm: false,
   setPayConfirm: (state) => set(() => ({ payConfirm: state })),
   disableCloseButton: false,
-  setDisableCloseButton: (state) => set(() => ({ disableCloseButton: state })),
-  adminMax: true,
-  setAdminMax: (state) => set(() => ({ adminMax: state }))
+  setDisableCloseButton: (state) => set(() => ({ disableCloseButton: state }))
 }))
 
 export { useStoreProv }
