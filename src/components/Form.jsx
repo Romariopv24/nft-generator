@@ -25,6 +25,7 @@ import CheckoutForm from "./mui-components/modal/CheckoutForm.jsx"
 import SeePrices from "./mui-components/modal/SeePrices.jsx"
 import PreviewCollection from "./PreviewCollection"
 import { TermsNConditionModal } from "./TermsNConditionModal.jsx"
+import MaxcombAdmin from "./mui-components/modal/MaxcombAdmin.jsx"
 
 // const paqueteDeMil_NFT = Const.PRECIO_PRUEBA_NFTS // 99$
 // const paqueteDeCincoMil_NFT = Const.PRECIO_PRUEBA_NFTS // 199$
@@ -1098,7 +1099,7 @@ const Form = ({
 
     const chainId = await window.ethereum.request({ method: "eth_chainId" })
     if (chainId === "0x61") {
-      if (typeUser === 1 || payConfirm === true) {
+      if (typeUser === 1 || typeUser === 2|| payConfirm === true) {
         const { valid, message } = await ValidarSiExisteNombreProjectServidor()
         if (valid === false) {
           setIsExisteNombreProject(message)
@@ -1178,6 +1179,7 @@ const Form = ({
       : "000"
 
   const [openMuiModal, setOpenMuiModal] = useState(false)
+  const [openMaxComb, setOpenMaxComb] = useState(false)
 
   const handleOpen = () => setOpenMuiModal(true)
   const handleClose = () => setOpenMuiModal(false)
@@ -1464,10 +1466,14 @@ const Form = ({
       <button
         className="__boton-mediano mx-auto d-block w-100 enphasis-button"
         onClick={() => {
-          handleGenerate()
-          loadImageFromDBB(setListPreview1)
-          loadImageFromDBB(setListPreview2)
-          loadImageFromDBB(setListPreview3)
+          if (typeUser === 2 && Number(inputProjectCollectionSize.current.value) > 11150) {
+            setOpenMaxComb(true)
+          } else {
+            handleGenerate()
+            loadImageFromDBB(setListPreview1)
+            loadImageFromDBB(setListPreview2)
+            loadImageFromDBB(setListPreview3)
+          }
         }}
         disabled={isInputGenerate}
         id="generar"
@@ -1496,6 +1502,7 @@ const Form = ({
         />
       </GenericModal>
       <SeePrices openMuiModal={openMuiModal} handleClose={handleClose} />
+      <MaxcombAdmin openMaxComb={openMaxComb} setOpenMaxComb={setOpenMaxComb} />
     </>
   )
 }

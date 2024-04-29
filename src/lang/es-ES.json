@@ -96,6 +96,7 @@
   "generator.no-image": "No puede realizar una solicitud sin imágenes para enviar",
   "generator.max-combinatios2": "El minimo de combinaciones totales debe ser de 10",
   "generator.min-combinations2": "El maximo total de las imagenes debe ser de 10.000",
+  "generator.max-admin": "El maximo total de las imagenes como admin debe ser de 11.150",
   "generator.must-have-email": "Por favor introduce tu datos en el formulario para generar NFTs",
 
   "colleccionNFT.loading": "Cargando...",
