@@ -1068,6 +1068,18 @@ const Form = ({
     let isPendiente = await estadoDePeticionDeGenerarNFT()
     if (isPendiente[0]?.url) isPendiente = isPendiente.pop()
 
+    // Nueva validación para el usuario de tipo 2
+    if (
+      typeUser === 2 &&
+      Number(inputProjectCollectionSize.current.value) > 11150
+    ) {
+      setIsExisteNombreProject(
+        "For admin, total combinations must be less than or equal to 11.150"
+      )
+      botonGenerate(true)
+      return
+    }
+
     const res = await ValidarSiExisteNombreProjectServidor()
 
     if (isPendiente.url === "En Proceso...") {
@@ -1086,15 +1098,9 @@ const Form = ({
 
     const chainId = await window.ethereum.request({ method: "eth_chainId" })
     if (chainId === "0x61") {
-      if (
-        typeUser === 1 ||
-        (typeUser === 2 &&
-          Number(inputProjectCollectionSize.current.value) <= 11150) ||
-        payConfirm === true
-      ) {
+      if (typeUser === 1 || payConfirm === true) {
         const { valid, message } = await ValidarSiExisteNombreProjectServidor()
         if (valid === false) {
-          // console.log(res)
           setIsExisteNombreProject(message)
           botonGenerate(true)
           return
@@ -1107,10 +1113,9 @@ const Form = ({
         }
       }
     }
-    //aqui termina si eres premiun
 
     if (res.valid) {
-      setIsExisteNombreProject(null) //cambiar montos
+      setIsExisteNombreProject(null)
       if (inputProjectCollectionSize.current.value > 100) {
         botonGenerate(true)
       } else {
