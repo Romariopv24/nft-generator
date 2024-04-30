@@ -41,6 +41,9 @@ export const PRECIO_CINCO_MIL_NFTS = "price_1L5Va5HHbdm3JgV0Du93Spud" // 199$
 export const PRECIO_DIEZ_MIL_NFTS = "price_1L5VaLHHbdm3JgV0vPIUGLid" // 299$
 export const PRECIO_PRUEBA_NFTS = "price_1L5VaLHHbdm3JgV0vPIUGLid" // 299$
 
+export const STRIPEKEY =
+  "pk_test_51P4lD8078MpJgJBLWduFkgSSdFjwEbwktwQ5RzVW703AE2PVBPaqySNvuviJoYQgYLJ32dRAlQCoZidgwDrZqu1Q00RZxMwXR2" // NEW APIKEY STRIPE MODAL
+
 //PRECIOS REALES PARA EL COBRO EN STRIPE DE LA EMPRESA
 // export const PUBLICKEY = 'pk_live_51IntJPHHbdm3JgV0f7uTOB1iCBRzrrA80ptbyqHh5Ze1aB6iskeIeYpxfPXhUti28v4cMEIlu9vZDPsPoazrqwbt006NLf13Mf'
 // export const PRECIO_MIL_NFTS = 'price_1L5VTvHHbdm3JgV0ER61KEjg'

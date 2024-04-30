@@ -22,10 +22,10 @@ import getDatosImg from "../utils/getDatosImg"
 import { useStoreProv } from "../utils/zustand/store.js"
 import GenericModal from "./GenericModal"
 import CheckoutForm from "./mui-components/modal/CheckoutForm.jsx"
+import MaxcombAdmin from "./mui-components/modal/MaxcombAdmin.jsx"
 import SeePrices from "./mui-components/modal/SeePrices.jsx"
 import PreviewCollection from "./PreviewCollection"
 import { TermsNConditionModal } from "./TermsNConditionModal.jsx"
-import MaxcombAdmin from "./mui-components/modal/MaxcombAdmin.jsx"
 
 // const paqueteDeMil_NFT = Const.PRECIO_PRUEBA_NFTS // 99$
 // const paqueteDeCincoMil_NFT = Const.PRECIO_PRUEBA_NFTS // 199$
@@ -274,9 +274,7 @@ const Form = ({
     )
   }
 
-  const stripePromise = loadStripe(
-    "pk_test_51P4lD8078MpJgJBLWduFkgSSdFjwEbwktwQ5RzVW703AE2PVBPaqySNvuviJoYQgYLJ32dRAlQCoZidgwDrZqu1Q00RZxMwXR2"
-  )
+  const stripePromise = loadStripe(Const.STRIPEKEY)
 
   const PayModal = ({ message, setMessage }) => {
     const [alertShow, setAlertShow] = useState(false)
@@ -1099,7 +1097,7 @@ const Form = ({
 
     const chainId = await window.ethereum.request({ method: "eth_chainId" })
     if (chainId === "0x61") {
-      if (typeUser === 1 || typeUser === 2|| payConfirm === true) {
+      if (typeUser === 1 || typeUser === 2 || payConfirm === true) {
         const { valid, message } = await ValidarSiExisteNombreProjectServidor()
         if (valid === false) {
           setIsExisteNombreProject(message)
@@ -1466,7 +1464,10 @@ const Form = ({
       <button
         className="__boton-mediano mx-auto d-block w-100 enphasis-button"
         onClick={() => {
-          if (typeUser === 2 && Number(inputProjectCollectionSize.current.value) > 11150) {
+          if (
+            typeUser === 2 &&
+            Number(inputProjectCollectionSize.current.value) > 11150
+          ) {
             setOpenMaxComb(true)
           } else {
             handleGenerate()
