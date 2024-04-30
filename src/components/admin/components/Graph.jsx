@@ -3,7 +3,13 @@ import { useIntl } from "react-intl"
 
 export default function Graph({ dataAdmin }) {
   const intl = useIntl()
-  const dataUserEmail = dataAdmin.map((value) => value.correo)
+
+  const seenEmails = {}
+
+  const uniqueEmailData = dataAdmin.filter((value) =>
+    seenEmails[value.correo] ? false : (seenEmails[value.correo] = true)
+  )
+  const dataUserEmail = uniqueEmailData.map((value) => value.correo)
   const dataUserCollection = dataAdmin.map((value) => value.cantidad)
 
   const data = [
