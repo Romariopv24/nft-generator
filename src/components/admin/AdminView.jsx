@@ -57,7 +57,10 @@ export default function AdminView() {
               color="primary"
               fontWeight="bold"
             >
-              There is no user yet!
+              <FormattedMessage
+                id="table.admin.not.user"
+                defaultMessage="There is no user registered yet!"
+              />
             </Typography>
             <Box sx={divider} />
           </Stack>

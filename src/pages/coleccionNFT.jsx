@@ -7,7 +7,7 @@ import { URL, listWalletPremiun, myHeaders } from "../constantes"
 import "../styles/scss/_table-styles.scss"
 
 import dayjs from "dayjs"
-import "dayjs/locale/es"; // load on demand
+import "dayjs/locale/es" // load on demand
 import relativeTime from "dayjs/plugin/relativeTime"
 
 import { FormattedMessage, useIntl } from "react-intl"
@@ -31,7 +31,7 @@ const ColeccionNFT = () => {
   const [isWalletPremiun, setIsWalletPremiun] = useState(false)
   // const signal = useStoreProv((state) => state.signal)
   // const setSignal = useStoreProv((state) => state.setSignal)
-  const {signal, setSignal, setPayConfirm} = useStoreProv()
+  const { signal, setSignal, typeUser } = useStoreProv()
   const intl = useIntl()
 
   const codeMessage = [
@@ -121,14 +121,12 @@ const ColeccionNFT = () => {
       if (post.message === "Usuario sin colecciones" || post.length === 0) {
         setIsPromiseReady(true)
         setCollectall([])
-      //  collectall.find((collection) => collection.url === "En Proceso..." && setPayConfirm(false) )
-
+        //  collectall.find((collection) => collection.url === "En Proceso..." && setPayConfirm(false) )
       } else {
         setCollectall(post)
         setIsPromiseReady(true)
         console.log(post)
         console.log("se hizo una solicitud")
-      
       }
     } catch (error) {
       console.log(error)
@@ -243,15 +241,12 @@ const ColeccionNFT = () => {
     return post
   }
 
-
-
   useEffect(() => {
     if (signal === true) {
       resetLocalStorage()
       setSignal(false)
     }
   }, [])
-
 
   return (
     <>
@@ -278,6 +273,14 @@ const ColeccionNFT = () => {
                   defaultMessage="Download"
                 />
               </th>
+              {typeUser === 2 && (
+                <th scope="col --max-width" style={{ color: "#00b8ff" }}>
+                  <FormattedMessage
+                    id="colleccionNFT.table-column4"
+                    defaultMessage="Export to NFanst"
+                  />
+                </th>
+              )}
               {/* <th scope="col --max-width" style={{ color: "#00b8ff" }}>
                 <FormattedMessage
                   id="colleccionNFT.table-column4"

@@ -242,6 +242,7 @@
   "table.admin.size": "Size",
   "table.admin.download": "Download Date",
 
+  "table.admin.not.user": "There is no user registered yet!",
   "table.admin.assing.wallet": "Email",
   "table.admin.assing.wallet.wallet": "Wallet",
 

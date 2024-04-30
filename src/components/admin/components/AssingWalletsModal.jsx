@@ -14,11 +14,7 @@ import { useIntl } from "react-intl"
 import { axiosClass } from "../../../api/api.config"
 import TableWallets from "./TableWallets"
 
-export default function AssingWalletsModal({
-  open,
-  handleClose,
-  getDataTable
-}) {
+export default function AssingWalletsModal({ open, handleClose }) {
   const intl = useIntl()
 
   const [wallet, setWallet] = useState("")

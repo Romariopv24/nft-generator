@@ -245,6 +245,7 @@
   "table.admin.assing.wallet": "Correo",
   "table.admin.assing.wallet.wallet": "Wallet",
 
+  "table.admin.not.user": "No hay usuarios registrados",
   "assing.wallet.button": "Asignar Wallets",
 
   "free.wallets": "Wallets Gratuitas",

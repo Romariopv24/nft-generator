@@ -27,11 +27,10 @@ export default function TableWallets({ getWallet, setGetWallet }) {
             (index) => index.wallet === wallet
           )
 
-          // Crear una copia del array getWallet
           const updatedWallet = [...getWallet]
-          updatedWallet.splice(getAFeeling, 1) // Eliminar 1 elemento en la posición getAFeeling
+          updatedWallet.splice(getAFeeling, 1)
 
-          setGetWallet(updatedWallet) // Actualizar el estado con la nueva copia
+          setGetWallet(updatedWallet)
           enqueueSnackbar(walletAlertSuccess, {
             variant: "success",
             anchorOrigin: {
