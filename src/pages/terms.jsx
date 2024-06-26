@@ -1,11 +1,16 @@
 import React from "react"
 import { FormattedMessage } from "react-intl"
 import "../styles/scss/_terms.scss"
+import { Box, Stack } from "@mui/material"
+import { Close } from "@mui/icons-material"
 
-const Terms = () => {
+const Terms = ({close}) => {
   return (
     <div>
       <div className="principal_container p-3">
+      <Stack flexDirection={'row'} justifyContent={'center'} >
+      <Box width={'95%'}>
+
         <h3
           className="p-3"
           style={{
@@ -21,6 +26,11 @@ const Terms = () => {
             defaultMessage="Términos y Condiciones del Generador de Colecciones de NFTs"
           />
         </h3>
+        </Box>
+        <Box width={'5%'} justifyContent={'flex-start'}>
+          <Close onClick={close} sx={{cursor:'pointer'}} />
+          </Box>
+        </Stack>
       </div>
 
       <div className="principal_container text_justify p-3">

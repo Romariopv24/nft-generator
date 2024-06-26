@@ -2,6 +2,8 @@ import React from "react"
 import { FormattedMessage } from "react-intl"
 import "../styles/scss/_legal-warning.scss"
 import GenericModal from "./GenericModal"
+import { Close } from "@mui/icons-material"
+import { Box, Stack } from "@mui/material"
 
 export const LegalWarning = ({ showLegalWarning, setShowLegalWarning }) => {
   const close = () => {
@@ -11,6 +13,8 @@ export const LegalWarning = ({ showLegalWarning, setShowLegalWarning }) => {
   return (
     <GenericModal show={showLegalWarning}>
       <div>
+        <Stack flexDirection={'row'} justifyContent={'center'} >
+        <Box width={'95%'}>
         <h3
           className="p-3"
           style={{
@@ -21,12 +25,17 @@ export const LegalWarning = ({ showLegalWarning, setShowLegalWarning }) => {
             borderBottomRightRadius: 0
           }}
         >
+          
           <FormattedMessage
             id="legalwarning.title"
             defaultMessage="Licence Agreement"
           />
         </h3>
-
+        </Box>
+          <Box width={'5%'} justifyContent={'flex-start'}>
+          <Close onClick={close} sx={{cursor:'pointer'}} />
+          </Box>
+        </Stack>
         <div
           style={{ overflowY: "scroll", maxHeight: "65vh" }}
           className="p-2 my-3 legal-p"

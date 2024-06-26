@@ -24,7 +24,7 @@ export const TermsNConditionModal = ({ showTerms, setShowTerms }) => {
       <Fade in={showTerms}>
         <Box sx={style}>
           <Box sx={{ overflow: "auto", height: "70vh" }}>
-            <Terms />
+            <Terms  close={close}/>
             <div className="p-2 mb-2">
               <button
                 className="__boton-mediano enphasis-button"
