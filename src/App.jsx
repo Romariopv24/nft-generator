@@ -19,6 +19,7 @@ import ColeccionNFT from "./pages/coleccionNFT"
 import Generator from "./pages/generator"
 import "./styles/scss/_pedir-correro.scss"
 import { useStoreProv } from "./utils/zustand/store"
+import ProtectedElement from "./utils/ProtecedElement"
 
 function App() {
   const intl = useIntl()
@@ -152,8 +153,7 @@ function App() {
   ])
   const [loading, setLoading] = useState(true)
   let navigate = useNavigate()
-  const { setAccess_token, setTypeUser, setEmail, email } = useStoreProv()
-
+  const { setAccess_token, setTypeUser, setEmail, email ,typeUser } = useStoreProv()
   useEffect(() => {
     setDatosUserLS({ metamask, google, facebook })
     fetchData()
@@ -261,6 +261,7 @@ function App() {
       setShow(false)
     }
   }
+  
 
   return (
     <>
@@ -334,7 +335,11 @@ function App() {
               <Route path="/pay/:params" element={<Pay />} />
               <Route path="/faqs" element={<FAQs />} />
               {/* <Route path="/terms&conditions" element={<Terms />} /> */}
-              <Route path="/admin" element={<AdminView />} />
+              <Route path="/admin" element={
+    <ProtectedElement role={String(typeUser)}>
+      <AdminView />
+    </ProtectedElement>
+  } />
             </Routes>
           </div>
           {isActiveModalRegister && (

@@ -56,6 +56,7 @@ const Login = ({ setIsAuth, isAuth }) => {
   }, [isAuth])
 
   const idiomaFocus = localStorage.getItem("idioma")
+  const isIdiomaFocusNull = idiomaFocus === "null" || idiomaFocus === null
 
   return (
     <>
@@ -122,24 +123,24 @@ const Login = ({ setIsAuth, isAuth }) => {
     />
   </button>
   <button
-    onClick={() => {
-      idioma.cambiarIdioma("en-US")
-    }}
+  onClick={() => {
+    idioma.cambiarIdioma("en-US");
+  }}
+  style={{
+    borderRadius: "20px",
+    backgroundColor: "transparent",
+  }}
+>
+  <img
+    src={en}
+    alt=""
     style={{
-      borderRadius: "20px",
-      backgroundColor: "transparent"
+      filter: (isIdiomaFocusNull || idiomaFocus === "en-US" || hovered === "en-US" || !localStorage.getItem("idioma")) ? "none" : "grayscale(100%)",
     }}
-  >
-    <img 
-      src={en} 
-      alt="" 
-      style={{
-        filter: (idiomaFocus === "en-US" || hovered === "en-US") ? "none" : "grayscale(100%)"
-      }}
-      onMouseEnter={() => setHovered("en-US")}
-      onMouseLeave={() => setHovered(null)}
-    />
-  </button>
+    onMouseEnter={() => setHovered("en-US")}
+    onMouseLeave={() => setHovered(null)}
+  />
+</button>
 </div>
       </div>
       </div>

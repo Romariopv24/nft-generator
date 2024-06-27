@@ -9,7 +9,7 @@ import {
   Typography
 } from "@mui/material"
 import { enqueueSnackbar } from "notistack"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useIntl } from "react-intl"
 import { axiosClass } from "../../../api/api.config"
 import TableWallets from "./TableWallets"
@@ -17,7 +17,7 @@ import TableWallets from "./TableWallets"
 export default function AssingWalletsModal({ open, handleClose }) {
   const intl = useIntl()
 
-  const [wallet, setWallet] = useState("")
+  const walletRef = useRef("")
   const [getWallet, setGetWallet] = useState([])
 
   const handleSubmit = () => {
@@ -30,13 +30,11 @@ export default function AssingWalletsModal({ open, handleClose }) {
       id: "free.wallets.error",
       defaultMessage: "The wallet was not registered, please try again"
     })
-
     axiosClass
-      .post("/setwallet", { wallet: wallet })
+      .post("/setwallet", { wallet: walletRef.current })
       .then((res) => {
-        console.log(res)
         if (res.status === 200) {
-          setWallet("")
+          walletRef.current = ''
           getWallets()
           enqueueSnackbar(walletAlertSuccess, {
             variant: "success",
@@ -65,6 +63,8 @@ export default function AssingWalletsModal({ open, handleClose }) {
     axiosClass
       .get("getwallet")
       .then((res) => {
+        console.log(res)
+
         if (res.status === 200) {
           setGetWallet(res.data)
           return
@@ -133,8 +133,9 @@ export default function AssingWalletsModal({ open, handleClose }) {
               </Typography>
               <Stack sx={boxWalletSend}>
                 <OutlinedInput
-                  value={wallet.trim()}
-                  onChange={(e) => setWallet(e.target.value)}
+                  inputRef={walletRef}
+                  // value={wallet.trim()}
+                  onChange={(e) => walletRef.current = e.target.value}
                   inputProps={{ maxLength: 42 }}
                   sx={outLinedInputStyle}
                   placeholder={intl.formatMessage({

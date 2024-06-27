@@ -72,16 +72,6 @@ const Menu = ({
     setDb(await ConexionDB())
   }
 
-  const walletUser = JSON.parse(localStorage.getItem("metamask"))
-
-  let isPremiun = false
-
-  listWalletPremiun.find((wallet) => {
-    if (wallet.toLowerCase() === walletUser?.tokenUser.toLowerCase()) {
-      isPremiun = true
-    }
-  })
-
   const idiomaFocus = localStorage.getItem("idioma")
 
   const allSignOut = () => {
@@ -112,6 +102,8 @@ const Menu = ({
   //     }
   //   }, 10000);
   // }
+console.log(typeUser)
+
 
   return isAuth ? (
     <div className="d-flex align-items-center my-2 ps-2 pe-1">
@@ -234,27 +226,24 @@ const Menu = ({
             />
           </button>
           <button
-            onClick={() => {
-              idioma.cambiarIdioma("en-US")
-            }}
-            style={{
-              borderRadius: "20px",
-              backgroundColor: "transparent"
-            }}
-          >
-            <img
-              src={en}
-              alt=""
-              style={{
-                filter:
-                  idiomaFocus === "en-US" || hovered === "en-US"
-                    ? "none"
-                    : "grayscale(100%)"
-              }}
-              onMouseEnter={() => setHovered("en-US")}
-              onMouseLeave={() => setHovered(null)}
-            />
-          </button>
+  onClick={() => {
+    idioma.cambiarIdioma("en-US");
+  }}
+  style={{
+    borderRadius: "20px",
+    backgroundColor: "transparent",
+  }}
+>
+  <img
+    src={en}
+    alt=""
+    style={{
+      filter: (idiomaFocus === "en-US" || hovered === "en-US" || !localStorage.getItem("idioma")) ? "none" : "grayscale(100%)",
+    }}
+    onMouseEnter={() => setHovered("en-US")}
+    onMouseLeave={() => setHovered(null)}
+  />
+</button>
         </div>
 
         {nameUser ? (

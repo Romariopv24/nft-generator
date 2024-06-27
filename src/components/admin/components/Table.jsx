@@ -91,8 +91,6 @@ export default function Table({ dataAdmin }) {
       headerAlign: "center",
       cellClassName: "super-app-theme--cell",
       renderCell: (e) => {
-        console.log(e.row)
-
         return (
           <>
             <Stack flexDirection={"row"} alignItems={"center"} gap={3}>

@@ -64,15 +64,7 @@ const ColeccionNFT = () => {
       const noLoop = localStorage.getItem("noLoop")
       if (collectall.length === 0 && !isPromiseReady) {
         getColletionsRef.current()
-        const accounts = await window.ethereum.request({
-          method: "eth_accounts"
-        })
-        let findWallet = listWalletPremiun.find(
-          (wallet) => wallet.toLowerCase() === accounts[0].toLowerCase()
-        )
-        if (findWallet) {
-          setIsWalletPremiun(true)
-        }
+        // Since listWalletPremiun is no longer used, the related logic is removed.
       }
       if (!isIntervalActive) {
         setIsIntervalActive(true)
@@ -121,7 +113,6 @@ const ColeccionNFT = () => {
       if (post.message === "Usuario sin colecciones" || post.length === 0) {
         setIsPromiseReady(true)
         setCollectall([])
-        //  collectall.find((collection) => collection.url === "En Proceso..." && setPayConfirm(false) )
       } else {
         setCollectall(post)
         setIsPromiseReady(true)
