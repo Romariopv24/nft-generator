@@ -20,6 +20,7 @@ import Generator from "./pages/generator"
 import "./styles/scss/_pedir-correro.scss"
 import { useStoreProv } from "./utils/zustand/store"
 import ProtectedElement from "./utils/ProtecedElement"
+import { NotFoundRoute } from "./components/NotFoundRoute"
 
 function App() {
   const intl = useIntl()
@@ -340,6 +341,7 @@ function App() {
       <AdminView />
     </ProtectedElement>
   } />
+          <Route path='*' element={<NotFoundRoute />} />
             </Routes>
           </div>
           {isActiveModalRegister && (
