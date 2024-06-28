@@ -452,7 +452,10 @@ function App() {
                   // onClick={() => setShowLegalWarning(true)}
                 >
                   {""}
-                  <FormattedMessage id="footer.home" defaultMessage="Home" />
+                  <FormattedMessage
+                    id="boton.home"
+                      defaultMessage="Home"
+                      />
                 </a>
                 /
                 <a

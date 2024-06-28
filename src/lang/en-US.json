@@ -300,5 +300,11 @@
 
   "alert.stripe.wait": "Please wait a few seconds to see you Free Collection!",
   "alert.stripe.generate": "Generating collection",
-  "alert.email.sent": "An email will be sent once the collection is ready"
+  "alert.email.sent": "An email will be sent once the collection is ready",
+
+  "error.title": "This page does not exist",
+  "error.text": "The page you are looking for does not exist.",	
+  "error.text2": "Please check the URL or go to the home page.",
+  "boton.home": "Home"
+
 }

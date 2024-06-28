@@ -300,5 +300,10 @@
 
   "alert.stripe.wait": "Por favor espera unos segundos para ver tu Colección Gratuita!",
   "alert.stripe.generate": "Generando colección",
-  "alert.email.sent": "Se le enviara un correo cuando la coleccion este terminada"
+  "alert.email.sent": "Se le enviara un correo cuando la coleccion este terminada",
+
+  "error.title": "Este sitio no existe",
+  "error.text": "La página que buscas no existe.",	
+  "error.text2": "Por favor, verifica la URL o ve a la página de inicio.",
+  "boton.home": "Inicio"
 }

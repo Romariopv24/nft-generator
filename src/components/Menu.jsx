@@ -73,6 +73,7 @@ const Menu = ({
   }
 
   const idiomaFocus = localStorage.getItem("idioma")
+  const isIdiomaFocusNull = idiomaFocus === "null" || idiomaFocus === null
 
   const allSignOut = () => {
     setName(null)
@@ -238,7 +239,7 @@ console.log(typeUser)
     src={en}
     alt=""
     style={{
-      filter: (idiomaFocus === "en-US" || hovered === "en-US" || !localStorage.getItem("idioma")) ? "none" : "grayscale(100%)",
+      filter: (isIdiomaFocusNull || idiomaFocus === "en-US" || hovered === "en-US" || !localStorage.getItem("idioma")) ? "none" : "grayscale(100%)",
     }}
     onMouseEnter={() => setHovered("en-US")}
     onMouseLeave={() => setHovered(null)}
