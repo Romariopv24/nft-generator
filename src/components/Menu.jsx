@@ -103,7 +103,6 @@ const Menu = ({
   //     }
   //   }, 10000);
   // }
-console.log(typeUser)
 
 
   return isAuth ? (

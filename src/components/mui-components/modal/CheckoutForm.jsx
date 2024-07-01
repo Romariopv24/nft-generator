@@ -20,6 +20,7 @@ import { enqueueSnackbar } from "notistack"
 import { useEffect, useState } from "react"
 import { axiosClass } from "../../../api/api.config"
 import { useStoreProv } from "../../../utils/zustand/store"
+import { useNavigate } from "react-router-dom"
 
 export default function CheckoutForm({
   // setIsConfirmed,
@@ -34,12 +35,11 @@ export default function CheckoutForm({
   closePaymentModal
 }) {
   const [lie, setLie] = useState(false)
-
   // const { setStripe } = useStore()
   const stripe = useStripe()
   const elements = useElements()
 
-  const { payConfirm, setPayConfirm, email } = useStoreProv()
+  const { payConfirm, setPayConfirm, email, setSignal } = useStoreProv()
   const [message, setMessage] = useState("")
 
   const [isProcessing, setIsProcessing] = useState(false)
@@ -103,7 +103,7 @@ export default function CheckoutForm({
             .post("confirm_payment", { paymentIntentId: res.paymentIntent.id })
             .then(async (res) => {
               if (res.status === 200) {
-                enqueueSnackbar("Payment Confirmed", {
+                enqueueSnackbar("Payment Confirmed, please wait...", {
                   variant: "success",
                   anchorOrigin: {
                     vertical: "top",
@@ -112,6 +112,7 @@ export default function CheckoutForm({
                 })
                 setPayConfirm(true)
                 handleClose()
+                setSignal(true)
               }
             })
             .catch((err) => {

@@ -6,7 +6,7 @@ import { ethers } from "ethers"
 import { closeSnackbar, enqueueSnackbar } from "notistack"
 import React, { useEffect, useRef, useState } from "react"
 import { FormattedMessage, useIntl } from "react-intl"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { axiosClass } from "../api/api.config.js"
 import { ReactComponent as MetamaskLogo } from "../assets/svg/metamask.svg"
 import { ReactComponent as Stripe } from "../assets/svg/stripe.svg"
@@ -979,6 +979,7 @@ const Form = ({
   }) => {
     const [show, setShow] = useState(false)
 
+
     useEffect(() => {
       if (isInputGenerate) setShow(true)
       else setShow(false)
@@ -1178,7 +1179,7 @@ const Form = ({
 
   const [openMuiModal, setOpenMuiModal] = useState(false)
   const [openMaxComb, setOpenMaxComb] = useState(false)
-
+  const navigate = useNavigate()
   const handleOpen = () => setOpenMuiModal(true)
   const handleClose = () => setOpenMuiModal(false)
 
@@ -1186,24 +1187,24 @@ const Form = ({
     if (payConfirm === true) {
       setDisableCloseButton(true) // Disable the button
 
-      const alertStripewait = intl.formatMessage({
-        id: "alert.stripe.wait",
-        defaultMessage: "Please wait a few seconds to see you Free Collection!"
-      })
+      // const alertStripewait = intl.formatMessage({
+      //   id: "alert.stripe.wait",
+      //   defaultMessage: "Please wait a few seconds to see you Free Collection!"
+      // })
 
       const alertGenerating = intl.formatMessage({
         id: "alert.stripe.generate",
-        defaultMessage: "Generating collection"
+        defaultMessage: "Generating collection, please wait!"
       })
 
-      const snackbarKey = enqueueSnackbar(alertStripewait, {
-        variant: "success",
-        anchorOrigin: {
-          vertical: "top",
-          horizontal: "right"
-        },
-        persist: true
-      })
+      // const snackbarKey = enqueueSnackbar(alertStripewait, {
+      //   variant: "success",
+      //   anchorOrigin: {
+      //     vertical: "top",
+      //     horizontal: "right"
+      //   },
+      //   persist: true
+      // })
 
       // handleGenerate()
       handleSubmit(setMessage)
@@ -1214,17 +1215,18 @@ const Form = ({
         .finally(() => {
           setPayConfirm(false)
 
-          closeSnackbar(snackbarKey)
+          closeSnackbar(alertGenerating)
 
           setDisableCloseButton(false) // Enable the button
           setMessage({ content: "success", type: "success" })
-          enqueueSnackbar(alertGenerating, {
-            variant: "success",
-            anchorOrigin: {
-              vertical: "top",
-              horizontal: "right"
-            }
-          })
+          // enqueueSnackbar(alertGenerating, {
+          //   variant: "success",
+          //   anchorOrigin: {
+          //     vertical: "top",
+          //     horizontal: "right"
+          //   }
+          // })
+          navigate('/coleccion')
         })
     }
   }, [payConfirm])

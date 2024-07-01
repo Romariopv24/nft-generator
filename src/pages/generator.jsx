@@ -58,8 +58,6 @@ const Generator = ({
 
         return result.find((db) => db.clave === e.images[index].id)
       })
-      console.log({ imagenes })
-
       setListPreview(imagenes)
       imagenes.length && setIsOpenModalPreviewImg(!isOpenModalPreviewImg)
     }
