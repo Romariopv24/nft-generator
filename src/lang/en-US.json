@@ -305,6 +305,7 @@
   "error.title": "This page does not exist",
   "error.text": "The page you are looking for does not exist.",	
   "error.text2": "Please check the URL or go to the home page.",
-  "boton.home": "Home"
+  "boton.home": "Home",
+  "payment.Confirmed": "Payment Confirmed, please wait a few minutes!"
 
 }

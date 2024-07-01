@@ -204,7 +204,7 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: { md: "90%", lg: 1200 },
-  height: { md: "100%", lg: "95%", xl: "70%" },
+  // height: { md: "100%",lg: "95%", xl: "70%" },
   bgcolor: "#000446",
   border: "2px solid #00B8FF",
   boxShadow: 24,

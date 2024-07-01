@@ -305,5 +305,6 @@
   "error.title": "Este sitio no existe",
   "error.text": "La página que buscas no existe.",	
   "error.text2": "Por favor, verifica la URL o ve a la página de inicio.",
-  "boton.home": "Inicio"
+  "boton.home": "Inicio",
+  "payment.Confirmed": "Pago Confirmado, por favor espere unos minutos"
 }

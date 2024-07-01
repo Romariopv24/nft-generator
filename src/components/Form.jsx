@@ -1135,7 +1135,8 @@ const Form = ({
     setlistImagenDB(result)
     return result
   }
-
+  
+  
   const [captureValue, setCaptureValue] = useState("")
 
   //Number of combinations with the name y the form field

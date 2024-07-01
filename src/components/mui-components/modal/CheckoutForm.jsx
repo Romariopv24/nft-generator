@@ -21,6 +21,7 @@ import { useEffect, useState } from "react"
 import { axiosClass } from "../../../api/api.config"
 import { useStoreProv } from "../../../utils/zustand/store"
 import { useNavigate } from "react-router-dom"
+import { useIntl } from "react-intl"
 
 export default function CheckoutForm({
   // setIsConfirmed,
@@ -34,6 +35,7 @@ export default function CheckoutForm({
   botonGenerate,
   closePaymentModal
 }) {
+  const intl = useIntl()
   const [lie, setLie] = useState(false)
   // const { setStripe } = useStore()
   const stripe = useStripe()
@@ -99,11 +101,15 @@ export default function CheckoutForm({
       })
       .then((res) => {
         if (res.paymentIntent) {
+          const paymenConfirmed = intl.formatMessage({
+            id: "payment.Confirmed",
+            defaultMessage: "Payment Confirmed, please wait a few minutes!"
+          })
           axiosClass
             .post("confirm_payment", { paymentIntentId: res.paymentIntent.id })
             .then(async (res) => {
               if (res.status === 200) {
-                enqueueSnackbar("Payment Confirmed, please wait...", {
+                enqueueSnackbar(paymenConfirmed, {
                   variant: "success",
                   anchorOrigin: {
                     vertical: "top",
