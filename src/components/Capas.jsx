@@ -150,7 +150,7 @@ function Capas({
                   if(clickCapa) {
                     clickCapaHandler(capa)
                     setClickedCapa(false)
- }
+                    }              
                   return(
                   <>
                     {selectedCapa && selectedCapa?.id && capa && capa.id && (
@@ -172,7 +172,6 @@ function Capas({
                             }}
                           >
                             {/* aqui se llama al componente capa */}
-
                             <Capa
                               setNewCapaName={setNewCapaName}
                               capa={capa}

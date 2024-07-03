@@ -64,9 +64,7 @@ const Generator = ({
   }
 
   const intl = useIntl()
-
   function requiredRarity(isRarity) {
-    console.log("se ejectuta")
     let capas = getCapas()
     const capaIndex = capas.findIndex((capa) => capa.id === selectedCapa.id)
     capas[capaIndex].required = isRarity

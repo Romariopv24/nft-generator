@@ -9,6 +9,7 @@ const getSelectedCapaId = () => {
   } else {
     selectedCapaId = getCapas()[0].id
     localStorage.setItem('selectedCapaId', selectedCapaId)
+
   }
   // console.log({selectedCapaId, type: typeof selectedCapaId});
   return selectedCapaId

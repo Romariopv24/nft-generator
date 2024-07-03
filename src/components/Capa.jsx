@@ -32,9 +32,9 @@ const Capa = ({
     setlistImagenDB(result)
     return result
   }
-
-  const capaIndex = getCapas().findIndex((capa) => capa.id === selectedCapa.id)
-
+  const capaIndex = getCapas().findIndex((capas) => {
+    return capas.id === selectedCapa.id
+  })  
   //Calculo de rareza con barra dependiente
   function handleRangeValue(event, element, isRarity) {
     let capas = getCapas()
@@ -182,7 +182,8 @@ const Capa = ({
                     </div>
                   </div> */}
                 {/*-----------render Imagenes individuales ----------------*/}
-                {getCapas()[capaIndex].images.map((e) => (
+                {getCapas()[capaIndex].images.map((e) => {
+                  return(
                   <div className="container-rarity-bottom " key={e.id}>
                     {/*--------- Imagen --------------------*/}
                     <div className="image-rarity-settings-container">
@@ -221,7 +222,7 @@ const Capa = ({
                       <h5 className="">{`${e.porcentaje.toFixed(1)}%`}</h5>
                     </div>
                   </div>
-                ))}
+                )})}
               </div>
             </ModalComponent>
           </div>

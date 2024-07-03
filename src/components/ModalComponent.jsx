@@ -14,8 +14,15 @@ const ModalComponent = (props) => {
     setIsShownModal(true);
   }
 
+  function handleClick(e) {
+    e.stopPropagation(); // Previene la propagación del evento al botón padre
+    showModal();
+    props.func();
+}
+
   return (
     <>
+
       <input
         className={`${props.classButton}`}
         type={`${props.typeButton}`}
@@ -25,10 +32,10 @@ const ModalComponent = (props) => {
           showModal();
           props.func();
         }}
-      ></input>
-      <label class="form-check-label capa-name" for="flexSwitchCheckDefault">
-        {props.textButton}
-      </label>
+      >
+      </input> 
+        <span onClick={handleClick} class="form-check-label capa-name" >{props.textButton}</span>
+   
       {isShownModal &&
         ReactDOM.createPortal(
           <div
