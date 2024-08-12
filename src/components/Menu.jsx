@@ -17,6 +17,7 @@ import "../styles/scss/_logo.scss"
 import "../styles/scss/_menu.scss"
 import "../styles/scss/app.scss"
 import { useStoreProv } from "../utils/zustand/store"
+import { jwtDecode } from "jwt-decode"
 
 const Menu = ({
   desLoguearse,
@@ -87,22 +88,24 @@ const Menu = ({
     setLoading(true)
   }
 
-  // if (access_token !== null || access_token) {
-  //   setInterval(() => {
-  //     const decoded = jwtDecode(access_token)?.exp;
-  //     const decoded_time = new Date(decoded * 1000);
-  //     const date = new Date();
-  //     console.log(date > decoded_time);
-  //     console.log(date);
-  //     console.log(decoded_time);
-  //     if (date > decoded_time) {
-  //      setName(null)
-  //       desLoguearse();
-  //       ReiniciarTodo();
-  //       navigate("/");
-  //     }
-  //   }, 10000);
-  // }
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (access_token) {
+        const decoded = jwtDecode(access_token);
+        const decoded_time = new Date(decoded.exp * 1000);
+        const now = new Date();
+        if (now > decoded_time) {
+          desLoguearse();
+          ReiniciarTodo();
+          navigate("/");
+        }
+      }
+    }, 10000); // Check every 10 seconds
+  
+    return () => clearInterval(interval); // Cleanup on component unmount
+  }, [access_token, desLoguearse, ReiniciarTodo, navigate]);
+
 
 
   return isAuth ? (

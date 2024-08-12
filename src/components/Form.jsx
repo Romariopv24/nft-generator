@@ -497,7 +497,8 @@ const Form = ({
       const res = await (await fetch(Const.CMCURL, myInit)).json()
       // const res = { data: { BNB: { quote: { USD: { price: 15000 } } } } }
       if (res) {
-        BNBprice.current = res.data?.BNB.quote.USD.price
+        BNBprice.current = res.data?.BNB?.quote.USD.price
+        console.log(res.data?.BNB?.quote?.USD?.price)
         // console.log(res)
         let coleccionSize = inputProjectCollectionSize.current.value
         // console.log(coleccionSize);
@@ -567,6 +568,7 @@ const Form = ({
       setChecked(false)
     }
 
+ 
     return (
       <>
         <div className="fs-6 fw-bold">

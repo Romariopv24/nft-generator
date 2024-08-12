@@ -90,7 +90,7 @@ export const Contact = ({ showContact, setShowContact }) => {
     enqueueSnackbar(
       intl.formatMessage({
         id: "contact.alertSuccess",
-        defaultMessage: "Message sent"
+        defaultMessage: "Message sent, you will receive a response from the NfansT team within the next 24/48 hours"
       }),
       {
         variant: "success",
@@ -98,7 +98,8 @@ export const Contact = ({ showContact, setShowContact }) => {
         anchorOrigin: {
           vertical: "top",
           horizontal: "right"
-        }
+        },
+        transitionDuration: {enter: 225, exit: 400}
       }
     )
 

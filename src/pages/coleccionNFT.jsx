@@ -256,13 +256,13 @@ const ColeccionNFT = () => {
                   defaultMessage="Amount"
                 />
               </th>
-              <th scope="col --max-width" style={{ color: "#00b8ff" }}>
+              <th scope="col --max-width" style={{ color: "#00b8ff", }}>
                 <FormattedMessage
                   id="colleccionNFT.table-column3"
                   defaultMessage="Download"
                 />
               </th>
-              {typeUser === 2 && (
+              {typeUser === 2 &&  typeUser === 1 &&(
                 <th scope="col --max-width" style={{ color: "#00b8ff" }}>
                   <FormattedMessage
                     id="colleccionNFT.table-column4"
@@ -323,17 +323,21 @@ const ColeccionNFT = () => {
                         </a>
                       )}
                     </td>
-                    <td className="py-2">
-                      {colletion.url === "En Proceso..." ? (
-                        <Export style={{ width: "32px" }} fill={"#494b50"} />
-                      ) : (
-                        <Export
-                          style={{ width: "32px", cursor: "pointer" }}
-                          fill={"#fff"}
-                          onClick={() => handleOpenModalCodigo(colletion.url)}
-                        />
+                      {typeUser === 2 && typeUser === 1 && (
+                        <td className="py-2">
+                        <>
+                        {colletion.url === "En Proceso..."  ? (
+                          <Export style={{ width: "32px" }} fill={"#494b50"} />
+                        ) : (
+                          <Export
+                            style={{ width: "32px", cursor: "pointer" }}
+                            fill={"#fff"}
+                            onClick={() => handleOpenModalCodigo(colletion.url)}
+                          />
+                        )}
+                        </>
+                      </td>
                       )}
-                    </td>
                     <td className="py-2">{date(colletion.fecha.$date)}</td>
                     <td className="py-2">{colletion.peso}</td>
                     <td className="py-2">

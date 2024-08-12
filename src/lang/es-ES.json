@@ -203,7 +203,7 @@
   "contact.message": "Mensaje",
   "contact.send": "Enviar",
 
-  "contact.alertSuccess": "Mensaje enviado",
+  "contact.alertSuccess": "Mensaje enviado, en las próximas 24/48hs recibira una respuesta del equipo de NfansT",
   "contact.captchaError": "Por favor complete el captcha",
   "contact.validationMail": "Por favor introduzca un correo valido",
   "contact.incompleteFields": "Por favor complete todos los campos",

@@ -251,7 +251,7 @@ export default function Table({ dataAdmin }) {
                   margin: "0 5px",
                   color: "white",
                   "&:hover": {
-                    backgroundColor: "darkred" // Mismo color de fondo al hacer hover
+                    backgroundColor: "darkred" 
                   }
                 }}
               >
