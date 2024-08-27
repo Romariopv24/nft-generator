@@ -57,4 +57,5 @@ const style = {
   flexDirection: "column",
   textAlign: "center",
   alignItems: "center"
+  // 
 }
