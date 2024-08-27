@@ -27,9 +27,9 @@ const Terms = ({close}) => {
           />
         </h3>
         </Box>
-        <Box width={'5%'} justifyContent={'flex-start'}>
+        {/* <Box width={'5%'} justifyContent={'flex-start'}>
           <Close onClick={close} sx={{cursor:'pointer'}} />
-          </Box>
+          </Box> */}
         </Stack>
       </div>
 

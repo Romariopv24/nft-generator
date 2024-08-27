@@ -237,6 +237,9 @@ const ColeccionNFT = () => {
     }
   }, [])
 
+
+
+
   return (
     <>
       {/* tabla pc */}
@@ -308,7 +311,11 @@ const ColeccionNFT = () => {
           ) : (
             <tbody className="my-0">
               {collectall.length > 0 ? (
-                collectall.map((colletion, key) => (
+                collectall.map((colletion, key) => {
+                  const currentDate = dayjs()
+                  const colletionDate = dayjs(colletion.date)
+                  const isDownloadDisabled = currentDate.isAfter(colletionDate.add(15, 'day'))
+                  return(
                   <tr key={key} className="align-middle">
                     <td className="py-2">{colletion.nombre}</td>
                     <td className="py-2">{colletion.cantidad}</td>
@@ -319,6 +326,7 @@ const ColeccionNFT = () => {
                         "Failed, try again"
                       ) : (
                         <a href={colletion.url}>
+                          asdasd
                           <Descargar style={{ width: "30px" }} fill={"#fff"} />
                         </a>
                       )}
@@ -354,7 +362,7 @@ const ColeccionNFT = () => {
                       )}
                     </td>
                   </tr>
-                ))
+                )})
               ) : (
                 <tr>
                   <th colSpan="7">
