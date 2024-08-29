@@ -166,8 +166,8 @@ export const Contact = ({ showContact, setShowContact }) => {
         </div>
 
         <form className="p-2 form-contact my-3">
-          <div className="mb-3">
-            <label htmlFor="projectname" className="form-label left">
+          <div className="mb-3"  style={{ display: 'flex', flexDirection: 'column',  justifyContent: 'flex-start' }}>
+            <label htmlFor="projectname" className="form-label left" style={{ textAlign: 'left' }}>
               <FormattedMessage id="contact.name" defaultMessage="Name" />
             </label>
             <input
@@ -179,8 +179,8 @@ export const Contact = ({ showContact, setShowContact }) => {
               onChange={(e) => setNombre(e.target.value)}
             />
           </div>
-          <div className="mb-3">
-            <label htmlFor="projectdescription" className="form-label">
+          <div className="mb-3"  style={{ display: 'flex', flexDirection: 'column',  justifyContent: 'flex-start' }}>
+            <label htmlFor="projectdescription" className="form-label" style={{ textAlign: 'left' }}>
               <FormattedMessage id="contact.email" defaultMessage="Email" />
             </label>
             <input
@@ -192,8 +192,8 @@ export const Contact = ({ showContact, setShowContact }) => {
               onChange={(e) => setCorreo(e.target.value)}
             />
           </div>
-          <div>
-            <label htmlFor="capaName" className="form-label">
+          <div  style={{ display: 'flex', flexDirection: 'column',  justifyContent: 'flex-start' }}> 
+            <label htmlFor="capaName" className="form-label" style={{ textAlign: 'left' }} >
               <FormattedMessage id="contact.message" defaultMessage="Message" />
             </label>
             <textarea
@@ -210,6 +210,11 @@ export const Contact = ({ showContact, setShowContact }) => {
           <ReCAPTCHA
             onChange={onChange}
             sitekey="6LfulzApAAAAANw5LdP3MWuK1PzSADmBkrk4osKE"
+            ref={captcha}
+            hl={language === null || language === "en-US" ? "en" : "es"}
+            language={language === null || language === "en-US" ? "en" : "es"}
+            key={language === null || language === "en-US" ? "en" : "es"}
+            translate="yes"
           />
         </div>
 

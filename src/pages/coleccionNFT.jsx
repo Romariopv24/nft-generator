@@ -326,7 +326,6 @@ const ColeccionNFT = () => {
                         "Failed, try again"
                       ) : (
                         <a href={colletion.url}>
-                          asdasd
                           <Descargar style={{ width: "30px" }} fill={"#fff"} />
                         </a>
                       )}
