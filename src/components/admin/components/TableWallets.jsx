@@ -118,11 +118,24 @@ export default function TableWallets({ getWallet, setGetWallet }) {
           display: "flex",
           justifyContent: "center",
           color: "white",
-          border: "3px solid #6772af",
-          borderRadius: "20px",
+          border: "3px solid #333333",
+          // borderRadius: "20px",
+          "&. MuiDataGrid-row": {
+            backgroundColor:'#1C1C1C',
+            border: '0px',
+          },
+          "& div": {
+            borderRadius: '0px',
+            border: '0' 
+          },
           "& .super-app-theme--cell": {
             display: "flex",
-            justifyContent: "center"
+            justifyContent: "center",
+            borderBottom: "1px solid #333333",
+            backgroundColor:'#1C1C1C',
+            "&:hover": {
+             backgroundColor: '#2E2E2E'
+          }
           },
           "& .MuiToolbar-root": {
             color: "white"
@@ -139,8 +152,8 @@ export default function TableWallets({ getWallet, setGetWallet }) {
             fontWeight: "bold"
           },
           "& .MuiDataGrid-columnHeaders": {
-            backgroundColor: "#2731C8",
-            borderRadius: "15px 15px"
+            backgroundColor: "#010101",
+            borderBottom: "1px solid #333333",
           },
           "& .MuiDataGrid-virtualScroller::-webkit-scrollbar-thumb": {
             backgroundColor: "#2731C8",
@@ -151,6 +164,12 @@ export default function TableWallets({ getWallet, setGetWallet }) {
           },
           "& .MuiDataGrid-menuIcon": {
             display: "none"
+          },
+          "& .MuiDataGrid-virtualScroller": {
+            backgroundColor: "#010101",
+          },
+          "& .MuiDataGrid-footerContainer":{
+            backgroundColor: "#010101",
           }
         }}
       />

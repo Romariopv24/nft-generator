@@ -340,8 +340,6 @@ export default function Table({ dataAdmin }) {
           "& .MuiDataGrid-columnHeaders": {
             backgroundColor: "#010101",
             borderBottom: "1px solid #333333",
-
-            // borderRadius: "15px 15px"
           },
           "& .MuiDataGrid-virtualScroller::-webkit-scrollbar-thumb": {
             backgroundColor: "#2731C8",
