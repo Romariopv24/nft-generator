@@ -304,11 +304,24 @@ export default function Table({ dataAdmin }) {
           display: "flex",
           justifyContent: "center",
           color: "white",
-          border: "3px solid #6772af",
-          borderRadius: "20px",
+          border: "3px solid #333333",
+          borderRadius: "0px",
+          "&. MuiDataGrid-row": {
+            backgroundColor:'#1C1C1C',
+            border: '0px',
+          },
+          "& div": {
+            borderRadius: '0px',
+            border: '0' 
+          },
           "& .super-app-theme--cell": {
             display: "flex",
-            justifyContent: "center"
+            justifyContent: "center",
+            borderBottom: "1px solid #333333",
+            backgroundColor:'#1C1C1C',
+            "&:hover": {
+             backgroundColor: '#2E2E2E'
+          }
           },
           "& .MuiToolbar-root": {
             color: "white"
@@ -325,18 +338,27 @@ export default function Table({ dataAdmin }) {
             fontWeight: "bold"
           },
           "& .MuiDataGrid-columnHeaders": {
-            backgroundColor: "#2731C8",
-            borderRadius: "15px 15px"
+            backgroundColor: "#010101",
+            borderBottom: "1px solid #333333",
+
+            // borderRadius: "15px 15px"
           },
           "& .MuiDataGrid-virtualScroller::-webkit-scrollbar-thumb": {
             backgroundColor: "#2731C8",
-            borderRadius: "20px"
+            // borderRadius: "20px"
           },
           "& .MuiDataGrid-virtualScroller::-webkit-scrollbar-thumb:hover": {
+            // backgroundColor: "#010101",
             background: "#12175f"
           },
           "& .MuiDataGrid-menuIcon": {
             display: "none"
+          },
+          "& .MuiDataGrid-virtualScroller": {
+            backgroundColor: "#010101",
+          },
+          "& .MuiDataGrid-footerContainer":{
+            backgroundColor: "#010101",
           }
         }}
       />
