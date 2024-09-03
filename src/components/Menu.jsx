@@ -96,8 +96,7 @@ const Menu = ({
         const decoded_time = new Date(decoded.exp * 1000);
         const now = new Date();
         if (now > decoded_time) {
-          desLoguearse();
-          ReiniciarTodo();
+          signOutBtn()
           navigate("/");
         }
       }
