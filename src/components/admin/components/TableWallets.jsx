@@ -122,7 +122,7 @@ export default function TableWallets({ getWallet, setGetWallet }) {
           display: "flex",
           justifyContent: "center",
           color: "white",
-          // border: "3px solid #333333",
+          border: "3px solid #333333",
           // borderRadius: "20px",
           "&. MuiDataGrid-row": {
             backgroundColor:'#1C1C1C',
