@@ -58,6 +58,7 @@ export default function TableWallets({ getWallet, setGetWallet }) {
         defaultMessage: "Email"
       }),
       width: 270,
+      // flex:1,
       headerAlign: "center",
       cellClassName: "super-app-theme--cell",
       editable: true,
@@ -69,7 +70,8 @@ export default function TableWallets({ getWallet, setGetWallet }) {
       field: "wallet",
       headerName: "Wallet",
       type: "number",
-      width: 400,
+      width: 500,
+      // flex:1,
       headerAlign: "center",
       cellClassName: "super-app-theme--cell",
       editable: true,
@@ -79,9 +81,10 @@ export default function TableWallets({ getWallet, setGetWallet }) {
     },
     {
       field: "delete",
-      headerName: "",
+      headerName: "Delete",
       type: "number",
-      width: 110,
+      width: 10,
+      flex:1,
       headerAlign: "center",
       cellClassName: "super-app-theme--cell",
       renderCell: (e) => {
@@ -95,7 +98,8 @@ export default function TableWallets({ getWallet, setGetWallet }) {
           />
         )
       }
-    }
+    },
+   
   ]
 
   return (
@@ -118,7 +122,7 @@ export default function TableWallets({ getWallet, setGetWallet }) {
           display: "flex",
           justifyContent: "center",
           color: "white",
-          border: "3px solid #333333",
+          // border: "3px solid #333333",
           // borderRadius: "20px",
           "&. MuiDataGrid-row": {
             backgroundColor:'#1C1C1C',
