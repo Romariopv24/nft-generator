@@ -1,39 +1,38 @@
-import React from "react"
-import { FormattedMessage } from "react-intl"
-import "../styles/scss/_legal-warning.scss"
-import GenericModal from "./GenericModal"
-import { Close } from "@mui/icons-material"
-import { Box, Stack } from "@mui/material"
+import React from "react";
+import { FormattedMessage } from "react-intl";
+import "../styles/scss/_legal-warning.scss";
+import GenericModal from "./GenericModal";
+import { Close } from "@mui/icons-material";
+import { Box, Stack } from "@mui/material";
 
 export const LegalWarning = ({ showLegalWarning, setShowLegalWarning }) => {
   const close = () => {
-    setShowLegalWarning(false)
-  }
+    setShowLegalWarning(false);
+  };
 
   return (
     <GenericModal show={showLegalWarning}>
       <div>
-        <Stack flexDirection={'row'} justifyContent={'center'} >
-        <Box width={'95%'}>
-        <h3
-          className="p-3"
-          style={{
-            fontSize: "1.5rem",
-            padding: ".7em",
-            boxShadow: "#ffffff1f 0px 2px 3px 0px",
-            borderBottomLeftRadius: 0,
-            borderBottomRightRadius: 0
-          }}
-        >
-          
-          <FormattedMessage
-            id="legalwarning.title"
-            defaultMessage="Licence Agreement"
-          />
-        </h3>
-        </Box>
-          <Box width={'5%'} justifyContent={'flex-start'}>
-          <Close onClick={close} sx={{cursor:'pointer'}} />
+        <Stack flexDirection={"row"} justifyContent={"center"}>
+          <Box width={"95%"}>
+            <h3
+              className="p-3"
+              style={{
+                fontSize: "1.5rem",
+                padding: ".7em",
+                // boxShadow: "#ffffff1f 0px 2px 3px 0px",
+                // borderBottomLeftRadius: 0,
+                // borderBottomRightRadius: 0
+              }}
+            >
+              <FormattedMessage
+                id="legalwarning.title"
+                defaultMessage="Licence Agreement"
+              />
+            </h3>
+          </Box>
+          <Box width={"5%"} justifyContent={"flex-start"}>
+            <Close onClick={close} sx={{ cursor: "pointer" }} />
           </Box>
         </Stack>
         <div
@@ -186,5 +185,5 @@ export const LegalWarning = ({ showLegalWarning, setShowLegalWarning }) => {
         </button>
       </div>
     </GenericModal>
-  )
-}
+  );
+};

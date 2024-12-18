@@ -9,13 +9,14 @@ import "../styles/scss/_contact.scss"
 export const Contact = ({ showContact, setShowContact }) => {
   const { enqueueSnackbar } = useSnackbar()
   const intl = useIntl()
-
   const captcha = useRef(null)
 
   function onChange(value) {
     captcha.current = value
     console.log("Captcha value:", value)
   }
+
+  console.log(intl)
 
   const [nombre, setNombre] = useState("")
   const [correo, setCorreo] = useState("")
