@@ -1109,7 +1109,6 @@ const Form = ({
       const decoded = jwtDecode(tokennfanst);
 
       const { role, nft } = decoded;
-
       if (
         typeUser === 1 ||
         typeUser === 2 ||
