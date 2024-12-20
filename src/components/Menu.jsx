@@ -80,7 +80,7 @@ const Menu = ({
     setName(null);
     desLoguearse();
     ReiniciarTodo();
-    navigate("/");
+    navigate("/login");
   };
 
   const signOutBtn = () => {

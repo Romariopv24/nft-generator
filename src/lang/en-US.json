@@ -303,9 +303,15 @@
   "alert.email.sent": "An email will be sent once the collection is ready",
 
   "error.title": "This page does not exist",
-  "error.text": "The page you are looking for does not exist.",	
+  "error.text": "The page you are looking for does not exist.",
   "error.text2": "Please check the URL or go to the home page.",
   "boton.home": "Home",
-  "payment.Confirmed": "Payment Confirmed, please wait a few minutes!"
+  "payment.Confirmed": "Payment Confirmed, please wait a few minutes!",
 
+  "title.alertLink": "Alert",
+  "paragraph.alertLink": "You must be logged in to access this page",
+  "paragraph.alertLink2": "Please go to NFansT to connect your wallet",
+
+  "button.cancel.alertLink": "Close",
+  "button.goToNFT": "Go to NFansT"
 }

@@ -10,6 +10,7 @@ import { LangProvider } from "./context/langContext"
 //   console.log = () => {}
 // }
 
+
 ReactDOM.render(
   <LangProvider>
     <React.StrictMode>

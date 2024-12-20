@@ -303,8 +303,15 @@
   "alert.email.sent": "Se le enviara un correo cuando la coleccion este terminada",
 
   "error.title": "Este sitio no existe",
-  "error.text": "La página que buscas no existe.",	
+  "error.text": "La página que buscas no existe.",
   "error.text2": "Por favor, verifica la URL o ve a la página de inicio.",
   "boton.home": "Inicio",
-  "payment.Confirmed": "Pago Confirmado, por favor espere unos minutos"
+  "payment.Confirmed": "Pago Confirmado, por favor espere unos minutos",
+
+  "title.alertLink": "Alerta",
+  "paragraph.alertLink": "Debes estar conectado para acceder a esta página",
+  "paragraph.alertLink2": "Por favor, ve a NFansT para conectar tu billetera",
+
+  "button.cancel.alertLink": "Cerrar",
+  "button.goToNFT": "Ir a NFansT"
 }

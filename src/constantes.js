@@ -2,6 +2,9 @@
 //export const URL = `http://38.242.196.143:5000`
 //export const URL = 'https://api.nftcreator.market'
 export const URL = "https://nftg-nfanst-api.devtop.online/"
+export const nfanstURL = "https://nfanst.devtop.online/api/v1/"
+export const URLNFanst = "https://nfanst.devtop.online/"
+// export const URLNFanst = "http://localhost:3000/"
 // export const WalletAddress = "0x70FDDe02e61981c1e21d0C33d04497116996CE7B" // wallet de nolverto
 export const WalletAddress = "0x5cBB31D9Cf75766342a8D048E09dEFb0071BfE2e" //wallet del jefe
 export const Ammount = 0.001
