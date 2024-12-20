@@ -29,12 +29,9 @@ const Login = ({ setIsAuth, isAuth }) => {
   async function connectWalletHandler() {
     const tokenFromNFansT = localStorage.getItem("NFansT Token");
 
-    const decoded = jwtDecode(tokenFromNFansT);
-
-    const { wallet } = decoded;
-
     try {
       if (!tokenFromNFansT) {
+        console.log("No token", tokenFromNFansT);
         setOpenModal(true);
         return;
       }
@@ -46,15 +43,14 @@ const Login = ({ setIsAuth, isAuth }) => {
         const signer = provider.getSigner();
         const firmaMensaje = await signer.signMessage("To Start Firm Section");
         const myAddress = await signer.getAddress();
-        console.log("Addreesss: ", myAddress);
+
+        const decoded = jwtDecode(tokenFromNFansT);
+        const { wallet } = decoded;
         if (firmaMensaje && myAddress.toLowerCase() === wallet.toLowerCase()) {
           let obj = {
             tokenUser: myAddress,
           };
           localStorage.setItem("metamask", JSON.stringify(obj));
-          setIsAuth(true);
-          navigate("/");
-          setOpenModal(false);
         } else {
           enqueueSnackbar(
             intl.formatMessage({
@@ -72,6 +68,9 @@ const Login = ({ setIsAuth, isAuth }) => {
           );
           setOpenModal(false);
         }
+        setIsAuth(true);
+        navigate("/");
+        setOpenModal(false);
       } else {
         setNombreBotonMT("MetaMask is not installed!");
       }
