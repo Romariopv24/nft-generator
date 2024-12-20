@@ -1105,7 +1105,19 @@ const Form = ({
 
     const chainId = await window.ethereum.request({ method: "eth_chainId" });
     if (chainId === "0x61") {
-      if (typeUser === 1 || typeUser === 2 || payConfirm === true) {
+      const tokennfanst = localStorage.getItem("NFansT Token");
+
+      const decoded = jwtDecode(tokennfanst);
+
+      const { role, nft } = decoded;
+
+      if (
+        typeUser === 1 ||
+        typeUser === 2 ||
+        payConfirm === true ||
+        role === "1001" ||
+        nft[0].name === "Unique"
+      ) {
         const { valid, message } = await ValidarSiExisteNombreProjectServidor();
         if (valid === false) {
           setIsExisteNombreProject(message);
