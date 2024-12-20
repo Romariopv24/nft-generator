@@ -23,11 +23,14 @@ function RegisterUser({
   const correo = facebook?.correo || google?.correo;
   const wallet = metamask?.tokenUser;
   const [userData, setUserData] = useState({
-    nombre: nombre || "",
-    correo: correo || "",
+    // nombre: nombre || "",
+    nombre: "",
+    // correo: correo || "",
+    correo: "",
     correob: "",
     telefono: "",
-    wallet: wallet || "",
+    // wallet: wallet || "",
+    wallet: "",
   });
 
   useEffect(() => {
@@ -36,23 +39,35 @@ function RegisterUser({
 
   async function esperar() {
     try {
-      let res = await fetchData();
-      // console.log(res)
-      if (userData.nombre === "") {
-        if (res) {
-          const obj = {
-            nombre: res[0].nombre || userData.nombre,
-            correo: res[0].correo || userData.correo,
-            correob: res[0].correob || userData.correob,
-            telefono: res[0].telefono || userData.telefono,
-            wallet: res[0].wallet || userData.wallet,
-          };
-          setUserData({ ...obj });
-          setEmail(res[0].correo || userData.correo);
-          setNameUser(res[0].nombre || userData.nombre);
-        }
+      // let res = await fetchData();
+      // // console.log(res)
+      // if (userData.nombre === "") {
+      //   if (res) {
+      //     const obj = {
+      //       nombre: res[0].nombre || userData.nombre,
+      //       correo: res[0].correo || userData.correo,
+      //       correob: res[0].correob || userData.correob,
+      //       telefono: res[0].telefono || userData.telefono,
+      //       wallet: res[0].wallet || userData.wallet,
+      //     };
+      //     setUserData({ ...obj });
+      //     setEmail(res[0].correo || userData.correo);
+      //     setNameUser(res[0].nombre || userData.nombre);
+      //   }
+      // }
+      // return res;
+      const tokenFromNFansT = localStorage.getItem("NFansT Token");
+      if (tokenFromNFansT) {
+        const decoded = jwtDecode(tokenFromNFansT);
+        const { names, lastname, email, phone, wallet } = decoded;
+        setUserData({
+          nombre: names + " " + lastname,
+          correo: email,
+          correob: "",
+          telefono: phone,
+          wallet: wallet,
+        });
       }
-      return res;
     } catch (error) {
       console.log(error);
     }
@@ -126,21 +141,7 @@ function RegisterUser({
     return post;
   }
 
-  useEffect(() => {
-    const tokenFromNFansT = localStorage.getItem("NFansT Token");
-    if (tokenFromNFansT) {
-      const decoded = jwtDecode(tokenFromNFansT);
-      const { names, lastname, email, phone, wallet } = decoded;
-      setUserData({
-        ...userData,
-        nombre: names + " " + lastname,
-        correo: email,
-        telefono: phone,
-        wallet: wallet,
-      });
-    }
-  }, []);
-
+  console.log(userData);
   const hanledChange = (e) => {
     const { name, value } = e.target;
 
@@ -159,6 +160,20 @@ function RegisterUser({
     // console.log(userData)
   };
 
+  useEffect(() => {
+    const tokenFromNFansT = localStorage.getItem("NFansT Token");
+    if (tokenFromNFansT) {
+      const decoded = jwtDecode(tokenFromNFansT);
+      const { names, lastname, email, phone, wallet } = decoded;
+      setUserData({
+        nombre: names + " " + lastname,
+        correo: email,
+        correob: "",
+        telefono: phone,
+        wallet: wallet,
+      });
+    }
+  }, []);
   return (
     <>
       <div className="FatherboxRegisterBefore">

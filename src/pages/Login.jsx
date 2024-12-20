@@ -11,12 +11,15 @@ import { langContext } from "../context/langContext";
 import "../styles/scss/_login.scss";
 import { Stack } from "@mui/material";
 import { AlertLinkNfanst } from "../components/mui-components/modal/AlertLinkNfanst";
+import { jwtDecode } from "jwt-decode";
+import { enqueueSnackbar, useSnackbar } from "notistack";
 
 const Login = ({ setIsAuth, isAuth }) => {
   const [nombreBotonMT, setNombreBotonMT] = useState("Login with Metamasks");
   const [openModal, setOpenModal] = useState(false);
   const [hovered, setHovered] = useState(null);
   const idioma = useContext(langContext);
+  const { enqueueSnackbar } = useSnackbar();
 
   let navigate = useNavigate();
 
@@ -25,9 +28,12 @@ const Login = ({ setIsAuth, isAuth }) => {
   async function connectWalletHandler() {
     const tokenFromNFansT = localStorage.getItem("NFansT Token");
 
+    const decoded = jwtDecode(tokenFromNFansT);
+
+    const { wallet } = decoded;
+
     try {
       if (!tokenFromNFansT) {
-        console.log(!tokenFromNFansT);
         setOpenModal(true);
         return;
       }
@@ -39,17 +45,27 @@ const Login = ({ setIsAuth, isAuth }) => {
         const signer = provider.getSigner();
         const firmaMensaje = await signer.signMessage("To Start Firm Section");
         const myAddress = await signer.getAddress();
-
-        if (firmaMensaje) {
+        console.log("Addreesss: ", myAddress);
+        if (firmaMensaje && myAddress.toLowerCase() === wallet.toLowerCase()) {
           let obj = {
             tokenUser: myAddress,
           };
           localStorage.setItem("metamask", JSON.stringify(obj));
+          setIsAuth(true);
+          navigate("/");
+          setOpenModal(false);
+        } else {
+          enqueueSnackbar(
+            "Wallets are different, please connect the correct wallet",
+            {
+              variant: "error",
+              anchorOrigin: {
+                vertical: "top",
+                horizontal: "right",
+              },
+            }
+          );
         }
-
-        setIsAuth(true);
-        navigate("/");
-        setOpenModal(false);
       } else {
         setNombreBotonMT("MetaMask is not installed!");
       }
