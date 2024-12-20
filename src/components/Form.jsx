@@ -1106,7 +1106,6 @@ const Form = ({
     const chainId = await window.ethereum.request({ method: "eth_chainId" });
     if (chainId === "0x61") {
       const tokennfanst = localStorage.getItem("NFansT Token");
-
       const decoded = jwtDecode(tokennfanst);
 
       const { role, nft } = decoded;
