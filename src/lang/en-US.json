@@ -313,5 +313,7 @@
   "paragraph.alertLink2": "Please go to NFansT to connect your wallet",
 
   "button.cancel.alertLink": "Close",
-  "button.goToNFT": "Go to NFansT"
+  "button.goToNFT": "Go to NFansT",
+
+  "alert.metamask.error": "Error, Wallet are different, please connect the same wallet"
 }

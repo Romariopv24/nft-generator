@@ -1,6 +1,6 @@
 import { ethers } from "ethers";
 import React, { useContext, useEffect, useState } from "react";
-import { FormattedMessage } from "react-intl";
+import { FormattedMessage, useIntl } from "react-intl";
 import { useNavigate } from "react-router-dom";
 import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import logo from "../assets/img/logo.png";
@@ -19,6 +19,7 @@ const Login = ({ setIsAuth, isAuth }) => {
   const [openModal, setOpenModal] = useState(false);
   const [hovered, setHovered] = useState(null);
   const idioma = useContext(langContext);
+  const intl = useIntl();
   const { enqueueSnackbar } = useSnackbar();
 
   let navigate = useNavigate();
@@ -56,7 +57,11 @@ const Login = ({ setIsAuth, isAuth }) => {
           setOpenModal(false);
         } else {
           enqueueSnackbar(
-            "Wallets are different, please connect the correct wallet",
+            intl.formatMessage({
+              id: "alert.metamask.error",
+              defaultMessage:
+                "Error, Wallet are different, please connect the same wallet",
+            }),
             {
               variant: "error",
               anchorOrigin: {
@@ -65,6 +70,7 @@ const Login = ({ setIsAuth, isAuth }) => {
               },
             }
           );
+          setOpenModal(false);
         }
       } else {
         setNombreBotonMT("MetaMask is not installed!");

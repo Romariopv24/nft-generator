@@ -313,5 +313,7 @@
   "paragraph.alertLink2": "Por favor, ve a NFansT para conectar tu billetera",
 
   "button.cancel.alertLink": "Cerrar",
-  "button.goToNFT": "Ir a NFansT"
+  "button.goToNFT": "Ir a NFansT",
+
+  "alert.metamask.error": "Error, las billeteras de Metamask son diferentes, por favor cambie a la billetera correcta"
 }
