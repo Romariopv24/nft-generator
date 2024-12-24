@@ -156,8 +156,7 @@ function App() {
   ]);
   const [loading, setLoading] = useState(true);
   let navigate = useNavigate();
-  const { setAccess_token, setTypeUser, setEmail, email, typeUser } =
-    useStoreProv();
+  const { setAccess_token, setTypeUser, setEmail, typeUser } = useStoreProv();
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
