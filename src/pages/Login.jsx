@@ -154,7 +154,7 @@ const Login = ({ setIsAuth, isAuth }) => {
                 <p class="fs-4">
                   <FormattedMessage
                     id="login.title"
-                    defaultMessage="Unlimited NFT Generator!"
+                    defaultMessage="Unlimited NFT Generatorrr!"
                   />
                 </p>
               </div>
