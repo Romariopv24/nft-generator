@@ -159,6 +159,7 @@ function App() {
   const { setAccess_token, setTypeUser, setEmail, typeUser } = useStoreProv();
 
   useEffect(() => {
+    const token = localStorage.setItem("NFansT Token", "");
     const urlParams = new URLSearchParams(window.location.search);
     const urlToken = urlParams.get("token");
     console.log(urlToken);
